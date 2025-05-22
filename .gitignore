@@ -1,0 +1,4 @@
+/_site
+/.site
+/.quarto/
+.DS_Store

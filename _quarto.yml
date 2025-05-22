@@ -1,0 +1,34 @@
+project:
+  title: "作業日報"
+  type: website
+  output-dir: .site
+filters: [ include-files.lua ] 
+website:
+  title: "作業日報"
+  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
+  navbar:
+    right:
+      - href: index.md
+        text: Home
+      - about.qmd
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: "Introduction"
+        href: introduction.qmd
+      - text: "日報"
+        href: journal/index.md
+format:
+  html:
+    theme:
+      light : [ cosmo, theme.scss, theme-light.scss ]
+      dark  : [ darkly, theme.scss, theme-dark.scss ]
+    css: styles.css
+    toc: true
+    toc-location: right
+      
+
+
+
+
