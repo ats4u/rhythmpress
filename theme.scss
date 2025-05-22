@@ -4,44 +4,22 @@
 body {
 }
 
-$font-size-base: 1.20em;
-$h1-font-size: calc( $font-size-base +  0.5em ) ;
-$h2-font-size: calc( $font-size-base +  0.10em ) ;
-$h3-font-size: calc( $font-size-base +  0.08em ) ;
-$h4-font-size: calc( $font-size-base +  0.06em ) ;
-$h5-font-size: calc( $font-size-base +  0.04em ) ;
-$h6-font-size: calc( $font-size-base +  0.02em  ) ;
-
-/*
-$h1-font-color: blue;
-$h2-font-color: blue;
-$h3-font-color: blue;
-$h4-font-color: blue;
-$h5-font-color: blue;
-$h6-font-color: blue;
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 15px 0px 0px 0px  !important;
-  font-color: red !important;
-}
-*/
+$font-size-base: 1.20rem;
+$h1-font-size: calc( $font-size-base +  0.5rem ) ;
+$h2-font-size: calc( $font-size-base +  0.10rem ) ;
+$h3-font-size: calc( $font-size-base +  0.08rem ) ;
+$h4-font-size: calc( $font-size-base +  0.06rem ) ;
+$h5-font-size: calc( $font-size-base +  0.04rem ) ;
+$h6-font-size: calc( $font-size-base +  0.02rem  ) ;
 
 /*-- scss:rules --*/
 body {
   // font-family: 'M PLUS 1p';
   font-family: 'M PLUS Rounded 1c';
-  font-size : 0.85em;
+  font-size : 0.85rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  /*
-  text-shadow: 
-     1px  1px 1px rgba(0, 0, 0, .2),
-    -1px -1px 1px rgba(0, 0, 0, .2),
-     1px -1px 1px rgba(0, 0, 0, .2),
-    -1px  1px 1px rgba(0, 0, 0, .2)
-  ;
-  */
   font-weight: 400;
   margin: 15px 0px 0px 0px;
   border-bottom: 1px silver dashed;
