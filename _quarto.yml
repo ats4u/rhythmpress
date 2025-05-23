@@ -1,34 +1,46 @@
 project:
-  title: "作業日報"
+  title: "リズムペディア.com"
   type: website
   output-dir: .site
+  preview:
+    port: 4141
+    browser: false
+
 filters: [ include-files.lua ] 
 website:
-  title: "作業日報"
+  title: "リズムペディア.com"
   site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
+#  announcement:
+#    content: |
+#       <div class="top-banner">
+#       <img src="attachments/rhythmpedia-header3.png" style="width:100vw"/>
+#      </div>
+#    type: primary
+#    position: above-navbar
+#    dismissable: false
   navbar:
     right:
       - href: index.md
-        text: Home
+        text: "ホーム"
       - about.qmd
-  sidebar:
+    logo: attachments/rhythmpedia-header2.png
+  sidebar: 
     style: "docked"
     search: true
     contents:
-      - text: "Introduction"
+      - text: "はじめに"
         href: introduction.qmd
       - text: "日報"
         href: journal/index.md
+    logo: /attachments/rhythmpedia-header2.png
 format:
   html:
     theme:
       light : [ cosmo, theme.scss, theme-light.scss ]
       dark  : [ darkly, theme.scss, theme-dark.scss ]
     css: styles.css
+#    include-in-header:
+#      - file: banner.html
     toc: true
     toc-location: right
-      
-
-
-
 
