@@ -9,7 +9,7 @@ project:
 filters: [ include-files.lua ] 
 website:
   title: "リズムペディア.com"
-  description: "**リズムペディア（Rhythmpedia）**  は、リズムに関するあらゆる知識と理論を体系的に集約した、世界初の総合リズム研究サイトです。 "
+  description: "グルーヴを科学するリズムペディア.com"
   site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
 #  announcement:
 #    content: |
