@@ -6,11 +6,12 @@ project:
     port: 4141
     browser: false
 
-filters: [ include-files.lua ] 
+filters: [ include-files.lua ]
 website:
   title: "リズムペディア.com"
   description: "グルーヴを科学するリズムペディア.com"
-  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
+  site-url: "https://rhythmpedia.com/"
+#  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
 #  announcement:
 #    content: |
 #       <div class="top-banner">
@@ -25,7 +26,7 @@ website:
         text: "ホーム"
       - about.qmd
     logo: attachments/rhythmpedia-header2.png
-  sidebar: 
+  sidebar:
     style: "docked"
     search: true
     contents:
@@ -33,6 +34,8 @@ website:
         href: index.md
       - text: "グルーヴを科学する"
         href: what-is-science.md
+      - text: "縦乗りとは何か"
+        href: tatenori.md
     logo: /attachments/rhythmpedia-header5v2.png
 format:
   html:
@@ -44,4 +47,7 @@ format:
 #      - file: banner.html
     toc: true
     toc-location: right
+    include-in-header:
+      - text: |
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
 
