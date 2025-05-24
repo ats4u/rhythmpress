@@ -29,10 +29,10 @@ website:
     style: "docked"
     search: true
     contents:
-      - text: "はじめに"
-        href: introduction.qmd
-      - text: "日報"
-        href: journal/index.md
+      - text:  "ホーム"
+        href: index.md
+      - text: "グルーヴを科学する"
+        href: what-is-science.md
     logo: /attachments/rhythmpedia-header5v2.png
 format:
   html:
