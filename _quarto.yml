@@ -5,7 +5,8 @@ project:
   preview:
     port: 4141
     browser: false
-
+  resources:
+    - ads.txt
 filters: [ include-files.lua ]
 website:
   title: "リズムペディア.com"
