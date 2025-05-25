@@ -35,8 +35,8 @@ website:
         href: index.md
       - text: "グルーヴを科学する"
         href: what-is-science.md
-      - text: "縦乗りとは何か"
-        href: tatenori.md
+      - section: "日本人のリズム感"
+        contents: tatenori/*.md
     logo: /attachments/rhythmpedia-header5v2.png
 format:
   html:
