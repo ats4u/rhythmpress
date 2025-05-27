@@ -7,7 +7,7 @@ project:
     browser: false
   resources:
     - ads.txt
-filters: [ include-files.lua ]
+
 website:
   title: "リズムペディア.com"
   description: "グルーヴを科学するリズムペディア.com"
@@ -24,14 +24,13 @@ website:
   navbar:
     right:
       - href: index.md
-        text: "ホーム"
-      - about.qmd
+        text: "リズムペディアホーム"
     logo: attachments/rhythmpedia-header2.png
   sidebar:
     style: "docked"
     search: true
     contents:
-      - text:  "ホーム"
+      - text:  "リズムペディアホーム"
         href: index.md
       - text: "グルーヴを科学する"
         href: what-is-science.md
@@ -43,6 +42,9 @@ format:
     theme:
       light : [ cosmo, theme.scss, theme-light.scss ]
       dark  : [ darkly, theme.scss, theme-dark.scss ]
+    filters:
+      - filters/include-files.lua
+      - filters/obsidian-image-dimensions.lua
     css: styles.css
 #    include-in-header:
 #      - file: banner.html
