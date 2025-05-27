@@ -32,10 +32,18 @@ website:
     contents:
       - text:  "リズムペディアホーム"
         href: index.md
-      - text: "グルーヴを科学する"
-        href: what-is-science.md
       - section: "日本人のリズム感"
-        contents: tatenori/*.md
+        contents: tatenori-theory/*.md
+      - section: "裏拍基軸リズム理論"
+        contents: offbeat-oriented-rhythm-theory/*.md
+      - section: "メタディヴィジョン理論"
+        contents: metadivision-theory/*.md
+      - section: "3^nリズム理論"
+        contents: three-n-rhythm-theory/*.md
+      - section: "ポリリズム理論"
+        contents: offbeat-oriented-polyrhythm-theory/*.md
+      - text: "エッセイ"
+        href: essays/*.md
     logo: /attachments/rhythmpedia-header5v2.png
 format:
   html:
