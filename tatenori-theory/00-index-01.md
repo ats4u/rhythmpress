@@ -1,5 +1,5 @@
 ---
-title: 序章・縦乗りについて
+title: bak縦乗りについて
 created: 2025-05-25T17:45
 tags:
   - foo

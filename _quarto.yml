@@ -52,7 +52,7 @@ format:
       dark  : [ darkly, theme.scss, theme-dark.scss ]
     filters:
       - filters/include-files.lua
-      - filters/obsidian-image-dimensions.lua
+#      - filters/obsidian-image-dimensions.lua
     css: styles.css
 #    include-in-header:
 #      - file: banner.html
