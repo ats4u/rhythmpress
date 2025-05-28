@@ -44,7 +44,7 @@ website:
           - offbeatcount-theory/metadivision-theory.md
           - offbeatcount-theory/three-n-rhythm-theory.md
           - offbeatcount-theory/offbeat-oriented-polyrhythm-theory.md
-      - text: "エッセイ"
+      - section: "エッセイ"
         href: essays/*.md
     logo: /attachments/rhythmpedia-header5v2.png
 format:
