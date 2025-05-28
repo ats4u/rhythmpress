@@ -1,5 +1,5 @@
 ---
-title: 縦乗りという用語の語源について
+title: 縦乗りの語源
 created: 2025-05-27T13:38
 sidebar: "false"
 ---

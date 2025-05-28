@@ -30,18 +30,20 @@ website:
     style: "docked"
     search: true
     contents:
-      - text:  "リズムペディアホーム"
-        href: index.md
-      - section: "日本人のリズム感"
-        contents: tatenori-theory/*.md
-      - section: "裏拍基軸リズム理論"
-        contents: offbeat-oriented-rhythm-theory/*.md
-      - section: "メタディヴィジョン理論"
-        contents: metadivision-theory/*.md
-      - section: "3^nリズム理論"
-        contents: three-n-rhythm-theory/*.md
-      - section: "ポリリズム理論"
-        contents: offbeat-oriented-polyrhythm-theory/*.md
+      - section: "縦乗り理論"
+        href: tatenori-theory/index.md
+        contents:
+          - tatenori-theory/index.md
+          - tatenori-theory/tatenori-to-reigi.md
+          - tatenori-theory/tatenori-no-gogen.md
+      - section: "オフビートカウント理論"
+        href: offbeatcount-theory/index.md
+        contents:
+          - offbeatcount-theory/index.md
+          - offbeatcount-theory/offbeat-oriented-rhythm-theory.md
+          - offbeatcount-theory/metadivision-theory.md
+          - offbeatcount-theory/three-n-rhythm-theory.md
+          - offbeatcount-theory/offbeat-oriented-polyrhythm-theory.md
       - text: "エッセイ"
         href: essays/*.md
     logo: /attachments/rhythmpedia-header5v2.png
@@ -61,4 +63,6 @@ format:
     include-in-header:
       - text: |
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
+    grid:
+      sidebar-width: 300px
 
