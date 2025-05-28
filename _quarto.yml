@@ -42,13 +42,13 @@ website:
           - tatenori-theory/tatenori-to-reigi.md
           - tatenori-theory/tatenori-no-gogen.md
       - section: "オフビートカウント理論"
-        href: offbeatcount-theory/index.md
+        href: offbeat-count-theory/index.md
         contents:
-          - offbeatcount-theory/index.md
-          - offbeatcount-theory/offbeat-oriented-rhythm-theory.md
-          - offbeatcount-theory/metadivision-theory.md
-          - offbeatcount-theory/three-n-rhythm-theory.md
-          - offbeatcount-theory/offbeat-oriented-polyrhythm-theory.md
+          - offbeat-count-theory/index.md
+          - offbeat-count-theory/offbeat-oriented-rhythm-theory.md
+          - offbeat-count-theory/metadivision-theory.md
+          - offbeat-count-theory/three-n-rhythm-theory.md
+          - offbeat-count-theory/offbeat-oriented-polyrhythm-theory.md
       - section: "エッセイ"
         href: essays/*.md
     logo: /attachments/rhythmpedia-header5v2.png
