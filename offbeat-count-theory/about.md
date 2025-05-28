@@ -1,5 +1,6 @@
 ---
-title: about
+title: オフビートカウントとは
 created: 2025-05-29T04:15
-tags: ["foo"]
+tags:
+  - foo
 ---
