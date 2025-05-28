@@ -30,6 +30,11 @@ website:
     style: "docked"
     search: true
     contents:
+      - section: "リズムペディア"
+        href: index.md
+        contents:
+          - text: ホーム
+            href: index.md
       - section: "縦乗り理論"
         href: tatenori-theory/index.md
         contents:
