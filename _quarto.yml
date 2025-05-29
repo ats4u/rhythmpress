@@ -3,7 +3,7 @@ project:
   type: website
   output-dir: .site
   preview:
-    port: 4141
+    port: 5150
     browser: false
   resources:
     - ads.txt
@@ -23,7 +23,7 @@ website:
 #    dismissable: false
   navbar:
     right:
-      - href: index.md
+      - href: index.qmd
         text: "リズムペディアホーム"
     logo: attachments/rhythmpedia-header2.png
   sidebar:
@@ -31,14 +31,14 @@ website:
     search: true
     contents:
       - section: "リズムペディア"
-        href: index.md
+        href: index.qmd
         contents:
           - text: ホーム
-            href: index.md
+            href: index.qmd
       - section: "縦乗り理論"
         href: tatenori-theory/index.md
         contents:
-          - tatenori-theory/index.md
+          - tatenori-theory/about.md
           - tatenori-theory/tatenori-to-reigi.md
           - tatenori-theory/tatenori-no-gogen.md
       - section: "オフビートカウント理論"

@@ -1,0 +1,13 @@
+---
+title: "Bash Block Test"
+format: html
+execute:
+  enabled: true
+---
+
+```{bash}
+echo "✅ Bash is running"
+uname -a
+```
+
+
