@@ -22,6 +22,10 @@ execute:
 
 このユニークなリズム理論をここで御紹介致します。
 
+## 統合グルーヴ理論：
+
+- [**縦乗りリズム理論**](                                          tatenori-theory/about.md)  
+  日本語を母国語とするミュージシャンならば必ず一度は経験する謎 ─── 「何故日本人はグルーヴしないのか」これは日本人が英語が聴き取れなくなる理由と共通です。 日本語と日本の音楽に潜む『縦乗り』の正体を明らかにし、その影響と限界を科学的・文化的に考察します。
 ```{python}
 #| output: asis
 
@@ -51,71 +55,14 @@ toc_md = subprocess.run(
 # [Title](#section-id) → [Title](tatenori-theory/about.html#section-id)
 patched = re.sub(r'\]\(#', f']({link_target}#', toc_md)
 
-print( patched )
-print( '## sss' )
-
+# Add 2 extra spaces to every indented line
+shifted = '\n'.join(
+    '  ' + line if re.match(r'^\s*- ', line) else line
+    for line in patched.splitlines()
+)
+print( shifted  )
 ```
 
-```{python}
-#| output: asis
-
-import subprocess
-import re
-
-test1 = subprocess.run(
-	[
-		"echo",
-		"foo bar"
-	]
-).stdout
-print( test1 )
-
-# Generate TOC in HTML using Pandoc
-toc_html = subprocess.run(
-    [
-        "pandoc",
-        "tatenori-theory/about.md",
-        "--toc",
-        "--to=html",
-        "--template=tatenori-theory/toc-template.html"  # Avoids full HTML doc
-    ],
-    capture_output=True,
-    text=True
-).stdout
-filename_html = "tatenori-theory/about.html"
-patched_toc = re.sub(r'href="#', f'href="{filename_html}#', toc_html)
-print(patched_toc)
-```
-
-## 統合グルーヴ理論：
-
-- [**縦乗りリズム理論**](                                          tatenori-theory/about.md)  
-  日本語を母国語とするミュージシャンならば必ず一度は経験する謎 ─── 「何故日本人はグルーヴしないのか」これは日本人が英語が聴き取れなくなる理由と共通です。 日本語と日本の音楽に潜む『縦乗り』の正体を明らかにし、その影響と限界を科学的・文化的に考察します。
-  - [縦乗りとは](                                            tatenori-theory/about.md#縦乗りとは)
-  - [縦乗りという盲点](                                            tatenori-theory/about.md#縦乗りという盲点)
-  - [縦乗りは存在する](                                            tatenori-theory/about.md#縦乗りは存在する)
-  - [横乗りの人は縦乗りにすぐに気付く](                            tatenori-theory/about.md#横乗りの人は縦乗りにすぐに気付く)
-  - [縦乗りの人は縦乗りに気付かない](                              tatenori-theory/about.md#縦乗りの人は縦乗りに気付かない)
-  - [縦乗りははっきりと定量化出来る](                              tatenori-theory/about.md#縦乗りははっきりと定量化出来る)
-  - [縦乗りの人には見えないことがある](                            tatenori-theory/about.md#縦乗りの人には見えないことがある)
-  - [縦乗りの人には出来ないことがある](                            tatenori-theory/about.md#縦乗りの人には出来ないことがある)
-  - [縦乗りが起こす問題](                                          tatenori-theory/about.md#縦乗りが起こす問題)
-    - [縦乗りだと横乗り音楽が聴き取れない](                        tatenori-theory/about.md#縦乗りだと横乗り音楽が聴き取れない)
-    - [縦乗りだと日本語以外の外国語は全て聴き取れない](            tatenori-theory/about.md#縦乗りだと日本語以外の外国語は全て聴き取れない)
-    - [縦乗りは英語(外国語)習得する上での最初で最大のハードル](    tatenori-theory/about.md#縦乗りは英語外国語習得する上での最初で最大のハードル)
-    - [縦乗りは日本人の礼儀の精神に反する](                        tatenori-theory/about.md#縦乗りは日本人の礼儀の精神に反する)
-  - [縦乗りには地域差がある](                                      tatenori-theory/about.md#縦乗りには地域差がある)
-  - [縦乗りの主な原因](                                            tatenori-theory/about.md#縦乗りの主な原因)
-    - [日本語のモーラ拍リズムの構造](                              tatenori-theory/about.md#日本語のモーラ拍リズムの構造)
-    - [リズム音痴コンプレックス](                                  tatenori-theory/about.md#リズム音痴コンプレックス)
-    - [リズムに対する社会的タブー](                                tatenori-theory/about.md#リズムに対する社会的タブー)
-    - [日本差別と取られる恐れ](                                    tatenori-theory/about.md#日本差別と取られる恐れ)
-  - [縦乗りを克服するにはどうすればよいか](                        tatenori-theory/about.md#縦乗りを克服するにはどうすればよいか)
-    - [リズム・コンプレックスを意識する](                          tatenori-theory/about.md#リズムコンプレックスを意識する)
-    - [モーラ拍リズムとストレス拍リズムの違いを良く知る](          tatenori-theory/about.md#モーラ拍リズムとストレス拍リズムの違いを良く知る)
-    - [オフビートカウント理論を習得する](                          tatenori-theory/about.md#オフビートカウント理論を習得する)
-    - [オフビートカウント練習法を実践する](                        tatenori-theory/about.md#オフビートカウント練習法を実践する)
-  - [まとめ](                                                      tatenori-theory/about.md#まとめ)
 - [**オフビートカウント理論** ](offbeat-count-theory/about.md)
     『声を出して英語でカウントする ─── 但しカウントする際に半拍早くカウントする』 ─── というとても単純な実践練習方法で、飛躍的にグルーヴ能力が向上します。たったこの『半拍早く数える』というごく小さな違いのなかに無限の奥行きが存在します。半拍早くカウントするというたったそれだけのことですが、習得にはしばしば１０年以上の長い年月が必要です。
 
@@ -123,10 +70,11 @@ print(patched_toc)
 
     - [オフビートカウントとは](offbeat-count-theory/about.md)  
         オフビートカウントとは何か ─── オフビートカウントは何故生まれたのでしょうか。オフビートカウント及び、オフビートカウントを構成する５つの理論との関係を説明します。
+	- **[裏拍基軸理論](beat-orientation.md)**  
+        
+        裏拍・表拍とは何か？何故裏拍と表拍が生まれるのか。そもそも裏拍表拍とは何なのか。これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。裏拍と表拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
     - [ストレス拍リズム発音練習理論](phonetics.md)  
         モーラ拍リズム言語を母国語とする人は「子音と母音を区別出来ない」「子音の長さを認識出来ない」「子音が母音に先行することを認識出来ない」この３つの欠落を補うことを主目的として再編された発音練習を行うことで、飛躍的にグルーヴ感が向上します。また同時に英語のリスニング能力も飛躍的に向上します。この練習方法をここで説明します。
-    - **[裏拍基軸理論](beat-orientation.md)**  
-        裏拍・表拍とは何か？何故裏拍と表拍が生まれるのか。そもそも裏拍表拍とは何なのか。これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。裏拍と表拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
     - [**メタディヴィジョン理論** ](metadivision.md)  
         リズムを明確かつ精密に認識するための基礎的な技術──それが「メタディヴィジョン理論」です。この理論はオフビートカウント理論を土台として構築されたものであり、グルーヴ解析に特化した汎用的な時間分割の方法論を提供します。
     - [**3^nリズム理論** ](three-n-rhythm.md)  
@@ -150,3 +98,5 @@ print(patched_toc)
 
 
 **Rhythmpedia** は、ミュージシャン、語学学習者、教育者をはじめ、TOEIC900点を取ったけど全く英語が話せない事に悩む貴方や、英語の壁に苦しむプログラマー、英語論文の執筆に悩む研究者など、縦乗りと横乗りの架け橋になる理論ポータルサイトです。
+
+

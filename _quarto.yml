@@ -55,8 +55,8 @@ website:
 format:
   html:
     theme:
-      light : [ cosmo, theme.scss, theme-light.scss ]
-      dark  : [ darkly, theme.scss, theme-dark.scss ]
+      light : [ cosmo,  .assets/websites/theme.scss, .assets/websites/theme-light.scss ]
+      dark  : [ darkly, .assets/websites/theme.scss, .assets/websites/theme-dark.scss ]
     filters:
       - filters/include-files.lua
 #      - filters/obsidian-image-dimensions.lua
@@ -70,4 +70,6 @@ format:
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
     grid:
       sidebar-width: 300px
-
+      body-width: 800px
+      margin-width: 500px
+      gutter-width: 1.5rem

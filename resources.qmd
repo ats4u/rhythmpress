@@ -1,0 +1,152 @@
+---
+title: 参照資料集
+created: 2025-05-30T01:46
+tags:
+  - foo
+execute:
+  enabled: true
+  echo: false
+  output: true
+  eval: true
+  cache: false
+---
+## 参照
+MIDI・音声・映像を用いた実験的リズム解析の記録を公開。論文、ツール、可視化例などを収録した実践的データアーカイブです。
+
+## ゴスペル音楽の資料
+
+```{python}
+#| output: asis
+
+import re
+
+heredoc = """
+
+## 理論を実証する為の音源
+
+### コード進行の先取りについて
+https://twitter.com/ats4u/status/1496443349540413440?ref_src=twsrc%5Etfw
+
+## 外国語の発音の違いを確認する為の資料
+
+### 米国南部訛り1
+https://twitter.com/ats4u/status/1642521764365471744?ref_src=twsrc%5Etfw
+あああ
+
+### 米国南部訛り2
+https://twitter.com/ats4u/status/1642521764365471744?ref_src=twsrc%5Etfw
+
+
+
+## ゴスペル音楽の資料
+
+### Tarmaine Hawkins
+https://x.com/ats4u/status/1738530936629702844
+
+### Tramaine Hawkins - Holy One
+https://x.com/ats4u/status/1781164917103739124
+
+
+### Watch this tutorial.
+https://youtube.com/watch?v=lOD3k6oMyUk
+
+### HELLO
+https://youtu.be/gdyUHe65ym0?si=w_VK5oqiTT9t-dsA
+
+
+## タイ語関連
+None
+
+### โฆษณา ดร.มนตรี - กระแต (Dr.Montri Ad. - Kratae)
+https://youtu.be/EInqzm9hCX8?si=y3u9x50oTgKrU1RD
+
+### HELLO
+https://youtu.be/gdyUHe65ym0?si=w_VK5oqiTT9t-dsA
+
+### โฆษณา ดร.มนตรี - กระแต (Dr.Montri Ad. - Kratae)
+https://youtu.be/EInqzm9hCX8?si=y3u9x50oTgKrU1RD
+
+### HELLO
+https://youtu.be/gdyUHe65ym0?si=w_VK5oqiTT9t-dsA
+
+## 日本人が作る尻合わせ
+### カップヌードルCM「チリトマゾンビ篇」
+https://www.youtube.com/watch?v=DmZpk2zWz1s
+この曲は２３４１リズム（２分音符の裏拍先行と４分音符の裏拍先行がある）で出来ている。一般的な日本人が作るリズムそていはほぼ絶対に出てこないリズム。しかし日本は多様性が非常に高く、しばしばこういう例外が見つかる。
+
+## end
+
+"""
+
+def render_embed(caption, text, url):
+    # The problem is: X.com doesn't support the new domain name "x.com"  when it is embedded into a web
+    url = re.sub(r"//x\.com/", "//twitter.com/", url)
+
+    if ( url == '' ):
+      return (
+f"""
+{caption}
+
+""" )
+    elif (
+      "twitter.com" in url
+    ):
+      return (
+f"""{caption}
+<blockquote class="twitter-tweet" data-conversation="none"><a href="{url}">Link</a></blockquote>
+
+  {text}
+
+---
+
+"""
+      )
+    elif (
+      "youtube.com" in url  or
+      "youtu.be"    in url  or
+      "vimeo.com"   in url
+    ):
+        return (
+f"""{caption}
+{{{{< video {url} width="640" height="480" >}}}}
+
+  {text}
+
+---
+
+"""
+    )
+    else:
+        return(
+f"""{caption}
+[{caption}]({url})
+
+  {text}
+
+---
+
+"""
+    )
+
+# --- Main logic ---
+for block in heredoc.strip().split("\n\n"):
+    lines = block.strip().splitlines()
+    if len(lines) == 1:
+      caption = lines[0].strip()
+      url  = ''
+      text = ''
+      print( render_embed( caption, text, url ))
+    elif len(lines) == 2:
+      caption = lines[0].strip()
+      url  = lines[1].strip()
+      text = ''
+      print( render_embed( caption, text, url ))
+    elif len(lines) >= 3:
+      caption = lines[0].strip()
+      url  = lines[1].strip()
+      text = lines[2].strip()
+      print( render_embed( caption, text, url ))
+```
+
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
