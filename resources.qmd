@@ -13,11 +13,11 @@ execute:
 ## 参照
 MIDI・音声・映像を用いた実験的リズム解析の記録を公開。論文、ツール、可視化例などを収録した実践的データアーカイブです。
 
-## ゴスペル音楽の資料
 
 ```{python}
 #| output: asis
 
+import importlib.util
 import re
 
 heredoc = """
@@ -29,14 +29,14 @@ https://twitter.com/ats4u/status/1496443349540413440?ref_src=twsrc%5Etfw
 
 ## 外国語の発音の違いを確認する為の資料
 
-### 米国南部訛り1
+### ビーバス＆バットヘッド Score One for the Secret Service
+https://x.com/ats4u/status/1642518664602877952
+
+### ビーバス＆バットヘッドのビル・クリントン 1
 https://twitter.com/ats4u/status/1642521764365471744?ref_src=twsrc%5Etfw
-あああ
 
-### 米国南部訛り2
-https://twitter.com/ats4u/status/1642521764365471744?ref_src=twsrc%5Etfw
-
-
+### ビーバス＆バットヘッドのビル・クリントン 2
+https://x.com/ats4u/status/1642835519985061888
 
 ## ゴスペル音楽の資料
 
@@ -46,35 +46,34 @@ https://x.com/ats4u/status/1738530936629702844
 ### Tramaine Hawkins - Holy One
 https://x.com/ats4u/status/1781164917103739124
 
+### Omerettà The Great - Sorry NOT Sorry (Official Video)
+https://www.youtube.com/watch?v=6IvchaA0B3Y
+<!-- https://x.com/ats4u/status/1556250048530628608 -->
 
-### Watch this tutorial.
-https://youtube.com/watch?v=lOD3k6oMyUk
+## 重要なツイッターメモ
 
-### HELLO
-https://youtu.be/gdyUHe65ym0?si=w_VK5oqiTT9t-dsA
+## 海外の人たちはメトロノームと同時に演奏しない。
+https://x.com/ats4u/status/1556243970782810113
+
+## 海外の人たちはメトロノームと同時に演奏しない。その２
+https://x.com/ats4u/status/1556244760326983680
 
 
 ## タイ語関連
-None
 
 ### โฆษณา ดร.มนตรี - กระแต (Dr.Montri Ad. - Kratae)
 https://youtu.be/EInqzm9hCX8?si=y3u9x50oTgKrU1RD
-
-### HELLO
-https://youtu.be/gdyUHe65ym0?si=w_VK5oqiTT9t-dsA
-
-### โฆษณา ดร.มนตรี - กระแต (Dr.Montri Ad. - Kratae)
-https://youtu.be/EInqzm9hCX8?si=y3u9x50oTgKrU1RD
-
-### HELLO
-https://youtu.be/gdyUHe65ym0?si=w_VK5oqiTT9t-dsA
 
 ## 日本人が作る尻合わせ
+
 ### カップヌードルCM「チリトマゾンビ篇」
 https://www.youtube.com/watch?v=DmZpk2zWz1s
 この曲は２３４１リズム（２分音符の裏拍先行と４分音符の裏拍先行がある）で出来ている。一般的な日本人が作るリズムそていはほぼ絶対に出てこないリズム。しかし日本は多様性が非常に高く、しばしばこういう例外が見つかる。
 
-## end
+## 日本人は海外からどう見られているか
+
+### 日本のコマーシャル
+https://www.youtube.com/watch?v=WpSo0xenjCY
 
 """
 
@@ -128,7 +127,10 @@ f"""{caption}
 """
     )
 
+
 # --- Main logic ---
+heredoc = re.sub(r'<!--.*?-->', '', heredoc, flags=re.DOTALL)
+
 for block in heredoc.strip().split("\n\n"):
     lines = block.strip().splitlines()
     if len(lines) == 1:

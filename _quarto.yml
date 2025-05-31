@@ -36,7 +36,7 @@ website:
           - text: ホーム
             href: index.qmd
       - section: "縦乗り理論"
-        href: tatenori-theory/index.md
+        href: tatenori-theory/about.md
         contents:
           - tatenori-theory/about.md
           - tatenori-theory/tatenori-to-reigi.md
@@ -68,8 +68,9 @@ format:
     include-in-header:
       - text: |
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     grid:
       sidebar-width: 300px
       body-width: 800px
-      margin-width: 500px
+      margin-width: 600px
       gutter-width: 1.5rem
