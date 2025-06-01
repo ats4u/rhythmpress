@@ -3,4 +3,6 @@
 /.quarto/
 .DS_Store
 *.~undo-tree~
+.venv
+.obsidian
 
