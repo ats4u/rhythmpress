@@ -21,9 +21,10 @@ tags:
 * 英語のリスニング
 * 英会話
 * その他、日本語以外の会話能力全て
-* ITの世界で世界の壁を打ち破る
 * クラシック演奏活動で世界の壁を打ち破る
 * ジャズの演奏活動で世界の壁を打ち破る
+* IT業界で世界の壁を打ち破る
+* ビジネスで世界の壁を打ち破る
 * 格闘技で世界の壁を打ち破る
 * レースで世界の壁を打ち破る
 * サッカーなどの球技全般のスポーツの世界で世界の壁を打ち破る
@@ -98,7 +99,19 @@ tags:
 
 ![](./attachments/ba-dum-tss-score-correct.png)
 
+### リズムの解釈の違い
+
+もしも前者の解釈でジャズの演奏を行うと次のようになる筈です。
+
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの縦乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/TCvZoJEMqw">pic.twitter.com/TCvZoJEMqw</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070176341164344?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote>
+
+もしも後者の解釈でジャズの演奏を行うと次の様になります。
+
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの横乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/C5x0FYgXLk">pic.twitter.com/C5x0FYgXLk</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070026998755806?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote>
+
 ここに日本語を母国語とする人と、そうでない人のリズムの認識に、大きな違いが見つかります。
+
+### リズムの解釈の違いによって生まれる音楽解釈の違い
 
 次の例を見てみてください。
 
@@ -118,6 +131,7 @@ tags:
 **ここからわかることは、日本語を母国語とする人はある音を聞いた瞬間、当然のようにそれを８分音符の表拍として認識しているところを、外人は当然の様にそれを８分音符の裏拍として認識しているということです。**
 
 これは些細なことと見えるかも知れません。しかしここに大きな盲点が存在します。
+### リズム解釈の違いによって生まれる言語解釈の違い
 
 この盲点こそが、日本語を母国語とする人が英語が聴き取れなくなる理由なのです。次の動画を見てみてください。これは映画ハイスクール・ミュージカル（2006年）の主題歌です。 この動画のなかで日本語母国語話者が聴き落とす地点をアニメーションで表現しました。
 
@@ -132,6 +146,10 @@ tags:
 この様に、小節の開始地点に先駆けて開始地点前の位置から勢いをつけてメロディーが始まることを、音楽の楽典の用語で<span style="font-size:3em">弱起</span>と呼びます。
 
 この最初の we're が **弱起** で発音されていることに注目してください。この弱起こそが日本語母国語話者の盲点です。
+
+ここで弱起の存在を前提としないリズム解釈のことを**縦乗り**と呼びたいと思います。そしてこの弱起の存在を前提しない縦乗りに対し、弱起の存在を前提としたリズム解釈のことを横乗りと呼びます。
+
+
 
 この曲では最初の部分だけが弱起になっている非常に短い弱起なので、全ての意味が理解できないことはないかも知れません。しかし英語の詩では、**歌詞の全て弱起になっている**ことは稀なことではありません。そうなると、全ての音が聴き取れないという現象が実際に起こるのです。
 
@@ -165,6 +183,7 @@ music</span>
 
 そしてこの弱起によって文章の切れ目位置が変わるということは、<span style="font-size:3em">アフリカ系の諸言語の影響を強く受けている米国英語では特に顕著</span>に起こります。
 
+そしてこの<span style="font-size:3em">言語上のリズム解釈の違いこそが、日本人の演奏がグルーヴしない原因の正体</span>なのです。
 ### 言語によって異なるリズム解釈
 
 次の曲は２０１４年頃にタイで流行していた曲です。
@@ -198,9 +217,7 @@ music</span>
 日本語のリズム認識のことを学術的に**モーラ拍リズム**と呼びます。モーラ拍リズムとは日本語を母国語とする人が当たり前のように行っている「あーいーうーえーおー」と発音を一定の長さに区切って認識する発音認識方法のことを指しま
 す。この一定の長さに区切った発音要素のことをモーラと呼びます。モーラ ─── これは日本語を話す人にとっては当たり前なことですが、実はこのモーラ拍リズムを持った言語は、世界的に探してみても日本語しかないと言われています。
 
-世界中の大半の言語は**ストレス拍リズム**または**シラブル拍リズム**と呼ばれるリズム認識を持っています。 例えば英語・ロシア語・ドイツ語・アラビア語は**ストレス拍リズム**、スペイン語・フランス語・イタリア語・中国語・韓国語は、**シラブル拍リズム** に分類されています。 タイ語・ラオ語は色々議論があるところですが、ストレス拍リズムに分類されることもあるそうです。
-
-ここでいう、**日本人に欠落しているある種のリズム感覚**とは特にこの**ストレス拍リズム** のことです。ここでいう横乗りとは、特に英語などのストレス拍リズムに基づいた言語を母国語として話す人々が自然に持っている**リズム感覚**です。
+世界中の大半の言語は**ストレス拍リズム**または**シラブル拍リズム**と呼ばれるリズム認識を持っています。 例えば英語・ロシア語・ドイツ語・アラビア語は**ストレス拍リズム**、スペイン語・フランス語・イタリア語・中国語・韓国語は、**シラブル拍リズム** に分類されています。 タイ語・ラオ語は色々議論があるところですが、ストレス拍リズムに分類されることもあるそうです。つまり、ここでいう、**日本人に欠落しているある種のリズム感覚=横乗り**とは、特に英語などの**ストレス拍リズムないしはシラブル拍リズムに基づいた言語を母国語として話す人々が自然に持っている**リズム感覚**です。
 
 ストレス拍リズムとは、一定時間ごとにストレス拍＝強調されたシラブルが現れ、ストレスによって強調されないシラブルはストレス拍の間に短く等分に発音されることをいいます。[参照](https://digitalcommons.wayne.edu/cgi/viewcontent.cgi?article=1025&context=honorstheses)  例えば、fourteen, fifteen, sixteen と発音したとします。 この時 teen は必ず同じ間隔の時間をもって強調されて発音します。 しかし four | fif  | six はそれぞれ  fo fif siks と異なる数の音素を持っていても、必ず同じ長さの範囲内で時間分配されて発音されます。 これがストレス拍リズムです。
 
@@ -227,6 +244,28 @@ music</span>
 ## 縦乗りははっきりと定量化出来る
 
 縦乗りの人が作った曲を採譜するとはっきりとそれと指摘できる特徴が見られます。例えば、縦乗りの人が作った曲には弱起がない為、必ず文書作成ソフトで文を左寄せにしたように音符が左側に偏って配置されます。一方横乗り（縦乗りではない人）の作った曲を採譜するとしばしば、文書作成ソフトで文を右寄せにしたように音符が右側に偏って配置されます。この様に縦乗りは、決して感覚的なものではなく、定量化してはっきりと目に見える形で観察することが出来ます。
+
+## 縦乗りと横乗りの比較
+以下は縦乗りと横乗りを理論化し、理論に従って機械的に演奏させたものです。
+
+### 縦乗りと横乗りの比較その１
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-mHk5FfhFas?si=4CQjOE1Fi5ap3Cc5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### 縦乗りと横乗りの比較その１
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BvpIcUBT418?si=jOhnlsRvhCYB-O_W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### 縦乗りと横乗りの比較その１
+
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【コード進行の先取りについて】 <a href="https://t.co/nqrVkVIhNy">pic.twitter.com/nqrVkVIhNy</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1496443349540413440?ref_src=twsrc%5Etfw">February 23, 2022</a></blockquote>
+
+
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【縦乗りの例】全拍がオンビートを起点にして演奏されている。全く同じ音楽、全く同じベースライン、全く同じコード進行でもリズムが縦乗りだとこういう風に響く ─── これが縦乗りだ。 <a href="https://t.co/nwXYzrULUD">pic.twitter.com/nwXYzrULUD</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1496813660249141249?ref_src=twsrc%5Etfw">February 24, 2022</a></blockquote>
+
+### 縦乗りと横乗りの比較その２
+
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">７イレブンで買い物したら、ものすごい縦乗りのヒューマンネーチャー（マイケル・ジャクソンの曲）がＢＧＭに掛かっていた。あまりに凄かったので、家に帰って譜面に起こしてみた。こんな感じだった。<br><br>前半４小節がオリジナル。後半４小節が縦乗りバージョン。 <a href="https://t.co/Vl9s9DWgh8">pic.twitter.com/Vl9s9DWgh8</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/975051946552827904?ref_src=twsrc%5Etfw">March 17, 2018</a></blockquote> 
 
 ## 縦乗りの人には見えないことがある
 
