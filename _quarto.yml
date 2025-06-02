@@ -39,9 +39,9 @@ website:
         href: tatenori-theory/about.md
         contents:
           - tatenori-theory/about.md
-          - tatenori-theory/tatenori-to-reigi.md
-          - tatenori-theory/tatenori-no-gogen.md
-      - section: "オフビートカウント理論"
+#          - tatenori-theory/tatenori-to-reigi.md
+#          - tatenori-theory/tatenori-no-gogen.md
+      - section: "オフビートカウント理論(工事中)"
         href: offbeat-count-theory/about.md
         contents:
           - offbeat-count-theory/about.md
@@ -49,8 +49,8 @@ website:
           - offbeat-count-theory/metadivision.md
           - offbeat-count-theory/three-n-rhythm.md
           - offbeat-count-theory/polyrhythm.md
-      - section: "エッセイ"
-        href: essays/*.md
+#      - section: "エッセイ"
+#        href: essays/*.md
     logo: /attachments/rhythmpedia-header5v2.png
 format:
   html:

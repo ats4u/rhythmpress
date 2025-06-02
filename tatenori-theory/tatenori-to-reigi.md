@@ -1,5 +1,5 @@
 ---
-title: 縦乗りと礼儀
+title: 縦乗りと礼儀(工事中)
 created: 2025-05-22T15:00
 tags:
   - foo

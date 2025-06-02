@@ -1,5 +1,5 @@
 ---
-title: 縦乗りの語源
+title: 縦乗りの語源(工事中)
 created: 2025-05-27T13:38
 sidebar: "false"
 ---
