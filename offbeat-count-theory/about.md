@@ -1,6 +1,5 @@
 ---
-title: オフビートカウントとは(工事中)
-created: 2025-05-29T04:15
-tags:
-  - foo
+title: about
+created: 2025-06-03T00:24
+tags: ["foo"]
 ---

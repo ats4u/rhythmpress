@@ -36,19 +36,20 @@ website:
           - text: ホーム
             href: index.qmd
       - section: "縦乗り理論"
-        href: tatenori-theory/about.md
+        href: tatenori-theory/
         contents:
-          - tatenori-theory/about.md
+          - tatenori-theory/index.md
 #          - tatenori-theory/tatenori-to-reigi.md
 #          - tatenori-theory/tatenori-no-gogen.md
       - section: "オフビートカウント理論(工事中)"
         href: offbeat-count-theory/about.md
         contents:
-          - offbeat-count-theory/about.md
-          - offbeat-count-theory/beat-orientation.md
-          - offbeat-count-theory/metadivision.md
-          - offbeat-count-theory/three-n-rhythm.md
-          - offbeat-count-theory/polyrhythm.md
+          - offbeat-count-theory/index.md
+          - offbeat-count-theory/beat-orientation/index.md
+          - offbeat-count-theory/phonetics/index.md
+          - offbeat-count-theory/metadivision/index.md
+          - offbeat-count-theory/three-n-rhythm/index.md
+          - offbeat-count-theory/polyrhythm/index.md
 #      - section: "エッセイ"
 #        href: essays/*.md
     logo: /attachments/rhythmpedia-header5v2.png
