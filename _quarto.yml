@@ -67,6 +67,8 @@ format:
 #      - file: banner.html
     toc: true
     toc-location: right
+    toc-depth: 5
+    toc-expand: true
     include-in-header:
       - text: |
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
