@@ -58,6 +58,7 @@ format:
     theme:
       light : [ cosmo,  .assets/websites/theme.scss, .assets/websites/theme-light.scss ]
       dark  : [ darkly, .assets/websites/theme.scss, .assets/websites/theme-dark.scss ]
+    lightbox: true
     filters:
       - filters/include-files.lua
 #      - filters/obsidian-image-dimensions.lua
@@ -75,3 +76,4 @@ format:
       body-width: 800px
       margin-width: 600px
       gutter-width: 1.5rem
+

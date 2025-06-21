@@ -49,20 +49,54 @@ tags:
 
 ### 音節／シラブルとは
 
+![](attachments/syllable-00-00-syllable-0.png)
+
 シラブル／音節とは音韻学の重要な概念のひとつです。全ての単語は、シラブルの組み合わせで構成されています。
-![](attachments/syllable-01-00-syllable-1.png)
 
-![](attachments/syllable-01-01-syllable-2.png)
+![](attachments/syllable-01-00-syllable-0.png)
 
-![](attachments/syllable-01-02-syllable-3.png)
+全てのシラブルは、**頭子音(Onset)** **音節核(Nucleus)** **末子音(Coda)** の３つの要素で構成されています。 
+
+音節核と末子音は、シラブルの本体になっています。この本体を **音節基(Rime)** と呼びます。 
+
+### 音節基は等間隔で配置される
+読み上げの際は音節基に強拍が置かれます。
+
+
+![](attachments/syllable-01-02-syllable-2.png)
 
 
 
+
+### 頭子音はなくならない
+
+![](attachments/syllable-01-01-syllable-1.png)
+
+単語 **Cat** の頭子音は **C** です。**C** がなくなると **At** という位置を表す前置詞になります。 この場合このシラブルには頭子音がありません。英語では、このように頭子音がそこにない時でもしばしばそこに **声門閉鎖音** という特殊な子音が挿入されます。 このことを**声門閉鎖音挿入(Glottal Stop Insertion)**  と呼びます。
+
+
+
+
+
+![](attachments/syllable-01-03-syllable-3.png)
+
+
+
+![](attachments/syllable-01-04-syllable-4.png)
+
+
+
+
+
+![](attachments/syllable-02-01-syllable-mora.png)
 
 
 ![](attachments/syllable-02-02-syllable-mora.png)
 
+
+
 ![](attachments/syllable-02-03-mora.png)
+
 
 ![](attachments/syllable-02-04-syllable-mora-comparison.png)
 
