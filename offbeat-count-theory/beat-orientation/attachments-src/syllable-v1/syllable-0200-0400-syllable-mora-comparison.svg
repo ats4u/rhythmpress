@@ -7,7 +7,7 @@
    viewBox="0 0 264.58333 264.58334"
    version="1.1"
    id="svg1"
-   sodipodi:docname="syllable-02-04-syllable-mora-comparison.svg"
+   sodipodi:docname="syllable-0200-0400-syllable-mora-comparison.svg"
    inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
    inkscape:export-filename="syllable-02-04-syllable-mora-comparison.png"
    inkscape:export-xdpi="96"
@@ -27,17 +27,38 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      inkscape:zoom="0.41089656"
-     inkscape:cx="560.96844"
+     inkscape:cx="563.40214"
      inkscape:cy="287.1769"
-     inkscape:window-width="1728"
-     inkscape:window-height="999"
-     inkscape:window-x="1920"
-     inkscape:window-y="25"
+     inkscape:window-width="2056"
+     inkscape:window-height="1229"
+     inkscape:window-x="0"
+     inkscape:window-y="-167"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      inkscape:export-bgcolor="#ffffffff" />
   <defs
-     id="defs1" />
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ArrowWide"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path25" />
+    </marker>
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
@@ -56,14 +77,14 @@
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1;font-family:DFGPOP1-W12;-inkscape-font-specification:DFGPOP1-W12;text-align:start;text-decoration-color:#000000;letter-spacing:-0.0846667px;word-spacing:0.00194749px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.79375;stroke-linecap:square;stroke-dashoffset:6;stroke-opacity:0.497159;paint-order:markers stroke fill"
-       x="9.7895823"
-       y="129.90732"
+       x="10.433499"
+       y="-33.647633"
        id="text2"><tspan
          sodipodi:role="line"
          id="tspan2"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:DFPGothic-UB;-inkscape-font-specification:DFPGothic-UB;fill:#000000;fill-opacity:1;stroke-width:0.79375"
-         x="9.7895823"
-         y="129.90732">頭子音/Onset</tspan></text>
+         x="10.433499"
+         y="-33.647633">頭子音/Onset</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1;font-family:DFGPOP1-W12;-inkscape-font-specification:DFGPOP1-W12;text-align:start;text-decoration-color:#000000;letter-spacing:-0.0846667px;word-spacing:0.00194749px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.79375;stroke-linecap:square;stroke-dashoffset:6;stroke-opacity:0.497159;paint-order:markers stroke fill"
@@ -89,25 +110,25 @@
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1;font-family:DFGPOP1-W12;-inkscape-font-specification:DFGPOP1-W12;text-align:start;text-decoration-color:#000000;letter-spacing:-0.0846667px;word-spacing:0.00194749px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.79375;stroke-linecap:square;stroke-dashoffset:6;stroke-opacity:0.497159;paint-order:markers stroke fill"
-       x="185.73749"
-       y="129.90732"
+       x="186.38141"
+       y="-33.647633"
        id="text5"><tspan
          sodipodi:role="line"
          id="tspan5"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:DFPGothic-UB;-inkscape-font-specification:DFPGothic-UB;fill:#000000;fill-opacity:1;stroke-width:0.79375"
-         x="185.73749"
-         y="129.90732">末子音/Coda</tspan></text>
+         x="186.38141"
+         y="-33.647633">末子音/Coda</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1;font-family:DFGPOP1-W12;-inkscape-font-specification:DFGPOP1-W12;text-align:start;text-decoration-color:#000000;letter-spacing:-0.0846667px;word-spacing:0.00194749px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.79375;stroke-linecap:square;stroke-dashoffset:6;stroke-opacity:0.497159;paint-order:markers stroke fill"
-       x="97.102081"
-       y="129.88664"
+       x="97.746002"
+       y="-33.668308"
        id="text6"><tspan
          sodipodi:role="line"
          id="tspan6"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:DFPGothic-UB;-inkscape-font-specification:DFPGothic-UB;fill:#000000;fill-opacity:1;stroke-width:0.79375"
-         x="97.102081"
-         y="129.88664">音節核/Nucleus</tspan></text>
+         x="97.746002"
+         y="-33.668308">音節核/Nucleus</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.794015;stroke-linecap:square;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:1;paint-order:markers stroke fill"
        d="m 128.85208,73.554166 c -0.66284,-14.284989 37.947,-1.525067 45.24486,-13.791256 8.71373,13.356662 46.28259,-0.622116 46.30097,12.203756"
@@ -327,7 +348,7 @@
     <g
        id="g2-6"
        style="fill:#ffffff;fill-opacity:1"
-       transform="translate(-3.8545828,102.38773)">
+       transform="translate(83.07423,102.38773)">
       <g
          id="g1-5">
         <circle
@@ -351,7 +372,7 @@
     </g>
     <g
        id="g3-4"
-       transform="matrix(0.87151798,0,0,0.87151798,2.8172732,110.14719)">
+       transform="matrix(0.87151798,0,0,0.87151798,89.746086,110.14719)">
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:1;paint-order:markers fill stroke"
          id="rect2-2"
@@ -375,7 +396,7 @@
     </g>
     <g
        id="g12"
-       transform="translate(-2.0916985,-0.34861645)">
+       transform="translate(84.837114,-0.34861645)">
       <g
          id="g5-9"
          style="fill:#ffffff;fill-opacity:1"
@@ -428,7 +449,7 @@
     </g>
     <g
        id="g15-5"
-       transform="translate(-20.956135,178.33594)">
+       transform="translate(-17.092632,192.50212)">
       <path
          id="path9-3"
          style="stroke:#000000;stroke-width:0.548996;stroke-linecap:square;stroke-dashoffset:6;paint-order:markers stroke fill"
@@ -477,35 +498,35 @@
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.30741;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
        id="path3"
-       cx="219.60915"
-       cy="198.46228"
+       cx="223.47266"
+       cy="212.62846"
        rx="1.7284992"
        ry="2.0087962" />
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.30741;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
        id="ellipse3"
-       cx="225.18021"
-       cy="198.46228"
+       cx="229.04372"
+       cy="212.62846"
        rx="1.7284992"
        ry="2.0087962" />
     <ellipse
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.07679;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
        id="ellipse4"
-       cx="225.18021"
-       cy="198.46228"
+       cx="229.04372"
+       cy="212.62846"
        rx="0.80663288"
        ry="0.93743819" />
     <ellipse
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.07679;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
        id="ellipse5"
-       cx="219.76985"
-       cy="198.46228"
+       cx="223.63336"
+       cy="212.62846"
        rx="0.80663288"
        ry="0.93743819" />
     <path
        id="path11"
        style="fill:#ffffff;stroke-width:1.32292;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
-       d="m 224.97094,203.12284 c 0,0.84151 -1.06182,4.80213 -2.51109,4.80213 -1.44928,0 -2.7372,-3.96061 -2.7372,-4.80213 0,-0.84152 1.17487,-1.5237 2.62415,-1.5237 1.44928,0 2.62414,0.68219 2.62414,1.5237 z"
+       d="m 228.83444,217.28902 c 0,0.84151 -1.06182,4.80213 -2.51109,4.80213 -1.44928,0 -2.7372,-3.96061 -2.7372,-4.80213 0,-0.84152 1.17487,-1.5237 2.62415,-1.5237 1.44928,0 2.62414,0.68219 2.62414,1.5237 z"
        sodipodi:nodetypes="sssss" />
     <circle
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.30741;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
@@ -540,23 +561,23 @@
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.794015;stroke-linecap:square;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:1;paint-order:markers stroke fill"
-       d="m 42.743822,176.91124 c -0.66284,14.28499 37.947,1.52507 45.24486,13.79125 8.71373,-13.35666 46.282588,0.62212 46.300968,-12.20375"
+       d="m 129.67263,176.91124 c -0.66284,14.28499 37.947,1.52507 45.24486,13.79125 8.71373,-13.35666 46.28259,0.62212 46.30097,-12.20375"
        id="path10"
        sodipodi:nodetypes="ccc" />
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:1;font-family:DFGPOP1-W12;-inkscape-font-specification:DFGPOP1-W12;text-align:start;text-decoration-color:#000000;letter-spacing:-0.0846667px;word-spacing:0.00194749px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.79375;stroke-linecap:square;stroke-dashoffset:6;stroke-opacity:0.497159;paint-order:markers stroke fill"
-       x="55.518734"
+       x="142.44754"
        y="202.41403"
        id="text11"><tspan
          sodipodi:role="line"
          id="tspan11"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:DFPGothic-UB;-inkscape-font-specification:DFPGothic-UB;fill:#000000;fill-opacity:1;stroke-width:0.79375"
-         x="55.518734"
+         x="142.44754"
          y="202.41403">音節基/Rime</tspan></text>
     <g
        id="g13"
-       transform="translate(0,-13.247424)">
+       transform="translate(157.7597,-11.95959)">
       <g
          id="g8-0"
          style="fill:#ffffff;fill-opacity:1"
@@ -610,7 +631,7 @@
     <g
        id="g2-4"
        style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:5.29167;stroke-dasharray:none;stroke-opacity:0.526611"
-       transform="translate(1.158613,65.104281)">
+       transform="translate(158.91831,66.392115)">
       <path
          style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:5.29167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:0.526611;paint-order:markers stroke fill"
          d="M 186.85839,75.301143 246.4718,122.71298"
@@ -620,5 +641,10 @@
          d="m 185.46393,119.22681 63.7968,-47.41183"
          id="path2" />
     </g>
+    <path
+       style="font-variation-settings:normal;opacity:0.381938;vector-effect:none;fill:none;fill-opacity:1;stroke:#f90000;stroke-width:5.36862;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:6;stroke-opacity:1;-inkscape-stroke:none;marker-start:url(#ArrowWide);paint-order:markers stroke fill;stop-color:#000000"
+       d="M 92.692047,155.8545 27.34758,155.39727"
+       id="path4-7"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
