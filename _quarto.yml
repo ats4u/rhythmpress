@@ -41,7 +41,7 @@ website:
           - tatenori-theory/index.md
 #          - tatenori-theory/tatenori-to-reigi.md
 #          - tatenori-theory/tatenori-no-gogen.md
-      - section: "オフビートカウント理論(工事中)"
+      - section: "オフビートカウント理論"
         href: offbeat-count-theory/about.md
         contents:
           - offbeat-count-theory/index.md
