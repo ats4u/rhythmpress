@@ -1,5 +1,5 @@
 ---
-title: 多層弱強拍基軸仮説
+title: 多次元弱拍基軸リズム理論
 created: 2025-05-24T00:17
 tags:
   - foo
@@ -150,7 +150,7 @@ tags:
 
 言語学ではこれらの特徴を総合して**モーラ拍リズム言語**と呼びます。
 
-![](./attachments/mora-timed-rhythm-01.png)
+![](attachments/mora-timed-rhythm-01.png)
 
 ### ストレス拍リズムの特徴
 
@@ -163,7 +163,7 @@ tags:
 
 言語学ではこれらの特徴を総合して**ストレス拍リズム言語**と呼びます。
 
-![](./attachments/stress-timed-rhythm-01.png)
+![](attachments/stress-timed-rhythm-01.png)
 
 ### モーラ拍リズムとストレス拍リズムの違い
 

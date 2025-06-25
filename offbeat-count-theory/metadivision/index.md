@@ -1,6 +1,5 @@
 ---
-title: メタディヴィジョン理論(工事中)
-created: 2025-05-27T11:07
-tags:
-  - foo
+title: index
+created: 2025-06-25T17:08
+tags: ["foo"]
 ---
