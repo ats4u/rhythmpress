@@ -22,6 +22,40 @@ execute:
 
 このユニークなリズム理論をここで御紹介致します。
 
+```{python}
+#| output: asis
+
+import subprocess
+import re 
+from pathlib import Path
+
+def proc( input_md, output_md, link_target_md ):
+    # Run pandoc to get TOC as Markdown
+    toc_md = subprocess.run(
+        [
+            "pandoc",
+            input_md,
+            "--toc",
+            "--toc-depth=6",
+            "--to=markdown",  # ← output pure Markdown TOC
+            "--template=templates/toc"  # optional: avoids front/back matter
+        ],
+        capture_output=True,
+        text=True
+    ).stdout
+    
+    # Patch all links to include the HTML filename prefix
+    # [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
+    patched = re.sub(r'\]\(#', f']({link_target_md}#', toc_md)
+    
+    # Add 2 extra spaces to every indented line
+    shifted = '\n'.join(
+        '  ' + line if re.match(r'^\s*- ', line) else line
+        for line in patched.splitlines()
+    )
+    print( shifted  )
+```
+
 ## 統合グルーヴ理論：
 
 オフビートカウント理論を核に据えた統合グルーヴ理論です ─── オフビートカウントとは何でしょうか。そして何故生まれたのでしょうか。オフビートカウント及び、オフビートカウントを構成する６つの理論との関係を説明します。
@@ -30,77 +64,19 @@ execute:
    *(最終更新日 2025/6/2)*  日本語を母国語とするミュージシャンならば必ず一度は経験する謎 ─── 「何故日本人はグルーヴしないのか」これは日本人が英語が聴き取れなくなる理由と共通です。 日本語と日本の音楽に潜む『縦乗り』の正体を明らかにし、その影響と限界を科学的・文化的に考察します。
 ```{python}
 #| output: asis
-
-import subprocess
-import re
-from pathlib import Path
-
-# Source input/output paths
 input_md = "tatenori-theory/index.md"
 output_md = "toc-about.md"
-link_target = "tatenori-theory/index.md"
-
-# Run pandoc to get TOC as Markdown
-toc_md = subprocess.run(
-    [
-        "pandoc",
-        input_md,
-        "--toc",
-        "--to=markdown",  # ← output pure Markdown TOC
-        "--template=templates/toc"  # optional: avoids front/back matter
-    ],
-    capture_output=True,
-    text=True
-).stdout
-
-# Patch all links to include the HTML filename prefix
-# [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
-patched = re.sub(r'\]\(#', f']({link_target}#', toc_md)
-
-# Add 2 extra spaces to every indented line
-shifted = '\n'.join(
-    '  ' + line if re.match(r'^\s*- ', line) else line
-    for line in patched.splitlines()
-)
-print( shifted  )
+link_target_md = input_md
+proc( input_md, output_md, link_target_md )
 ```
 - [**多次元弱拍基軸リズム理論**](./beat-orientation/index.md)  
     音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
 ```{python}
 #| output: asis
-
-import subprocess
-import re
-from pathlib import Path
-
-# Source input/output paths
 input_md    = "beat-orientation/index.md"
 output_md = "toc-beat-orientation.md"
-link_target  = "beat-orientation/index.md"
-
-# Run pandoc to get TOC as Markdown
-toc_md = subprocess.run(
-    [
-        "pandoc",
-        input_md,
-        "--toc",
-        "--to=markdown",  # ← output pure Markdown TOC
-        "--template=templates/toc"  # optional: avoids front/back matter
-    ],
-    capture_output=True,
-    text=True
-).stdout
-
-# Patch all links to include the HTML filename prefix
-# [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
-patched = re.sub(r'\]\(#', f']({link_target}#', toc_md)
-
-# Add 2 extra spaces to every indented line
-shifted = '\n'.join(
-    '  ' + line if re.match(r'^\s*- ', line) else line
-    for line in patched.splitlines()
-)
-print( shifted  )
+link_target_md  = "beat-orientation/index.md"
+proc( input_md, output_md, link_target_md )
 ```
 - [🚧  **オフビートカウント理論** ](offbeat-count-theory/about.md)  
     『声を出して英語でカウントする ─── 但しカウントする際に半拍早くカウントする』 ─── というとても単純な実践練習方法で、飛躍的にグルーヴ能力が向上します。たったこの『半拍早く数える』というごく小さな違いのなかに無限の奥行きが存在します。半拍早くカウントするというたったそれだけのことですが、習得にはしばしば１０年以上の長い年月が必要です。
