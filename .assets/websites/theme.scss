@@ -1,6 +1,9 @@
 /*-- scss:defaults --*/
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=M+PLUS+1:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap');
 body {
 }
 
@@ -14,13 +17,23 @@ $h6-font-size: calc( $font-size-base +  0.02rem  ) ;
 
 /*-- scss:rules --*/
 body {
-  font-family: 'M PLUS 1p';
-  // font-family: 'M PLUS Rounded 1c';
-  font-size : 0.85rem;
+  // font-family: 'M PLUS 1p';
+
+  /*
+    font-family: 'M PLUS Rounded 1c';
+    font-weight: 700;
+    font-size : 0.85em;
+  */
+
+  font-family: "M PLUS 1", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size : 1.00em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400;
+  font-weight: 600;
   margin: 15px 0px 0px 0px;
   border-bottom: 1px silver dashed;
   margin-top: 40px;
