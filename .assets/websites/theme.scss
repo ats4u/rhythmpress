@@ -7,13 +7,40 @@
 body {
 }
 
-$font-size-base: 1.20rem;
-$h1-font-size: calc( $font-size-base +  0.5rem ) ;
-$h2-font-size: calc( $font-size-base +  0.10rem ) ;
-$h3-font-size: calc( $font-size-base +  0.08rem ) ;
-$h4-font-size: calc( $font-size-base +  0.06rem ) ;
-$h5-font-size: calc( $font-size-base +  0.04rem ) ;
-$h6-font-size: calc( $font-size-base +  0.02rem  ) ;
+/* Hide the "On This Page" caption on the right sidebar.*/
+#quarto-sidebar > h2,  /* old layout */
+.sidebar-title,        /* newer layout */
+#toc-title {           /* fallback */
+  display: none !important;
+}
+
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border: 2px dotted rgb(96 139 168);
+}
+
+.center-box blockquote,
+.center-box div,
+.center-box iframe
+{
+  width: 100%;
+  // height: 100px;
+  // border: 2px solid rgb(96 139 168);
+  // border-radius: 5px;
+  // background-color: rgb(96 139 168 / 0.2);
+}
+
+
+$font-size-base: 1.20em; // calc( 1em / 30 ); // 1.20rem;
+$font-size-step: calc( 1em / 30 ); // 1.20rem;
+$h1-font-size: calc( $font-size-base + 2.50em );  // 0.5rem  
+$h2-font-size: calc( $font-size-base + 1.00em );  // 0.10rem 
+$h3-font-size: calc( $font-size-base + 0.50em );  // 0.08rem 
+$h4-font-size: calc( $font-size-base + 0.15em );  // 0.06rem 
+$h5-font-size: calc( $font-size-base + 0.00em );  // 0.04rem 
+$h6-font-size: calc( $font-size-base + 0.25em );  // 0.02rem 
 
 /*-- scss:rules --*/
 body {
@@ -33,13 +60,41 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 1000;
   margin: 15px 0px 0px 0px;
-  border-bottom: 1px silver dashed;
   margin-top: 40px;
   margin-bottom: 5px;
   padding:0px;
+  padding-left:15px;
+  padding-bottom:5px;
 }
+
+h1 {
+  // border-bottom: 5px silver double;
+  text-align:center;
+  padding:30px 0px 30px 0px;
+  // border: double 5px silver;
+}
+
+h2 {
+  text-align:center;
+  padding:30px 0px 30px 0px;
+  border: double 5px silver;
+  border-bottom: 5px silver double;
+}
+h3 {
+  border-bottom: 5px silver double;
+}
+h4 {
+  border-bottom: 3px silver solid;
+}
+h5 {
+  border-bottom: 1px silver solid;
+}
+h6 {
+  border-bottom: 1px silver solid;
+}
+
 
 // h1::before {
 //   content : '☀️ ';
@@ -49,3 +104,4 @@ h1, h2, h3, h4, h5, h6 {
 //   content : '🛎️ ';
 //   display: inline-block;
 // }
+

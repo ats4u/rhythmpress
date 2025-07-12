@@ -60,7 +60,7 @@ tags:
 
 次のリズムを聴いてみてください。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツー（英語での「ちゃんちゃん」のような効果音） Credit : <a href="https://t.co/1pMfDuY1S3">https://t.co/1pMfDuY1S3</a> <a href="https://t.co/qdcGm8P81M">pic.twitter.com/qdcGm8P81M</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928811162042507281?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote> 
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツー（英語での「ちゃんちゃん」のような効果音） Credit : <a href="https://t.co/1pMfDuY1S3">https://t.co/1pMfDuY1S3</a> <a href="https://t.co/qdcGm8P81M">pic.twitter.com/qdcGm8P81M</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928811162042507281?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote></div>
 
 これは海外では、日本の「ちゃんちゃん」と同じ意味を持っているリズム効果音です。これを何か面白いことが起こった時の落ちの効果音として演奏します。この音のことを一般的にバダムツーというオノマトペで表現し ba dum tss と綴ります。このバダムツーに関しては [縦乗り理論#バダムツーとは](/tatenori-theory/#バダムツーとは) で詳しく説明しました。
 
@@ -72,11 +72,11 @@ tags:
 
 果たしてバダムツーは、本当にこういうリズムの音楽からやってきたのでしょうか ─── 実際に試してみるとわかるかも知れません。このリズム解釈を使って音楽を作って見て、実際に聴いてみましょう。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの縦乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/TCvZoJEMqw">pic.twitter.com/TCvZoJEMqw</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070176341164344?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの縦乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/TCvZoJEMqw">pic.twitter.com/TCvZoJEMqw</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070176341164344?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote></div>
 
 これは正しいでしょうか  ─── 少なくともリズムペディア筆者の私には、こうは感ぜられないのです。その音楽は恐らくこういう音楽だった筈です。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの横乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/C5x0FYgXLk">pic.twitter.com/C5x0FYgXLk</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070026998755806?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの横乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/C5x0FYgXLk">pic.twitter.com/C5x0FYgXLk</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070026998755806?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote></div>
 
 この上記リズム解釈を譜面として表現した場合、恐らく次のようになるでしょう。
 
@@ -88,7 +88,7 @@ tags:
 ### 音楽の弱拍強拍の順番認識の違い
 
 強拍弱拍の順番とはどういう意味でしょうか。次のビデオを見てください。
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【モーラ拍リズムの言語（日本語）を母語として話す人が聴き取れないリズム】 16分音符1つが弱起として入っている基本リフパターン ─── マイケル・ジャクソンのヒューマン・ネイチャー Live at Wembley 1988 Credit : <a href="https://t.co/eQ1e6WjElH">https://t.co/eQ1e6WjElH</a> <a href="https://t.co/mBAaWxTeSj">pic.twitter.com/mBAaWxTeSj</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928820285270024211?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【モーラ拍リズムの言語（日本語）を母語として話す人が聴き取れないリズム】 16分音符1つが弱起として入っている基本リフパターン ─── マイケル・ジャクソンのヒューマン・ネイチャー Live at Wembley 1988 Credit : <a href="https://t.co/eQ1e6WjElH">https://t.co/eQ1e6WjElH</a> <a href="https://t.co/mBAaWxTeSj">pic.twitter.com/mBAaWxTeSj</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928820285270024211?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote></div>
 
 この曲は、マイケル・ジャクソンのヒット曲『[ヒューマン・ネイチャー](https://www.youtube.com/watch?v=ElN_4vUvTPs)』です。この曲の冒頭でマイケル・ジャクソンが「チーチキ・チーチキ」と歌っていますが、この記事を読んで下さっている皆様は、このリズムをどの様に聴き取りましたでしょうか。
 
@@ -112,7 +112,7 @@ tags:
 
 具体例として次のビデオを見てみます。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【リエゾン】前後の子音が全て繋がることをリエゾンといいます。<br><br>LMFAO<br>エルエムエフエイオー<br>⇩⇩⇩⇩<br>エェレッメッフェィヨゥ！<br>Credit : <a href="https://t.co/FL5wMtgC4l">https://t.co/FL5wMtgC4l</a> <a href="https://t.co/v0mkyrsnW4">pic.twitter.com/v0mkyrsnW4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1596182037001830400?ref_src=twsrc%5Etfw">November 25, 2022</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【リエゾン】前後の子音が全て繋がることをリエゾンといいます。<br><br>LMFAO<br>エルエムエフエイオー<br>⇩⇩⇩⇩<br>エェレッメッフェィヨゥ！<br>Credit : <a href="https://t.co/FL5wMtgC4l">https://t.co/FL5wMtgC4l</a> <a href="https://t.co/v0mkyrsnW4">pic.twitter.com/v0mkyrsnW4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1596182037001830400?ref_src=twsrc%5Etfw">November 25, 2022</a></blockquote></div>
 
 このビデオに登場するのは2011年前後に一世風靡したLMFAOというボーカルユニットです。彼らがストレス拍リズムで発音する「エルエムエフエイオー」が、モーラ拍リズムの認識では『エェレッメッフェイヨウ』と認識されます。
 
@@ -145,15 +145,15 @@ tags:
 
 もし音が次のように2回鳴ったとすると、その音符をどのように譜面に配置するでしょうか。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">この様に２つの音が連続して並んでいるリズムをスコッチスナップと呼びます。一説では英語の元となったゲール語に起源があり、ゲール語由来の英語の主要単語にしばしば見られるリズムです。body billy money nitty gritty bitter dinner uncle Philip 等々 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> v2 <a href="https://t.co/LXyKij07J6">pic.twitter.com/LXyKij07J6</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1938149704401043799?ref_src=twsrc%5Etfw">June 26, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">この様に２つの音が連続して並んでいるリズムをスコッチスナップと呼びます。一説では英語の元となったゲール語に起源があり、ゲール語由来の英語の主要単語にしばしば見られるリズムです。body billy money nitty gritty bitter dinner uncle Philip 等々 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> v2 <a href="https://t.co/LXyKij07J6">pic.twitter.com/LXyKij07J6</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1938149704401043799?ref_src=twsrc%5Etfw">June 26, 2025</a></blockquote></div>
 
 この時、二通りの配置のしかたがあります。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 モーラ拍リズム（日本語）リズム認識では強拍の後ろに弱拍が追随していると認識する。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/beMyPDhY7L">pic.twitter.com/beMyPDhY7L</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931607875006427196?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 モーラ拍リズム（日本語）リズム認識では強拍の後ろに弱拍が追随していると認識する。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/beMyPDhY7L">pic.twitter.com/beMyPDhY7L</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931607875006427196?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote></div>
 
 もしかするとこの配置が最も自然だと感じたかも知れません ───  しかし次の様に解釈することも可能です。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 ストレス拍リズム（英語）のリズム認識では弱拍が強拍に先駆けているという順序認識になる。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/rPiPqopgN4">pic.twitter.com/rPiPqopgN4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931608649400467488?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 ストレス拍リズム（英語）のリズム認識では弱拍が強拍に先駆けているという順序認識になる。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/rPiPqopgN4">pic.twitter.com/rPiPqopgN4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931608649400467488?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote></div>
 
 この様に解釈しても決して間違いではありません。
 
@@ -161,7 +161,7 @@ tags:
 
 ### 強拍先行＝強弱
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 モーラ拍リズム（日本語）リズム認識では強拍の後ろに弱拍が追随していると認識する。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/beMyPDhY7L">pic.twitter.com/beMyPDhY7L</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931607875006427196?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 モーラ拍リズム（日本語）リズム認識では強拍の後ろに弱拍が追随していると認識する。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/beMyPDhY7L">pic.twitter.com/beMyPDhY7L</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931607875006427196?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote></div>
 
 この様に解釈した時、これは弱拍が強拍の後ろに配置されていると見ることが出来ます。この場合の順番は『**強弱**』です。
 
@@ -169,7 +169,7 @@ tags:
 
 逆に
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 ストレス拍リズム（英語）のリズム認識では弱拍が強拍に先駆けているという順序認識になる。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/rPiPqopgN4">pic.twitter.com/rPiPqopgN4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931608649400467488?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【音が２つ鳴った時のリズムの前後関係の認識の違い】 ストレス拍リズム（英語）のリズム認識では弱拍が強拍に先駆けているという順序認識になる。（第二版） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/rPiPqopgN4">pic.twitter.com/rPiPqopgN4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1931608649400467488?ref_src=twsrc%5Etfw">June 8, 2025</a></blockquote></div>
 
 この様に解釈した場合、これは弱拍が強拍よりも前に配置されている見ることが出来ます。この場合の順番は『**弱強**』です。
 
@@ -306,6 +306,10 @@ tags:
 <span style="color:silver">※ 実例を追加する。</span>
 
 ### モーラ拍リズムについて
+
+モーラ拍はシラブル拍と全く違った特徴を持っています。
+
+#### モーラ拍の主な特徴
 
 ![](attachments/beat-orientation-basic.png)
 
@@ -448,7 +452,7 @@ tags:
 
 このことは、日本語の名称が英語でどのような発音に変化するかを観察するとよくわかります。以下は英語吹き替え版アキラの一幕です。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【縦乗りの起源】頭にアクセントが置かれる日本語の名前を英語ネイティブの人たちが読むと、しばしば2つ目の位置にアクセントが移動しますが、逆もまた然りです。<br><br>しばしば2番め以降にアクセントが置かれる英語のリズムを日本話ネイティブの人が読むと全アクセントが頭に移動します。<br><br>【英語版アキラ <a href="https://t.co/fJHnZgu5cb">pic.twitter.com/fJHnZgu5cb</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1574375878184042496?ref_src=twsrc%5Etfw">September 26, 2022</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【縦乗りの起源】頭にアクセントが置かれる日本語の名前を英語ネイティブの人たちが読むと、しばしば2つ目の位置にアクセントが移動しますが、逆もまた然りです。<br><br>しばしば2番め以降にアクセントが置かれる英語のリズムを日本話ネイティブの人が読むと全アクセントが頭に移動します。<br><br>【英語版アキラ <a href="https://t.co/fJHnZgu5cb">pic.twitter.com/fJHnZgu5cb</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1574375878184042496?ref_src=twsrc%5Etfw">September 26, 2022</a></blockquote></div>
 
 ストレス拍リズムでは、アクセントが置かれたシラブル（モーラ）を他のシラブル（モーラ）よりも長く発音するというルールがあります。このため「タカシ」は「タカーシ」「アキラ」は「アキーラ」に変化します。一方タカシのタは弱拍にある為、軽く添える様に短く「ﾀｯカーーーｼ」とシラブル長が短くなる傾向があります。場合によってはこのシラブルは脱落し発音しないこともあります。シラブルの長さが伸び縮みする ─── これがストレス拍リズムの1つ目の特徴です。
 
@@ -472,7 +476,7 @@ tags:
 
 次のビデオで実際の音声を確認してください。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VXHxtpvRacc?si=nOJ9rsU44BqROp7R&amp;start=450" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div style="center-box"><iframe width="560" height="315" src="https://www.youtube.com/embed/VXHxtpvRacc?si=nOJ9rsU44BqROp7R&amp;start=450" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
 #### ストレス拍ではアクセントなしシラブルが省略される
 
@@ -684,9 +688,56 @@ tags:
 
 ## 多次元弱拍先行について
 
-前章までに拍には強拍と弱拍の2種類があることを見てきました。そして強拍は必ずしも先に現れる必要はなく、しばしば弱拍が先に演奏されて
+前章までに拍には強拍と弱拍の2種類があることを見てきました。そして強拍は必ずしも先に現れるわけではなく、しばしば弱拍が先に演奏されることも見てきました。次に弱拍・強拍は、4分音符だけではなく全ての音価の音符に存在することを見てみます。
 
-これを音楽の小節のなかで見てみる
+### 4分音符の弱拍と強拍
+
+前章で4分音符に対して弱拍と強拍が現れることを見ました。 これを音楽の小節のなかで見てみます。
+
+次の図の様に１小節のなかに4つの4分音符があったとします。
+
+![](attachments/beat-orientation-explained-4th.png)
+
+この時、4分音符は、次の図の様に強拍と弱拍に分かれることを説明しました。
+
+![](attachments/beat-orientation-explained-4th-with-caption.png)
+
+強拍が先に来るように音符を認識すると、これが強拍先行になることを説明しました。
+
+これを4分音符上で行うと次のようになります。
+
+![](attachments/beat-orientation-explained-4th-sw.png)
+
+これを弱拍が先に来るように認識すると次の様になります。
+
+![](attachments/beat-orientation-explained-4th-ws.png)
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行（シラブル拍リズム／ストレス拍リズム）<a href="https://t.co/GQwo8b3NOs">pic.twitter.com/GQwo8b3NOs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024049505673559?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の強拍先行（モーラ拍リズム）<a href="https://t.co/sxZbhBf0oP">pic.twitter.com/sxZbhBf0oP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024220717265090?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の弱拍先行（ストレス拍リズム）<a href="https://t.co/YOsxEiurjc">pic.twitter.com/YOsxEiurjc</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024378947383703?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の強拍先行（モーラ拍リズム・シラブル拍リズム）<a href="https://t.co/nm7sOtEMLs">pic.twitter.com/nm7sOtEMLs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024526159065266?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符及び8分音符の弱拍先行（ストレス拍リズム）<a href="https://t.co/bao2f19Tbb">pic.twitter.com/bao2f19Tbb</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024709320126788?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符及び8分音符の強拍先行（モーラ拍リズム）<a href="https://t.co/emtb3pwkcD">pic.twitter.com/emtb3pwkcD</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024971963244620?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符、4分音符及び8分音符の弱拍先行（英語などのストレス拍リズム）<a href="https://t.co/xYQj8CQPJX">pic.twitter.com/xYQj8CQPJX</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944025277438509100?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符、4分音符及び8分音符の強拍先行（日本語などのモーラ拍リズム）<a href="https://t.co/tnw3Sn6aE8">pic.twitter.com/tnw3Sn6aE8</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944025500139286791?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符、8分音符及び16分音符の弱拍先行（英語などのストレス拍リズム） ( Can&#39;t Hide Love / Earth, Wind &amp; Fire ) <a href="https://t.co/z93F8mmjU7">pic.twitter.com/z93F8mmjU7</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944026314014630346?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符、8分音符及び16分音符の強拍先行（日本語などのモーラ拍リズム）( モーラ拍リズムの頭合わせリズム認識を適用した Can&#39;t Hide Love / Earth, Wind &amp; Fire ) <a href="https://t.co/Nx5G8rBc4f">pic.twitter.com/Nx5G8rBc4f</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944026780706521146?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote> </div>
 
 ![](attachments/beat-offset-offset-0.png)
 
@@ -704,7 +755,7 @@ tags:
 
 モーラ拍リズムを母語として話す人は、ストレス拍リズムを母語として話す人が演奏するリズムを強弱リズム解釈として１つずれた形で認識します。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツー（英語での「ちゃんちゃん」のような効果音） Credit : <a href="https://t.co/1pMfDuY1S3">https://t.co/1pMfDuY1S3</a> <a href="https://t.co/qdcGm8P81M">pic.twitter.com/qdcGm8P81M</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928811162042507281?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote> 
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツー（英語での「ちゃんちゃん」のような効果音） Credit : <a href="https://t.co/1pMfDuY1S3">https://t.co/1pMfDuY1S3</a> <a href="https://t.co/qdcGm8P81M">pic.twitter.com/qdcGm8P81M</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928811162042507281?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote> </div>
 
 #### 弱強リズム解釈
 
@@ -714,7 +765,7 @@ tags:
 
 この解釈を音楽で表すと次のようになるでしょう。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの横乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/C5x0FYgXLk">pic.twitter.com/C5x0FYgXLk</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070026998755806?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの横乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/C5x0FYgXLk">pic.twitter.com/C5x0FYgXLk</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070026998755806?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote></div>
 
 #### 強弱のリズム解釈
 
@@ -724,11 +775,11 @@ tags:
 
 この解釈を音楽で表すと次のようになるでしょう。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの縦乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/TCvZoJEMqw">pic.twitter.com/TCvZoJEMqw</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070176341164344?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの縦乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/TCvZoJEMqw">pic.twitter.com/TCvZoJEMqw</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070176341164344?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote></div>
 
 この様に、ストレス拍リズムの人々が演奏する弱強リズムが前提で構成されたリズムパターンを、モーラ拍リズムの人々は、強弱リズムとして１つずれた形で間違って解釈します。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ストレス拍リズム（英語）のスイング ─── ベースが1/9早めのタイミングに移動しライドシンバルの8分弱拍が4分音符に対して5/9の位置に配置されている。また4分音符は全て1/9遅れている。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> (訂正版) <a href="https://t.co/QajecpWuqP">pic.twitter.com/QajecpWuqP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932739193438146682?ref_src=twsrc%5Etfw">June 11, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ストレス拍リズム（英語）のスイング ─── ベースが1/9早めのタイミングに移動しライドシンバルの8分弱拍が4分音符に対して5/9の位置に配置されている。また4分音符は全て1/9遅れている。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> (訂正版) <a href="https://t.co/QajecpWuqP">pic.twitter.com/QajecpWuqP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932739193438146682?ref_src=twsrc%5Etfw">June 11, 2025</a></blockquote></div>
 
 ## 時間認識の指向性について
 
@@ -738,11 +789,11 @@ tags:
 
 ![](attachments/Pasted%20image%2020250609002541.png)
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【尻合わせ】 <a href="https://t.co/vryyK4SjMC">pic.twitter.com/vryyK4SjMC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304475347390466?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【尻合わせ】 <a href="https://t.co/vryyK4SjMC">pic.twitter.com/vryyK4SjMC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304475347390466?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote></div>
 
 ### 頭合わせ
 ![](attachments/Pasted%20image%2020250609002708.png)
-<blockquote class="twitter-tweet" data-media-max-width="560" data-lang="en"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【頭合わせ】 <a href="https://t.co/Eij6Uuqi5G">pic.twitter.com/Eij6Uuqi5G</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304530502451201?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560" data-lang="en"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【頭合わせ】 <a href="https://t.co/Eij6Uuqi5G">pic.twitter.com/Eij6Uuqi5G</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304530502451201?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote></div>
 
 ### モーラ拍リズムのリボ払い
 ### シラブル拍リズムの月末締め一括払い
@@ -762,11 +813,11 @@ tags:
 
 弱強リズム認識を持つ人（＝ストレス拍リズム言語を母国語として話す人）は、リズムニュアンスを演奏する時に、弱拍位置を基準位置として固定し強拍位置を移動することでニュアンスを醸し出す習慣を持っています。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">レイドバックの基本『オフビートの位置は固定。オンビートの位置が遅れる』 ギターの方がこの演奏中でそれをはっきり行っています。<br><br>これを日本人が聴くとオンビートの位置が固定でオフビートの位置が早くなったように錯覚するため、同じ様に演奏することが出来ません。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/QC9uaA2F4h">pic.twitter.com/QC9uaA2F4h</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1650000173932900352?ref_src=twsrc%5Etfw">April 23, 2023</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">レイドバックの基本『オフビートの位置は固定。オンビートの位置が遅れる』 ギターの方がこの演奏中でそれをはっきり行っています。<br><br>これを日本人が聴くとオンビートの位置が固定でオフビートの位置が早くなったように錯覚するため、同じ様に演奏することが出来ません。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/QC9uaA2F4h">pic.twitter.com/QC9uaA2F4h</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1650000173932900352?ref_src=twsrc%5Etfw">April 23, 2023</a></blockquote></div>
 
 一方、強弱リズム認識を持つ人（＝モーラ拍リズム言語を母国語として話す人）は、リズムニュアンスを演奏する時に、弱強リズム認識を持つ人と全く逆に、強拍位置を基準位置として固定し弱拍位置を移動することでニュアンスを醸し出す習慣を持っています。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ずれのない歯ざわりのよい頭拍。朗々と歌うレイドバック。渋みと哀愁 ─── 演歌の素晴らしさがつまっている。<br><br>氷川きよしのずんどこ節<a href="https://t.co/xKDWfdwEC3">https://t.co/xKDWfdwEC3</a> <a href="https://t.co/nN06TRy28c">pic.twitter.com/nN06TRy28c</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1710928577670336908?ref_src=twsrc%5Etfw">October 8, 2023</a></blockquote> 
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ずれのない歯ざわりのよい頭拍。朗々と歌うレイドバック。渋みと哀愁 ─── 演歌の素晴らしさがつまっている。<br><br>氷川きよしのずんどこ節<a href="https://t.co/xKDWfdwEC3">https://t.co/xKDWfdwEC3</a> <a href="https://t.co/nN06TRy28c">pic.twitter.com/nN06TRy28c</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1710928577670336908?ref_src=twsrc%5Etfw">October 8, 2023</a></blockquote> </div>
 
 > なお日本の演歌では、伴奏側が表拍位置を基準位置を固定する役割を担い、歌唱者はその固定した強拍位置に対して、自分自身の演奏する強拍と弱拍の両方を移動することでニュアンスを演奏するという習慣があります。これは弱拍の位置が必ず固定になる弱強リズム認識と大きく異なる特徴です。この事については後述します。
 
@@ -775,23 +826,23 @@ tags:
 
 強弱リズム認識の人が弱強リズム認識のニュアンスが理解出来ない様子はあたかも、天体の動きを天動説で捉えると理解が困難になる様子とにています。
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">『ジャズのリズムはオフビートが基準点！』<br>オフビート基準点 ⇔ オンビート基準点<br><br>オンビートを基準にして考えると、基準点自体が動いてしまうことから、音符ずれの動きが全て矛盾して見えてしまう。オフビートを基準点にして考えると、とても単純に解釈できる。 <a href="https://t.co/muwn40MxLD">pic.twitter.com/muwn40MxLD</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1520578075490418688?ref_src=twsrc%5Etfw">May 1, 2022</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">『ジャズのリズムはオフビートが基準点！』<br>オフビート基準点 ⇔ オンビート基準点<br><br>オンビートを基準にして考えると、基準点自体が動いてしまうことから、音符ずれの動きが全て矛盾して見えてしまう。オフビートを基準点にして考えると、とても単純に解釈できる。 <a href="https://t.co/muwn40MxLD">pic.twitter.com/muwn40MxLD</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1520578075490418688?ref_src=twsrc%5Etfw">May 1, 2022</a></blockquote></div>
 
 弱拍の位置が基準になっていることに気付けば全ては単純な動作に見えますが、強拍位置が基準になっていると認識していると途端に全てが複雑な動作となって見えてきます。
 
 移動しているのは、自分が足をおいている強拍だった ─── それに気付く瞬間はまるで、天動説の人々が太陽が動いていると思っていたものが、実は自分たちが立っている地球自身が動いていると気付く瞬間ととても似ています。
 
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">欧米／東南アジアの交互に手を叩く「交互ルール」リズムに対して、真逆のルール「同時ルール」で歌う演歌。演歌のリズムの起源は中国にある。日本の演歌は（実は）中国で高い人気がある。<br><br>Credit : 蒋大为 - 北国之春 <a href="https://t.co/TtRu1Sfo52">https://t.co/TtRu1Sfo52</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/DsjR7NPhL4">pic.twitter.com/DsjR7NPhL4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192825442021377?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> 
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">欧米／東南アジアの交互に手を叩く「交互ルール」リズムに対して、真逆のルール「同時ルール」で歌う演歌。演歌のリズムの起源は中国にある。日本の演歌は（実は）中国で高い人気がある。<br><br>Credit : 蒋大为 - 北国之春 <a href="https://t.co/TtRu1Sfo52">https://t.co/TtRu1Sfo52</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/DsjR7NPhL4">pic.twitter.com/DsjR7NPhL4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192825442021377?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> </div>
 
 
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">二葉百合子の『関東一本〆』<br><br>正統派演歌の語法<br>・ぴったりに合わせる表拍<br>・後ろにつく裏拍<br>・揺れる表拍<br><br>Credit : 二葉百合子 - 関東一本〆<a href="https://t.co/Pz122I6Hhv">https://t.co/Pz122I6Hhv</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/3M68PZ4gbP">pic.twitter.com/3M68PZ4gbP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192095406628864?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> 
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">二葉百合子の『関東一本〆』<br><br>正統派演歌の語法<br>・ぴったりに合わせる表拍<br>・後ろにつく裏拍<br>・揺れる表拍<br><br>Credit : 二葉百合子 - 関東一本〆<a href="https://t.co/Pz122I6Hhv">https://t.co/Pz122I6Hhv</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/3M68PZ4gbP">pic.twitter.com/3M68PZ4gbP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192095406628864?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> </div>
 
 ## 縦乗りのメカニズム
 ### モーラ拍ネイティブが陥りがちなリズム習癖
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">縦乗りと横乗りの違いを完全に把握した。縦乗り解釈する時に音符の位置がずれる。これがいわゆる『日本人の頭重心リズム』のメカニズムだ。<br><br>縦乗り（モーラ拍リズム）<br>横乗り（ストレス拍リズム）<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/o3RILE8EMy">pic.twitter.com/o3RILE8EMy</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1930932283294544307?ref_src=twsrc%5Etfw">June 6, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">縦乗りと横乗りの違いを完全に把握した。縦乗り解釈する時に音符の位置がずれる。これがいわゆる『日本人の頭重心リズム』のメカニズムだ。<br><br>縦乗り（モーラ拍リズム）<br>横乗り（ストレス拍リズム）<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/o3RILE8EMy">pic.twitter.com/o3RILE8EMy</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1930932283294544307?ref_src=twsrc%5Etfw">June 6, 2025</a></blockquote></div>
 
 ### 縦乗りに気付く
 
@@ -852,7 +903,7 @@ tags:
 
 <!--
 盆踊り・マクドナルド
-<iframe style="width:100%;height:360px;" src="https://www.youtube.com/embed/zhGnuWwpNxI?si=rmaaGup-ewVlmkTv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div style="center-box"><iframe style="width:100%;height:360px;" src="https://www.youtube.com/embed/zhGnuWwpNxI?si=rmaaGup-ewVlmkTv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【外人が演奏する縦乗り】この方は日本語のリズムと英語のリズムの違いに気付いている ── が見事なまでに縦乗りに失敗している。これは彼が日本語話者でないことを表している。リエゾンによって倒置するオフビートがあり、オンビートは全てレイドバックして遅れている。<br><br> <a href="https://t.co/5MrK0hKUHo">https://t.co/5MrK0hKUHo</a> <a href="https://t.co/oJnPHqAaza">pic.twitter.com/oJnPHqAaza</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1573036257588178944?ref_src=twsrc%5Etfw">September 22, 2022</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【外人が演奏する縦乗り】この方は日本語のリズムと英語のリズムの違いに気付いている ── が見事なまでに縦乗りに失敗している。これは彼が日本語話者でないことを表している。リエゾンによって倒置するオフビートがあり、オンビートは全てレイドバックして遅れている。<br><br> <a href="https://t.co/5MrK0hKUHo">https://t.co/5MrK0hKUHo</a> <a href="https://t.co/oJnPHqAaza">pic.twitter.com/oJnPHqAaza</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1573036257588178944?ref_src=twsrc%5Etfw">September 22, 2022</a></blockquote></div>
 -->
