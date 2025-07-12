@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1000"
+   height="250"
+   viewBox="0 0 264.58333 66.145835"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   sodipodi:docname="rhythmpedia-title.svg"
+   inkscape:export-filename="../attachments/rhythmpedia-title.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.41611171"
+     inkscape:cx="389.31853"
+     inkscape:cy="79.305627"
+     inkscape:window-width="1920"
+     inkscape:window-height="999"
+     inkscape:window-x="1920"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:export-bgcolor="#ffffffff" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-weight:normal;font-size:45.8611px;line-height:0.8;font-family:DFPKoIn-W4;-inkscape-font-specification:'DFPKoIn-W4, Normal';text-align:start;text-decoration-color:#000000;letter-spacing:0.863914px;word-spacing:0.0342823px;writing-mode:lr-tb;direction:rtl;text-anchor:start;opacity:0.953437;fill:#565656;fill-opacity:1;stroke:#010101;stroke-width:1.45162;stroke-linecap:square;stroke-miterlimit:111;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="226.91716"
+       y="58.032566"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45.86109794px;font-family:DFPKoIn-W4;-inkscape-font-specification:'DFPKoIn-W4, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#565656;fill-opacity:1;stroke:#010101;stroke-width:1.45162;stroke-dasharray:none;stroke-opacity:1"
+         x="227.78108"
+         y="58.032566">律動図鑑</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.8493px;line-height:0.8;font-family:'Rounded Mplus 1c Bold';-inkscape-font-specification:'Rounded Mplus 1c Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-decoration-color:#000000;letter-spacing:0.787319px;word-spacing:0.0312428px;writing-mode:lr-tb;direction:rtl;text-anchor:start;opacity:0.953437;fill:#000000;stroke-width:0.937284;stroke-linecap:square;stroke-miterlimit:111;-inkscape-stroke:none;paint-order:markers stroke fill"
+       x="203.52521"
+       y="14.538863"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.8493px;font-family:'Rounded Mplus 1c Bold';-inkscape-font-specification:'Rounded Mplus 1c Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.937284"
+         x="204.31253"
+         y="14.538863">ペディア</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.8493px;line-height:0.8;font-family:'Rounded Mplus 1c Bold';-inkscape-font-specification:'Rounded Mplus 1c Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-decoration-color:#000000;letter-spacing:0.787319px;word-spacing:0.0312428px;writing-mode:lr-tb;direction:rtl;text-anchor:start;opacity:0.953437;fill:#000000;stroke-width:0.937284;stroke-linecap:square;stroke-miterlimit:111;-inkscape-stroke:none;paint-order:markers stroke fill"
+       x="107.53663"
+       y="14.311527"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.8493px;font-family:'Rounded Mplus 1c Bold';-inkscape-font-specification:'Rounded Mplus 1c Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.937284"
+         x="108.32395"
+         y="14.311527">リズム</tspan></text>
+  </g>
+</svg>

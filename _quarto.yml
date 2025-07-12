@@ -25,7 +25,8 @@ website:
     right:
       - href: index.qmd
         text: "リズムペディアホーム"
-    logo: attachments/rhythmpedia-header2.png
+    logo: attachments/rhythmpedia-title.png
+#    logo: attachments/rhythmpedia-header2.png
   sidebar:
     style: "docked"
     search: true
@@ -53,7 +54,8 @@ website:
           - ./polyrhythm/index.md
 #      - section: "エッセイ"
 #        href: essays/*.md
-    logo: /attachments/rhythmpedia-header5v2.png
+#    logo: /attachments/rhythmpedia-header5v2.png
+    logo: attachments/rhythmpedia-title.png
 format:
   html:
     theme:
