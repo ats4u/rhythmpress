@@ -15,6 +15,15 @@ title-block: false
   margin:0px;
   padding:0px;
 }
+ul {
+    margin: 0;
+    padding: 0 0 0 0.0em;
+}
+ul ul {
+    margin: 0;
+    padding: 0 0 0 1.5em;
+}
+
 </style>
 <span style="font-weight:1000; font-size:300%; ">リズムもひとつのハーモニー</span>です。何故ならリズムは波動だからです。つまり<ruby>周期<rt>テンポ<rt></ruby>があり<ruby>位相<rt>ニュアンス</rt></ruby>があり<ruby >共鳴<rt>ポリリズム</rt></ruby>があります。 ハーモニーに理論があるのに何故リズムには理論がないのでしょうか ─── 
 
@@ -33,6 +42,7 @@ title-block: false
 ```{python}
 #| output: asis
 
+import sys
 import subprocess
 import re 
 from pathlib import Path
@@ -60,16 +70,17 @@ def proc( input_md, output_md, link_target_md ):
     shifted = '\n'.join(
         '  ' + line if re.match(r'^\s*- ', line) else line
         for line in patched.splitlines()
+        if line.strip() != ''
     )
-    print( shifted  )
+    print( shifted )
 ```
 
 ## オフビートカウント理論
-
 オフビートカウント理論とは、オフビートカウントという練習法を核とした統合グルーヴ理論です。
-   
+
+### 縦乗りリズム理論
 - [**縦乗りリズム理論**](                                          tatenori-theory/index.md)  
-   *(最終更新日 2025/6/2)*  日本語を母国語とするミュージシャンならば必ず一度は経験する謎 ─── 「何故日本人はグルーヴしないのか」これは日本人が英語が聴き取れなくなる理由と共通です。 日本語と日本の音楽に潜む『縦乗り』の正体を明らかにし、その影響と限界を科学的・文化的に考察します。
+    *(最終更新日 2025/6/2)*  日本語を母国語とするミュージシャンならば必ず一度は経験する謎 ─── 「何故日本人はグルーヴしないのか」これは日本人が英語が聴き取れなくなる理由と共通です。 日本語と日本の音楽に潜む『縦乗り』の正体を明らかにし、その影響と限界を科学的・文化的に考察します。
 ```{python}
 #| output: asis
 input_md = "tatenori-theory/index.md"
@@ -77,6 +88,8 @@ output_md = "toc-about.md"
 link_target_md = input_md
 proc( input_md, output_md, link_target_md )
 ```
+
+### 多次元弱拍基軸リズム理論
 - [**多次元弱拍基軸リズム理論**](./beat-orientation/index.md)  
     音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
 ```{python}
