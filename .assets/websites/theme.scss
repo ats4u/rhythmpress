@@ -14,6 +14,62 @@ body {
   display: none !important;
 }
 
+/* Hide texts inside the container and set the logo of the website */
+.quarto-title h1.title {
+  text-indent: -9999px;
+  background-image: url("attachments/rhythmpedia-logo-light.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  height: 300px;
+  width: 100%;
+}
+
+body.quarto-dark .quarto-title h1.title {
+  text-indent: -9999px;
+  background-image: url("attachments/rhythmpedia-logo-dark.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  height: 300px;
+  width: 100%;
+}
+
+/*
+.navbar-logo {
+  background-image: url("attachments/rhythmpedia-logo-dark.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  height: 300px;
+  width: 600px;
+}
+.body.quarto-dark .navbar-logo {
+  background-color: red;
+  background-image: url("attachments/rhythmpedia-logo-dark.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  height: 300px;
+  width: 600px;
+}
+*/
+
+
+/* Light mode default */
+.logo {
+  background-image: url("attachments/rhythmpedia-logo-light.png");
+}
+
+/* When Quarto switches to dark mode, it adds `.quarto-dark` to <body> */
+body.quarto-dark .logo {
+  background-image: url("attachments/rhythmpedia-logo-dark.png");
+}
+
+
+
+
+/* Center-align images, tweets, youtube videos within the container */
 .center-box {
   display: flex;
   align-items: center;

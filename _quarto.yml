@@ -9,8 +9,8 @@ project:
     - ads.txt
 
 website:
-  title: "リズムペディア.com"
-  description: "グルーヴを科学するリズムペディア.com"
+  title: "律動図鑑(リズムペディア)"
+  description: "グルーヴを科学する律動図鑑（リズムペディア）"
   site-url: "https://rhythmpedia.com/"
 #  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
 #  announcement:
@@ -24,14 +24,14 @@ website:
   navbar:
     right:
       - href: index.qmd
-        text: "リズムペディアホーム"
-    logo: attachments/rhythmpedia-title.png
+        text: "トップに戻る"
+#    logo: /attachments/rhythmpedia-logo-dark.png
 #    logo: attachments/rhythmpedia-header2.png
   sidebar:
     style: "docked"
     search: true
     contents:
-      - section: "リズムペディア"
+      - section: "律動図鑑(リズムペディア)"
         href: index.qmd
         contents:
           - text: ホーム
@@ -55,12 +55,12 @@ website:
 #      - section: "エッセイ"
 #        href: essays/*.md
 #    logo: /attachments/rhythmpedia-header5v2.png
-    logo: attachments/rhythmpedia-title.png
+    logo: /attachments/rhythmpedia-logo-dark.png
 format:
   html:
     theme:
       light : [ cosmo,  .assets/websites/theme.scss, .assets/websites/theme-light.scss ]
-      dark  : [ darkly, .assets/websites/theme.scss, .assets/websites/theme-dark.scss ]
+      dark  : [ darkly, .assets/websites/theme.scss, .assets/websites/theme-dark.scss  ]
     lightbox: true
     filters:
       - filters/include-files.lua
