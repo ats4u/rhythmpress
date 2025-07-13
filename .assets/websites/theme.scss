@@ -15,25 +15,27 @@ body {
 }
 
 /* Hide texts inside the container and set the logo of the website */
-.quarto-title h1.title {
-  text-indent: -9999px;
+.quarto-title h1:first-of-type::before
+{
+  content: "";
+  display: inline-block;
+  // text-indent: -9999px;
   background-image: url("attachments/rhythmpedia-logo-light.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
   height: 300px;
   width: 100%;
+  margin:0px;
+  padding: 0px;
 }
 
-body.quarto-dark .quarto-title h1.title {
-  text-indent: -9999px;
+body.quarto-dark .quarto-title h1:first-of-type::before {
   background-image: url("attachments/rhythmpedia-logo-dark.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-  height: 300px;
-  width: 100%;
 }
+
+
+
 
 /*
 .navbar-logo {

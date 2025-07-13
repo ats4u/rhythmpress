@@ -1,5 +1,5 @@
 ---
-title: リズムペディア
+title: 律動図鑑 〜 リズムペディア
 format: html
 execute:
   enabled: true
@@ -7,7 +7,15 @@ execute:
   output: true
   eval: true
   cache: false
+title-block: false
 ---
+<style>
+.quarto-title h1 {
+  font-size: 2em;
+  margin:0px;
+  padding:0px;
+}
+</style>
 <span style="font-weight:1000; font-size:300%; ">リズムもひとつのハーモニー</span>です。何故ならリズムは波動だからです。つまり<ruby>周期<rt>テンポ<rt></ruby>があり<ruby>位相<rt>ニュアンス</rt></ruby>があり<ruby >共鳴<rt>ポリリズム</rt></ruby>があります。 ハーモニーに理論があるのに何故リズムには理論がないのでしょうか ─── 
 
 リズム理論総合**リズムペディア.com** は、リズムで最も重要な要素であるグルーヴに着目しリズム理論を体系的にまとめたリズムによるリズムに興味がある人の為のリズム演奏者によるリズム理論サイトです。
