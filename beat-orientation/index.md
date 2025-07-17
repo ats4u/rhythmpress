@@ -1,14 +1,14 @@
 ---
-title: 多次元弱拍基軸リズム理論
+title: 多層弱拍基軸リズム理論
 created: 2025-05-24T00:17
 tags:
   - foo
 ---
 *※2025/06/16 11:16:35 更新*
 
-## 多次元弱拍基軸リズム理論で得られるもの
+## 多層弱拍基軸リズム理論で得られるもの
 
-**多次元弱拍基軸リズム理論** は、日本人語学学習者、日本人音楽家に向けて、日本人が何故グルーヴしないのかを理論的に説明し、どうしたらグルーヴする様になるのかについて具体的な指針を与えます。
+**多層弱拍基軸リズム理論** は、日本人語学学習者、日本人音楽家に向けて、日本人が何故グルーヴしないのかを理論的に説明し、どうしらグルーヴする様になるのかについて具体的な指針を与えます。
 
 ここでは次の内容を説明します。
 
@@ -19,11 +19,11 @@ tags:
 * 弱拍強拍には音楽・言語の両方に共通の**階層**があること
 * 弱拍強拍の階層には **再帰性** があること
 * 弱拍強拍階層の再帰性が音楽と詩吟の読み方に大きな影響を与えていること
-* 弱拍強拍の多次元階層の分析手法
+* 弱拍強拍の多層階層の分析手法
 
 ### この本の読み方
 
-まず言語によってリズム認識が異なるということを見ていきます。次にシラブル拍、ストレス拍、モーラ拍の違いを学びます。そしてこれが弱拍強拍という概念と関連していることを見ていきます。次にストレス拍でこの弱拍強拍という概念が多次元構造になっていることを見ていきます。そして弱拍強拍とは何かを掘り下げ、弱拍と強拍の多次元構造とはどういうものなのかを見ていきます。そしてこの多次元構造がメロディを歌う時の配置の方向性に大きな影響を与えることを見ていきます。そして最後に、これが人間の時間認識の方向性に大きな影響を与えており、更にこれが人間の動きの認識自体に影響を与えていることを見ていきます。
+まず言語によってリズム認識が異なるということを見ていきます。次にシラブル拍、ストレス拍、モーラ拍の違いを学びます。そしてこれが弱拍強拍という概念と関連していることを見ていきます。次にストレス拍でこの弱拍強拍という概念が多層構造になっていることを見ていきます。そして弱拍強拍とは何かを掘り下げ、弱拍と強拍の多層構造とはどういうものなのかを見ていきます。そしてこの多層構造がメロディを歌う時の配置の方向性に大きな影響を与えることを見ていきます。そして最後に、これが人間の時間認識の方向性に大きな影響を与えており、更にこれが人間の動きの認識自体に影響を与えていることを見ていきます。
 
 ### グルーヴとは英語そのもの
 
@@ -35,16 +35,16 @@ tags:
 
 ### 音楽と語学を繋げる
 
-この多次元弱拍基軸リズム理論は、音楽でグルーヴが起こる条件を理論的に説明した上で、何故人によって音楽のグルーヴの認識い違いが生まれるのかを考察します。そしてこのリズム認識の違いが生まれる理由に関して、この音韻学を使って説明します。この多次元弱拍基軸リズム理論は、グルーヴを習得する為の理論・オフビートカウント理論が成立することを示す基礎理論となります。
+この多層弱拍基軸リズム理論は、音楽でグルーヴが起こる条件を理論的に説明した上で、何故人によって音楽のグルーヴの認識い違いが生まれるのかを考察します。そしてこのリズム認識の違いが生まれる理由に関して、この音韻学を使って説明します。この多層弱拍基軸リズム理論は、グルーヴを習得する為の理論・オフビートカウント理論が成立することを示す基礎理論となります。
 
 ### グルーヴを顕在意識化する
 
-つまり多次元弱拍基軸リズム理論は、日本人が何故グルーヴしないのかを理論的に説明し、どうやったら日本人が後天的にグルーヴを習得する事ができるのか、その練習方法に関して理論的な予想を与えます。
+つまり多層弱拍基軸リズム理論は、日本人が何故グルーヴしないのかを理論的に説明し、どうやったら日本人が後天的にグルーヴを習得する事ができるのか、その練習方法に関して理論的な予想を与えます。
 
 ### 音楽のグルーヴで英語リスニング力は伸びる
 もしも読者の貴方が英語学習者でしたら、恐らくリスニングに対して問題意識を持っているのではないでしょうか ─── 日本人は英語が聴き取れません。日本人は英語がわかる様になるために義務教育で１０年以上の月日を費していますが日本人はほとんどの場合英語が理解できません。努力の末に英語を読むことが出来るようになっても、映画を字幕無しで見て理解したり、実際に会話したりすることは出来ません。そんな頭でっかちな英語教育が批判され、実践英会話の重要性が叫ばれたのももう２０年以上前の話です。しかし２０年たった今も状況は全く変わっていません。
 
-**多次元弱拍基軸リズム理論** は、この残念な状況に一石を投じます。
+**多層弱拍基軸リズム理論** は、この残念な状況に一石を投じます。
 
 ### 英語リスニングで音楽のグルーヴ力が伸びる
 
@@ -54,7 +54,7 @@ tags:
 
 日本には世界有数の巨大なジャズ演奏者コミュニティがあります ─── にもかかわらず世界中の誰も日本人ジャズを聞かない。日本には世界有数の巨大なジャズのリスナコミュニティがあり、ジャズ市場は世界最大規模と言われています。そんな巨大なジャズ市場の誰も日本人ジャズを聴いていません  ─── これはジャズ界最大悲劇の悲劇を通り越して、もはや喜劇です。
 
-**多次元弱拍基軸リズム理論** は、この状況に一石を投じます。
+**多層弱拍基軸リズム理論** は、この状況に一石を投じます。
 
 ## 強拍弱拍の順序に対する認識の違い
 音符が現れる順序の認識は、その人が母国語とする言語によって大きな違いが生まれます。
@@ -455,7 +455,7 @@ tags:
 
 このことを本書では **再帰的韻律同一性原理**  **RPEP (Recursive Prosodic Equivalence Principle)** と呼びます。
 
-ストレス拍のアクセント（すなわちストレスのある拍とストレスのない拍）を分析すると、中心に核となるストレスのあるシラブルが置かれ、その前後にストレスのないシラブルが前、及び後ろにある構造が浮かび上がります。 この構造は英語の音韻分析では従来、二分木構造などの階層モデルによって説明されてきました。 本稿が提唱する多次元弱拍基軸理論は、**シラブル拍の分析手法は、そのままストレス拍にも再帰的に利用できる** という新しい視点を提案します。このことを本書では **MPOP (Maximal Prosodic Onset Principle)** と呼びます。
+ストレス拍のアクセント（すなわちストレスのある拍とストレスのない拍）を分析すると、中心に核となるストレスのあるシラブルが置かれ、その前後にストレスのないシラブルが前、及び後ろにある構造が浮かび上がります。 この構造は英語の音韻分析では従来、二分木構造などの階層モデルによって説明されてきました。 本稿が提唱する多層弱拍基軸理論は、**シラブル拍の分析手法は、そのままストレス拍にも再帰的に利用できる** という新しい視点を提案します。このことを本書では **MPOP (Maximal Prosodic Onset Principle)** と呼びます。
 
 この理論では、シラブル拍リズムのシラブルのリズム構造は、ストレスあるなしの二分木構造に置き換わるのではなく、むしろシラブル拍と同じ構造が、階層の異なる次元で再帰的に表現されます。
 
@@ -641,10 +641,11 @@ tags:
 オフビートカウント理論は、このモーラ拍リズムを母国語とする人が、シラブル拍リズムや次に紹介するストレス拍リズムを第二言語として習得する為にどのようにしたら最も効率よく習得することが出来るかに着目し考察した結果として生まれた練習方法です。
 
 ### 音節核と頭子音との位置関係が強拍弱拍順序認識を決める
+#### <ruby><rb>律動</rb><rt>リズム</rt></ruby>的頭子音最大化原則（RMOP = Rhythmic Maximal Onset Principle ）
 
-**音節核（ライム）** と子音の位置の関係 ─── これが日本語とその他の言語との違いの本質です。
+**核 Nucleus** と **頭子音 Onset** の位置関係 ── これこそが日本語と他言語との根本的な違いです。 言語における核 Nucleus は、音楽における**強拍**のような役割を果たします。 各言語が聴覚上で核(Nucleus)の**前**に頭子音(Onset)を配置しているか、あるいは**後**に配置しているかという認知上の傾向の違いが、音楽におけるリズム認識 ── すなわち、**強拍の前に弱拍を置くか、後に置くか** ── というリズム順序の違いへと反映されるのです。この強拍弱拍の順番認識が言語発音構造上の拍リズム認識と相関関係があるという仮説を、ここでは**<ruby><rb>律動</rb><rt>リズム</rt></ruby>的頭子音最大化原則（RMOP = Rhythmic Maximal Onset Principle ）** と呼びます。
 
-**音節核（ライム）** は、音楽で言う強拍の様なものです。
+**核（Nucleus）** は、音楽で言う強拍の様なものです。 
 
 シラブル拍・ストレス拍では音節核と同時に母音を発音します。つまり母音が強拍の様なものです。そして子音は弱拍の様なものです。そして、子音は母音の前後にあります。しかし**頭子音最大化原則＝MOP** によって末子音は全て頭子音にまとめられます。つまり**子音は必ず母音の前に配置**されます。ここから<span style="font-size:200%">**シラブル拍・ストレス拍は、弱拍を先にくるものとして認識し、強拍を弱拍の後ろとして認識している</span>のです。
 
@@ -664,11 +665,11 @@ tags:
 
 ここでは <ruby><rb>日本的追従律動</rb><rt>タテノリ</rt></ruby> が音楽のリズムに対して与えている大きな影響について次節以降で見ていきます。そしてこれが日本人の英語音痴の本質に横たわっていることを見ていきます。
 
-## 多次元弱拍先行について
+## 多層弱拍先行について
 
 拍には強拍と弱拍の2種類があることを見ていきます。そして強拍は必ずしも先に現れるわけではなく、しばしば弱拍が先に演奏されることを見ていきます。次に弱拍・強拍は、4分音符だけではなく全ての音価の音符に存在することを見てみます。各音価の弱拍強拍は、結果的に弱拍に多層構造を生み出します。この弱拍の多層構造に弱拍先行が加わると、リズムが頭合わせ構成から尻合わせ構成へと移行することを見てみます。
 
-### 強拍弱拍とは
+### 弱拍／強拍とは
 
 もしもそこに拍が一つしか存在しなければ、それはリズムとして成立しません。なぜなら、リズムという時間的な構造は、**対比の上に成立する感覚**だからです。次の例を見てみます。
 
@@ -678,18 +679,46 @@ tags:
 
 拍が一つしか存在しなければ、そこにリズムは成立しません。何故ならば、リズムという時間的構造は、**対比的な関係性の上に成立する感覚**だからです。 対比が成立する為に、少なくとも二つの拍が存在する必要があります。そして**その２つの間に相対的な機能差（強拍と弱拍）が生じたとき**、初めて私達はそこにリズムという時間的構造を認識します。すなわち、リズムとは単なる『**一音の繰り返し**』ではなく『**関係性の知覚**』によって生まれるものなのです。この現象をここでは「**リズムの二項対立性**」と呼びます。『**リズムの二項対立性**』は、リズムに意味的・構造的役割を持たせるための**最小構成単位** だと考えられます。
 
-このリズムの二項対立性を概念化したものが**強拍/弱拍**と言えます。
+このリズムの二項対立性を概念化したものが**弱拍／強拍**と言えます。
 
-### 弱拍強拍の成立には最低二拍が必要
+### 弱拍／強拍の成立には最低二拍必要
 
-よってそこに拍が一拍しかなければ、それは強拍か弱拍か判別出来ず、強拍/弱拍の関係が成立しません。 つまり強拍と弱拍は、そこに２つの音があって初めて成立する相対的な関係といえます。  ─── このことをここでは **強弱二拍単位仮説** と呼びます。
+よってそこに拍が一拍しかなければ、それは強拍か弱拍か判別出来ず、強拍/弱拍の関係が成立しません。 つまり強拍と弱拍は、そこに２つの音があって初めて成立する相対的な関係といえます。  ─── このことをここでは **強弱二拍単位仮説** と呼びます。 この**強弱二拍単位仮説**は、ジャズやファンクなどの音楽で特徴的なバックビートを説明する時の重要なキーワードとなります。
 
-### 強拍／弱拍はリズムの本質
+### 弱拍／強拍はリズムの本質
 
-つまりリズムと強拍/弱拍には類似性が見られます。この類似性から強拍と弱拍はリズムの本質だという仮説を導き出すことが出来ます。この仮説の厳密な証明は出来ませんが、それを証明する体感的な感覚を恐らくこの文章を読んでいる皆様は既にお持ちではないでしょうか。 ここではこの仮説が正しいということを仮定して論を進めたいと思います。
+このように、**リズムの二項対立性**は、時間の中で「対比」を成立させるための最小単位として機能します。その機能を象徴する表現が**強拍／弱拍**の関係です。つまり強拍と弱拍とは、単なる音量の強弱差を表すものではなく、**リズムという構造そのものを成り立たせる基盤的な関係性**そのものなのです。
 
-### 強拍と弱拍の定義
-海外の音楽の音符には **強拍** と **弱拍** という概念があります。音符が２つ以上あった時に小節上に現れる奇数番目の音符を**強拍**と、そして小節上に現れる偶数番目の音符を**弱拍**と呼びます。
+リズムを私たちが知覚するということは、即ち「どこを主と捉え、どこを副と捉えるか」を**一定時間内で判断するプロセス**を経ています。この判断のプロセス ── つまり、**拍の間に構造的な意味差を見出す知覚作用**──こそが、リズムの本質に他なりません。
+
+したがって、**強拍／弱拍の構造は、リズムの外側に付与される装飾的な性質ではなく、リズムがリズムとして成立するために不可欠な内在的構造**であると捉えるべきです。この視点に立てば、「強拍／弱拍」は単なる演奏上の指示や感覚的強弱ではなく、**時間構造を意味的に分節化するための認知的メカニズム**であり、結果として **リズムの意味**が生まれます。
+
+故に ──   **強拍／弱拍とは、リズムそのものの本質的構造**といえます。
+
+### 弱が起で強が結
+
+日は昇り沈む ─── これを弱拍／強拍で表すとどちらが弱拍でどちらが強拍でしょうか。きっと**強拍で日が昇り、弱拍で日が沈む** …とお考えになったと思われます。この順序の認識は、その人が母国語として話す言語の認識に大きく影響を受けます。特に日本語のようなモーラ拍リズム言語を母国語として話す人は、それ以外の言語を話す人々の認識と大きな違いを持っています。この認識の違いを説明することがこの本の大きな目標の一つでもあります。
+
+モーラ拍リズム以外の言語を母国語とする人々はしばしば逆の認識を持っています。つまり、しばしば彼らは「**弱拍で日が昇り、強拍で日が沈む**」と認識しています。 「波は打ち寄せては引いていく」もしばしば同様に「**弱拍で波が打ち寄せて、強拍で波が引いていく**」と認識しています。
+
+<!-- コメント →→ --><div style="display:none"><!--
+ストレス拍言語を話す人が必ずしもグルーヴする訳ではないので、英語で説明するときは別な説明が必要になる。
+
+モーラ拍リズム言語話者
+　　　↓↓↓
+グルーヴする人
+　　　↑↑↑
+ストレス拍言語
+　　　↑↑↑
+シラブル拍言語
+--></div>
+
+弱拍は英語でしばしば「**アップビート**」と呼ばれることがあります。これは指揮者の指揮棒になぞらえた表現です。指揮者は壇上で指揮するにあたって弱拍で指揮棒を振り上げ、強拍で指揮棒を振り下ろすでしょう。この動きになぞらえて、弱拍は英語で「**アップビート**」と呼ばれるのです。モーラ拍リズム言語である日本語を母国語とするとしばしばこの認識は逆になります。
+
+このモーラ拍リズム言語の順序認識が逆転するメカニズムについては [音節核と頭子音との位置関係が強拍弱拍順序認識を決める](#音節核と頭子音との位置関係が強拍弱拍順序認識を決める) でも説明しました。 
+
+### 弱拍と強拍の定義
+**強拍** と **弱拍** の定義を振り返ってみます。音符が２つ以上あった時に小節上に現れる奇数番目の音符を**強拍**と、そして小節上に現れる偶数番目の音符を**弱拍**と呼びます。
 
 各音価にそれぞれ強拍と弱拍があります。
 
@@ -704,10 +733,6 @@ tags:
 強拍弱拍を二分音符の上で見てみると次のようになります。
 
 ![](attachments/beat-orientation-explained-half-with-caption.png)
-
-### 弱拍による強拍の分割と弱拍の多次元性
-
-優秀な演奏者は、2つ以上の音が重なって音が濁ることを防ぐために、譜面上では同時に演奏するように指示されていた場合でも、それぞれの音の位置を微妙にずらすことで音が重ならないように配慮して演奏します。音が重ならないようにするために最も大切なことは、弱拍と強拍をきちんと区別して認識することです。弱拍は元来、お互いが避け合うような位置にあるため、重なり合うことがありません。よって弱拍は位置をずらさなくても、重なって濁り合う心配がありません。しかし強拍は本質的に、重なり合う位置にあります。よって強拍を演奏する際には配慮が必要になります。
 
 ### 弱拍は強拍を分割する
 
@@ -759,7 +784,7 @@ tags:
 
 つまり <span style="font-size:200%;">**全ての音価の音符の強拍は必ず、その音価の倍の長さの音符と衝突する**</span> ということがわかります。
 
-### 強拍弱拍は分数で表すことが出来る
+### 弱拍強拍は分数で表すことが出来る
 
 音符の位置は、小節を一定の比率で分割したものなので、分数で小節先頭からの距離として表せるでしょう。 楽典では小節先頭拍を１拍目として数える序数を使って説明されていますが、ここでは数学の数直線のように基数を使って先頭の拍を０拍目として並べてみましょう。
 
@@ -781,25 +806,37 @@ tags:
 
 
 分数は１つの数を表すに当たって複数通りの書き方がありますが、2/8 や 2/4などの分数は約分できます。つまり他の小さな数の組み合わせで表現することができます。
+
+### 弱拍強拍の最適化
   
-**つまり強拍とは約分できる分数で表される地点にある拍のことです。ある音価（ある分母）の強拍は、必ずその分母の最大公約数で約分された数字を分母として持つ音価の音符の弱拍が存在します。そしてその音価が音楽中で最小の音価でない限り、必ず他の音価（分母）を持った拍＝強拍が存在します。 つまりある音楽の中で、ある音価で強拍に置かれた音は、他の音価で強拍に置かれた音と衝突する可能性が高いといえます。**
+**つまり強拍とは約分できる分数で表される地点にある拍のことです。ある音価（ある分母）の強拍は、必ずその分母の最大公約数で約分された数字を分母として持つ音価の音符の弱拍が存在します。そしてその音価が音楽中で最小の音価でない限り、必ず他の音価（分母）を持った拍＝強拍が存在します。 つまりある音楽の中で、ある音価で強拍に置かれた音は、必ず他の音価で強拍または弱拍に置かれた音と重複します。**
 
-### 小節先頭の拍は強拍しかない
+ある強拍を最も大きな音価での弱拍として再解釈することをここでは**弱拍強拍の最適化***と呼びます。
 
-また小節の先頭の拍は、全ての音価で強拍なので、必ず衝突するということがわかります。
+### 先頭拍は必ず強拍だがより大きい音価で約分され弱拍になる
+また小節の先頭の拍は全ての音価で必ず強拍となることがわかります。
 
 ![](attachments/Pasted%20image%2020250716050850.png)
 
-しかし全音に弱拍が存在しない訳ではありません。この場合、もしこの全音が２個あったら２つ目の全音が弱拍となります。この様に弱拍の存在を前提に考えると、全ての強拍には対応すべき大きな音価の弱拍があることになるため、次々に前方にさかのぼってリズムを構成するようになります。このことを **尻合わせ** と呼びます。 このことに関しては後に詳細を見ていきます。
+しかし小節先頭の拍は強拍だからといって、弱拍が存在しない訳ではありません。この場合も前述の弱拍強拍の最適化を行うことで弱拍として解釈することが出来ます。 例えば、もしこの小節が２つあったら全音も２つあることになります。つまり２つ目の全音が弱拍となります。この様に繰り返しを前提に考えた場合、全ての強拍には対応すべき大きな音価の弱拍があることになります。
 
-### 全ての拍は弱拍である
+### 弱拍強拍最適化と尻合わせ
 
-**ある音価の強拍は、必ずその音価より大きい音価の弱拍に相当しています**。つまり全ての音価で弱拍だけを演奏すると全ての拍がお互いに衝突を回避しあって入れ違いの位置に配置されることがわかります。このことをグラフを使って見てみましょう。 
+この考え方は結果として、音楽を聞く時に常に**前方にさかのぼってリズムを解釈しなおす習慣**を生み出します。 作曲する時に、最後に解決すべき強拍位置を最初に決め、そこから遡る様に弱拍の位置を設定していく様に考える様になります。 また音楽を聞いている時でも、最初に聴いた拍が弱拍であることを前提にして、その拍がどの音価の弱拍だったのかを推測しながら解釈する様になります。 ─── このことを **尻合わせ** と呼びます。 このことに関しては後に詳細を見ていきます。
+
+### 強拍は存在せず全ての拍は弱拍である
+
+以上の様に考え進めると、**ある音価の強拍は、必ずその音価より大きい音価の弱拍に相当**していることがわかります。つまり全ての音価で弱拍だけを演奏すると全ての拍がお互いに衝突を回避しあって入れ違いの位置に配置されることがわかります。このことをグラフを使って見てみましょう。 
 
 ![](attachments/layered-weak-beats-map.png)
 
+### 拍の多層性
 
-つまりす
+この時、各音価（４分音符、８分音符、１６分音符…／ ２分音符・全音符・２全音符…）の弱拍の集合をここでは **拍の層** と呼びます。
+
+ジャズでは、しばしば全ての拍は弱拍だという認識を持った演奏者同士で即興演奏を行います。 この時に、ある演奏者Ａが２分音符だけを演奏した場合は、もう一方の演奏者Ｂが４分音符だけを演奏したり、突然Ａが予告なく４分音符に入れ替えて演奏したらＢが咄嗟に２分音符に切り替えて演奏したりする、臨機応変な対応を楽しむ習慣があります。
+
+異なる拍の層に切り替えることをここでは **拍の層の乗り換え** と呼びます。
 
 ### 弱拍だけを演奏する
 
@@ -838,7 +875,7 @@ tags:
 
 つまり
 
-### 強拍弱拍の順序とは
+### 弱拍強拍の順序とは
 
 もし音が次のように2回鳴ったとすると、その音符をどのように譜面に配置するでしょうか。
 
@@ -876,6 +913,879 @@ tags:
 ### 弱起の重要性
 
 この弱起の認識は、その人が母国語として話す言語に大きな影響を受けます。音楽を世界全体で見回してみると弱起が起こる頻度は非常に高いことに気付きます。音楽の種類によっては弱起の頻度は非常に高く、ほぼ毎回必弱起を演奏する場合もあります。弱起の頻度を更に踏み込んで調べてみると、実は逆に、日本だけが作曲や即興演奏で弱起をほとんど使わないということに気がつくでしょう。日本は音楽に弱起を使わないという非常に珍しい習慣を持っていることがわかります。 この習慣には理由があります ─── これは日本語が持っているモーラ拍リズムというリズム認識が引き起こす現象だからです。
+
+### 多層弱拍先行と尻合わせ
+
+多層の拍の上で弱拍先行が起こると**尻合わせ**という非常に特徴的なリズム上の現象が起こります。この節ではこの尻合わせが起こるメカニズムを説明します。
+
+#### 尻合わせと頭あ合わせ
+モーラ拍リズムのリズム認識をここでは**頭合わせ**と、そしてストレス拍リズムのリズム認識を**尻合わせ** と呼びます。
+
+#### 尻合わせ
+
+
+![](attachments/Pasted%20image%2020250609002541.png)
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【尻合わせ】 <a href="https://t.co/vryyK4SjMC">pic.twitter.com/vryyK4SjMC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304475347390466?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote></div>
+
+#### 頭合わせ
+![](attachments/Pasted%20image%2020250609002708.png)
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560" data-lang="en"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【頭合わせ】 <a href="https://t.co/Eij6Uuqi5G">pic.twitter.com/Eij6Uuqi5G</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304530502451201?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote></div>
+
+<style>
+  table.offbeat-onbeat-table {
+    border-collapse: collapse;
+    border: black 1px solid;
+    text-align: center;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  table.offbeat-onbeat-table th,
+  table.offbeat-onbeat-table td {
+    border: 1px solid black;
+  }
+
+  table.offbeat-onbeat-table th {
+    width: 5em;
+    overflow: hidden;
+    font-size: smaller;
+    background-color: yellow;
+  }
+</style>
+
+#### 多層拍構造での強拍先行
+
+次のように4分音符が1小節に4つあったとします。ここで音符を２個ずつのグループに分け、先に現れる方を強拍、後に現れる方を弱拍と定義します
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td>２拍目</td>
+      <td>３拍目</td>
+      <td>４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td>◯</td>
+      <td>◯</td>
+      <td>◯</td>
+    </tr>
+  </tbody>
+</table>
+
+
+同じ様に全ての音価に対して強拍弱拍を割り当てていくことが出来ます。ここでは２分音符・４分音符８分音符・１６分音符を対象に、割り当てて行きます。結果は次のようになります。
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１</td>
+      <td class="offbeat-td">２</td>
+      <td>３</td>
+      <td class="offbeat-td">４</td>
+      <td>５</td>
+      <td class="offbeat-td">６</td>
+      <td>７</td>
+      <td class="offbeat-td">８</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>1</td>
+      <td class="offbeat-td">2</td>
+      <td>3</td>
+      <td class="offbeat-td">4</td>
+      <td>5</td>
+      <td class="offbeat-td">6</td>
+      <td>7</td>
+      <td class="offbeat-td">8</td>
+      <td>9</td>
+      <td class="offbeat-td">10</td>
+      <td>11</td>
+      <td class="offbeat-td">12</td>
+      <td>13</td>
+      <td class="offbeat-td">14</td>
+      <td>15</td>
+      <td class="offbeat-td">16</td>
+    </tr>
+    <tr>
+      <th>16分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+#### RMOP原則を適用し弱拍を前にする
+
+前節では、**頭子音最大化原則(MOP)** を紹介しました。またMOPが音楽上のリズムにも適用されるという<ruby><rb>律動</rb><rt>リズム</rt></ruby>的頭子音最大化原則（RMOP = Rhythmic Maximal Onset Principle ）という原理についても紹介致しました。
+
+このRMOPを多層の拍層に適用するとどうなるかを見ていきます。
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+これをRMOPを適用し、弱拍が前に来るという法則を使って再音節化(Resyllabification)すると次の様になります。
+
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">４拍目</td>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2 style="text-align: left;">横乗りの弱拍には複数の階層がある</h2>
+<h3 style="text-align: left;">何故横乗りは理解が難しいのか</h3>
+<p>
+  前章では横乗りでは４分音符の弱拍がその強拍よりも先に演奏されるということを見てきました。この横乗りの弱拍が先に演奏される習慣は4分音符以外の拍でも行われます。例えば2分音符で見てみます。
+</p>
+<style>
+  .offbeat-td {
+    color:red;
+  }
+</style>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">２拍目</td>
+      <td>１拍目</td>
+    </tr>
+    <tr>
+      <th>２分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>
+  この様に2分音符も弱拍が先に演奏され、強拍がその後ろに演奏されます。同じことは8分音符16分音符でも起こります。次で2分音符4分音符8分音符16分音符の弱拍が先になった様子を見てみます。
+</p>
+<h3 style="text-align: left;">横乗り ─── 弱拍が前になる場合の音符の一覧強</h3>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">２拍目</td>
+      <td>１拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">４拍目</td>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">8拍目</td>
+      <td>1拍目</td>
+      <td class="offbeat-td">2拍目</td>
+      <td>3拍目</td>
+      <td class="offbeat-td">4拍目</td>
+      <td>5拍目</td>
+      <td class="offbeat-td">6拍目</td>
+      <td>7拍目</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">16</td>
+      <td>1</td>
+      <td class="offbeat-td">2</td>
+      <td>3</td>
+      <td class="offbeat-td">4</td>
+      <td>5</td>
+      <td class="offbeat-td">6</td>
+      <td>7</td>
+      <td class="offbeat-td">8</td>
+      <td>9</td>
+      <td class="offbeat-td">10</td>
+      <td>11</td>
+      <td class="offbeat-td">12</td>
+      <td>13</td>
+      <td class="offbeat-td">14</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>16分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 style="text-align: left;">縦乗り ─── 弱拍が後ろになる場合の音符の一覧強</h3>
+<p>&nbsp;縦乗りの強弱順番と比較してみましょう。</p>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１</td>
+      <td class="offbeat-td">２</td>
+      <td>３</td>
+      <td class="offbeat-td">４</td>
+      <td>５</td>
+      <td class="offbeat-td">６</td>
+      <td>７</td>
+      <td class="offbeat-td">８</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>1</td>
+      <td class="offbeat-td">2</td>
+      <td>3</td>
+      <td class="offbeat-td">4</td>
+      <td>5</td>
+      <td class="offbeat-td">6</td>
+      <td>7</td>
+      <td class="offbeat-td">8</td>
+      <td>9</td>
+      <td class="offbeat-td">10</td>
+      <td>11</td>
+      <td class="offbeat-td">12</td>
+      <td>13</td>
+      <td class="offbeat-td">14</td>
+      <td>15</td>
+      <td class="offbeat-td">16</td>
+    </tr>
+    <tr>
+      <th>16分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp;</p>
+<h3>2種類の音符の弱拍が同時に前に来るリズム／尻合わせと頭合わせへの序章</h3>
+<p>
+  前章で、4分音符で4拍目2拍目が1拍3拍目よりも先に現れる事、そして2分音符の2拍目が1拍目よりも先に現れることの２つを見ました。
+  ─── この２つはしばしば同時に起こります。これはどういうことでしょうか。
+</p>
+<p>4分音符の弱拍は次のように前に現れます。</p>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">４拍目</td>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+<p>そして2分音符の弱拍も先に現れます。</p>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">２拍目</td>
+      <td>１拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  この2分音符の弱拍が前につくことと、4分音符の弱拍が前につくこと ───
+  この２つが同時に起こるとどういうことは、どういうことでしょうか。順を追って見ていきましょう。
+</p>
+<p>
+  まずこの弱拍4拍2拍が先に来る4分音符の上で2分音符はどの位置にあるでしょうか。
+</p>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">４拍目</td>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td colspan="2">１拍目</td>
+      <td class="offbeat-td" colspan="2">２拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td colspan="2">◯</td>
+      <td class="offbeat-td" colspan="2">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td colspan="2">強</td>
+      <td class="offbeat-td" colspan="2">弱</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  この様に4分音符で見た時に弱拍が強拍よりも前についていると考えると、2分音符で見るとそれは4分音符1個前にずれた2分音符の様になります。
+</p>
+<p>
+  そして、その2分音符は強拍が先で弱拍が先に現れる順番になっていることがわかります。
+</p>
+<p>
+  この2分音符の順番は縦乗り（強拍が先）と同じ法則です。つまり恐らくですが、横乗りで演奏する時はこの順番で演奏することは出来ません。そこで試しに2分音符も横乗りに変えてみたいと思います。
+</p>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+      <td>１拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td class="offbeat-td" colspan="2">２拍目</td>
+      <td colspan="2">１拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td class="offbeat-td" colspan="2">◯</td>
+      <td colspan="2">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td" colspan="2">弱</td>
+      <td colspan="2">強</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  4分音符の順番がほぼ一周入れ替わった状態になりました。これが横乗りリズムの世界の4分音符の順番です。私はこのリズムの事を<b>２３４１リズム</b>と呼んでいます。
+</p>
+<p>
+  これまで１から始まっていたリズムが、１で終わるリズムになった事がわかります。つまり<ruby class="bouten">弱拍が前に付くというルール変更が生じた影響でこれまで１から始まって４で終わると認識していた４分音符の順番が２から始まって１で終わるという順番で認識するように変化した</ruby>ことがわかります。&nbsp;
+</p>
+<p>
+  この１で終わるリズムのことを「尻合わせリズム」と私は呼んでいます。これに対して１で始まるリズムのことを「頭合わせリズム」と私は呼んでいます。
+</p>
+<p>
+  この様にすると2分音符4分音符だけでなく、全音符／2全音符を含む考えうる全ての音符でこの現象が起こります。次で8分音符を加えてみましょう。
+</p>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>2分音符</th>
+      <td class="offbeat-td" colspan="8">２拍目</td>
+      <td colspan="8">１拍目</td>
+    </tr>
+    <tr>
+      <th>2分音符</th>
+      <td class="offbeat-td" colspan="8">◯</td>
+      <td colspan="8">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td" colspan="8">弱</td>
+      <td colspan="8">強</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td" colspan="4">２拍目</td>
+      <td colspan="4">３拍目</td>
+      <td class="offbeat-td" colspan="4">４拍目</td>
+      <td colspan="4">１拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td" colspan="4">◯</td>
+      <td colspan="4">◯</td>
+      <td class="offbeat-td" colspan="4">◯</td>
+      <td colspan="4">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td" colspan="4">弱</td>
+      <td colspan="4">強</td>
+      <td class="offbeat-td" colspan="4">弱</td>
+      <td colspan="4">強</td>
+    </tr>
+
+    <tr>
+      <th>8分音符</th>
+      <td class="offbeat-td" colspan="2">2拍目</td>
+      <td colspan="2">3拍目</td>
+      <td class="offbeat-td" colspan="2">4拍目</td>
+      <td colspan="2">5拍目</td>
+      <td class="offbeat-td" colspan="2">6拍目</td>
+      <td colspan="2">7拍目</td>
+      <td class="offbeat-td" colspan="2">8拍目</td>
+      <td colspan="2">1拍目</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td class="offbeat-td" colspan="2">◯</td>
+      <td colspan="2">◯</td>
+      <td class="offbeat-td" colspan="2">◯</td>
+      <td colspan="2">◯</td>
+      <td class="offbeat-td" colspan="2">◯</td>
+      <td colspan="2">◯</td>
+      <td class="offbeat-td" colspan="2">◯</td>
+      <td colspan="2">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td" colspan="2">弱</td>
+      <td colspan="2">強</td>
+      <td class="offbeat-td" colspan="2">弱</td>
+      <td colspan="2">強</td>
+      <td class="offbeat-td" colspan="2">裏</td>
+      <td colspan="2">強</td>
+      <td class="offbeat-td" colspan="2">裏</td>
+      <td colspan="2">強</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  12345678 という順番で現れていた 8分音符も 23456781
+  と1で終わる様に変わったことがわかります。
+</p>
+<p>
+  この様に<b>拍の順番が常に尻合わせ</b>で構成されるリズムが<b>横乗りリズム</b>です。
+</p>
+<p>
+  ややこしいですが、なんとか理解して頂けましたでしょうか…。もしかすると理解すること自体はそんなに難しくなかったかも知れません。この縦乗りと横乗りの間に横たわる本当の問題は、私達日本人の様に<ruby class="bouten">日本語を母国語として子供の頃から日本語のリズムに慣れ親しんできた人々にとって、この横乗りのリズムを感覚的に認識する事がとても難しい</ruby>という点にあります。
+</p>
 
 ### リズム解釈の本質
 
@@ -920,7 +1830,7 @@ tags:
 #### 音が２つあれば必ず強拍と弱拍ができる
 音が２つあった場合、そのどちらかは必ず弱拍でそのどちらかは必ず強拍になります。先行拍が**弱拍**なら後行拍は**強拍**です。先行拍が**強拍**なら後行拍は**弱拍**です。
 
-#### 先行拍が強拍だった場合、それは必ず１拍目強拍になる
+#### 先行拍が強拍だったとみなす場合、それは必ず１拍目強拍になる
 * 例としてその音符が４分音符だった時のことを考えます。
 * もし、その拍が２拍目か４拍目だったらそれは弱拍なのでここでは除外されます。
 * もし、それが４分音符３拍目強拍だったとしたら、それは２分音符の弱拍ということになります。
@@ -936,7 +1846,7 @@ tags:
 
 ![](attachments/strong-beat-orientation-8.png)
 
-#### 先行拍が弱拍だった場合、全ての音価の弱拍である可能性がある
+#### 先行拍が弱拍だった場合あらゆる音価の弱拍である可能性を検証しなければならない
 もしも先行拍が弱拍だった場合、それは１拍目強拍以外の音でしかありえません。
 
 そしてその場合、その音符は４分音符の弱拍かも知れませんし、８分音符・１６分音符などのより細かな音価の弱拍かも知れません。或いはより長い２分音符や全音符、二全音符などの音符での弱拍かも知れません。可能性として考えられる音符は無数にあります。数ある可能性のなかでどの音符の弱拍なのかを判別するためには、音楽をしばらく聴いて前後の文脈から判別する必要があるでしょう。
@@ -1159,3 +2069,4 @@ tags:
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【外人が演奏する縦乗り】この方は日本語のリズムと英語のリズムの違いに気付いている ── が見事なまでに縦乗りに失敗している。これは彼が日本語話者でないことを表している。リエゾンによって倒置するオフビートがあり、オンビートは全てレイドバックして遅れている。<br><br> <a href="https://t.co/5MrK0hKUHo">https://t.co/5MrK0hKUHo</a> <a href="https://t.co/oJnPHqAaza">pic.twitter.com/oJnPHqAaza</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1573036257588178944?ref_src=twsrc%5Etfw">September 22, 2022</a></blockquote></div>
 -->
+
