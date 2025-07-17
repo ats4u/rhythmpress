@@ -952,6 +952,9 @@ tags:
     font-size: smaller;
     background-color: yellow;
   }
+  body.quarto-dark  table.offbeat-onbeat-table th  {
+    background-color: green;
+  }
 </style>
 
 #### 多層拍構造での強拍先行
