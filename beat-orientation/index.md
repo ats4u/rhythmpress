@@ -2811,7 +2811,10 @@ tags:
 
 ![](attachments/strong-beat-orientation-8.png)
 
+> 💡 もしも強拍が１拍目ではなかった場合、それは必ず弱拍として約分が出来ます。つまり必ず弱拍なのです。 [参照：弱拍強拍は分数で表すことが出来る]( #弱拍強拍は分数で表すことが出来る )
+
 #### 先行拍が弱拍だった場合あらゆる音価の弱拍である可能性を検証しなければならない
+
 もしも先行拍が強拍ではなかった場合、それは必ず弱拍です。弱拍は強拍とは異なり、無限に存在します。
 
 もしその拍が弱拍だったとすると、その音符は４分音符の弱拍かも知れませんし、８分音符の弱拍かも知れません。１６分音符などのより細かな音価の弱拍かも知れません。或いはより長い２分音符・全音符・２全音符などの音符での弱拍かも知れません。可能性として考えられる音符は無限に存在します。無限に存在する可能性のなかでどの音符の弱拍なのかを判別するためには、予想と修正が必要になります。 まず予想を立てた上で、音楽をしばらく聴き前後の文脈から判別しながら、予想を修正しながら、実際の音価を特定する必要が発生します。
@@ -2866,6 +2869,7 @@ tags:
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符、8分音符及び16分音符の強拍先行（日本語などのモーラ拍リズム）( モーラ拍リズムの頭合わせリズム認識を適用した Can&#39;t Hide Love / Earth, Wind &amp; Fire ) <a href="https://t.co/Nx5G8rBc4f">pic.twitter.com/Nx5G8rBc4f</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944026780706521146?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote> </div>
 
+
 ![](attachments/beat-offset-offset-0.png)
 
 ### ８分音符の弱拍先行
@@ -2907,6 +2911,10 @@ tags:
 この様に、ストレス拍リズムの人々が演奏する弱強リズムが前提で構成されたリズムパターンを、モーラ拍リズムの人々は、強弱リズムとして１つずれた形で間違って解釈します。
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ストレス拍リズム（英語）のスイング ─── ベースが1/9早めのタイミングに移動しライドシンバルの8分弱拍が4分音符に対して5/9の位置に配置されている。また4分音符は全て1/9遅れている。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> (訂正版) <a href="https://t.co/QajecpWuqP">pic.twitter.com/QajecpWuqP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932739193438146682?ref_src=twsrc%5Etfw">June 11, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">モーラ拍リズム（日本語）のスイング ─── 俗に「頭重心」「縦乗り」という。ライドシンバルの4分音符が基準位置になっているため移動しない。ベースが1/32 遅めのタイミングに移動し遅れる等々、全ての打点が4分音符よりも後ろに遅れて配置され音量が小さい。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KMnIJYQXmC">pic.twitter.com/KMnIJYQXmC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932139175647850918?ref_src=twsrc%5Etfw">June 9, 2025</a></blockquote></div>
+
 
 ## 時間認識の指向性について
 
