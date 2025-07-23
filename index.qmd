@@ -99,13 +99,13 @@ link_target_md = input_md
 proc( input_md, output_md, link_target_md )
 ```
 ### 多層弱拍基軸リズム理論
-- [**多層弱拍基軸リズム理論**](./beat-orientation/index.md)  
+- [**多層弱拍基軸リズム理論**](./beat-orientation/index.qmd)  
     音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
 ```{python}
 #| output: asis
-input_md    = "beat-orientation/index.md"
-output_md = "toc-beat-orientation.md"
-link_target_md  = "beat-orientation/index.md"
+input_md    = "beat-orientation/index.qmd"
+output_md = "toc-beat-orientation.qmd"
+link_target_md  = "beat-orientation/index.qmd"
 proc( input_md, output_md, link_target_md )
 ```
 ### 声出しオフビートカウント法
