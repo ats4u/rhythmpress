@@ -737,23 +737,9 @@ tags:
 
 よってそこに拍が一拍しかなければ、それは強拍か弱拍か判別出来ず、強拍/弱拍の関係が成立しません。 つまり強拍と弱拍は、そこに２つの音があって初めて成立する相対的な関係といえます。 ─── このことをここでは **弱強二拍単位説** と呼びます。この**弱強二拍単位説**は、ジャズやファンクなどの音楽で特徴的なバックビートを説明する時の重要なキーワードとなります。
 
-<!-- ABOUT_RMOP -->
-
 モーラ拍リズム言語（日本語）を母国語とする人は、言語の発音構造上１モーラに１拍しか持たないという制約を持っています。つまりモーラ拍リズムの言語にはリズムが存在しません。
 
-<blockquote class="twitter-tweet" data-media-max-width="560">
-
-<p lang="ja" dir="ltr">
-
-日本のリズムには１拍しかない。弱拍強拍が成立する為には２拍必要だが日本語は１拍しか持たないので弱拍強拍という概念自体が存在しない ── 日本文化には動きのない美しさ…雅楽の笙（しょう）の様に無限に続く様な世界観がある。<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/4zBePkuQvv">pic.twitter.com/4zBePkuQvv</a>
-
-</p>
-
-— 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1946690247380897798?ref_src=twsrc%5Etfw">July 19, 2025</a>
-
-</blockquote>
-
-<!-- ABOUT_RMOP -->
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">日本のリズムには１拍しかない。弱拍強拍が成立する為には２拍必要だが日本語は１拍しか持たないので弱拍強拍という概念自体が存在しない ── 日本文化には動きのない美しさ…雅楽の笙（しょう）の様に無限に続く様な世界観がある。<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/wJklGwmWN3">pic.twitter.com/wJklGwmWN3</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948142143668990071?ref_src=twsrc%5Etfw">July 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 ストレス拍リズム言語・シラブル拍リズム言語の音楽を演奏する人々は、そこに１拍しかないかのように演奏していても、心の中でその拍を無意識のうちに分割して２拍として演奏しています。つまり**１拍しかなくてもその拍を弱拍として認識したり、或いは１拍しかなくてもその前に弱拍の休符があると認識**していたりします。これが**弱強二拍単位説**です。
 
