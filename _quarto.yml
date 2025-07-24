@@ -47,7 +47,7 @@ website:
         contents:
           - ./tatenori-theory/index.md
           - ./offbeat-count-theory/index.md
-          - ./beat-orientation/index.qmd
+          - ./beat-orientation/index.md
           - ./phonetics/index.md
           - ./metadivision/index.md
           - ./three-n-rhythm/index.md
