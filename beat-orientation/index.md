@@ -779,7 +779,7 @@ Boys play games の３シラブルにアクセントがあります。この３�
 
 ### <ruby><rb>韻律</rb><rt>ミータ/Metre</rt></ruby>には多くの形式がある
 
- <ruby><rb>韻律</rb><rt>ミータ/Metre</rt></ruby> には３０程度の形式があります。それぞれの形式は、強弱の組み合わせ順によって定義されます。そのなかでも最も基礎的な形式は、弱強格（アイアンビック＝iambic) と強弱格（トロキーク＝trochaic)と呼ばれています。以下は、ウィキペディアの<ruby><rb>韻律</rb><rt>ミータ/Metre</rt></ruby> について説明する記事の韻律一覧の日本語抄訳です。
+ <ruby><rb>韻律</rb><rt>ミータ/Metre</rt></ruby> には３０程度の形式があります。それぞれの形式は、強弱の組み合わせ順によって定義されます。そのなかでも最も基礎的な形式は、弱強格（アイエムビック＝iambic) と強弱格（トロキーク＝trochaic)と呼ばれています。以下は、ウィキペディアの<ruby><rb>韻律</rb><rt>ミータ/Metre</rt></ruby> について説明する記事の韻律一覧の日本語抄訳です。
 
 #### 二音節韻律( ダイシラブルズ・Disyllables）
 
@@ -1383,9 +1383,11 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 #### RMOP原則を適用し弱拍を前にする
 <!-- ABOUT_RMOP -->
 
-前節では、**頭子音最大化原則(MOP)** を紹介しました。またMOPが音楽上のリズムにも適用されるという<ruby><rb>律動</rb><rt>リズム</rt></ruby>的頭子音最大化原則（RMOP = Rhythmic Maximal Onset Principle ）という原理についても紹介致しました。
+前節で言語の音韻学の**頭子音最大化原則(MOP)** が音楽上のリズムにも適用されるという **<ruby><rb>律動</rb><rt>リズム</rt></ruby>的頭子音最大化原則（RMOP = Rhythmic Maximal Onset Principle ）** という原理について紹介致しました。 この**<ruby><rb>律動</rb><rt>リズム</rt></ruby>的頭子音最大化原則（RMOP = Rhythmic Maximal Onset Principle ）** を多層の拍層に適用するとどうなるかを見ていきます。
 
-このRMOPを多層の拍層に適用するとどうなるかを見ていきます。
+#### 弱拍先行の基本
+
+小節上の拍に対して弱拍先行が起こるとどうなるのかを簡単な例から順に見ていきます。
 
 次のように４分音符があったとします。
 
@@ -1447,6 +1449,14 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを**弱拍の先行**と呼びます。 
 
+このことを譜面と音で確認してみましょう。
+
+##### 4分音符弱拍先行のない演奏
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の強拍先行（モーラ拍リズム・シラブル拍リズム）<a href="https://t.co/nm7sOtEMLs">pic.twitter.com/nm7sOtEMLs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024526159065266?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+##### 4分音符弱拍先行のある演奏
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の弱拍先行（ストレス拍リズム）<a href="https://t.co/YOsxEiurjc">pic.twitter.com/YOsxEiurjc</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024378947383703?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
 #### 弱拍先行には複数の階層がある
 
 前章では弱拍先行するリズムの例として４分音符に於いて弱拍が強拍よりも先に演奏される場合をグラフ化して俯瞰しました。**この弱拍の先行は4分音符以外の全ての音価の拍で同時に起こり** ます。例えば2分音符で見てみましょう。
@@ -1498,6 +1508,15 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 この様に2分音符でも弱拍が先に演奏され、強拍がその後ろに演奏されるようになりました。弱拍の先行は8分音符16分音符などの他の全ての音価で同様に起こります。
+
+このことを譜面と音で確認してみましょう
+
+**2分音符強拍が先行するパターン** 
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の強拍先行・基本パターン <a href="https://t.co/VLnxwpduHi">pic.twitter.com/VLnxwpduHi</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948794253955784843?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote>
+
+**2分音符弱拍が先行するパターン**
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の弱拍先行・基本パターン <a href="https://t.co/VVSuuaxet9">pic.twitter.com/VVSuuaxet9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703051340284302?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
+
 
 そして弱拍の先行は**常に同時に起こる**のです。
 
@@ -3037,6 +3056,10 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 
 
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の強拍先行・基本パターン <a href="https://t.co/COldk5IJUx">pic.twitter.com/COldk5IJUx</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703203379548193?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の弱拍先行・基本パターン <a href="https://t.co/VVSuuaxet9">pic.twitter.com/VVSuuaxet9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703051340284302?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
 
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行（シラブル拍リズム／ストレス拍リズム）<a href="https://t.co/GQwo8b3NOs">pic.twitter.com/GQwo8b3NOs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024049505673559?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
