@@ -1451,11 +1451,11 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを譜面と音で確認してみましょう。
 
-##### 4分音符弱拍先行のない演奏
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の強拍先行（モーラ拍リズム・シラブル拍リズム）<a href="https://t.co/nm7sOtEMLs">pic.twitter.com/nm7sOtEMLs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024526159065266?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
 ##### 4分音符弱拍先行のある演奏
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の弱拍先行（ストレス拍リズム）<a href="https://t.co/YOsxEiurjc">pic.twitter.com/YOsxEiurjc</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024378947383703?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
+
+##### 4分音符弱拍先行のない演奏
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の強拍先行（モーラ拍リズム・シラブル拍リズム）<a href="https://t.co/nm7sOtEMLs">pic.twitter.com/nm7sOtEMLs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024526159065266?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
 
 #### 弱拍先行には複数の階層がある
 
@@ -1511,11 +1511,11 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを譜面と音で確認してみましょう
 
-**2分音符強拍が先行するパターン** 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の強拍先行・基本パターン <a href="https://t.co/VLnxwpduHi">pic.twitter.com/VLnxwpduHi</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948794253955784843?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote>
+###### 2分音符弱拍が先行があるパターン
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の弱拍先行・基本パターン（修正版） <a href="https://t.co/1DCsSlq82e">pic.twitter.com/1DCsSlq82e</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1949043511510421562?ref_src=twsrc%5Etfw">July 26, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
-**2分音符弱拍が先行するパターン**
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の弱拍先行・基本パターン <a href="https://t.co/VVSuuaxet9">pic.twitter.com/VVSuuaxet9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703051340284302?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
+###### 2分音符弱拍が先行がないパターン
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の強拍先行・基本パターン（修正版） <a href="https://t.co/eiPEUP9wCG">pic.twitter.com/eiPEUP9wCG</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1949042220247527581?ref_src=twsrc%5Etfw">July 26, 2025</a></blockquote></div>
 
 
 そして弱拍の先行は**常に同時に起こる**のです。
@@ -1580,7 +1580,19 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-これで４分音符の弱拍が先行しました。 しかしこの弱拍先行は完全ではありません。上に対応する2分音符のグラフを重ねてみると、２分音符で見たときには依然として強拍が先行していることがわかります。次のグラフを御覧下さい。
+これで４分音符の弱拍が先行しました。 
+
+このことを譜面と音で確認してみましょう。
+
+###### 4分音符弱拍先行のある演奏
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の弱拍先行があるパターン（第二版） <a href="https://t.co/1YA7jowLed">pic.twitter.com/1YA7jowLed</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1949088062539182103?ref_src=twsrc%5Etfw">July 26, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+###### 4分音符弱拍先行のない演奏
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の弱拍先行がないパターン（第二版） <a href="https://t.co/TPprUgSguQ">pic.twitter.com/TPprUgSguQ</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1949092670552649739?ref_src=twsrc%5Etfw">July 26, 2025</a></blockquote></div>
+
+##### 4分音符及び2分音符の場合（二重弱拍先行）
+
+しかしこの弱拍先行は完全ではありません。上に対応する2分音符のグラフを重ねてみると、２分音符で見たときには依然として強拍が先行していることがわかります。次のグラフを御覧下さい。
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -1677,6 +1689,17 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 4分音符の順番がまる一周回転した状態になりました。このリズムを２３４１リズムと呼びます。これがいわゆる**横乗りリズム**の世界の数の数え方です。この世界では4分音符の順番が小節中を回転し完全に一周回って１が終了地点に来る状態になっています。
+
+このことを譜面と音で確認してみましょう。
+
+###### 2分音符及び4分音符で弱拍先行のある演奏
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符及び4分音符の二重弱拍先行・基本パターン <a href="https://t.co/0ak7ojRnGq">pic.twitter.com/0ak7ojRnGq</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1949058528637055317?ref_src=twsrc%5Etfw">July 26, 2025</a></blockquote></div>
+
+###### 2分音符及び4分音符で弱拍先行のない演奏
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符及び4分音符の二重弱拍先行がないパターン <a href="https://t.co/wKfnULieDK">pic.twitter.com/wKfnULieDK</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1949062597699076148?ref_src=twsrc%5Etfw">July 26, 2025</a></blockquote></div>
+
+
 
 この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。** これが２３４１リズムが出来上がるメカニズムです。
 
@@ -3052,9 +3075,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 これを弱拍が先に来るように認識すると次の様になります。
 
 ![](attachments/beat-orientation-explained-4th-ws.png)
-
-
-
 
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の強拍先行・基本パターン <a href="https://t.co/COldk5IJUx">pic.twitter.com/COldk5IJUx</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703203379548193?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
