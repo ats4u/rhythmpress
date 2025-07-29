@@ -697,8 +697,6 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【タイ東北の民謡・モーラム】タイ東北方言（ラオ／イサーン語）を習得したことが、私のリズム開眼のきっかけになりました。<br><br>ラオ民謡はメロディーが全て弱起になっており、弱起のない部分がありません。日中韓と真逆のリズム構成になっています。<br><br>Credit :… <a href="https://t.co/N8etpUVFY9">pic.twitter.com/N8etpUVFY9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1670421166673268736?ref_src=twsrc%5Etfw">June 18, 2023</a></blockquote></div>
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">アル・ジャロウ / Love is Real （1980年 アルバム This Time から） <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> Credit : <a href="https://t.co/x4adaieY8P">https://t.co/x4adaieY8P</a> <a href="https://t.co/RPIMJv3fFA">pic.twitter.com/RPIMJv3fFA</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1629436930877431811?ref_src=twsrc%5Etfw">February 25, 2023</a></blockquote> </div>
-
 
 形容詞の原型・比較級・最上級を順番に読んでネイティブの幼稚園児に教えている英語の先生ですが、最上級の前に the を入れていることがわかります。 英語ネイティブの人は最上級の前に無意識の内に定冠詞 the を入れます。最上級を定冠詞なしで読むこと自体に違和感があるからです。だからこそ先生は the を入れて読んでいますが、これも日本人が聴き取れない弱拍位置にあるため、そこに拍があること自体に気付きません。
 
