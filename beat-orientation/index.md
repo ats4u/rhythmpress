@@ -682,10 +682,18 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 この様な例はたくさん存在します。ジャズや・R&B・ヒップホップなどのアフリカ系アメリカ人の音楽では**ほぼ全ての曲** にこのようなモーラ拍リズム言語を母国語とする人が聴き取れないリズム型が見つかります。モーラ拍リズム言語を母国語とする人には、数多くの聴き取れないリズム型が存在するのです。
 
+
+カーペンターズの有名曲「スーパースター」のサビの歌詞 "You said you'd be coming back this way again, baby♪" という歌詞は、多くの単語が弱拍から始まっています。この様なリズムで歌われた歌詞は、ほとんど全て聞き漏らしてしまうという現象が起こります。
+
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">You said you&#39;d be coming back this way again, baby♪ <br><br>─── の部分が何度聴いても聴き取れない縦乗り脳な私。 全部オフビートから１つずつずれて単語が始まっている日本人が一番苦手なパターンがここにあります。<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a><br>Credit : <a href="https://t.co/1BfCPxCqqN">https://t.co/1BfCPxCqqN</a> <a href="https://t.co/riVn1DdcHf">pic.twitter.com/riVn1DdcHf</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1713509900897361984?ref_src=twsrc%5Etfw">October 15, 2023</a></blockquote></div>
+
+
+次のビデオは、モーラ拍リズム言語を母国語とする者が、聞き漏らしやすいリズム位置を字幕によって示したものです。
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【日本人はオフビートが聴き取れない】 日本人が英語が聴き取れない理由は音楽のリズムの認識の違いと深い関係があります。 <br><br>日本人がリズム上聴き取れない部位を見える化しました。<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a><br>Credit: Tape Machine の Boomerang Feauturing MIa Pfirrman<br> <a href="https://t.co/6GtW6DqEX4">https://t.co/6GtW6DqEX4</a> <a href="https://t.co/QzFHwUtoJm">pic.twitter.com/QzFHwUtoJm</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1642021208131764224?ref_src=twsrc%5Etfw">April 1, 2023</a></blockquote></div>
 
+
+これはラオ（タイ東北）の民謡です。ラオの民謡は234拍目で歌詞を歌う為、日本人は多くの拍を聞き漏らします。またしばしば、全ての拍を聞き漏らしているということ自体が認識できません。このことは拍数を数えながら音楽を聴くことで確認することが出来ます。
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【タイ東北の民謡・モーラム】タイ東北方言（ラオ／イサーン語）を習得したことが、私のリズム開眼のきっかけになりました。<br><br>ラオ民謡はメロディーが全て弱起になっており、弱起のない部分がありません。日中韓と真逆のリズム構成になっています。<br><br>Credit :… <a href="https://t.co/N8etpUVFY9">pic.twitter.com/N8etpUVFY9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1670421166673268736?ref_src=twsrc%5Etfw">June 18, 2023</a></blockquote></div>
 
