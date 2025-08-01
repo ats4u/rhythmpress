@@ -1681,7 +1681,10 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 ###### 2分音符弱拍が先行がないパターン
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950903671266623988?ref_src=twsrc%5Etfw"></a></blockquote></div>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
+2分音符の弱拍先行＝なし
+#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904653664952572?ref_src=twsrc%5Etfw"></a></blockquote></div>
+
 <table class="offbeat-onbeat-table">
   <tbody>
     <tr>
@@ -1704,7 +1707,10 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 ###### 2分音符弱拍が先行があるパターン
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝あり #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904053028040845?ref_src=twsrc%5Etfw"></a></blockquote></div>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
+2分音符の弱拍先行＝あり
+#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904900134818064?ref_src=twsrc%5Etfw"></a></blockquote></div>
+
 <table class="offbeat-onbeat-table">
   <tbody>
     <tr>
@@ -1726,7 +1732,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 
-そして弱拍の先行は**常に複数の音価の上で同時に起こる**のです。
+そして弱拍の先行は**常に同時に起こる**のです。
 
 
 ##### 4分音符の場合
@@ -3447,7 +3453,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950903671266623988?ref_src=twsrc%5Etfw"></a></blockquote></div>
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝あり #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904053028040845?ref_src=twsrc%5Etfw"></a></blockquote></div>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝あり #グルーヴは弱拍が先
+<a href="https://twitter.com/ats4u/status/1950904053028040845?ref_src=twsrc%5Etfw"></a></blockquote></div>
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904200105480328?ref_src=twsrc%5Etfw"></a></blockquote></div>
 
