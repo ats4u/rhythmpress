@@ -1632,7 +1632,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 #### 弱拍先行には複数の階層がある
 
-前章では弱拍先行するリズムの例として４分音符に於いて弱拍が強拍よりも先に演奏される場合をグラフ化して俯瞰しました。**この弱拍の先行は4分音符以外の全ての音価の拍で同時に起こり** ます。例えば2分音符で見てみましょう。
+前章では弱拍先行するリズムの例として４分音符に於いて弱拍が強拍よりも先に演奏される場合をグラフ化して俯瞰しました。**この弱拍の先行は複数の音価の拍で同時に起こり** ます。例えば2分音符で見てみましょう。
 
 ##### 2分音符の場合
 
@@ -1684,7 +1684,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを譜面と音で確認してみましょう。
 
-###### 2分音符弱拍が先行がないパターン
+###### 💡実例＝2分音符弱拍先行なし
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950903671266623988?ref_src=twsrc%5Etfw"></a></blockquote></div>
 <table class="offbeat-onbeat-table">
@@ -1707,7 +1707,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-###### 2分音符弱拍が先行があるパターン
+###### 💡実例＝2分音符弱拍先行あり
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝あり #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904053028040845?ref_src=twsrc%5Etfw"></a></blockquote></div>
 <table class="offbeat-onbeat-table">
@@ -1798,7 +1798,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを譜面と音で確認してみましょう。
 
-###### 4分音符弱拍先行のない演奏
+###### 💡実例＝4分音符弱拍先行なし
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝なし 2分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904501377946028?ref_src=twsrc%5Etfw"></a></blockquote></div>
 
@@ -1828,7 +1828,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-###### 4分音符弱拍先行のある演奏
+###### 💡実例＝4分音符弱拍先行あり
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
 2分音符の弱拍先行＝なし
@@ -1861,7 +1861,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 
-##### 4分音符及び2分音符の場合（二重弱拍先行）
+##### 4分音符での多重弱拍先行
 
 しかし４分音符の弱拍先行だけでは、完全な横乗りリズムにはなりません。上に対応する2分音符のグラフを重ねてみると、２分音符で見たときには依然として強拍が先行していることがわかります。次のグラフを御覧下さい。
 
@@ -1963,7 +1963,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを譜面と音で確認してみましょう。
 
-###### 4分音符弱拍先行なし２分音符弱拍先行がありの場合
+
+###### 💡実例＝ 弱拍先行→4分音符あり２分音符なし
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
 2分音符の弱拍先行＝なし
@@ -2016,7 +2017,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-###### 4分音符弱拍先行あり２分音符弱拍先行なしの場合
+###### 💡実例＝ 弱拍先行→4分音符あり＆２分音符あり
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
 2分音符の弱拍先行＝あり
@@ -2081,11 +2082,16 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 この様にすると2分音符4分音符だけでなく、全音符／2全音符を含む考えうる全ての音符でこの現象が起こります。次に8分音符で見てみましょう。
 
-##### ８分音符の場合
+##### ８分音符での多重弱拍先行
 
-次のように８分音符が並んでいる場合を考えてみます。
+8分音符で弱拍先行を考えた場合も、4分音符で考えた場合と同様に、最小の音価で弱拍が先行すると
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝なし<br>4分音符の弱拍先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/ASYOxNChGr">pic.twitter.com/ASYOxNChGr</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905132335747545?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
+次のように８分音符が８つ並んでいる場合を考えてみます。
+
+
+###### 💡実例＝ 弱拍先行→8分音符なし
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝なし<br>4分音符の弱拍先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/ASYOxNChGr">pic.twitter.com/ASYOxNChGr</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905132335747545?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -2125,7 +2131,10 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
+
 これを８分音符の弱拍を先行する形に並べ替えてみます。すると以下の様になります。
+
+###### 💡実例＝ 弱拍先行→8分音符あり
 
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">８分音符先行＝あり <a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/oHAMPjSVv9">pic.twitter.com/oHAMPjSVv9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951194208930521147?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote>
 
@@ -2168,6 +2177,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 これで弱拍が先行した形になりました。 しかし４分音符を重ねてみると違った様相が見えてきます。
+
+###### 💡実例＝ 弱拍先行→8分音符あり４分音符なし
 
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/iiSAX6NKMm">pic.twitter.com/iiSAX6NKMm</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905516039037201?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
 
@@ -2237,6 +2248,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 こうしてみてみると、4分音符は依然として強拍先行になっていることがわかります。 つまり4分音符として見たときでも弱拍先行にしなければ、全ての音価で弱拍先行になっていないと言えます。 次に4分音符に関しても弱拍が先行する様に変えたものを見てみましょう。
 
+###### 💡実例＝ 弱拍先行→8分音符あり４分音符あり
+
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/BFqRR2dANP">pic.twitter.com/BFqRR2dANP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905618157744183?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
 
 <table class="offbeat-onbeat-table">
@@ -2304,6 +2317,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 これで4分音符も弱拍先行になりました。しかしこれも再度2分音符を重ねると、実はこれもまだ強拍先行になっていることがわかります。
+
+###### 💡実例＝ 弱拍先行→8分音符あり４分音符あり2分音符なし
 
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符先行＝あり<br>4分音符先行＝あり<br>2分音符先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/Ls3K4Mrst3">pic.twitter.com/Ls3K4Mrst3</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951207274044678563?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote>
 
@@ -2393,6 +2408,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 ここで2分音符も先行するように並べ替えてみます。
 
+###### 💡実例＝ 弱拍先行→8分音符あり４分音符あり2分音符あり
+
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<br>2分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/DLIJh2aeHC">pic.twitter.com/DLIJh2aeHC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950906937073434775?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
 
 <table class="offbeat-onbeat-table">
@@ -2479,9 +2496,11 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
+###### まとめ
+
 これで小節内の全ての音価が弱拍先行になりました。すると最初12345678と並んでいた8分音符が23456781という様に１が最後に来るように並び替わったことがわかります。 これが**23456781リズム**です。 これがいわゆる**横乗りリズム**の世界での8分音符の数え方です。この世界でも、8分音符の順番が小節中を回転し完全に一周回って１が終了地点に来る状態になったのです。
 
-##### 16分音符の場合
+##### 16分音符での多重弱拍先行
 
 16分音符でも全く同じ事が言えます。 次の様に16分音符が並んでいた時を考えます。
 
