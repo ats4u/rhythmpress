@@ -5,4 +5,5 @@
 *.~undo-tree~
 .venv
 .obsidian
+.vscode/
 

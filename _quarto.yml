@@ -70,7 +70,7 @@ format:
 #      - file: banner.html
     toc: true
     toc-location: right
-    toc-depth: 5
+    toc-depth: 7
     toc-expand: 1
     include-in-header:
       - text: |
