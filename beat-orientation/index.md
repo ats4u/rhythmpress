@@ -89,6 +89,8 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 ここに存在する違いは一体何でしょうか ───  これが**強拍弱拍の順序認識**です。
 
+今後このバダムツーを理解する為に必要な前提となる知識＝弱拍先行とは何か、弱拍先行の背後に存在する音韻学的な原理、そして弱拍先行の多重性、<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>を聴き取る難しさについてを順に見て行きます。 そしてこのバダムツーの解釈方法について [バダムツーは二重弱拍先行認識の試金石](#バダムツーは二重弱拍先行認識の試金石) でより詳細に説明します。
+
 ### 音楽の弱拍強拍の順序認識の違い
 
 強拍弱拍の順序とはどういう意味でしょうか。次のビデオを見てください。
@@ -1859,7 +1861,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-##### 4分音符での多重弱拍先行
+##### 4分音符での<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>
 
 しかし４分音符の弱拍先行だけでは、完全な横乗りリズムにはなりません。上に対応する2分音符のグラフを重ねてみると、２分音符で見たときには依然として強拍が先行していることがわかります。次のグラフを御覧下さい。
 
@@ -2078,7 +2080,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 この様にすると2分音符4分音符だけでなく、全音符／2全音符を含む考えうる全ての音符でこの現象が起こります。次に8分音符で見てみましょう。
 
-##### ８分音符での多重弱拍先行
+##### ８分音符での<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>
 
 8分音符で弱拍先行を考えた場合も、4分音符で考えた場合と同様に、最小の音価で弱拍が先行すると
 
@@ -2498,7 +2500,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。これが23456781リズムが出来上がるメカニズムです。** 
 
 
-##### 16分音符での多重弱拍先行
+##### 16分音符での<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>
 
 16分音符でも8分音符・4分音符・2分音符と全く同じ事が言えます。
 
@@ -3422,7 +3424,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 </table>
 
 
-##### まとめ16分音符での多重弱拍先行
+##### まとめ16分音符での<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>
 
 これで小節内の全ての音価が弱拍先行になりました。すると最初に `[ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]` のように並んでいた8分音符が `[ 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1 ]` という様に１が最後に来るように並び替わったことがわかります。 この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。**   これがいわゆる横乗りリズムの世界での16分音符の数え方です。この世界でも16分音符の順番が小節中を回転し完全に一周回って１が終了地点に来る状態になったのです。
 
@@ -3572,67 +3574,283 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 この様な音楽中に存在する微細な弱起の存在を間違いなく確実に認識しつづける音楽認識の方法論として考案されたのが **声出しオフビートカウント**です。
 
-#### 弱起が先行する音楽を理解する難しさ
+
+#### まとめ＝弱起が先行する音楽を理解する難しさ
 **弱拍が属する音価の判定**が出来ないと、その音楽が持っているリズムの全体像を理解する事ができなくなります。**弱拍が属する音価の判定** が弱拍が先行する音楽の理解の難しさの根底に存在します。つまり **弱拍が属する音価の判定** を素早く行う訓練を行うことで、弱拍が先行する音楽の理解及び演奏の改善を行うことが出来ます。
 
 **弱拍が属する音価の判定** の訓練として考え出された方法が **声出しオフビートカウント練習法**です。
 
+### バダムツーは二重弱拍先行認識の試金石
 
+これまで、弱拍先行の意味、弱拍先行の多重性、そして多重の弱拍先行を聴き分ける困難の理由について見てきました。ここでようやくバダムツーを理解する為に必要な武器が揃った状態になったと言えます。
 
-#### 弱強リズム解釈
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツー（英語での「ちゃんちゃん」のような効果音） Credit : <a href="https://t.co/1pMfDuY1S3">https://t.co/1pMfDuY1S3</a> <a href="https://t.co/qdcGm8P81M">pic.twitter.com/qdcGm8P81M</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928811162042507281?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote></div>
 
-ストレス拍リズム（英語）の話者は、バダムツーを聴いた時、4分音符で弱強で、8分音符で弱強で解釈します。
+[音楽のリズム解釈には言語によって違いがある](#音楽のリズム解釈には言語によって違いがある) で御紹介したバダムツーは、4分音符も弱強で解釈し、8分音符も弱強で解釈するという二重の弱強解釈を必要とするからです。
 
-![](../../tatenori-theory/attachments/ba-dum-tss-score-correct.png)
+#### バダムツーの解釈＝8分音符弱拍先行なし4分音符弱拍先行なし
 
-この解釈を音楽で表すと次のようになるでしょう。
+もしもこの音に関して弱拍先行が全ての音価がないという前提で解釈すると次のようになります。
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの横乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/C5x0FYgXLk">pic.twitter.com/C5x0FYgXLk</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070026998755806?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote></div>
+![](../tatenori-theory/attachments/ba-dum-tss-incorrect.png)
 
-#### 強弱のリズム解釈
+この解釈は、4分音符の弱拍先行なし、8分音符の弱拍先行なしを前提としたリズム解釈と言えます。 ─── この解釈は正しくないということも[音楽のリズム解釈には言語によって違いがある](#音楽のリズム解釈には言語によって違いがある)で御説明致しました。
 
-ところがモーラ拍リズム（日本語）の話者は、バダムツーを4分音符も強弱、8分音符も強弱で解釈します。
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
 
-![](../../tatenori-theory/attachments/ba-dum-tss-incorrect.png)
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１</td>
+      <td class="offbeat-td">２</td>
+      <td>３</td>
+      <td class="offbeat-td">４</td>
+      <td>５</td>
+      <td class="offbeat-td">６</td>
+      <td>７</td>
+      <td class="offbeat-td">８</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
 
-この解釈を音楽で表すと次のようになるでしょう。
+#### バダムツーの解釈＝8分音符弱拍先行あり4分音符弱拍先行なし
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツーの縦乗りでの解釈 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KN5gMaKMdE">https://t.co/KN5gMaKMdE</a> <a href="https://t.co/TCvZoJEMqw">pic.twitter.com/TCvZoJEMqw</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928070176341164344?ref_src=twsrc%5Etfw">May 29, 2025</a></blockquote></div>
+次の解釈を見てみます。
 
-この様に、ストレス拍リズムの人々が演奏する弱強リズムが前提で構成されたリズムパターンを、モーラ拍リズムの人々は、強弱リズムとして１つずれた形で間違って解釈します。
+![](../tatenori-theory/attachments/ba-dum-tss-incorrect-8th.png)
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ストレス拍リズム（英語）のスイング ─── ベースが1/9早めのタイミングに移動しライドシンバルの8分弱拍が4分音符に対して5/9の位置に配置されている。また4分音符は全て1/9遅れている。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> (訂正版) <a href="https://t.co/QajecpWuqP">pic.twitter.com/QajecpWuqP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932739193438146682?ref_src=twsrc%5Etfw">June 11, 2025</a></blockquote></div>
+この解釈は、8分音符の弱拍先行が存在することを前提として解釈していると言えます。しかし、4分音符の弱拍先行はなしとみなしている為、１つずれた形で認識していることを観察することが出来ます。
 
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+      <td class="offbeat-td">４拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">モーラ拍リズム（日本語）のスイング ─── 俗に「頭重心」「縦乗り」という。ライドシンバルの4分音符が基準位置になっているため移動しない。ベースが1/32 遅めのタイミングに移動し遅れる等々、全ての打点が4分音符よりも後ろに遅れて配置され音量が小さい。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KMnIJYQXmC">pic.twitter.com/KMnIJYQXmC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932139175647850918?ref_src=twsrc%5Etfw">June 9, 2025</a></blockquote></div>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">8拍目</td>
+      <td>1拍目</td>
+      <td class="offbeat-td">2拍目</td>
+      <td>3拍目</td>
+      <td class="offbeat-td">4拍目</td>
+      <td>5拍目</td>
+      <td class="offbeat-td">6拍目</td>
+      <td>7拍目</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
 
-## 時間認識の指向性について
+#### バダムツーの解釈＝8分音符弱拍先行あり4分音符弱拍先行あり
 
-### 尻合わせ
-モーラ拍リズムのリズム認識をここでは**頭合わせ**と、そしてストレス拍リズムのリズム認識を**尻合わせ** と呼びます。
+次の解釈を見てみます。
 
+![](../tatenori-theory/attachments/ba-dum-tss-score-correct.png)
 
-![](attachments/Pasted%20image%2020250609002541.png)
+この解釈は、8分音符の弱拍先行が存在することを前提としおり、同時に4分音符の弱拍先行も存在することを前提として解釈していることがわかります。
 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【尻合わせ】 <a href="https://t.co/vryyK4SjMC">pic.twitter.com/vryyK4SjMC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304475347390466?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote></div>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">４拍目</td>
+      <td>１拍目</td>
+      <td class="offbeat-td">２拍目</td>
+      <td>３拍目</td>
+    </tr>
+    <tr>
+      <th>4分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
 
-### 頭合わせ
-![](attachments/Pasted%20image%2020250609002708.png)
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560" data-lang="en"><p lang="ja" dir="ltr">尻合わせリズム（海外の音楽ジャズ／ファンク）<br>頭合わせリズム（日本人が陥りがちなリズム)<br>… の違い<br><br>【頭合わせ】 <a href="https://t.co/Eij6Uuqi5G">pic.twitter.com/Eij6Uuqi5G</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1612304530502451201?ref_src=twsrc%5Etfw">January 9, 2023</a></blockquote></div>
+<table class="offbeat-onbeat-table">
+  <tbody>
+    <tr>
+      <th>位置</th>
+      <td class="offbeat-td">6拍目</td>
+      <td>7拍目</td>
+      <td class="offbeat-td">8拍目</td>
+      <td>1拍目</td>
+      <td class="offbeat-td">2拍目</td>
+      <td>3拍目</td>
+      <td class="offbeat-td">4拍目</td>
+      <td>5拍目</td>
+    </tr>
+    <tr>
+      <th>8分音符</th>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+      <td class="offbeat-td">◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th>強弱</th>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+      <td class="offbeat-td">弱</td>
+      <td>強</td>
+    </tr>
+  </tbody>
+</table>
 
-### モーラ拍リズムのリボ払い
-### シラブル拍リズムの月末締め一括払い
+### <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>のまとめ
 
+これまで見てきた<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>の認識は、その人が母国語として話す言語の拍リズムの影響を受けます。つまり言語の拍リズムによって、どの音価での弱拍先行を認識しやすいか、或いは<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>を認識しやすいしにくいか…といった違いが生じます。 その傾向の一覧を以下で示します。
 
-## 弱拍基軸リズム理論とは
+| 拍リズム | 弱拍先行8分音符 | 弱拍先行4分音符 | 多重数 | 
+|---------|:-----------:|:--------------:|:------:|
+|シラブル拍リズム| あり | なし | 1 |
+|ストレス拍リズム| あり | あり | 2 |
+|モーラ拍リズム  | なし | なし | 0 |
 
-弱拍基軸理論を一言でいうと『弱拍と強拍のどちらが先か』という視点を元にリズムを区分する方法論です。ここでの強拍弱拍という用語は、強拍・弱拍の様に楽典として正式に意味が定義されている用語ではありません。ここでは**奇数拍**の事を**強拍**、**偶数拍**の事を**弱拍** と呼ぶことにしましょう。 強拍が先行する感覚で演奏することをここでは**強拍基軸**と呼ぶことにしましょう。そして弱拍が先行する感覚で演奏することを**弱拍基軸**と呼ぶことにします。
+ここでひとつの仮説が生まれます。
 
-グルーヴするリズムは必ず弱拍基軸です。
+シラブル拍リズムでは **頭子音最大化原則(MOP原則)** によって子音が可能な限り先行するという法則を見てきました。 つまりこれは8分音符の弱拍の先行と見ることが出来ます。
 
-## どんな音価にも強弱がある
+次にストレス拍リズムでは、シラブル拍リズムの **頭子音最大化原則(MOP原則)** に加えて、**頭音節最大化原則(MPOP)** が適用されます。これはつまり、8分音符の弱拍先行に加えて、4分音符の弱拍先行が同時に有効になると解釈することができます。
 
-[縦乗りリズム理論](../tatenori-theory/) で説明したバダムツーは、4分音符も弱強で解釈し、8分音符も弱強で解釈するという2重の弱強解釈が登場します。
+**シラブル拍リズムは単層の弱拍先行**であり、**ストレス拍リズムは二層の弱拍先行**であると解釈することが可能です。
+
+そしてモーラ拍リズムには、ストレス拍リズム・シラブル拍リズムとは全く逆の **頭子音最小化原則 (MiOP = Minimum Onset Principle)** が適用されます。 つまり弱拍がないだけでなく、強拍もないといえます。つまり全ての拍は分割されずに孤立しており、層がないと解釈することが可能です。
+
+つまり**モーラ拍リズムは無層リズム**と解釈することが可能です。
+
+マイルス・デイヴィスの演奏する Four のように二重の弱拍先行が現れる音楽は、米国にしか存在しません。
+
+<div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/d_dSxV1bm4Q?si=PoKsWTiUDw4qCZDQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+この二重の弱拍先行は時代を経ることにより、より多層化が進みます。
+
+<div class="center-box"><iframe class="rhythmpedia-iframe"  src="https://www.youtube.com/embed/6x3QtLCAPp8?si=7Ev6xaj3UOXFiqc_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+ ハービー・ハンコックのアクチュアル・プルーフは１６ビートで2分音符４分音符8分音符16分音符で同時に弱拍が先行するリズムが表れます。
+
+ この弱拍先行の多重化は更に進化します。
+
+<div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/2F3Ej6Cn1dg?si=mBR8Zcj4n86sfyEM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+この楽曲では16分音符8分音符4分音符2分音符で同時に弱拍が先行するリズムに加え、８小節単位で後半の２小節だけにメロディーが配置される二全音弱拍先行が表れます。合計で五重の弱拍先行といえます。
+
+米国音楽だけがこの様な<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>リズムを持っています。
+
+<div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/tLAJSQR8V9Q?si=6LFljO26x9olfPeB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+このように<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>は、ストレス拍リズムという英語・ドイツ語で特有な言語上のリズムが生み出したリズムでした。それが米国で南米やアフリカの各種民族音楽と混ざり合うことでより複雑化し発展したことにより、リズムの娯楽としての性能が高いと言うことも出来ます。ストレス拍リズムから生まれた米国音楽の娯楽性能の高さは、以上のように音韻学的に見ても説明することが出来ます。
+
+## メタディヴィジョンについて
+
+## 3ⁿグルーヴ理論について
 
 ## 弱拍天動説と弱拍地動説
 
@@ -3658,11 +3876,22 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 移動しているのは、自分が足をおいている強拍だった ─── それに気付く瞬間はまるで、天動説の人々が太陽が動いていると思っていたものが、実は自分たちが立っている地球自身が動いていると気付く瞬間ととても似ています。
 
 
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">ストレス拍リズム（英語）のスイング ─── ベースが1/9早めのタイミングに移動しライドシンバルの8分弱拍が4分音符に対して5/9の位置に配置されている。また4分音符は全て1/9遅れている。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> (訂正版) <a href="https://t.co/QajecpWuqP">pic.twitter.com/QajecpWuqP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932739193438146682?ref_src=twsrc%5Etfw">June 11, 2025</a></blockquote></div>
+
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">モーラ拍リズム（日本語）のスイング ─── 俗に「頭重心」「縦乗り」という。ライドシンバルの4分音符が基準位置になっているため移動しない。ベースが1/32 遅めのタイミングに移動し遅れる等々、全ての打点が4分音符よりも後ろに遅れて配置され音量が小さい。 <a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/KMnIJYQXmC">pic.twitter.com/KMnIJYQXmC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1932139175647850918?ref_src=twsrc%5Etfw">June 9, 2025</a></blockquote></div>
+
+
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">欧米／東南アジアの交互に手を叩く「交互ルール」リズムに対して、真逆のルール「同時ルール」で歌う演歌。演歌のリズムの起源は中国にある。日本の演歌は（実は）中国で高い人気がある。<br><br>Credit : 蒋大为 - 北国之春 <a href="https://t.co/TtRu1Sfo52">https://t.co/TtRu1Sfo52</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/DsjR7NPhL4">pic.twitter.com/DsjR7NPhL4</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192825442021377?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> </div>
 
 
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">二葉百合子の『関東一本〆』<br><br>正統派演歌の語法<br>・ぴったりに合わせる強拍<br>・後ろにつく弱拍<br>・揺れる強拍<br><br>Credit : 二葉百合子 - 関東一本〆<a href="https://t.co/Pz122I6Hhv">https://t.co/Pz122I6Hhv</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/3M68PZ4gbP">pic.twitter.com/3M68PZ4gbP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192095406628864?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> </div>
+
+### モーラ拍リズムのリボ払い
+### シラブル拍リズムの月末締め一括払い
 
 ## 縦乗りのメカニズム
 ### モーラ拍ネイティブが陥りがちなリズム習癖
