@@ -7,7 +7,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 ---
 *※2025/06/16 11:16:35 更新*
 
-## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの
+## <ruby>多層弱拍基軸律動<rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの
 
 **多層弱拍基軸リズム理論** は、日本人語学学習者、日本人音楽家に向けて、日本人が何故グルーヴしないのかを理論的に説明し、どうしらグルーヴする様になるのかについて具体的な指針を与えます。
 
@@ -708,7 +708,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 
 
-日本（モーラ拍リズム）の音楽は西洋（ストレス拍リズム・シラブル拍リズム）の音楽と全く違うリズムによって構成されています。
+日本（モーラ拍リズム）の音楽は、西洋（ストレス拍リズム・シラブル拍リズム）の音楽と全く違うリズム構造を持っています。
 
 <div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/J1987W0Dsjk?si=aktGPxjwxNS3FvAh&amp;start=33" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
@@ -949,9 +949,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 <div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/5gZOYKHXwyQ?si=IU87MAlbWB343re6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
-## 多層弱拍先行について
+## <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>について
 
-拍には強拍と弱拍の2種類があることを見ていきます。そして強拍は必ずしも先に現れるわけではなく、しばしば弱拍が先に演奏されることを見ていきます。次に弱拍・強拍は、4分音符だけではなく全ての音価の音符に存在することを見てみます。各音価の弱拍強拍は、結果的に弱拍に多層構造を生み出します。この弱拍の多層構造に弱拍先行が加わると、リズムが頭合わせ構成から尻合わせ構成へと移行することを見てみます。
+拍には強拍と弱拍の2種類があることを見ていきます。そして強拍は必ずしも先に現れるわけではなく、しばしば弱拍が先に演奏されることを見ていきます。次に弱拍・強拍は、4分音符だけではなく全ての音価の音符に存在することを見てみます。各音価の弱拍強拍は、結果的に弱拍に多層構造を生み出します。この弱拍の多層構造に弱拍先行が加わると、リズムが**頭合わせ構造**から**尻合わせ構造**へと移行することを見てみます。
 
 ### 弱拍強拍とは
 #### １拍だけではリズムは生まれない
@@ -1225,7 +1225,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 この弱起の認識は、その人が母国語として話す言語に大きな影響を受けます。音楽を世界全体で見回してみると弱起が起こる頻度は非常に高いことに気付きます。音楽の種類によっては弱起の頻度は非常に高く、ほぼ毎回必弱起を演奏する場合もあります。弱起の頻度を更に踏み込んで調べてみると、実は逆に、日本だけが作曲や即興演奏で弱起をほとんど使わないということに気がつくでしょう。日本は音楽に弱起を使わないという非常に珍しい習慣を持っていることがわかります。 この習慣には理由があります ─── これは日本語が持っているモーラ拍リズムというリズム認識が引き起こす現象だからです。
 
-### 多層弱拍先行と尻合わせ
+### <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>と尻合わせ
 
 弱拍には多層性があります。そして多層の拍の上で弱拍先行が起こると**尻合わせ** という非常に興味深いリズム上の現象が起こります。この**尻合わせ**が、**音楽グルーヴの正体**です。この節ではまず多層性が何か、尻合わせとは何か、そして尻合わせが何故起こるのかそのメカニズムを見ていきます。
 
@@ -1233,28 +1233,28 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 モーラ拍リズムのリズム認識をここでは**頭合わせ**と、そしてストレス拍リズムのリズム認識を**尻合わせ** と呼びます。
 
 #### 尻合わせ
-海外の音楽・・・ジャズやR&B、ロックではしばしばメロディーの開始点がはっきり決まっておらず、メロディーは任意の地点から漠然と開始されます。開始点ははっきり決まっていませんが、終了地点は必ず決まっており、その地点で大きな音でアクセントを入れる手法がしばしば用いられます。このリズム構成の構造をここでは **尻合わせ** と呼びます。
+海外の音楽・・・ジャズやR&B、ロックではしばしばメロディーの開始点がはっきり決まっておらず、メロディーは任意の地点から漠然と開始されます。開始点ははっきり決まっていませんが、終了地点は必ず決まっており、その地点で大きな音でアクセントを入れる手法がしばしば用いられます。このリズム構造をここでは **尻合わせ** と呼びます。
 
 ![](attachments/Pasted%20image%2020250609002541.png)
 
-[尻合わせ](https://x.com/ats4u/status/1612304475347390466)
+[尻合わせ(x/twitter)](https://x.com/ats4u/status/1612304475347390466)
 
-尻合わせリズム構成では４分音符の演奏順序がしばしば１２３４ではなく２３４１という順序で演奏されます。この様に必ず最後が１になるようにメロディーが配置されます。１６ビートの曲では８分音符で数えることが一般的ですが、この場合では２３４５６７８１と同様に必ず１が最後になるようにメロディーが配置されます。
+尻合わせリズム構造では４分音符の演奏順序がしばしば１２３４ではなく２３４１という順序で演奏されます。この様に必ず最後が１になるようにメロディーが配置されます。１６ビートの曲では８分音符で数えることが一般的ですが、この場合では２３４５６７８１と同様に必ず１が最後になるようにメロディーが配置されます。
 
 これがいわゆる **グルーヴ**  の正体です。この尻合わせがあらゆる音価で同時に起こっているということが**グルーヴというリズム現象の本質**と言えます。
 
 #### 頭合わせ
 
-中国の伝統音楽や、日本・イランなどモーラ拍言語を母国語とする国々の音楽では、しばしば繰り返しのなかでメロディーの開始地点がはっきりと決まっており、そこで大きな音でアクセントを入れる手法がしばしば用いられます。ほとんどの場合、終了地点ははっきり決まっておらず、メロディーは漠然と終わります。このリズム構成の構造をここでは **頭合わせ** と呼びます。
+中国の伝統音楽や、日本・イランなどモーラ拍言語を母国語とする国々の音楽では、しばしば繰り返しのなかでメロディーの開始地点がはっきりと決まっており、そこで大きな音でアクセントを入れる手法がしばしば用いられます。ほとんどの場合、終了地点ははっきり決まっておらず、メロディーは漠然と終わります。このリズム構造をここでは **頭合わせ** と呼びます。
 
 ![](attachments/Pasted%20image%2020250609002708.png)
 
-[頭合わせ](https://twitter.com/ats4u/status/1612304530502451201)
+[頭合わせ(x/twitter)](https://twitter.com/ats4u/status/1612304530502451201)
 
-頭合わせリズム構成では、４分音符の演奏順序がしばしば１２３休という順序で演奏されます。この時４はしばしば演奏されずに休符が演奏されます。１６ビートの曲では「１２３休４５６休」（１２３休を２回繰り返し）や「１２３４５６休休」（１２３休を２倍に延長）という様に１２３休を変形した形を保ちます。
+頭合わせリズム構造では、４分音符の演奏順序がしばしば１２３休という順序で演奏されます。この時４はしばしば演奏されずに休符が演奏されます。１６ビートの曲では「１２３休４５６休」（１２３休を２回繰り返し）や「１２３４５６休休」（１２３休を２倍に延長）という様に１２３休を変形した形を保ちます。
 
 #### 多層拍構造での強拍先行
-頭合わせ・尻合わせリズム構成が生まれることには、はっきりした理由があります。メロディーのリズム構成が頭合わせになるか尻合わせになるかは、リズムが弱拍先行であるか強拍先行であるかによって決まります。
+頭合わせ・尻合わせリズム構造が生まれることには、はっきりした理由があります。メロディーのリズム構造が頭合わせになるか尻合わせになるかは、リズムが弱拍先行であるか強拍先行であるかによって決まります。
 
 以下で頭合わせ・尻合わせが起こるメカニズムを見ていきます。
 
@@ -1961,7 +1961,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを譜面と音で確認してみましょう。
 
-###### 💡実例＝ 弱拍先行→4分音符あり２分音符なし
+###### 💡実例＝弱拍先行→4分音符あり２分音符なし
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
 2分音符の弱拍先行＝なし
@@ -2014,7 +2014,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-###### 💡実例＝ 弱拍先行→4分音符あり＆２分音符あり
+###### 💡実例＝弱拍先行→4分音符あり＆２分音符あり
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
 2分音符の弱拍先行＝あり
@@ -2066,16 +2066,15 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-###### まとめ
+###### まとめ４分音符での尻合わせリズム
 
-この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。** これが２３４１リズムが出来上がるメカニズムです。
+この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。これが２３４１リズムが出来上がるメカニズムです。** 
 
-１から始まるリズムは、弱拍が先行することにより、１で終わるリズムへと形を変えるのです。  この１で終わるリズムのことを**尻合わせリズム**と呼びます。これに対して１で始まるリズムのことを**頭合わせリズム**と呼びます。
+１から始まるリズムは、弱拍が先行することにより、１で終わるリズムへと形を変えるのです。  この始まる場所が不定で１で終わるリズムのことを**尻合わせリズム**と呼びます。これに対して１で始まり終わりがないリズムのことを**頭合わせリズム**と呼びます。
 
-  - 1 〜 n の拍が存在した時
-    -  **1** で始まり **n** で終わる順序で演奏される→ **頭合わせ**
-    -  **2** で始まり **1** で終わる順序で演奏される→ **尻合わせ**
-
+- 1 〜 n の拍が存在した時
+  -  **1** で始まり **n** で終わる順序で演奏される→ **頭合わせ**
+  -  **2** で始まり **1** で終わる順序で演奏される→ **尻合わせ**
 
 この様にすると2分音符4分音符だけでなく、全音符／2全音符を含む考えうる全ての音符でこの現象が起こります。次に8分音符で見てみましょう。
 
@@ -2085,7 +2084,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 次のように８分音符が８つ並んでいる場合を考えてみます。
 
-###### 💡実例＝ 弱拍先行→8分音符なし
+###### 💡実例＝弱拍先行→8分音符なし
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝なし<br>4分音符の弱拍先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/ASYOxNChGr">pic.twitter.com/ASYOxNChGr</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905132335747545?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote></div>
 
@@ -2130,9 +2129,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 これを８分音符の弱拍を先行する形に並べ替えてみます。すると以下の様になります。
 
-###### 💡実例＝ 弱拍先行→8分音符あり
+###### 💡実例＝弱拍先行→8分音符あり
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">８分音符先行＝あり <a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/oHAMPjSVv9">pic.twitter.com/oHAMPjSVv9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951194208930521147?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">８分音符先行＝あり <a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/oHAMPjSVv9">pic.twitter.com/oHAMPjSVv9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951194208930521147?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -2174,9 +2173,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 これで弱拍が先行した形になりました。 しかし４分音符を重ねてみると違った様相が見えてきます。
 
-###### 💡実例＝ 弱拍先行→8分音符あり４分音符なし
+###### 💡実例＝弱拍先行→8分音符あり４分音符なし
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/iiSAX6NKMm">pic.twitter.com/iiSAX6NKMm</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905516039037201?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/iiSAX6NKMm">pic.twitter.com/iiSAX6NKMm</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905516039037201?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -2244,9 +2243,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 こうしてみてみると、4分音符は依然として強拍先行になっていることがわかります。 つまり4分音符として見たときでも弱拍先行にしなければ、全ての音価で弱拍先行になっていないと言えます。 次に4分音符に関しても弱拍が先行する様に変えたものを見てみましょう。
 
-###### 💡実例＝ 弱拍先行→8分音符あり４分音符あり
+###### 💡実例＝弱拍先行→8分音符あり４分音符あり
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/BFqRR2dANP">pic.twitter.com/BFqRR2dANP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905618157744183?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/BFqRR2dANP">pic.twitter.com/BFqRR2dANP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950905618157744183?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -2314,9 +2313,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 これで4分音符も弱拍先行になりました。しかしこれも再度2分音符を重ねると、実はこれもまだ強拍先行になっていることがわかります。
 
-###### 💡実例＝ 弱拍先行→8分音符あり４分音符あり2分音符なし
+###### 💡実例＝弱拍先行→8分音符あり４分音符あり2分音符なし
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符先行＝あり<br>4分音符先行＝あり<br>2分音符先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/Ls3K4Mrst3">pic.twitter.com/Ls3K4Mrst3</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951207274044678563?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符先行＝あり<br>4分音符先行＝あり<br>2分音符先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/Ls3K4Mrst3">pic.twitter.com/Ls3K4Mrst3</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951207274044678563?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -2404,9 +2403,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 ここで2分音符も先行するように並べ替えてみます。
 
-###### 💡実例＝ 弱拍先行→8分音符あり４分音符あり2分音符あり
+###### 💡実例＝弱拍先行→8分音符あり４分音符あり2分音符あり
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<br>2分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/DLIJh2aeHC">pic.twitter.com/DLIJh2aeHC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950906937073434775?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<br>2分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/DLIJh2aeHC">pic.twitter.com/DLIJh2aeHC</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950906937073434775?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -2492,13 +2491,20 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-###### まとめ
+###### まとめ8分音符での尻合わせリズム
 
 これで小節内の全ての音価が弱拍先行になりました。すると最初12345678と並んでいた8分音符が23456781という様に１が最後に来るように並び替わったことがわかります。 これが**23456781リズム**です。 これがいわゆる**横乗りリズム**の世界での8分音符の数え方です。この世界でも、8分音符の順番が小節中を回転し完全に一周回って１が終了地点に来る状態になったのです。
 
+この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。これが23456781リズムが出来上がるメカニズムです。** 
+
+
 ##### 16分音符での多重弱拍先行
 
-16分音符でも全く同じ事が言えます。 次の様に16分音符が並んでいた時を考えます。
+16分音符でも8分音符・4分音符・2分音符と全く同じ事が言えます。
+
+###### 💡実例＝弱拍先行→ 全音価でなし
+
+ まず次の様に16分音符が並んでいた時を考えてみます。
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">16分音符先行＝なし<br>8分音符先行＝なし<br>4分音符先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/FoCovKTkMf">pic.twitter.com/FoCovKTkMf</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951234518276247845?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
 
@@ -2566,6 +2572,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 これを16分音符に注目しながら弱拍先行に並べ替えてみます。
 
+###### 💡実例＝16分音符弱拍先行あり
+
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">16分音符先行＝あり<br>8分音符先行＝なし<br>4分音符先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/aKsMKJEqCf">pic.twitter.com/aKsMKJEqCf</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951234688900895125?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote></div>
 
 <table class="offbeat-onbeat-table">
@@ -2629,6 +2637,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
     </tr>
   </tbody>
 </table>
+
+###### 💡実例＝弱拍先行16分音符あり8分音符なし
 
 しかしこの場合も16分音符よりも1層大きな音価である8分音符から見ると、同様に実はまだ8分音符では強拍先行になっていることがわかります。
 
@@ -2734,6 +2744,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
+###### 💡実例＝弱拍先行16分音符あり8分音符あり
+
 これも4分音符でやった時と同じ様に、8分音符弱拍先行で並べ替えてみます。
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">16分音符先行＝あり<br>8分音符先行＝あり<br>4分音符先行＝なし<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/PVU4PZNGTG">pic.twitter.com/PVU4PZNGTG</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1951234864889352344?ref_src=twsrc%5Etfw">August 1, 2025</a></blockquote></div>
@@ -2838,6 +2850,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
+###### 💡実例＝弱拍先行16分音符あり8分音符あり4分音符なし
 これで8分音符・16分音符共に弱拍先行になりました。
 
 しかしこれも4分音符の世界から見ると強拍先行になっていることがわかります。
@@ -2971,6 +2984,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
+###### 💡実例＝弱拍先行16分音符あり8分音符あり4分音符あり
+
  8分音符16分音符で見た時に弱拍先行になっていても、4分音符では強拍先行になっていることがわかります。 そこで4分音符も弱拍先行として並べ替えてみます。
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">16分音符の弱拍先行＝あり<br>8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/Sn26EvIqtp">pic.twitter.com/Sn26EvIqtp</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950907402611732797?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote> </div>
@@ -3000,7 +3015,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
     </tr>
   </tbody>
 </table>
-
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -3102,9 +3116,12 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-これで4分音符も弱拍先行になりました。
 
-しかしこれも今までと同様に2分音符で見ると依然として強拍先行になっていることがわかります。  次の表を見て下さい。
+###### 💡実例＝弱拍先行16分音符あり8分音符あり4分音符あり2分音符なし
+
+これで4分音符も弱拍先行になりました。 しかしこれも今までと同様に2分音符で見ると依然として強拍先行になっていることがわかります。  次の表を見て下さい。
+
+<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">16分音符の弱拍先行＝あり<br>8分音符の弱拍先行＝あり<br>4分音符の弱拍先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/Sn26EvIqtp">pic.twitter.com/Sn26EvIqtp</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950907402611732797?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote> </div>
 
 <table class="offbeat-onbeat-table">
   <tbody>
@@ -3251,6 +3268,8 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
     </tr>
   </tbody>
 </table>
+
+###### 💡実例＝弱拍先行16分音符あり8分音符あり4分音符あり2分音符あり
 
 2分音符も弱拍先行として並べ替えると以下の様になります。
 
@@ -3402,15 +3421,37 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-これで小節内の全ての音価が弱拍先行になりました。すると最初に `[ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]` のように並んでいた8分音符が `[ 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1 ]` という様に１が最後に来るように並び替わったことがわかります。 これが23456781リズムです。 これがいわゆる横乗りリズムの世界での8分音符の数え方です。この世界でも、8分音符の順番が小節中を回転し完全に一周回って１が終了地点に来る状態になったのです。
 
-##### まとめ
+##### まとめ16分音符での多重弱拍先行
 
-強拍先行で1から始まっていたリズムが、弱拍先行に移行することで１で終わるリズムに変化することを見てきました。  この１で終わるリズムが**尻合わせリズム**です。これに対して１で始まるリズムが **頭合わせリズム**です。
+これで小節内の全ての音価が弱拍先行になりました。すると最初に `[ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]` のように並んでいた8分音符が `[ 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1 ]` という様に１が最後に来るように並び替わったことがわかります。 この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。**   これがいわゆる横乗りリズムの世界での16分音符の数え方です。この世界でも16分音符の順番が小節中を回転し完全に一周回って１が終了地点に来る状態になったのです。
+
+#### 尻合わせリズム構造とは
+
+この様に、**全ての音価で弱拍が先行すると結果として、全ての音価の音符の序数の列は、必ず１が最後に来る様に回転します。これが弱拍先行で尻合わせが構成されるメカニズムです。**
+
+これまで全ての音価で、強拍先行で1から始まっていたリズムが、弱拍先行に移行することで１で終わるリズムに変化することを見てきました。  この始まりがなく１で終わるリズムが**尻合わせリズム**です。これに対して１で始まり終わりがないリズムを **頭合わせリズム**です。
+
+- 1 〜 n の拍が存在した時
+  -  **1** で始まり **n** で終わる順序で演奏される→ **頭合わせ**
+  -  **2** で始まり **1** で終わる順序で演奏される→ **尻合わせ**
+
+これまで 4分音符では**2341リズム** 、8分音符では **23456781リズム** などという呼び方をしてきましたが、16分音符で 2,3,4,5,6,7,8,9,10,11,12,13,14,15,1リズムと呼ぶのは長くて読みにくいという問題があります。
+
+更に、このリズム構造は小節の長さだけあります。複数の小節にまたがることもあります。或いは譜面に書かれない細かな音符について起こることもあります。
+
+なのでこの２で始まり１で終わる順序で演奏されるリズム構造のことを**尻合わせリズム構造**と呼びます。
+
 
 ### 弱拍が属する音価の判定
 
-もしもリズムの拍に弱拍と強拍の2種類がなかったら、最初に聴こえた拍は必ず1種類しか存在しないため、何も判断する必要はありません。しかし分裂拍律動で構成される音楽では、拍は弱拍と強拍の2種類に区別されます。この時もし強拍と判定するならば、その可能性は１つしかありませんが、しかしその拍を弱拍と判定するなら、その弱拍はどの音価の弱拍なのかを区別して判定する必要があります。つまり音楽が弱拍を前提しているからこそ、その音楽を耳にする人は、一定時間内に**その弱拍が属する音価を判定**する必要が生じます。これがリズムの面白さの本質に横たわっています。このことをより詳細に考察してみます。
+もしもリズムの拍に弱拍と強拍の2種類がなかったら、最初に聴こえた拍は必ず1種類しか存在しないため、何も判断する必要はありません。しかし分裂拍律動で構成される音楽では、拍は弱拍と強拍の2種類に区別されます。この時もし強拍と判定するならば、その可能性は１つしかありませんが、しかしその拍を弱拍と判定するなら、その弱拍はどの音価の弱拍なのかを区別して判定する必要があります。つまり音楽が弱拍を前提しているからこそ、その音楽を耳にする人は、一定時間内に**その弱拍が属する音価を判定**する必要が生じます。これがリズムの面白さの本質に横たわっています。
+
+この時「当然強拍だろう」と感じる人々と、「当然弱拍だろう」と感じる人々の二通りが存在することが知られています。 何故「当然強拍だろう」と感じる人と、或いは「当然弱拍だろう」と感じる人に分かれるのか、その理由に関しては、その人の弱拍先行を当然と考える感覚が、その人が母語として話している言語の大きな影響を受けているからだということをこれまで見てきました。
+
+ここでは感覚が分かれる理由ではなく、何故弱拍が先行する音楽の方が効果的に聴こえるのかを説明したいと思います。 米国音楽は何故世界的に受け入れられているのか ─── その理由はこれまで米国の覇権と結びつけて語られることが多かったのではないでしょうか。 何故音楽は米国発なのか。それは米国音楽のリズムが、シラブル拍よりも複雑なストレス拍に基づいているからであり、更に米国英語が、アフリカ・南米・アジアの各種言語の影響を受けて更に複雑化したことによって、言語自体が持つリズムの娯楽性能が高いからだということが、音韻学的な視点から説明できます。
+
+何故リズムは面白いのか ─── このことをここではより詳細に考察してみます。
 
 #### 弱拍の音価を判定するアルゴリズム
 
@@ -3437,11 +3478,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 ![](attachments/beat-orientation-explained-4th-ws.png)
 
 このように『**強拍**が先行するのが当然』と考える人が採譜した結果と『**弱拍**が先行するのが当然』と考える人が採譜した結果は、大きく異なります。
-
-
-この時「当然強拍だろう」と感じる人々と、「当然弱拍だろう」と感じる人々の二通りが存在することが知られています。 何故その様な感覚上の違いが生まれるのでしょうか。 何故ある人が「当然強拍だろう」と感じるか、或いは「当然弱拍だろう」と感じるのでしょうか。 この理由を分析してみると、その感覚の違いは、その人が母語として話している言語の大きな影響を受けることがわかります。
-
-
 
 
 
@@ -3513,24 +3549,35 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 #### 先行する強拍は安定感を生み出す
 逆に先行する強拍は、その可能性が必ず１拍目強拍に限定される為、考えるべき可能性の数が大幅に減少する結果となります。これにより先行する強拍は、それを聴く人に安定感をもたらします。
 
+#### 先行する弱拍が長ければ長いほど躍動感が増す
+その音楽のリズムに於いて、先行する弱拍が長ければ長いほど躍動感が増すということがあります。これは弱起（弱拍先行）の重要な性質のひとつです。
+
+先行する弱拍の長さが8分音符、4分音符、2分音符…と長くなるに連れて、演奏は困難になっていきます。特に即興演奏上で長い弱起を演奏する為には、曲全体の構成をよく理解した上で将来起こることを予想しながら、かつ予想外に発生した出来事を加味した上で予想を修正しながら演奏する必要があります。 弱起が長くなればなるほど、即興演奏に求められる構成力を含めた高度な作曲能力が必要となります。
+
+曲全体の構成を把握しつつ、曲の細部に存在する弱起を正確に把握する為に作られた、音楽認識の方法論が **声出しオフビートカウント**です。
+
+#### 先行する弱拍が完全になくなると音楽から躍動感が完全になくなる
+もしその音楽から弱起が完全になくなると、その音楽から躍動感が失われます。これも弱起（弱拍先行）の重要な性質のひとつです。
+
+躍動感はダンスミュージックだけでなく、バラードやミドルテンポなど、全ての音楽に求められる音楽の基本的な要素です。音楽から躍動感が失われれば、それはダンスミュージックとしての機能を失うだけでなく、バラードの持っている情緒感や落ち着きのある空間も失われ、ミドルテンポの音楽が持っている静かな動きのある楽しさも失われます。
+
+つまりテンポのある音楽では、弱起は必ず存在し、決してなくなることはありません。弱起の完全な消失は**音楽的死**を意味します。
+
+#### 先行する弱拍が短ければ短いほど抑圧感が高くなる
+その音楽のリズムに於いて、先行する弱拍が短ければ短いほど強い抑圧のある緊張感が増すという要素があります。
+
+前節で弱起が完全になくなる事は**音楽的死**だということを述べました。 つまり先行する弱拍が短くなっていけばいくほど、その音楽は **音楽的死** と直面することになり、一瞬の気の緩みが即座に**音楽的死**に直結する極めて高い緊張感を伴う抑圧感が生まれます。
+
+音楽を演奏するなかで、その微かな弱起の存在を維持し続ける為には、高い集中力が必要となります。
+
+この様な音楽中に存在する微細な弱起の存在を間違いなく確実に認識しつづける音楽認識の方法論として考案されたのが **声出しオフビートカウント**です。
+
 #### 弱起が先行する音楽を理解する難しさ
 **弱拍が属する音価の判定**が出来ないと、その音楽が持っているリズムの全体像を理解する事ができなくなります。**弱拍が属する音価の判定** が弱拍が先行する音楽の理解の難しさの根底に存在します。つまり **弱拍が属する音価の判定** を素早く行う訓練を行うことで、弱拍が先行する音楽の理解及び演奏の改善を行うことが出来ます。
 
-**弱拍が属する音価の判定**の訓練として考え出された方法が**声出しオフビートカウント練習法**です。
+**弱拍が属する音価の判定** の訓練として考え出された方法が **声出しオフビートカウント練習法**です。
 
 
-
-強拍が先に来るように音符を認識すると、これが強拍先行になることを説明しました。
-
-#### ４分音符の弱拍先行
-
-#### 2分音符の弱拍先行
-
-#### ４分音符と８分音符で同時に弱拍先行
-
-モーラ拍リズムを母語として話す人は、ストレス拍リズムを母語として話す人が演奏するリズムを強弱リズム解釈として１つずれた形で認識します。
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">バダムツー（英語での「ちゃんちゃん」のような効果音） Credit : <a href="https://t.co/1pMfDuY1S3">https://t.co/1pMfDuY1S3</a> <a href="https://t.co/qdcGm8P81M">pic.twitter.com/qdcGm8P81M</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1928811162042507281?ref_src=twsrc%5Etfw">May 31, 2025</a></blockquote> </div>
 
 #### 弱強リズム解釈
 
