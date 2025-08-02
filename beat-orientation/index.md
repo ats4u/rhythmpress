@@ -1,5 +1,5 @@
 ---
-title: 多層弱拍基軸リズム理論
+title: <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論
 created: 2025-05-24T00:17
 tags:
   - foo
@@ -7,7 +7,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 ---
 *※2025/06/16 11:16:35 更新*
 
-## 多層弱拍基軸リズム理論で得られるもの
+## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの
 
 **多層弱拍基軸リズム理論** は、日本人語学学習者、日本人音楽家に向けて、日本人が何故グルーヴしないのかを理論的に説明し、どうしらグルーヴする様になるのかについて具体的な指針を与えます。
 
@@ -134,7 +134,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 [最初に聴いた音が１拍目強拍に聴こえる症候群](https://oka-ats.blogspot.com/2021/01/oka01-ubjkgrbexmeuwzjj.html)  によって日本人が英語を聞くと、単語の区切り位置が完全に１つずれた状態で頭の中で結像する結果となって観察されます。
 
-### 強拍先行の日本語のリズム 🇯🇵
+### 強拍先行の日本語のリズム
 
 日本語を母国語とする人は、**強弱を自然と感じ弱強を不自然に感じる**という認識の偏りを持っています。 また日本語で演奏される音楽の拍の順序には『強弱』のパターンしか現れません。日本に生まれて日本の音楽だけを聴いていると、このリズムの偏りに気付く機会は全くありません。よって日本語話者の大半は、このリズムの偏りに全く気付くことがなく日々を過ごしています。このリズム偏りは日本社会の大きな盲点です。 この盲点は人々から全く気付かれることなく、社会のなかで隠然と存在し続けています。
 
@@ -146,7 +146,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 このモーラ拍リズムがこの強弱リズム認識が起こるメカニズムの根底に存在します。このモーラ拍リズムについて以降の節で見ていきます。
 
-### 弱拍先行のフランス語🇫🇷スペイン語🇪🇸や英語のリズム🇺🇸 
+### 弱拍先行のフランス語スペイン語英語のリズム
 
 英語を母国語とする人は、**強弱を自然と感じ弱強を不自然に感じる**という認識の偏りを持っていません。 彼らは **弱強と強弱の両方とも自然**に感じており、音楽にも『弱強』『強弱』の両方のパターンが現れます。
 
@@ -154,7 +154,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 このシラブル拍リズム、ストレス拍リズムについてを以降の節で見ていきます。
 
-## 拍リズムと言語特有のリズム認識
+## 音韻学的拍リズムと音楽的グルーヴ
 
 日本人が演奏する音楽のリズムは、海外の人が演奏する音楽と比べて何かが違います。この違いは、海外の人々が弱拍が強拍の前に来ていると認識している事に対し、日本人は強拍が弱拍の前に来ていると認識している事が原因として起こります。この認識の違いは言語自体が持っているリズム認識の違いから生まれます。このリズム認識の事を音韻学(Phonetics)で**拍リズム**(timed-rhythm)と呼びます。
 
@@ -176,13 +176,13 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 | ラオ語    | テルグ語  |        |
 | ノルウェー語 |       |        |
 
-### シラブル拍リズム🇫🇷🇪🇸の特徴
+### シラブル拍リズムの特徴
 世界中の大半の言語はシラブル拍リズムだと言われています。シラブルと呼ばれる時間単位で発音が構成されていることがシラブル拍リズムの特徴です。各シラブルはほとんど同じ長さで発音されます。シラブルは前節で述べたモーラとほとんど同じ時間単位ですが、１つのシラブル内に多重子音・多重母音・末子音が現れることが特徴です。またリエゾンと言って、末子音が次のシラブルにつながることが特徴になっています。詳しくは後述します。
 
-### ストレス拍リズム🇩🇪🇺🇸🇬🇧の特徴
+### ストレス拍リズムの特徴
 主に英語とドイツ語で見られる拍リズムです。ほとんどの特徴はシラブル拍リズムと共通ですが、シラブルの長さが不定で伸縮するという大きな違いがあります。ストレス拍では、シラブルが **強拍**・**弱拍** (ストレス拍・非ストレス拍) に分かれており、一定の時間毎に強拍を配置し、強拍ではないすべての弱拍は強拍の 間に適切に分散されたり、省略されたり、完全に脱落したりします。この弱拍の省略がストレス拍リズムの大きな特徴です。詳しくは後述します。
 
-### モーラ拍リズム🇯🇵の特徴
+### モーラ拍リズムの特徴
 ほぼ日本語だけで見られる拍リズムで、完全なモーラ拍リズム言語は日本語しかないと言われています。モーラと呼ばれる時間単位で発音が構成されていることがモーラ拍リズムの特徴です。各モーラはほとんど同じ長さで発音されます。モーラは次で述べるシラブルとほとんど同じですが、末子音や多重子音がないことが特徴です。二重子音・末子音が必要なときは、それぞれの子音にモーラ割り当てるという特徴があります。 詳しくは後述します。
 
 ### 日本人が英語が苦手になる原理
@@ -193,10 +193,10 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 シラブル拍という段階を経ずに一足飛びにストレス拍を習得する ─── この難しさが英語の習得の難しさの根源にあります。
 
-### リズム認識はリズム拍によって異なる
+### リズム認識は拍リズムによって異なる
 日本語のリズム認識のことを学術的に**モーラ拍リズム**と呼びます。世界的に見てモーラ拍リズムを持った言語は日本語しかありません。一方英語のリズム認識のことを学術的に**ストレス拍リズム**と呼びます。ストレス拍リズムの言語は英語だけではなく、ロシア語やドイツ語など世界的に見ると英語以外にもたくさん存在します。
 
-### シラブル拍リズム🇫🇷🇪🇸の詳細
+### シラブル拍リズムの詳細
 
 **シラブル拍リズム** （syllable-timed rhythm）とは、各シラブル（音節）がほぼ一定の長さで均等に発音される言語のリズムのことを指します。代表的なシラブル拍リズム言語としては、スペイン語、イタリア語、フランス語、タイ語などが挙げられます。  以下でこのシラブルの仕組みについて見ていきましょう。
 
@@ -260,7 +260,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 <span style="color:silver">※ 実例を追加する。</span>
 
-### ストレス拍リズム🇩🇪🇺🇸🇬🇧の詳細
+### ストレス拍リズムの詳細
 ストレス拍リズム（stress-timed rhythm）は、シラブル拍リズム（syllable-timed rhythm）から分岐して発展したと考えられているリズム認識の形式です。基本的な性質はストレス拍リズムと共通ですが、シラブル拍リズムにはないいくつかの大きな違いがあります。どちらのリズムも発音に一定のリズム感を作り出す為の拍を持っていますが、その拍の置き方に大きな違いがあります。
 
 #### ストレス拍リズムとシラブル拍リズムの違い
@@ -535,7 +535,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 <span style="color:silver">※ 実例を追加する。</span>
 
-### モーラ拍リズム🇯🇵の詳細
+### モーラ拍リズムの詳細
 
 モーラ拍は、シラブル拍、及びストレス拍とは全く違った特徴を持っています。
 
@@ -1733,7 +1733,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 そして弱拍の先行は**常に複数の音価の上で同時に起こる**のです。
 
-
 ##### 4分音符の場合
 
 前節で4分音符での弱拍先行のグラフを見ました。その4分音符弱拍先行のグラフの上にそれぞれの4分音符に対応する2分音符のグラフを重ねてみると興味深いことがわかるのです。
@@ -1860,7 +1859,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   </tbody>
 </table>
 
-
 ##### 4分音符での多重弱拍先行
 
 しかし４分音符の弱拍先行だけでは、完全な横乗りリズムにはなりません。上に対応する2分音符のグラフを重ねてみると、２分音符で見たときには依然として強拍が先行していることがわかります。次のグラフを御覧下さい。
@@ -1962,7 +1960,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 4分音符の順番がまる一周回転した状態になりました。このリズムを２３４１リズムと呼びます。これがいわゆる**横乗りリズム**の世界の数の数え方です。横乗りリズムの世界では4分音符の順序が小節内を回転し完全に一周回って１が終了地点に来る状態になっています。
 
 このことを譜面と音で確認してみましょう。
-
 
 ###### 💡実例＝ 弱拍先行→4分音符あり２分音符なし
 
@@ -2087,7 +2084,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 8分音符で弱拍先行を考えた場合も、4分音符で考えた場合と同様に、最小の音価で弱拍が先行すると
 
 次のように８分音符が８つ並んでいる場合を考えてみます。
-
 
 ###### 💡実例＝ 弱拍先行→8分音符なし
 
@@ -3428,7 +3424,26 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 ![](attachments/beat-orientation-explained-4th-with-caption.png)
 
-しかし現実の音楽の音符は、この様に譜面上に行儀よく並んでいる訳ではありません。小節から逸脱して不規則に並んでいます。 この複雑なリズムを人間が聴いた時に、人間がどう解釈しているかを考えます。
+
+ここでひとつの大きな問題が生まれます。もしも拍に強拍と弱拍の2種類が存在するとしたら、音楽の中で唐突に聴こえたある「最初の拍」は、弱拍なのでしょうか、それとも強拍なのでしょうか。
+
+もしも強拍が先行すると考えたとすると、その解釈は次のようになるでしょう。
+
+![](attachments/beat-orientation-explained-4th-sw.png)
+
+
+もしも弱拍が先行すると考えたとすると、その解釈は次の様になるでしょう。
+
+![](attachments/beat-orientation-explained-4th-ws.png)
+
+このように『**強拍**が先行するのが当然』と考える人が採譜した結果と『**弱拍**が先行するのが当然』と考える人が採譜した結果は、大きく異なります。
+
+
+この時「当然強拍だろう」と感じる人々と、「当然弱拍だろう」と感じる人々の二通りが存在することが知られています。 何故その様な感覚上の違いが生まれるのでしょうか。 何故ある人が「当然強拍だろう」と感じるか、或いは「当然弱拍だろう」と感じるのでしょうか。 この理由を分析してみると、その感覚の違いは、その人が母語として話している言語の大きな影響を受けることがわかります。
+
+
+
+
 
 * １．テンポのある曲では拍が１拍しかないということはありえない。
     * 何故なら、拍が一拍しかなかった場合、それはリズムとして成立せずテンポも存在しないからである。
@@ -3503,139 +3518,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 **弱拍が属する音価の判定**の訓練として考え出された方法が**声出しオフビートカウント練習法**です。
 
-### テンプレート
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【グルーヴするリズムの音価別・弱拍先行強拍先行合わせ全パターン（スレッド）】 <a href="https://t.co/XeWJ25cU0l">pic.twitter.com/XeWJ25cU0l</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950902959245807774?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950903671266623988?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">2分音符の弱拍先行＝あり #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904053028040845?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904200105480328?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904332750393729?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝なし 2分音符の弱拍先行＝なし #グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904501377946028?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
-2分音符の弱拍先行＝なし
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904653664952572?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">4分音符の弱拍先行＝あり
-2分音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950904900134818064?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝なし
-4分音符の弱拍先行＝なし
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950905132335747545?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝なし
-4分音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950905265894650080?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝なし
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950905516039037201?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950905618157744183?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-─── の鏡像リズム（頭合わせ変換）
-2分音符の弱拍先行＝あり
-全音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950906200335466863?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">掛け合いパターン
-
-ピアノ：
-8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-2分音符の弱拍先行＝あり
-
-オルガン：
-8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-2分音符の弱拍先行＝あり
-全音符の弱拍先行＝あり
-
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950906694822920522?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-2分音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950906937073434775?ref_src=twsrc%5Etfw"></a></blockquote></div>
- 
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-2分音符の弱拍先行＝あり
-全音符の弱拍先行＝あり
-（鏡像リズム＝頭合わせ変換）
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950907194045550752?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">16分音符の弱拍先行＝あり
-8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950907402611732797?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560">16分音符の弱拍先行＝あり
-8分音符の弱拍先行＝あり
-4分音符の弱拍先行＝あり
-
- ─── 鏡像リズム（頭合わせ変換）
-2分音符の弱拍先行＝あり
-全音符の弱拍先行＝あり
-#グルーヴは弱拍が先<a href="https://twitter.com/ats4u/status/1950907627015172121?ref_src=twsrc%5Etfw"></a></blockquote></div>
-
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【弱拍先行＝音価乗り換え】<br>前半<br>８分音符先行＝あり<br>４分音符先行＝なし<br>後半<br>８分音符先行＝あり<br>４分音符先行＝あり<a href="https://twitter.com/hashtag/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%B4%E3%81%AF%E5%BC%B1%E6%8B%8D%E3%81%8C%E5%85%88?src=hash&amp;ref_src=twsrc%5Etfw">#グルーヴは弱拍が先</a> <a href="https://t.co/TDFe9uOjhV">pic.twitter.com/TDFe9uOjhV</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1950954192744714629?ref_src=twsrc%5Etfw">July 31, 2025</a></blockquote>
-
 
 
 強拍が先に来るように音符を認識すると、これが強拍先行になることを説明しました。
-
-これを4分音符上で行うと次のようになります。
-
-![](attachments/beat-orientation-explained-4th-sw.png)
-
-これを弱拍が先に来るように認識すると次の様になります。
-
-![](attachments/beat-orientation-explained-4th-ws.png)
-
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の強拍先行・基本パターン <a href="https://t.co/COldk5IJUx">pic.twitter.com/COldk5IJUx</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703203379548193?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符の弱拍先行・基本パターン <a href="https://t.co/VVSuuaxet9">pic.twitter.com/VVSuuaxet9</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1948703051340284302?ref_src=twsrc%5Etfw">July 25, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の弱拍先行（シラブル拍リズム／ストレス拍リズム）<a href="https://t.co/GQwo8b3NOs">pic.twitter.com/GQwo8b3NOs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024049505673559?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">8分音符の強拍先行（モーラ拍リズム）<a href="https://t.co/sxZbhBf0oP">pic.twitter.com/sxZbhBf0oP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024220717265090?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の弱拍先行（ストレス拍リズム）<a href="https://t.co/YOsxEiurjc">pic.twitter.com/YOsxEiurjc</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024378947383703?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符の強拍先行（モーラ拍リズム・シラブル拍リズム）<a href="https://t.co/nm7sOtEMLs">pic.twitter.com/nm7sOtEMLs</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024526159065266?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符及び8分音符の弱拍先行（ストレス拍リズム）<a href="https://t.co/bao2f19Tbb">pic.twitter.com/bao2f19Tbb</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024709320126788?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符及び8分音符の強拍先行（モーラ拍リズム）<a href="https://t.co/emtb3pwkcD">pic.twitter.com/emtb3pwkcD</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944024971963244620?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符、4分音符及び8分音符の弱拍先行（英語などのストレス拍リズム）<a href="https://t.co/xYQj8CQPJX">pic.twitter.com/xYQj8CQPJX</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944025277438509100?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">2分音符、4分音符及び8分音符の強拍先行（日本語などのモーラ拍リズム）<a href="https://t.co/tnw3Sn6aE8">pic.twitter.com/tnw3Sn6aE8</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944025500139286791?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符、8分音符及び16分音符の弱拍先行（英語などのストレス拍リズム） ( Can&#39;t Hide Love / Earth, Wind &amp; Fire ) <a href="https://t.co/z93F8mmjU7">pic.twitter.com/z93F8mmjU7</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944026314014630346?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote></div>
-
-<div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">4分音符、8分音符及び16分音符の強拍先行（日本語などのモーラ拍リズム）( モーラ拍リズムの頭合わせリズム認識を適用した Can&#39;t Hide Love / Earth, Wind &amp; Fire ) <a href="https://t.co/Nx5G8rBc4f">pic.twitter.com/Nx5G8rBc4f</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1944026780706521146?ref_src=twsrc%5Etfw">July 12, 2025</a></blockquote> </div>
-
-
-![](attachments/beat-offset-offset-0.png)
-
-#### ８分音符の弱拍先行
-
-![](attachments/beat-offset-4-8-offset-0.png)
-
-![](attachments/beat-offset-4-8-offset-2.png)
 
 #### ４分音符の弱拍先行
 
