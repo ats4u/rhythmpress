@@ -3850,7 +3850,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このように<ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>は、ストレス拍リズムという英語・ドイツ語で特有な言語上のリズムが生み出したリズムでした。それが米国で南米やアフリカの各種民族音楽と混ざり合うことでより複雑化し発展したことにより、リズムの娯楽としての性能が高いと言うことも出来ます。ストレス拍リズムから生まれた米国音楽の娯楽性能の高さは、以上のように音韻学的に見ても説明することが出来ます。
 
-## メタディヴィジョン理論にとは
+## メタディヴィジョン理論とは
 
 これまで「ディヴィジョン（４分音符の拍）」と、ディヴィジョンを更に分割して出来る「サブディヴィジョン」に対して弱拍先行と多層を適用するとどうなるかを見てきました。
 
@@ -3902,10 +3902,10 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">二葉百合子の『関東一本〆』<br><br>正統派演歌の語法<br>・ぴったりに合わせる強拍<br>・後ろにつく弱拍<br>・揺れる強拍<br><br>Credit : 二葉百合子 - 関東一本〆<a href="https://t.co/Pz122I6Hhv">https://t.co/Pz122I6Hhv</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/3M68PZ4gbP">pic.twitter.com/3M68PZ4gbP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192095406628864?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> </div>
 
-### モーラ拍リズムのリボ払い
-### シラブル拍リズムの月末締め一括払い
 
 ## 縦乗りのメカニズム
+
+
 ### モーラ拍ネイティブが陥りがちなリズム習癖
 
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">縦乗りと横乗りの違いを完全に把握した。縦乗り解釈する時に音符の位置がずれる。これがいわゆる『日本人の頭重心リズム』のメカニズムだ。<br><br>縦乗り（モーラ拍リズム）<br>横乗り（ストレス拍リズム）<a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/o3RILE8EMy">pic.twitter.com/o3RILE8EMy</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1930932283294544307?ref_src=twsrc%5Etfw">June 6, 2025</a></blockquote></div>
@@ -3962,10 +3962,12 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 強拍でも弱拍でもない単独の音符が現れてしまう ─── これがモーラ拍リズム（日本語）話者が持っている１つ目の盲点です。
 
+### 拍リズムによって頭合わせ尻合わせの違いが生まれるメカニズム
+#### モーラ拍リズムのリボ払い
+#### シラブル拍リズムの月末締め一括払い
+
 ### 桃太郎さん現象について
 ### 最初に聴こえた拍が１拍目強拍に聞こえる症候群について
-
-
 
 <!--
 盆踊り・マクドナルド
