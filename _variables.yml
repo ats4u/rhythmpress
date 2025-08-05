@@ -1,0 +1,11 @@
+version: 1.2
+keyword:
+  beat-orientation: <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>
+
+email:
+  info: info@example.com
+  support: support@example.com
+
+engine:
+  jupyter: "[Jupyter](https://jupyter.org)"
+  knitr: "[Knitr](<https://yihui.name/knitr>)"
