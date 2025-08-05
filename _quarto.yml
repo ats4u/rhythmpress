@@ -10,7 +10,7 @@ project:
 
 website:
   title: "律動図鑑(リズムペディア)"
-  description: "グルーヴを科学する律動図鑑（リズムペディア）"
+  description: "グルーヴを科学する律動図鑑〜リズムペディア"
   site-url: "https://rhythmpedia.com/"
 #  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
 #  announcement:
@@ -36,6 +36,18 @@ website:
         contents:
           - text: ホーム
             href: index.qmd
+          - section: "オフビートカウント理論"
+            contents:
+              - ./tatenori-theory/index.md
+              - ./beat-orientation/index.md
+              - ./metadivision/index.md
+              - ./three-n-rhythm/index.md
+              - ./distributed-groove-theory/index.md
+              - ./offbeat-count-theory/index.md
+              - ./practical-offbeat-count/index.md
+              - ./polyrhythm/index.md
+              - ./influence-of-japanese-language-on-cognition/index.md
+
 #      - section: "縦乗り理論"
 #        href: tatenori-theory/
 #        contents:
