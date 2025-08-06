@@ -30,44 +30,26 @@ website:
   sidebar:
     style: "docked"
     search: true
+    logo: /attachments/rhythmpedia-logo-dark.png
     contents:
       - section: "律動図鑑(リズムペディア)"
         href: index.qmd
         contents:
-          - text: ホーム
+          - text: トップ
             href: index.qmd
-          - section: "オフビートカウント理論"
-            contents:
-              - ./tatenori-theory/index.md
-              - ./beat-orientation/index.md
-              - ./metadivision/index.md
-              - ./three-n-rhythm/index.md
-              - ./distributed-groove-theory/index.md
-              - ./offbeat-count-theory/index.md
-              - ./practical-offbeat-count/index.md
-              - ./polyrhythm/index.md
-              - ./influence-of-japanese-language-on-cognition/index.md
-
-#      - section: "縦乗り理論"
-#        href: tatenori-theory/
-#        contents:
-#          - tatenori-theory/index.md
-#          - tatenori-theory/tatenori-to-reigi.md
-#          - tatenori-theory/tatenori-no-gogen.md
-      - section: "統合グルーヴ理論"
-#        href: offbeat-count-theory/about.md
+      - section: "オフビートカウント理論"
         contents:
           - ./tatenori-theory/index.md
-          - ./offbeat-count-theory/index.md
           - ./beat-orientation/index.md
-          - ./phonetics/index.md
-          - ./metadivision/index.md
-          - ./three-n-rhythm/index.md
-          - ./polyrhythm/index.md
-#      - section: "エッセイ"
-#        href: essays/*.md
-#    logo: /attachments/rhythmpedia-header5v2.png
-    logo: /attachments/rhythmpedia-logo-dark.png
+#          - ./metadivision/index.md
+#          - ./three-n-rhythm/index.md
+          - ./distributed-groove-theory/index.md
+          - ./offbeat-count-theory/index.md
+#          - ./practical-offbeat-count/index.md
+#          - ./polyrhythm/index.md
+          - ./tatenori-and-psychology/index.md
+#          - ./mechanism-behind-tatenori/index.md
+#          - ./influence-of-japanese-language-on-cognition/index.md
 format:
   html:
     theme:
