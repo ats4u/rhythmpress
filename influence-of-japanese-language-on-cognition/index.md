@@ -17,3 +17,4 @@ tags:
 | 音楽 | 最初に表拍を演奏し、裏拍の位置が定まらない。<br>拍を同時に演奏する。 | 必ず裏拍を先に演奏し、表拍で止まる。<br>拍を互い違いに演奏する。 |
 |      |                                                                      |                                                                  |
 
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">リボ払いは世界的に一般的なシステムだが日本だけで独特な問題を引き起こしていると言う。これも日本語特有な認知バイアスが影響している可能性が高い。</p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1934837338930336088?ref_src=twsrc%5Etfw">June 17, 2025</a></blockquote> 
