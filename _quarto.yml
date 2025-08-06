@@ -6,7 +6,7 @@ project:
     port: 5150
     browser: false
   resources:
-    - ads.txt
+    - Ads.txt
 
 website:
   title: "律動図鑑(リズムペディア)"
