@@ -37,7 +37,7 @@ def extract_ruby_base(text):
 
 
 
-def split_qmd(input_file):
+def split_qmd( input_file, lang_id ):
     input_path = Path(input_file)
     base_dir = input_path.parent
     input_text = input_path.read_text(encoding='utf-8')
@@ -91,6 +91,11 @@ def split_qmd(input_file):
         sections.append((h2_title, h2_id, h2_description ))
         print(f"✅ Wrote: {section_path}")
 
+    # Write combined index
+    index_dir = base_dir / f"{lang_id}"
+    index_dir.mkdir(exist_ok=True)
+    index_file = index_dir / "index.qmd"
+
     # Build index.qmd
     index_lines = []
     if preamble:
@@ -104,10 +109,21 @@ def split_qmd(input_file):
             index_lines.append(h2_desc)
         index_lines.append("")
 
-    (base_dir / "splitted-index.qmd").write_text("\n".join(index_lines).strip() + "\n", encoding='utf-8')
-    print(f"✅ Wrote: {base_dir / 'index.qmd'}")
+    index_file.write_text("\n".join(index_lines).strip() + "\n", encoding='utf-8')
+    print(f"✅ Wrote: {index_file}")
 
-split_qmd("index.md")
+for file in Path('.').glob( 'master-*.qmd' ):
+    print( file )
+    # lang_id_match = re.match(r'master-\(([^)]+)\)\.qmd', file.name )
+    lang_id_match = re.match(r'master-([^.]+)\.qmd', file.name)
+    if lang_id_match:
+        lang_id = lang_id_match.group(1)
+        print(f"🔧 Processing: {file.name} → Language ID: {lang_id}")
+        split_qmd(str(file), lang_id)
+    else:
+        print( 'else' );
+
+
 
 # Test
 # print(extract_ruby_base('<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの'))
