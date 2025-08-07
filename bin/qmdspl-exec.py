@@ -82,8 +82,8 @@ def split_qmd( input_file, lang_id ):
         # section_path = base_dir / f"{h2_id}.qmd"
         # section_path.write_text(h2_block + "\n", encoding='utf-8')
 
-        section_dir = base_dir / h2_id
-        section_dir.mkdir(exist_ok=True)
+        section_dir = base_dir / h2_id / lang_id
+        section_dir.mkdir(exist_ok=True, parents=True)
 
         section_path = section_dir / "index.qmd"
         section_path.write_text(h2_block + "\n", encoding='utf-8')
