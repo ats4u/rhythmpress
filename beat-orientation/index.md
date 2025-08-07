@@ -7,7 +7,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 ---
 *※2025/06/16 11:16:35 更新*
 
-## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの {#多層弱拍基軸律動で得られるもの}
+## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの {#benefits-of-multi-layered-weak-beat-oriented-rhythm-theory}
 
 **<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論** は、日本人語学学習者、日本人音楽家に向けて、日本人が何故グルーヴしないのかを理論的に説明し、どうしらグルーヴする様になるのかについて具体的な指針を与えます。
 
@@ -74,7 +74,8 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 **多層弱拍基軸リズム理論** は、この状況に一石を投じます。
 
-## 強拍弱拍の順序に対する認識の違い
+## 強拍弱拍の順序に対する認識の違い {#headians-and-bottomians-of-beat-orientation}
+
 音符が現れる順序の認識は、その人が母国語とする言語によって大きな違いが生まれます。
 
 ### 音楽のリズム解釈には言語によって違いがある
@@ -89,7 +90,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 もしかしたら次の様に解釈したかも知れません。
 
-![](../../tatenori-theory/attachments/ba-dum-tss-incorrect.png)
+![](/tatenori-theory/attachments/ba-dum-tss-incorrect.png)
 
 果たしてバダムツーは、本当にこういうリズムの音楽からやってきたのでしょうか ─── 実際に試してみるとわかるかも知れません。このリズム解釈を使って音楽を作って見て、実際に聴いてみましょう。
 
@@ -101,7 +102,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 この上記リズム解釈を譜面として表現した場合、恐らく次のようになるでしょう。
 
-![](../../tatenori-theory/attachments/ba-dum-tss-score-correct.png)
+![](/tatenori-theory/attachments/ba-dum-tss-score-correct.png)
 
 
 ここに存在する違いは一体何でしょうか ───  これが**強拍弱拍の順序認識**です。
@@ -115,11 +116,11 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 この曲は、マイケル・ジャクソンのヒット曲『[ヒューマン・ネイチャー](https://www.youtube.com/watch?v=ElN_4vUvTPs)』です。この曲の冒頭でマイケル・ジャクソンが「チーチキ・チーチキ」と歌っていますが、この記事を読んで下さっている皆様は、このリズムをどの様に聴き取りましたでしょうか。
 
-![](attachments/humannature-incorrect.png)
+![](/beat-orientation/attachments/humannature-incorrect.png)
 
 この様に解釈されたのではないでしょうか。しかし曲が始まると間もなくこの解釈が間違っていることが明らかになります ─── 実は次のようになっています。
 
-![](attachments/humannature-correct.png)
+![](/beat-orientation/attachments/humannature-correct.png)
 
 このように８分音符１つ分ずれた形でリズムが始まっています。  ─── **ここからわかることは、日本人はある音を聞いた瞬間、当然のようにそれを８分音符の強拍として認識しているところを、日本人以外の人々は当然の様にそれを８分音符の弱拍として認識している**ということです。
 
@@ -141,7 +142,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 これはシラブル拍リズム・ストレス拍リズム言語での拍の順序＝弱強というリズム認識を、モーラ拍リズム言語での拍の順序＝強弱というリズム認識で間違って認識してしまうことから起こります。
 
-![](attachments/beat-orientation-liarson.png)
+![](/beat-orientation/attachments/beat-orientation-liarson.png)
 
 上記はストレス拍解釈の発音をモーラ拍リズム解釈で解釈し間違えた時の状態を図式化したものです。
 
@@ -173,7 +174,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 このシラブル拍リズム、ストレス拍リズムについてを以降の節で見ていきます。
 
-## 言語の拍リズムと音韻学的分析
+## 言語の拍リズムと音韻学的分析 {#phonological-analysis-of-rhythm-types-in-languages}
 
 日本人が演奏する音楽のリズムは、海外の人が演奏する音楽と比べて何かが違います。この違いは、海外の人々が弱拍が強拍の前に来ていると認識している事に対し、日本人は強拍が弱拍の前に来ていると認識している事が原因として起こります。この認識の違いは言語自体が持っているリズム認識の違いから生まれます。このリズム認識の事を音韻学(Phonetics)で**拍リズム**(timed-rhythm)と呼びます。
 
@@ -223,59 +224,59 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 シラブル／音節とは音韻学の重要な概念のひとつです。全ての単語は、シラブルの組み合わせで構成されています。
 
-![](attachments/syllable-about.png)
+![](/beat-orientation/attachments/syllable-about.png)
 
 #### シラブルの構造
 全てのシラブルは、**頭子音(Onset)** **音節核(Nucleus)** **末子音(Coda)** の３つの要素で構成されています。 
 
 音節核と末子音は、シラブルの本体になっています。この本体を **音節基(Rime)** と呼びます。 
 
-![](attachments/syllable-basic.png)
+![](/beat-orientation/attachments/syllable-basic.png)
 
 #### シラブルの頭子音はなくならない
 
 単語 **Cat** の頭子音は **C** です。**C** がなくなると **At** という位置を表す前置詞になります。 この場合このシラブルには頭子音がありません。英語では、このように頭子音がそこにない時でもしばしばそこに **声門閉鎖音** という特殊な子音が挿入されます。 このことを**声門閉鎖音挿入(Glottal Stop Insertion)**  と呼びます。
 
-![](attachments/syllable-basic-without-onset.png)
+![](/beat-orientation/attachments/syllable-basic-without-onset.png)
 
 ネイティブ話者がほとんど声門閉鎖音挿入を意識していません。しかし日本人が、英語やスペイン語などのシラブル拍リズムやストレス拍リズムの言語を学ぶ場合、この**声門閉鎖音挿入をはっきり意識することはとても大切**です。これにはとても明快な理由があります。以下でその理由を見ていきましょう。
 
 #### シラブルの音節基は等間隔で配置される
 音節基は基本的に等間隔で発音されます。音節基の間に子音が何個あっても音節基は必ず等間隔に発音します。
 
-![](attachments/syllable-equaldistant.png)
+![](/beat-orientation/attachments/syllable-equaldistant.png)
 
 #### シラブルの頭子音と末子音は音節基の間に配置される
 **頭子音** 及び **末子音** は、等間隔に並んでいる音節基と音節基の間に分散されます。頭子音と末子音の数が増えても音節基の間隔はかわりません。
 
-![](attachments/syllable-distribution.png)
+![](/beat-orientation/attachments/syllable-distribution.png)
 
 #### シラブルの音節基に強拍が置かれる
 読み上げの際は音節基に強拍が置かれます。
 
-![](attachments/syllable-division.png)
+![](/beat-orientation/attachments/syllable-division.png)
 
 #### シラブルの頭子音と末子音に弱拍が置かれる。
 音節基が強拍であることに対し **頭子音** 及び **末子音** は弱拍に対応します。
 
-![](attachments/syllable-subdivision.png)
+![](/beat-orientation/attachments/syllable-subdivision.png)
 
 #### シラブルの末子音は頭子音に融合する＝リンキング
 
 ２つの音節が連続する場合、先に現れた音節の末子音は、可能な限り次の音節の頭子音としてまとめられて発音されます。このまとめる作業のことを**再音節化**・**再シラブル化** と呼びます。そしてこの末子音が頭子音にまとめられて発音される現象を<span>**リンキング**</span>と呼びます。**リンキングは英語の発音を学ぶうえで最も重要**と言っても過言ではない規則です。
 
-![](attachments/syllable-linking.png)
+![](/beat-orientation/attachments/syllable-linking.png)
 
 #### シラブルには頭子音最大化原則(MOP=Maximize Onset Principle)がある {#シラブルには頭子音最大化原則がある}
 リンキングは、可能であれば可能な限り起こるという規則があります。このことを**頭子音最大化原則（とうしおんさいだいかげんそく）**、または英語表記「Maximal Onset Principle」の頭文字をとって**MOP原則**と呼びます。
 
 この図中で帽子が頭子音、猫が音節核、靴が末子音を表しています。
 
-![](attachments/syllable-mop-1.png)
+![](/beat-orientation/attachments/syllable-mop-1.png)
 
 この図中の様に全ての末子音は出来るだけ次の頭子音に結びついてまとめて発音されます。これがリンキングです。
 
-![](attachments/syllable-mop-2.png)
+![](/beat-orientation/attachments/syllable-mop-2.png)
 
 <span style="color:silver">※ 実例を追加する。</span>
 
@@ -303,7 +304,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 * 母音は強拍と弱拍の両方がある。
 
 
-![](attachments/stress-basic.png)
+![](/beat-orientation/attachments/stress-basic.png)
 
 #### モーラ拍リズムとストレス拍リズムの違い
 
@@ -436,24 +437,24 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 **再帰**とは全体の構造がその一部の構造と一致することです。
 
-![](attachments/recursion-japanese-recursive-girls.png)
+![](/beat-orientation/attachments/recursion-japanese-recursive-girls.png)
 
 この漫画には、自分自身の状況をそのまま漫画にするという再帰的な自己言及性が表現されています。
 
 この様な再帰的な構造は世界のあらゆる場所に現れます。
 
-![](attachments/recursion-tree.png)
+![](/beat-orientation/attachments/recursion-tree.png)
 
-![](attachments/recursion-de-reffye-tree.png) 
+![](/beat-orientation/attachments/recursion-de-reffye-tree.png) 
 
 
-![](attachments/recursion-fractal-2.png)
+![](/beat-orientation/attachments/recursion-fractal-2.png)
 
-![](attachments/recursion-fractal-1.png)
+![](/beat-orientation/attachments/recursion-fractal-1.png)
 
-![](attachments/recursion-fractal-4.png)
+![](/beat-orientation/attachments/recursion-fractal-4.png)
 
-![](attachments/recursion-fractal-3.png)
+![](/beat-orientation/attachments/recursion-fractal-3.png)
 
 再帰についての詳しい解説は[オンライン上の解説](https://www.google.com/search?gl=us&hl=en&gws_rd=cr&safe=off&q=%E5%86%8D%E5%B8%B0)などを参照してください。
 
@@ -462,7 +463,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 ##### ストレス拍とシラブル拍の再帰的構造
 シラブル拍は、頭子音・音節核・末子音という要素を持っていることを見てきました。
 
-![](attachments/syllable-basic.png)
+![](/beat-orientation/attachments/syllable-basic.png)
 
 そして [頭子音最大化原則(MOP=Maximum Onset Principle)](#シラブルには頭子音最大化原則がある) によって、末子音が頭子音にまとめられて発音されることを見てきました。
 
@@ -471,7 +472,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 前述したシラブル拍の構造が、ストレス拍に関しても成立します。
 
 
-![](attachments/stress-basic.png)
+![](/beat-orientation/attachments/stress-basic.png)
 
 ストレス拍のアクセント（すなわちストレスのある拍とストレスのない拍）を分析すると、中心に核となるストレスのあるシラブルが置かれ、その前後にストレスのないシラブルが前、及び後ろにある構造が浮かび上がります。 この構造は英語の音韻分析では従来、二分木構造などの階層モデルによって説明されてきました。 本稿が提唱する多層弱拍基軸理論は、**シラブル拍の分析手法は、そのままストレス拍にも再帰的に利用できる** という新しい視点を提案します。このことを本書では **再帰的韻律同一性原理**  **RPEP (Recursive Prosodic Equivalence Principle)** と呼びます。 そしてストレス拍に適用された MOP原則のことをここでは **MPOP (Maximal Prosodic Onset Principle)** と呼びます。
 
@@ -486,7 +487,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 **再帰的韻律同一性原理**  **RPEP (Recursive Prosodic Equivalence Principle)** では、単語のなかのシラブルをアクセントの位置によって分類します。
 
-![](attachments/stress-basic.png)
+![](/beat-orientation/attachments/stress-basic.png)
 
 単語のなかのアクセントのあるシラブルのことを核音節(Nucleus Syllable) と呼びます。
 
@@ -506,33 +507,33 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 韻律節は、大抵単語と等しくなります。しかしこのあとで紹介する**再韻律節化**という法則が適用されることで一致しなくなることがあります。以下で見ていきます。
 
-![](attachments/stress-prosodic-words.png)
+![](/beat-orientation/attachments/stress-prosodic-words.png)
 
 #### ストレス拍では基音節は等間隔で配置される
 基音節に等間隔で発音されます。基音節の間にある音節の数に関わらず、基音節は必ず等間隔に配置します。
 
-![](attachments/stress-equaldistant.png)
+![](/beat-orientation/attachments/stress-equaldistant.png)
 
 #### ストレス拍では頭音節と末音節は基音節の間に配置される
 **頭子音** 及び **末子音** は、等間隔に並んでいる基音節と基音節の間に分散されます。頭音節と末音節の数が増えても基音節の間隔は変わりません。
 
-![](attachments/stress-distribution.png)
+![](/beat-orientation/attachments/stress-distribution.png)
 
 #### ストレス拍では基音節に強拍が置かれる
 読み上げの際は基音節に強拍が置かれます。
 
-![](attachments/stress-division.png)
+![](/beat-orientation/attachments/stress-division.png)
 
 #### ストレス拍では頭音節と末音節に弱拍が置かれる
 基音節が強拍であることに対し **頭子音** 及び **末子音** は弱拍に対応します。
 
-![](attachments/stress-subdivision.png)
+![](/beat-orientation/attachments/stress-subdivision.png)
 
 #### ストレス拍では末音節は頭音節に融合する再韻律節化が起こる
 
 ２つの音節が連続する場合、先に現れた音節の末子音は、可能な限り次の音節の頭子音としてまとめられて発音されます。このまとめる作業のことを**再韻律節化 (Reprosodification)** と呼びます。そしてこの末音節が頭音節にまとめられて発音される現象を **音節リンキング** と呼びます。
 
-![](attachments/stress-linking.png)
+![](/beat-orientation/attachments/stress-linking.png)
 
 #### ストレス拍には頭音節最大化原則＝MPOP原則がある
 
@@ -546,11 +547,11 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 この図中で帽子が頭音節、猫が核音節、靴が末音節を表しています。
 
-![](attachments/syllable-mop-1.png)
+![](/beat-orientation/attachments/syllable-mop-1.png)
 
 この図中の様に全ての末音節は出来るだけ次の頭音節に結びついてまとめて発音されます。これが音節リンキングです。
 
-![](attachments/syllable-mop-2.png)
+![](/beat-orientation/attachments/syllable-mop-2.png)
 
 <span style="color:silver">※ 実例を追加する。</span>
 
@@ -560,7 +561,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 #### モーラ拍の主な特徴
 
-![](attachments/beat-orientation-basic.png)
+![](/beat-orientation/attachments/beat-orientation-basic.png)
 
 日本語のリズムは、学術的に **モーラ拍リズム** に分類されています。モーラ拍リズムは、**シラブル**音節ではなく**モーラ**音節という特殊な単位で発音すると定義されています。この**モーラ**音節の構造を**シラブル**音節と比較すると多くの根本的な違いがあります。 日本語のモーラ拍リズムには主に以下のような特徴があります。
 
@@ -596,43 +597,43 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 | 子音を意識       |  しない  |    する    |
 
 
-![](attachments/mora-timed-rhythm-01.png)
+![](/beat-orientation/attachments/mora-timed-rhythm-01.png)
 
 結果としてモーラ拍とシラブル拍には最初に挙げた図の様な違いが表れます。
 
-![](attachments/beat-orientation-basic.png)
+![](/beat-orientation/attachments/beat-orientation-basic.png)
 
 以下でモーラ拍リズムとシラブル拍リズムの違いを詳細に見ていきましょう。
 
 #### モーラには末子音がない
 モーラ音節をシラブル音節と比較した時の最大の違いは、末子音がないことです。モーラ音節には末子音がない ─── これがモーラ拍リズムの最大の特徴です。モーラ音節に末子音がないことが発端となってモーラ音節にはシラブル音節とは全く違った性質が生み出されます。以下で見ていきます。
 
-![](attachments/syllable-mora-1.png)
+![](/beat-orientation/attachments/syllable-mora-1.png)
 
 #### モーラの頭子音は音節基に含まれる
 シラブル音節では音節基に頭子音は含まれません。しかしモーラ音節では音節基に頭子音が含まれます。これがモーラ音節の2つ目の大きな特徴です。
 
-![](attachments/syllable-mora-2.png)
+![](/beat-orientation/attachments/syllable-mora-2.png)
 
 #### モーラと音節基は同じ長さで区別がない
 
 シラブル音節では、頭子音と音節核はそれぞれ独立していますが、モーラ音節では、音節核に頭子音が含まれ、かつ末子音がない為、結果として音節核と音節が同じ長さになり区別がなくなります。
 
-![](attachments/syllable-mora-mora-and-nucleus-are-equal-lenghed.png)
+![](/beat-orientation/attachments/syllable-mora-mora-and-nucleus-are-equal-lenghed.png)
 
 #### モーラの頭子音はとても短い
 
 日本語（モーラ拍）の子音は、シラブル拍ストレス拍の言語の子音の長さと比較して非常に短いという特徴があります。
 
-![](attachments/syllable-mora-short-onset.png)
+![](/beat-orientation/attachments/syllable-mora-short-onset.png)
 
 これは母音優位な言語である日本語だけを話しているとほとんど意識できないことですが、一般的に日本語以外の言語では子音は母音と同じくらい長いものです。
 
-![](attachments/trump.png)
+![](/beat-orientation/attachments/trump.png)
 
 これは米国政治家トランプ氏の有名な写真です。彼が正に今 **頭子音 F** を長く発音することでFで始まる単語を言おうとしていることがわかる写真です。この様に英語やその他の言語では**子音は長く発音する**ことができます。 ─── これは日本語がフを長く言おうとすると「ふううーーー」となってしまい**母音「う」** しか残らないことと対照的です。
 
-![](attachments/comparison-ac-and-pv.png)
+![](/beat-orientation/attachments/comparison-ac-and-pv.png)
 
 引用：[言語と音楽のリズム的共通性：ジャズおよびブルーグラス奏者を対象とした事例研究 — ウディ・ワールサガー修士論文](https://www.academia.edu/50961691/Rhythmic_Similarities_between_Language_and_Music_Jazz_and_Bluegrass_Musicians_as_a_Case_Study_Udi_Wahrsagers_Thesis?utm_source=chatgpt.com) この論文は『言語と音楽のリズム的類似性』というタイトルの修士論文で、ジャズとブルーグラスの演奏家を比較対象にしています。（著：ウディ・ワールサガー）
 
@@ -641,7 +642,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 #### モーラの頭子音はなくなる
 シラブル音節では、頭子音が音節核と独立しており、かつ音節核に音節基が置かれている為、**頭子音がなくなっても音節核の位置は変わりません。**  しかしモーラ音節では、頭子音が音節基に含まれている為、**頭子音がなくなると音節基がその分拡張します。** これがモーラ拍リズムの3番目の特徴です。
 
-![](attachments/syllable-stretching-nucleus.png)
+![](/beat-orientation/attachments/syllable-stretching-nucleus.png)
 
 #### モーラには頭子音最小化原則 (MiOP = Minimum Onset Principle) がある
 
@@ -651,7 +652,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 モーラ拍リズムは末子音を持ちません。 末子音があった場合、末子音が次の頭子音と結合することを避ける為に、その末子音が新しい母音のない音節（モーラ）を作り、そこの頭子音として発音されます。またモーラ拍リズムは多重子音を持ちません。多重子音が表れた場合、それぞれの子音がそれぞれ独立した音節（モーラ）を作り、そこの頭子音として発音されます。
 
-![](attachments/syllable-mora-miop.png)
+![](/beat-orientation/attachments/syllable-mora-miop.png)
 
 この様にモーラ拍リズムでは、頭子音末子音が可能な限り独立してバラバラになるように発音されます。これはシラブル拍言語・ストレス拍言語が持っている**頭子音最大化原則(MOP=Maximize Onset Principle)** と真逆の性質です。 この性質を、ここでは **頭子音最小化原則 (MiOP = Minimum Onset Principle)** と呼びます。
 
@@ -659,7 +660,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 モーラ拍とシラブル拍の違いは、頭子音（弱拍）が音節基（強拍）よりも前にあるか、後ろにあるかに集約されます。
 
-![](attachments/syllable-syllable-mora-comparison.png)
+![](/beat-orientation/attachments/syllable-syllable-mora-comparison.png)
 
 **シラブル拍リズム言語を話す人は、一定間隔でやってくる強拍（音節基）を聴く前に弱拍（頭子音）を認識**しています。
 
@@ -671,7 +672,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 オフビートカウント理論は、このモーラ拍リズムを母国語とする人が、シラブル拍リズムや次に紹介するストレス拍リズムを第二言語として習得する為にどのようにしたら最も効率よく習得することが出来るかに着目し考察した結果として生まれた練習方法です。
 
-## モーラ拍リズム言語を母国語とする方々への手紙
+## モーラ拍リズム言語を母国語とする方々への手紙 {#letter-to-native-mora-timed-speakers}
 
 **音楽には必ず、弱拍と強拍があります** ─── しかしこの見解は、必ずしも正しくありません。何故なら日本の音楽には伝統的に強拍弱拍を持たないからです。  日本に公式に西洋音楽が導入されたのは明治時代だと言われていますが、それ以前にもキリスト教などの伝来と共に西洋音楽が日本に伝わっていたとも言われています。それ以前の日本の音楽には弱拍と強拍がなかったと考えられます。
 
@@ -683,7 +684,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 次の図を御覧下さい。
 
-![](attachments/beat-orientation-comparison.png)
+![](/beat-orientation/attachments/beat-orientation-comparison.png)
 
 この様に世界中の殆どの言語が、強拍(rime)よりも前に子音を配置する習慣を持っています。しかし日本語はこの点で非常に特殊な特徴として 強拍(rime) の後ろに子音を配置する習慣を持っています。よって子音のあるなしによって母音の位置が変化するという特徴を持っています。この母音位置の修正は日本人にとって完全な無意識下に行われており、**母音の位置を修正していることを全く意識することが出来ません**。そして**強拍よりも前に起こる拍を無意識のうちに雑音として無視し、そこにある拍が存在することすら認識することが出来ない**という非常に大きな特徴があるのです。
 
@@ -761,7 +762,7 @@ RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
 
 どうか諦めることなく、粘り強くこの節以降を読んで頂けましたら幸いです ─── きっと期待以上の成果を得ることが出来るでしょう。
 
-## 言語のリズムと音楽のリズムの交差点
+## 言語のリズムと音楽のリズムの交差点 {#the-crossing-point-of-language-and-music}
 
 ### 最初の拍が強拍弱拍かを判断する感覚は言語リズムの影響を受ける
 
@@ -970,7 +971,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 <div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/5gZOYKHXwyQ?si=IU87MAlbWB343re6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
-## <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>について
+## <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>について {#multi-layered-weak-beat-precedence}
 
 拍には強拍と弱拍の2種類があることを見ていきます。そして強拍は必ずしも先に現れるわけではなく、しばしば弱拍が先に演奏されることを見ていきます。次に弱拍・強拍は、4分音符だけではなく全ての音価の音符に存在することを見てみます。各音価の強拍弱拍は、結果的に弱拍に多層構造を生み出します。この弱拍の多層構造に弱拍先行が加わると、リズムが**頭合わせ構造**から**尻合わせ構造**へと移行することを見てみます。
 
@@ -1041,15 +1042,15 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 例えば強拍弱拍を四分音符の上で見てみると次のようになります。
 
-![](attachments/beat-orientation-explained-4th-with-caption.png)
+![](/beat-orientation/attachments/beat-orientation-explained-4th-with-caption.png)
 
 強拍弱拍を八分音符の上で見てみると次のようになります。
 
-![](attachments/beat-orientation-explained-8th-with-caption.png)
+![](/beat-orientation/attachments/beat-orientation-explained-8th-with-caption.png)
 
 強拍弱拍を二分音符の上で見てみると次のようになります。
 
-![](attachments/beat-orientation-explained-half-with-caption.png)
+![](/beat-orientation/attachments/beat-orientation-explained-half-with-caption.png)
 
 ### 多層拍とは
 
@@ -1057,35 +1058,35 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 ２分音符と２つの４分音符を例にとって考えてみます。
 
-![](attachments/Pasted%20image%2020250716041121.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716041121.png)
 
 
 この図では、橙色の星印が打音（アタック）を表しています。赤色の線が持続音（サスティン）を表しています。２分音符と４分音符の違いの本質は音符の長さですが、このことを改めて考えてみると、**音の長さ**と**打点と打点の距離**という２つの要素がそこにあることがわかります。
 
 
-![](attachments/Pasted%20image%2020250716043812.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716043812.png)
 
 ここで打点だけに注目して考えて見ると、四分音符の強拍の打点位置は、２分音符の打点位置と同じことがわかります。
 
-![](attachments/Pasted%20image%2020250716044134.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716044134.png)
 
 打音（アタック音）だけを考えると、４分音符の強拍を演奏することと２分音符を演奏することは全く同じことと言えます。逆に弱拍こそが２分音符との違いを際立たせている４分音符の特徴であり最も４分音符らしさを持った拍ということが言えます。
 
 もしもこれをどら焼きに例えるならば、どら焼きが２分音符で弱拍が４分音符といえます。
 
-![](attachments/splitting-notes.png)
+![](/beat-orientation/attachments/splitting-notes.png)
 
 強拍は拍と拍の境目と言えます。そして弱拍は、その拍の中央にあります。つまり弱拍は、その音価の拍を分割します。
 
 
 同じことが四分音符と８分音符にも言えます。
 
-![](attachments/Pasted%20image%2020250716044354.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716044354.png)
 
 
 ここで打点だけに注目して考えて見ると、８分音符の強拍の打点位置は、四分音符の打点位置と同じことがわかります。
 
-![](attachments/Pasted%20image%2020250716044134.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716044134.png)
 
 
 このことは、全ての音価の音符についていえます。
@@ -1099,7 +1100,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 このことを図で見てみます。
 
-![](attachments/layered-strong-beats.png)
+![](/beat-orientation/attachments/layered-strong-beats.png)
 
 つまり <span style="font-size:200%;">**全ての音価の音符の強拍は必ず、その音価の倍の長さの音符と衝突する**</span> ということがわかります。
 
@@ -1107,7 +1108,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 音符の位置は、小節を一定の比率で分割したものなので、分数で小節先頭からの距離として表せるでしょう。 楽典では小節先頭拍を１拍目として数える序数を使って説明されていますが、ここでは数学の数直線のように基数を使って先頭の拍を０拍目として並べてみましょう。
 
-![](attachments/Pasted%20image%2020250717165456.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250717165456.png)
 
 ここから興味深い法則を見つけることが出来ます。
 
@@ -1115,13 +1116,13 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 この各音符列上で左から数えて偶数番目（０個目・２個目・４個目・・・）の音符が強拍になります。そして奇数番目（１個目・３個目・５個目・・・）が弱拍になります。 すると全ての強拍は約分できることがわかります。
 
-![](attachments/Pasted%20image%2020250716050956.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716050956.png)
 
 #### 弱拍は約分できない
 
 更に全ての弱拍は、約分できない分数＝既約分数になっていることがわかります。
 
-![](attachments/Pasted%20image%2020250716045505.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716045505.png)
 
 
 分数は１つの数を表すに当たって複数通りの書き方がありますが、2/8 や 2/4などの分数は約分できます。つまり他の小さな数の組み合わせで表現することができます。
@@ -1135,7 +1136,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 #### 先頭拍は必ず強拍だがより大きい音価で約分され弱拍になる
 また小節の先頭の拍は全ての音価で必ず強拍となることがわかります。
 
-![](attachments/Pasted%20image%2020250716050850.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250716050850.png)
 
 しかし小節先頭の拍は強拍だからといって、弱拍が存在しない訳ではありません。この場合も前述の強拍弱拍の最適化を行うことで弱拍として解釈することが出来ます。 例えば、もしこの小節が２つあったら全音も２つあることになります。つまり２つ目の全音が弱拍となります。この様に繰り返しを前提に考えた場合、全ての強拍には対応すべき大きな音価の弱拍があることになります。
 
@@ -1147,7 +1148,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 以上の様に考え進めると、**ある音価の強拍は、必ずその音価より大きい音価の弱拍に相当**していることがわかります。つまり全ての音価で弱拍だけを演奏すると全ての拍がお互いに衝突を回避しあって入れ違いの位置に配置されることがわかります。このことをグラフを使って見てみましょう。 
 
-![](attachments/layered-weak-beats-map.png)
+![](/beat-orientation/attachments/layered-weak-beats-map.png)
 
 #### 弱拍の多層性
 
@@ -1164,9 +1165,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 次のグラフは、弱拍基軸演奏テクニックを**使わず**に、強拍と弱拍を全て演奏した場合のグラフです。
 
-![](attachments/layered-strong-beats.png)
+![](/beat-orientation/attachments/layered-strong-beats.png)
 
-![](attachments/layered-strong-beats-graph.png)
+![](/beat-orientation/attachments/layered-strong-beats-graph.png)
 
 
 この様に強拍が重なりあってしまうことによってアンサンブルの瞬間音量が上がってしまうことがわかります。この音の重なりは音の濁りの原因となります。また加えて、各演奏者が演奏中に各自の自音がはっきり聞こえなくなる原因となり、無意識の内に更に音量を上げて演奏するようになり、聴者の耳が痛くなりやすくなる原因となります。
@@ -1175,9 +1176,9 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 こうならないようにする為には、強拍を演奏せず弱拍だけを演奏するようにすることです。次の図は、弱拍のみを演奏した場合のグラフです。
 
-![](attachments/layered-weak-beats.png)
+![](/beat-orientation/attachments/layered-weak-beats.png)
 
-![](attachments/layered-weak-beats-graph.png)
+![](/beat-orientation/attachments/layered-weak-beats-graph.png)
 
 全ての音価で拍が重ならず単音で鳴っています。重なりがないので全ての拍で一定の音量で抑えられています。この様に各拍が重ならずに分離していると、各パートの楽器音が大きくてもそれぞれの音が分離して聞き取りやすくなります。自音が聞こえず無意識の内に音量が上がるということがなくなり、音の濁りを減らすことができます。
 
@@ -1256,7 +1257,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 #### 尻合わせ
 海外の音楽・・・ジャズやR&B、ロックではしばしばメロディーの開始点がはっきり決まっておらず、メロディーは任意の地点から漠然と開始されます。開始点ははっきり決まっていませんが、終了地点は必ず決まっており、その地点で大きな音でアクセントを入れる手法がしばしば用いられます。このリズム構造をここでは **尻合わせ** と呼びます。
 
-![](attachments/Pasted%20image%2020250609002541.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250609002541.png)
 
 [尻合わせ(x/twitter)](https://x.com/ats4u/status/1612304475347390466)
 
@@ -1268,7 +1269,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 中国の伝統音楽や、日本・イランなどモーラ拍言語を母国語とする国々の音楽では、しばしば繰り返しのなかでメロディーの開始地点がはっきりと決まっており、そこで大きな音でアクセントを入れる手法がしばしば用いられます。ほとんどの場合、終了地点ははっきり決まっておらず、メロディーは漠然と終わります。このリズム構造をここでは **頭合わせ** と呼びます。
 
-![](attachments/Pasted%20image%2020250609002708.png)
+![](/beat-orientation/attachments/Pasted%20image%2020250609002708.png)
 
 [頭合わせ(x/twitter)](https://twitter.com/ats4u/status/1612304530502451201)
 
@@ -3480,23 +3481,23 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 次の図の様に１小節のなかに4つの4分音符があったとします。
 
-![](attachments/beat-orientation-explained-4th.png)
+![](/beat-orientation/attachments/beat-orientation-explained-4th.png)
 
 この時、4分音符は、次の図の様に強拍と弱拍に分かれることを説明しました。
 
-![](attachments/beat-orientation-explained-4th-with-caption.png)
+![](/beat-orientation/attachments/beat-orientation-explained-4th-with-caption.png)
 
 
 ここでひとつの大きな問題が生まれます。もしも拍に強拍と弱拍の2種類が存在するとしたら、音楽の中で唐突に聴こえたある「最初の拍」は、弱拍なのでしょうか、それとも強拍なのでしょうか。
 
 もしも強拍が先行すると考えたとすると、その解釈は次のようになるでしょう。
 
-![](attachments/beat-orientation-explained-4th-sw.png)
+![](/beat-orientation/attachments/beat-orientation-explained-4th-sw.png)
 
 
 もしも弱拍が先行すると考えたとすると、その解釈は次の様になるでしょう。
 
-![](attachments/beat-orientation-explained-4th-ws.png)
+![](/beat-orientation/attachments/beat-orientation-explained-4th-ws.png)
 
 このように『**強拍**が先行するのが当然』と考える人が採譜した結果と『**弱拍**が先行するのが当然』と考える人が採譜した結果は、大きく異なります。
 
@@ -3536,15 +3537,15 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 * つまりもし、その拍が強拍だったとすると、それは必ず１拍目強拍ということになります。
 * これは４分音符だけでなく、全ての音価の音符に対して成立します。
 
-![](attachments/single-beat-orientation-strong-1.png)
+![](/beat-orientation/attachments/single-beat-orientation-strong-1.png)
 
-![](attachments/single-beat-orientation-strong-2.png)
+![](/beat-orientation/attachments/single-beat-orientation-strong-2.png)
 
-![](attachments/single-beat-orientation-strong-4.png)
+![](/beat-orientation/attachments/single-beat-orientation-strong-4.png)
 
-![](attachments/single-beat-orientation-strong-8.png)
+![](/beat-orientation/attachments/single-beat-orientation-strong-8.png)
 
-![](attachments/single-beat-orientation-strong-16.png)
+![](/beat-orientation/attachments/single-beat-orientation-strong-16.png)
 
 > 💡 もしも強拍が１拍目ではなかった場合、それは必ず弱拍として約分が出来ます。つまり必ず弱拍なのです。 [参照：強拍弱拍は分数で表すことが出来る]( #強拍弱拍は分数で表すことが出来る )
 
@@ -3552,15 +3553,15 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 もし先行拍が強拍ではなかったとすると、それは必ず弱拍ということになります。その弱拍の位置として考えられる地点は、強拍とは異なりその弱拍の属する音価によって変化します。
 
-![](attachments/single-beat-orientation-weak-1.png)
+![](/beat-orientation/attachments/single-beat-orientation-weak-1.png)
 
-![](attachments/single-beat-orientation-weak-2.png)
+![](/beat-orientation/attachments/single-beat-orientation-weak-2.png)
 
-![](attachments/single-beat-orientation-weak-4.png)
+![](/beat-orientation/attachments/single-beat-orientation-weak-4.png)
 
-![](attachments/single-beat-orientation-weak-8.png)
+![](/beat-orientation/attachments/single-beat-orientation-weak-8.png)
 
-![](attachments/single-beat-orientation-weak-16.png)
+![](/beat-orientation/attachments/single-beat-orientation-weak-16.png)
 
 もしその拍が弱拍だったとすると、その音符は４分音符の弱拍かも知れませんし、８分音符の弱拍かも知れません。１６分音符などのより細かな音価の弱拍かも知れません。或いはより長い２分音符・全音符・２全音符などの音符での弱拍かも知れません。可能性として考えられる音符は無限に存在します。無限に存在する可能性のなかでどの音符の弱拍なのかを判別するためには、予想と修正が必要になります。 まず予想を立てた上で、音楽をしばらく聴き前後の文脈から判別しながら、予想を修正しながら、実際の音価を特定する必要が発生します。
 
@@ -3598,7 +3599,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 **弱拍が属する音価の判定** の訓練として考え出された方法が **声出しオフビートカウント練習法**です。
 
-## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論まとめ {#多層弱拍基軸律動理論まとめ}
+## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論まとめ {#multi-layered-weak-beat-oriented-rhythm-theory-summary}
 
 ### バダムツーは二層弱拍先行認識
 
@@ -3612,7 +3613,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 もしもこの音に関して弱拍先行が全ての音価がないという前提で解釈すると次のようになります。
 
-![](../tatenori-theory/attachments/ba-dum-tss-incorrect.png)
+![](/tatenori-theory/attachments/ba-dum-tss-incorrect.png)
 
 この解釈は、4分音符の弱拍先行なし、8分音符の弱拍先行なしを前提としたリズム解釈と言えます。 ─── この解釈は正しくないということも[音楽のリズム解釈には言語によって違いがある](#音楽のリズム解釈には言語によって違いがある)で御説明致しました。
 
@@ -3684,7 +3685,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 次の解釈を見てみます。
 
-![](../tatenori-theory/attachments/ba-dum-tss-incorrect-8th.png)
+![](/tatenori-theory/attachments/ba-dum-tss-incorrect-8th.png)
 
 この解釈は、8分音符の弱拍先行が存在することを前提として解釈していると言えます。しかし、4分音符の弱拍先行はなしとみなしている為、１つずれた形で認識していることを観察することが出来ます。
 
@@ -3756,7 +3757,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 次の解釈を見てみます。
 
-![](../tatenori-theory/attachments/ba-dum-tss-score-correct.png)
+![](/tatenori-theory/attachments/ba-dum-tss-score-correct.png)
 
 この解釈は、8分音符の弱拍先行が存在することを前提としおり、同時に4分音符の弱拍先行も存在することを前提として解釈していることがわかります。
 
@@ -3908,7 +3909,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
   - 縦乗りのメカニズム
 
 
-## 弱拍天動説と弱拍地動説
+## 弱拍天動説と弱拍地動説 {#weakbeat-geocentrism-vs-heliocentrism}
 
 弱強リズム認識を持つ人（＝ストレス拍リズム言語を母国語として話す人）は、リズムニュアンスを演奏する時に、弱拍位置を基準位置として固定し強拍位置を移動することでニュアンスを醸し出す習慣を持っています。
 
@@ -3947,7 +3948,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">二葉百合子の『関東一本〆』<br><br>正統派演歌の語法<br>・ぴったりに合わせる強拍<br>・後ろにつく弱拍<br>・揺れる強拍<br><br>Credit : 二葉百合子 - 関東一本〆<a href="https://t.co/Pz122I6Hhv">https://t.co/Pz122I6Hhv</a><a href="https://twitter.com/hashtag/%E3%82%AA%E3%83%95%E3%83%93%E3%83%BC%E3%83%88%E3%81%A7%E6%80%9D%E8%80%83%E3%81%99%E3%82%8B%E8%AA%9E%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#オフビートで思考する語学</a> <a href="https://t.co/3M68PZ4gbP">pic.twitter.com/3M68PZ4gbP</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1669192095406628864?ref_src=twsrc%5Etfw">June 15, 2023</a></blockquote> </div>
 
 
-## 縦乗りのメカニズム
+## 縦乗りのメカニズム {#mechanism-of-tatenori}
 
 
 ### モーラ拍ネイティブが陥りがちなリズム習癖
