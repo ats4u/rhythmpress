@@ -301,6 +301,43 @@ def proc_qmd_teasers( items, basedir: str, lang: str ):
         it["link"] = link
         it["slug"] = slug
 
+    return items
+
+#######################
+
+def call_create_toc( input_qmd, create_toc ):
+    p = Path(input_qmd)
+    basedir = str( p.parent ) # directory path as string
+    lang = _lang_id_from_filename(p)
+    text = p.read_text(encoding="utf-8")
+    return create_toc(text, basedir, lang)
+
+#######################
+
+def _create_toc_v1(text: str, basedir: str, lang: str) -> None:
+    items = parse_qmd_teasers(
+        text,
+        min_level=2,
+        max_level=6,
+        strip_html_in_title=False,  # keep HTML to read <ruby> base
+        normalize_ws=False,
+        respect_frontmatter=True,
+    )
+    items = proc_qmd_teasers( items, basedir, lang )
+    lines_out = []
+    for it in items:
+        lvl         : int = it["level"]
+        link        : str = it["link"]
+        description : str = it["description"].strip()
+        title       : str = it["header_title"]
+
+        if link is not None:
+            indent_level = " " * (2 * max(0, lvl - 2))
+            lines_out.append( f"{indent_level}- [{title}]({link})" )
+            lines_out.append("")
+
+    return "\n".join(lines_out)
+
 def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
     items = parse_qmd_teasers(
         text,
@@ -310,13 +347,9 @@ def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
         normalize_ws=False,
         respect_frontmatter=True,
     )
+    items = proc_qmd_teasers( items, basedir, lang )
 
-    if not items:
-        return
-
-    proc_qmd_teasers( items, basedir, lang )
     lines_out = []
-
     for it in items:
         lvl         : int = it["level"]
         link        : str = it["link"]
@@ -337,74 +370,16 @@ def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
     return "\n".join(lines_out)
 
 
-def _create_toc_v3(text: str, basedir: str, lang: str) -> None:
-    """
-    Print a nested Markdown TOC from master-<lang>.qmd.
+def create_toc_v1( input_qmd ):
+    call_create_toc( input_qmd, _create_toc_v1 )
 
-    - Level-2 →  ./<basedir>/<slug>/<lang-id>/
-    - Level-3+ → ./<basedir>/<parent-slug>/<lang-id>/#<sub-slug>
-    - Indent: 0 spaces at level-2, +2 spaces per deeper level
-    """
-    items = parse_qmd_teasers(
-        text,
-        min_level=2,
-        max_level=6,
-        strip_html_in_title=False,  # keep HTML to read <ruby> base
-        normalize_ws=False,
-        respect_frontmatter=True,
-    )
-
-    if not items:
-        return
-
-    current_lv2_slug: Optional[str] = None
-    stack: List[Tuple[int, str]] = []
-
-    lines_out = []
-
-    for it in items:
-        lvl: int = it["level"]           # provided by your parser
-        title: str = it["header_title"]
-        title_raw: str = it["title_raw"] # provided by your parser
-        explicit: Optional[str] = it["header_slug"]
-
-        slug = _slug_for_item(title_raw, explicit)
-
-        if lvl == 2:
-            current_lv2_slug = slug
-            link = f"./{basedir}/{slug}/{lang}/"
-        elif lvl ==3:
-            ancestor = current_lv2_slug or slug
-            link = f"./{basedir}/{ancestor}/{lang}/#{slug}"
-        else:
-            ancestor = current_lv2_slug or slug
-            link = None
-
-        while stack and stack[-1][0] >= lvl:
-            stack.pop()
-
-        stack.append((lvl, slug))
-
-        if link is not None:
-            indent_level = " " * (2 * max(0, lvl - 2))
-            lines_out.append( f"{indent_level}- [{title}]({link})" )
-            lines_out.append("")
-
-            description = it["description"].strip()
-            if description and lvl == 2:
-                description = dedent(description).strip()
-                description = indent(description, indent_level)
-                lines_out.append(description)
-                lines_out.append("")
-
-    return "\n".join(lines_out)
+def create_toc_v4( input_qmd ):
+    call_create_toc( input_qmd, _create_toc_v4 )
 
 
-def create_toc( input_qmd ):
-    p = Path(input_qmd)
-    basedir = str( p.parent ) # directory path as string
-    lang = _lang_id_from_filename(p)
-    text = p.read_text(encoding="utf-8")
-    return _create_toc_v4(text, basedir, lang)
-
-
+# def create_toc( input_qmd ):
+#     p = Path(input_qmd)
+#     basedir = str( p.parent ) # directory path as string
+#     lang = _lang_id_from_filename(p)
+#     text = p.read_text(encoding="utf-8")
+#     return _create_toc_v4(text, basedir, lang)

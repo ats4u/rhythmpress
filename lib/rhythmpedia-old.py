@@ -71,3 +71,68 @@ def create_toc_v2(input_md, link_target_md='.'):
 # link_target_md  = "beat-orientation"
 # create_toc_v2( input_md, link_target_md )
 # ```
+#
+
+
+def _create_toc_v3(text: str, basedir: str, lang: str) -> None:
+    """
+    Print a nested Markdown TOC from master-<lang>.qmd.
+
+    - Level-2 →  ./<basedir>/<slug>/<lang-id>/
+    - Level-3+ → ./<basedir>/<parent-slug>/<lang-id>/#<sub-slug>
+    - Indent: 0 spaces at level-2, +2 spaces per deeper level
+    """
+    items = parse_qmd_teasers(
+        text,
+        min_level=2,
+        max_level=6,
+        strip_html_in_title=False,  # keep HTML to read <ruby> base
+        normalize_ws=False,
+        respect_frontmatter=True,
+    )
+
+    if not items:
+        return
+
+    current_lv2_slug: Optional[str] = None
+    stack: List[Tuple[int, str]] = []
+
+    lines_out = []
+
+    for it in items:
+        lvl: int = it["level"]           # provided by your parser
+        title: str = it["header_title"]
+        title_raw: str = it["title_raw"] # provided by your parser
+        explicit: Optional[str] = it["header_slug"]
+
+        slug = _slug_for_item(title_raw, explicit)
+
+        if lvl == 2:
+            current_lv2_slug = slug
+            link = f"./{basedir}/{slug}/{lang}/"
+        elif lvl ==3:
+            ancestor = current_lv2_slug or slug
+            link = f"./{basedir}/{ancestor}/{lang}/#{slug}"
+        else:
+            ancestor = current_lv2_slug or slug
+            link = None
+
+        while stack and stack[-1][0] >= lvl:
+            stack.pop()
+
+        stack.append((lvl, slug))
+
+        if link is not None:
+            indent_level = " " * (2 * max(0, lvl - 2))
+            lines_out.append( f"{indent_level}- [{title}]({link})" )
+            lines_out.append("")
+
+            description = it["description"].strip()
+            if description and lvl == 2:
+                description = dedent(description).strip()
+                description = indent(description, indent_level)
+                lines_out.append(description)
+                lines_out.append("")
+
+    return "\n".join(lines_out)
+
