@@ -39,45 +39,6 @@ ul ul {
 
 このユニークなリズム理論をここで御紹介致します。
 
-```{python}
-#| output: asis
-
-import sys
-import subprocess
-import re 
-from pathlib import Path
-
-def create_toc_v1( input_md, output_md, link_target_md ):
-    # Run pandoc to get TOC as Markdown
-    toc_md = subprocess.run(
-        [
-            "pandoc",
-            input_md,
-            "--toc",
-            "--toc-depth=6",
-            "--to=markdown",  # ← output pure Markdown TOC
-            "--template=templates/toc"  # optional: avoids front/back matter
-        ],
-        capture_output=True,
-        text=True
-    ).stdout
-    
-    # Patch all links to include the HTML filename prefix
-    # [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
-    patched = re.sub(r'\]\(#', f']({link_target_md}#', toc_md)
-    
-    # Add 2 extra spaces to every indented line
-    shifted = '\n'.join(
-        '  ' + line if re.match(r'^\s*- ', line) else line
-        for line in patched.splitlines()
-        if line.strip() != ''
-    )
-    print( shifted )
-
-```
-
-
-
 
 ## オフビートカウント理論
 オフビートカウント理論とは、**声出しオフビートカウント法**という演奏技術を核としたリズム理論です。リズムによって立体的/多次元的な空間を作り出し静けさや激しさを表現する **リズム=グルーヴ** を演奏する為の理論です。オフビートカウント理論は主に4つの理論によって構成されます。
@@ -99,24 +60,25 @@ def create_toc_v1( input_md, output_md, link_target_md ):
 以下で順に見ていきましょう。
 
 ### 縦乗りリズム理論
-- [**縦乗りリズム理論**](                                          tatenori-theory/index.md)  
+- [**縦乗りリズム理論**](                                          tatenori-theory/ja/index.qmd)  
     *(最終更新日 2025/6/2)*  日本語を母国語とするミュージシャンならば必ず一度は経験する謎 ─── 『何故日本人はグルーヴしないのか』この問題について考察した記事です。考察中にて、日本人がグルーヴしない理由が日本人が英語が聞き取れない理由と等しいことを明らかにします。日本語と日本の音楽に潜む『縦乗り』の正体を明らかにし、その影響と限界を科学的・文化的に考察します。 
 ```{python}
 #| output: asis
-# input_md = "tatenori-theory/index.md"
-# output_md = "toc-about.md"
-# link_target_md = input_md
-# create_toc_v1( input_md, output_md, link_target_md )
+from lib import rhythmpedia
+input_md       = "tatenori-theory/ja/index.qmd"
+link_target_md = input_md
+print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
 
 ```
 ### <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論 {#多層弱拍基軸律動理論}
-- [**<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論**](./beat-orientation/index.md)  
+- [**<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論**](./beat-orientation/ja/)  
 音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
 
 ```{python}
 #| output: asis
 from lib import rhythmpedia
 print( rhythmpedia.create_toc_v4( 'beat-orientation/master-ja.qmd' ))
+
 ```
 
 

@@ -1,6 +1,45 @@
 
 def greet(name):
     return f"Hello, {name}! This is mymodule speaking."
+# ======================
+# version 1
+# ======================
+
+import sys
+import subprocess
+import re 
+from pathlib import Path
+
+def create_toc_v1( input_md, link_target_md ):
+    # Run pandoc to get TOC as Markdown
+    toc_md = subprocess.run(
+        [
+            "pandoc",
+            input_md,
+            "--toc",
+            "--toc-depth=6",
+            "--to=markdown",  # ← output pure Markdown TOC
+            "--template=templates/toc"  # optional: avoids front/back matter
+        ],
+        capture_output=True,
+        text=True
+    ).stdout
+
+    # Patch all links to include the HTML filename prefix
+    # [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
+    patched = re.sub(r'\]\(#', f']({link_target_md}#', toc_md)
+
+    # Add 2 extra spaces to every indented line
+    shifted = '\n'.join(
+        '  ' + line if re.match(r'^\s*- ', line) else line
+        for line in patched.splitlines()
+        if line.strip() != ''
+    )
+    return shifted
+
+# ======================
+# version 2 and later
+# ======================
 
 import re
 import html
@@ -370,11 +409,11 @@ def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
     return "\n".join(lines_out)
 
 
-def create_toc_v1( input_qmd ):
-    call_create_toc( input_qmd, _create_toc_v1 )
+def create_toc_v3( input_qmd ):
+    return call_create_toc( input_qmd, _create_toc_v3 )
 
 def create_toc_v4( input_qmd ):
-    call_create_toc( input_qmd, _create_toc_v4 )
+    return call_create_toc( input_qmd, _create_toc_v4 )
 
 
 # def create_toc( input_qmd ):
