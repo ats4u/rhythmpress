@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 from pathlib import Path
 from html.parser import HTMLParser
@@ -35,6 +37,8 @@ def extract_ruby_base(text):
     parser = RubyBaseTextExtractor()
     return parser.extract(text)
 
+def extract_illegal_char(text):
+    return re.sub(r'[^\w\u4e00-\u9fff\u3040-\u30ff\u3000-\u303f-]+', '-', text, flags=re.UNICODE)
 
 
 def split_qmd( input_file, lang_id ):
@@ -59,7 +63,7 @@ def split_qmd( input_file, lang_id ):
     for i, h2 in enumerate(h2_matches):
         h2_title = h2.group(1).strip()
         # h2_id = h2.group(2).strip() if h2.group(2) else re.sub(r'[^a-zA-Z0-9_-]+', '-', h2.group(1).strip()).lower()
-        h2_id = h2.group(2).strip() if h2.group(2) else re.sub(r'[^\w\u4e00-\u9fff\u3040-\u30ff\u3000-\u303f-]+', '-', extract_ruby_base( h2.group(1).strip() ), flags=re.UNICODE).strip('-')
+        h2_id = h2.group(2).strip() if h2.group(2) else extract_illegal_char( extract_ruby_base( h2.group(1).strip() ) ) .strip( '-' )
 
         h2_start = h2.start()
         h2_end = h2_matches[i + 1].start() if i + 1 < len(h2_matches) else len(input_text)
