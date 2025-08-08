@@ -146,6 +146,16 @@ def create_toc_v2(input_md, link_target_md='.'):
     print('\n'.join(toc_lines))
 ```
 
+```{python}
+from lib import rhythmpedia
+
+with open( 'beat-orientation/master-ja.qmd', encoding='utf-8') as f:
+  result = rhythmpedia.parse_qmd_teasers( f.read() )
+
+# print( result )
+
+```
+
 ## オフビートカウント理論
 オフビートカウント理論とは、**声出しオフビートカウント法**という演奏技術を核としたリズム理論です。リズムによって立体的/多次元的な空間を作り出し静けさや激しさを表現する **リズム=グルーヴ** を演奏する為の理論です。オフビートカウント理論は主に4つの理論によって構成されます。
 
