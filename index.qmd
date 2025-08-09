@@ -56,6 +56,8 @@ ul ul {
 - [縦乗りが起こるメカニズム  (未稿)](#縦乗りが起こるメカニズム)
 - [日本語が認識にもたらす影響  (未稿)](#日本語が認識にもたらす影響) 
 -->
+<nav id="toc"></nav>
+<script type="module" src="assets/toc-ul.mjs"></script>
 
 以下で順に見ていきましょう。
 
@@ -76,7 +78,7 @@ print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
 ```{python}
 #| output: asis
 from lib import rhythmpedia
-print( rhythmpedia.create_toc_v3( 'beat-orientation/master-ja.md' ))
+print( rhythmpedia.create_toc_v3( 'beat-orientation/master-ja.qmd' ))
 
 
 ```

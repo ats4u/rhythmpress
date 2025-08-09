@@ -70,6 +70,7 @@ format:
       - text: |
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <script type="module" src="assets/toc-ul.mjs"></script>
     grid:
       sidebar-width: 300px
       body-width: 800px
