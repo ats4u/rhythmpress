@@ -57,7 +57,6 @@ ul ul {
 - [日本語が認識にもたらす影響  (未稿)](#日本語が認識にもたらす影響) 
 -->
 <nav id="toc"></nav>
-<script type="module" src="assets/toc-ul.mjs"></script>
 
 以下で順に見ていきましょう。
 
@@ -70,7 +69,6 @@ from lib import rhythmpedia
 input_md       = "tatenori-theory/ja/index.qmd"
 link_target_md = input_md
 print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
-
 ```
 ### <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論 {#多層弱拍基軸律動理論}
 - [**<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論**](./beat-orientation/ja/)  
@@ -101,8 +99,8 @@ print( rhythmpedia.create_toc_v3( 'beat-orientation/master-ja.qmd' ))
     メタディヴィジョン理論を踏まえた上で、拍子やポリリズムの限界を超え、階層的で動的な時間構造を持つ新しいリズム理論を提案します。
 -->
 
-### オフビートカウント理論
- * [**オフビートカウント理論**](offbeat-count-theory/index.md)  
+### 声出しオフビートカウント法
+ * [**声出しオフビートカウント法**](offbeat-count-theory/index.md)  
     オフビートカウントとは、音楽を聴いている時、或いは音楽を演奏している時に、同時に声を出して英語で『半拍早く』拍数をカウントするという実践方法を使うことで、音楽上のグルーヴをはっきり意識し理解を深め音楽性を向上するという実践的手法です。
     
     とても単純な実践方法ですが、たったこれだけの練習方法で飛躍的に音楽演奏能力が向上します。たったこの『半拍早く数える』という単純な行為に無限の奥行きが存在します。半拍早くカウントするというたったそれだけのことですが、習得にはしばしば長い長い年月が必要です。 

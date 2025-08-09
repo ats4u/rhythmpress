@@ -227,12 +227,20 @@ def parse_qmd_teasers(
             # Guard: avoid chopping an open fence. We'll truncate only if not inside an unmatched fence.
             description = description[:max_description_chars].rstrip()
 
+        # Compute character offsets in the original text
+        section_start_char = sum(len(lines[i]) + 1 for i in range(section_start))
+        section_end_char   = sum(len(lines[i]) + 1 for i in range(next_bound))
+
         out.append({
             "header_title": h["title_norm"],
             "header_slug": h["slug"],  # explicit only; may be None
             "description": description,
             "level": h["level"],          # ← add
             "title_raw": h["title_raw"],  # ← add
+            "section_start_line": section_start,         # first content line after header
+            "section_end_line"  : next_bound,            # first line after section
+            "section_start_char": section_start_char,    # char offset of section_start
+            "section_end_char"  : section_end_char,      # char offset of section_end
         })
 
     return out
@@ -314,31 +322,42 @@ def _slug_for_item(title_raw: str, explicit: Optional[str]) -> str:
     rb = _ruby_base_or_none(title_raw)
     return _slugify_unicode(rb if rb else title_raw)
 
-def proc_qmd_teasers( items, basedir: str, lang: str ):
+def proc_qmd_teasers(items, basedir: str | Path, lang: str):
     """
-    Print a nested Markdown TOC from master-<lang>.qmd.
+    Decorate parsed heading items with file/link metadata.
 
-    - Level-2 →  ./<basedir>/<slug>/<lang-id>/
-    - Level-3+ → ./<basedir>/<parent-slug>/<lang-id>/#<sub-slug>
-    - Indent: 0 spaces at level-2, +2 spaces per deeper level
+    Adds:
+      - it["slug"]            : final slug (explicit {#id} wins; else ruby-aware)
+      - it["link"]            : H2 → ./<dir>/<slug>/<lang>/ ; H3+ → ./<dir>/<h2>/<lang>/#<slug>
+      - it["out_path"]        : target file path for this heading (future-ready, all levels)
+                                <base>/<slug>/<lang>/index.qmd   [flat by slug]
+      - it["lang_index_path"] : <base>/<lang>/index.qmd
+
+    Notes:
+      - This function only annotates; callers may choose to write H2 only (current spec).
+      - Links use the directory name (Path(basedir).name) to avoid absolute paths.
+      - No de-duplication: ensure slugs are globally unique if you keep the flat layout.
     """
+    base = Path(basedir)
+    base_name = base.name  # safe for links
+    current_lv2_slug: Optional[str] = None
+
     for it in items:
-        lvl: int = it["level"]           # provided by your parser
-        title: str = it["header_title"]
-        title_raw: str = it["title_raw"] # provided by your parser
+        lvl: int = int(it["level"])
+        title_raw: str = it["title_raw"]
         explicit: Optional[str] = it["header_slug"]
 
         slug = _slug_for_item(title_raw, explicit)
-
+        it["slug"] = slug
+        it["out_path"] = base / slug / lang / "index.qmd"
+        # convenience: same for all items
+        it["lang_index_path"] = base / lang / "index.qmd" 
         if lvl == 2:
             current_lv2_slug = slug
-            link = f"./{basedir}/{slug}/{lang}/"
+            it["link"] = f"./{base_name}/{slug}/{lang}/"
         else:
             ancestor = current_lv2_slug or slug
-            link = f"./{basedir}/{ancestor}/{lang}/#{slug}"
-
-        it["link"] = link
-        it["slug"] = slug
+            it["link"] = f"./{base_name}/{ancestor}/{lang}/#{slug}"
 
     return items
 
