@@ -12,6 +12,8 @@ website:
   title: "律動図鑑(リズムペディア)"
   description: "グルーヴを科学する律動図鑑〜リズムペディア"
   site-url: "https://rhythmpedia.com/"
+  page-navigation: true     # show Previous / Next buttons in the footer
+  bread-crumbs: true
 #  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"
 #  announcement:
 #    content: |
@@ -31,12 +33,8 @@ website:
     style: "docked"
     search: true
     logo: /attachments/rhythmpedia-logo-dark.png
-    contents:
-      - section: "律動図鑑(リズムペディア)"
-        href: index.qmd
-        contents:
-          - text: トップ
-            href: index.qmd
+    collapse-level: 1
+    contents: []
 format:
   html:
     theme:
@@ -65,5 +63,7 @@ format:
       gutter-width: 1.5rem
 
 metadata-files:
+    - _quarto.before.yml
     - _quarto.sidebar.yml
-    - _quarto.sidebar.generated.yml
+    - beat-orientation/_quarto.index.ja.yml
+    - _quarto.after.yml

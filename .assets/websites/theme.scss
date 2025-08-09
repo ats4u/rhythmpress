@@ -177,3 +177,51 @@ dl:not(dl dl):not(dl ul):not(dl ol) {
   margin-left: 2em; /* increase only top-level margin */
   margin-bottom: 1em; /* increase only top-level margin */
 }
+
+
+
+
+
+
+/* ADDED Sun, 10 Aug 2025 07:20:05 +0900 */
+/* Make page navigation buttons bigger and styled */
+.nav-page {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.nav-page a {
+  display: inline-block;
+  background: var(--bs-primary);
+  color: white !important;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background 0.2s ease-in-out;
+}
+
+.nav-page a:hover {
+  background: var(--bs-primary-dark, #0056b3);
+}
+
+
+/*  **** */
+
+/* Force breadcrumbs to bottom-align text */
+.breadcrumb {
+  display: flex;
+  align-items: flex-end;
+}
+
+.breadcrumb li,
+.breadcrumb a {
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+

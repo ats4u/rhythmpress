@@ -1,6 +1,33 @@
 
 def greet(name):
     return f"Hello, {name}! This is mymodule speaking."
+
+# ===============================================================
+# compact front matter + wrapper 
+# ===============================================================
+import re
+from typing import Any, Dict
+
+_FM_RE = re.compile(r'^\ufeff?---\s*\n(.*?)\n(?:---|\.\.\.)\s*(?:\n|$)', re.DOTALL)
+
+def parse_frontmatter(text: str) -> Dict[str, Any]:
+    m = _FM_RE.match(text)
+    if not m:
+        return {}
+    block = m.group(1)
+    try:
+        import yaml  # full YAML parser
+        data = yaml.safe_load(block)
+        return data if isinstance(data, dict) else {"_frontmatter": data}
+    except ModuleNotFoundError:
+        raise RuntimeError(
+            "PyYAML is required to parse front matter. "
+            "Install it with: python -m pip install pyyaml"
+        )
+    except Exception as e:
+        raise RuntimeError(f"Error parsing YAML front matter: {e}")
+
+
 # ======================
 # version 1
 # ======================
@@ -97,6 +124,8 @@ def parse_qmd_teasers(
     section’s opening content until the first child or sibling header, and
     return them as a list of dictionaries.
     """
+
+
     lines = text.splitlines()
 
     # 1) Skip YAML front matter at file head (--- ... --- or ...)
@@ -454,6 +483,8 @@ def split_master_qmd(master_path: Path) -> None:
     lang = _lang_id_from_filename(master_path)
     text = master_path.read_text(encoding="utf-8")
 
+    frontmatter = parse_frontmatter(text)
+
     items = parse_qmd_teasers(
         text, min_level=2, max_level=6,
         strip_html_in_title=False, normalize_ws=False, respect_frontmatter=True
@@ -496,6 +527,47 @@ def split_master_qmd(master_path: Path) -> None:
     idx.parent.mkdir(parents=True, exist_ok=True)
     idx.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
     print(f"  ✅ {idx}")
+
+
+    # section_title = ""
+    # yml_lang_path = master_path.parent / f"_quarto.index.{lang}.yml"
+    # yml_lang_lines = [
+    #     "website:",
+    #     "  sidebar:",
+    #     "    contents:",
+    #     f"      - section: \"{section_title}\"",
+    #     "        contents:",
+    # ]
+    # for it in h2s:
+    #     slug = it["slug"]
+    #     # project-relative path (no leading slash)
+    #     yml_lang_lines.append(f"          - {slug}/{lang}/index.qmd")
+
+    # yml_lang_path.write_text("\n".join(yml_lang_lines) + "\n", encoding="utf-8")
+    # print(f"  ✅ {yml_lang_path}")
+
+
+    # --- NEW: per-language YAML include: _quarto.index.<lang>.yml ---
+    section_title = frontmatter.get("title") or "untitled"
+    yml_lang_path = master_path.parent / f"_quarto.index.{lang}.yml"
+    yml_lang_lines = [
+        "website:",
+        "  sidebar:",
+        "    contents:",
+        f"      - section: \"{section_title}\"",
+        "        contents:",
+    ]
+    for it in h2s:
+        base_name = it["base_name"]
+        slug      = it["slug"]
+        href      = f"{base_name}/{slug}/{lang}/index.qmd"
+        yml_lang_lines.append(f"          - {href}")
+    yml_lang_path.write_text("\n".join(yml_lang_lines) + "\n", encoding="utf-8")
+    print(f"  ✅ {yml_lang_path}")
+
+
+
+
 
 def split_all_masters( qmd_splitter , root: str | Path = ".") -> None:
     for p in sorted(Path(root).glob("master-*.qmd")):

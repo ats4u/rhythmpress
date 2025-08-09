@@ -1,20 +1,5 @@
 
 website:
   sidebar:
-    style: "docked"
-    search: true
-    logo: /attachments/rhythmpedia-logo-dark.png
-    contents:
-      - section: "オフビートカウント理論"
-        contents:
-          - tatenori-theory/ja/index.qmd
-          - beat-orientation/ja/index.qmd
-#          - metadivision/index.md
-#          - three-n-rhythm/index.md
-          - distributed-groove-theory/ja/index.qmd
-#          - offbeat-count-theory/ja/
-#          - practical-offbeat-count/index.md
-#          - polyrhythm/index.md
-          - tatenori-and-psychology/index.md
-#          - mechanism-behind-tatenori/index.md
-#          - influence-of-japanese-language-on-cognition/index.md
+    contents: []
+
