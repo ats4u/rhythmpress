@@ -37,19 +37,6 @@ website:
         contents:
           - text: トップ
             href: index.qmd
-      - section: "オフビートカウント理論"
-        contents:
-          - ./tatenori-theory/index.md
-          - ./beat-orientation/index.md
-#          - ./metadivision/index.md
-#          - ./three-n-rhythm/index.md
-          - ./distributed-groove-theory/index.md
-          - ./offbeat-count-theory/index.md
-#          - ./practical-offbeat-count/index.md
-#          - ./polyrhythm/index.md
-          - ./tatenori-and-psychology/index.md
-#          - ./mechanism-behind-tatenori/index.md
-#          - ./influence-of-japanese-language-on-cognition/index.md
 format:
   html:
     theme:
@@ -77,3 +64,6 @@ format:
       margin-width: 600px
       gutter-width: 1.5rem
 
+metadata-files:
+    - _quarto.sidebar.yml
+    - _quarto.sidebar.generated.yml
