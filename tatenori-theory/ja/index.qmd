@@ -14,7 +14,7 @@ tags:
 
 縦乗りに気付くかどうかは貴方次第です。そのまま縦乗りの存在に気付かずに生涯を全うするか、あるいは縦乗りに気付いて火のついた様な激しい真実の世界で生きていくか。それは貴方の選択次第です。
 
-![](attachments/blue-pill-and-red-pill-v2.png)
+![](/tatenori-theory/attachments/blue-pill-and-red-pill-v2.png)
 
 それは映画マトリックスに登場する赤いカプセルと青いカプセルの様です。もちろん、このまま縦乗りに気付かないで生きていくことも可能です。もしもここで、縦乗りに気付くことを選んだらどうなるでしょうか。 …縦乗りに気付くことにより大きな自由が得られると同時に、大きなリスクのある世界で生きていく事になります。
 
@@ -87,7 +87,7 @@ tags:
 
 これは日本語ではしばしば「ちゃんちゃん」と訳されます。
 
-![](./attachments/ba-dum-tss.png){width=560px }
+![](/tatenori-theory/attachments/ba-dum-tss.png){width=560px }
 
 これは日本語のちゃんちゃんの様な位置にあり、コントの終わりなどで効果音として使われます。
 
@@ -95,11 +95,11 @@ tags:
 
 もし貴方が音楽の訓練を受けている方で、譜面を読み書きすることができる方でしたら、次の様に聴き取ったかも知れません。
 
-![](./attachments/ba-dum-tss-incorrect.png)
+![](/tatenori-theory/attachments/ba-dum-tss-incorrect.png)
 
 しかしこれは本来次の様に記譜すべきなのです。
 
-![](./attachments/ba-dum-tss-score-correct.png)
+![](/tatenori-theory/attachments/ba-dum-tss-score-correct.png)
 
 ### リズムの解釈の違い
 
@@ -122,11 +122,11 @@ tags:
 この曲は、マイケル・ジャクソンのヒット曲『[ヒューマン・ネイチャー](https://www.youtube.com/watch?v=ElN_4vUvTPs)』です。この曲の冒頭でマイケル・ジャクソンが「チーチキ・チーチキ」と歌っていますが、この記事を読んで下さっている皆様は、このリズムをどの様に聴き取りましたでしょうか。
 
 
-![](./attachments/human-nature-score-incorrect.png)
+![](/tatenori-theory/attachments/human-nature-score-incorrect.png)
 
 この様に解釈されたのではないでしょうか。しかし曲が始まると間もなくこの解釈が間違っていることが明らかになります ─── 実は次のようになっています。
 
-![](./attachments/human-nature-score-correct.png)
+![](/tatenori-theory/attachments/human-nature-score-correct.png)
 
 このように８分音符１つ分ずれた形でリズムが始まっています。
 
