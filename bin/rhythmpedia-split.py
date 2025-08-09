@@ -44,6 +44,7 @@ def split_master_qmd(master_path: Path) -> None:
         title = it["header_title"]
         slug  = it["slug"]
         desc  = (it["description"] or "").strip()
+        # href  = f"../{slug}/{lang}/"   # <-- lang at the end
         href  = f"../{slug}/{lang}/"   # <-- lang at the end
 
         lines.append(f"### [{title}]({href})")

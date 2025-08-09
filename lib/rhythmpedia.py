@@ -232,15 +232,15 @@ def parse_qmd_teasers(
         section_end_char   = sum(len(lines[i]) + 1 for i in range(next_bound))
 
         out.append({
-            "header_title": h["title_norm"],
-            "header_slug": h["slug"],  # explicit only; may be None
-            "description": description,
-            "level": h["level"],          # ← add
-            "title_raw": h["title_raw"],  # ← add
-            "section_start_line": section_start,         # first content line after header
-            "section_end_line"  : next_bound,            # first line after section
-            "section_start_char": section_start_char,    # char offset of section_start
-            "section_end_char"  : section_end_char,      # char offset of section_end
+            "header_title"      : h["title_norm"],
+            "header_slug"       : h["slug"],           # explicit only; may be None
+            "description"       : description,
+            "level"             : h["level"],          # ← add
+            "title_raw"         : h["title_raw"],      # ← add
+            "section_start_line": section_start,       # first content line after header
+            "section_end_line"  : next_bound,          # first line after section
+            "section_start_char": section_start_char,  # char offset of section_start
+            "section_end_char"  : section_end_char,    # char offset of section_end
         })
 
     return out
@@ -338,8 +338,11 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str):
       - Links use the directory name (Path(basedir).name) to avoid absolute paths.
       - No de-duplication: ensure slugs are globally unique if you keep the flat layout.
     """
-    base = Path(basedir)
+    base      = Path(basedir)
     base_name = base.name  # safe for links
+    if base_name in ("", ".", "/"):
+        base_name = base.resolve().name
+
     current_lv2_slug: Optional[str] = None
 
     for it in items:
@@ -348,6 +351,7 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str):
         explicit: Optional[str] = it["header_slug"]
 
         slug = _slug_for_item(title_raw, explicit)
+        it["base_name"] = base_name # the current directory name; this is safe for links
         it["slug"] = slug
         it["out_path"] = base / slug / lang / "index.qmd"
         # convenience: same for all items
