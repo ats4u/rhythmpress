@@ -2,7 +2,7 @@ We use a project-local virtual environment (`.venv`) to run Python in Quarto dyn
 
 Use the procedure below to recreate the `.venv` environment.
 
-```
+```python
 # 0) From your project root
 deactivate 2>/dev/null || true
 rm -rf .venv
