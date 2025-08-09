@@ -20,15 +20,15 @@ tags:
 
 リズムを叩くにあたって制約１『一定周期で叩くことしかできない』を知ることはとても重要だ。例えばこういう複雑なリズムがあったとする。
 
-![](attachments/Pasted%20image%2020250805190006.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190006.png)
 
 人間は直接このリズムを叩くことはできない。何故なら人間は時間を一定周期で分割する能力しか持たないからだ。だが次のように工夫することで叩くことができる。
 
-![](attachments/Pasted%20image%2020250805190035.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190035.png)
 
 譜面上ではこれが一定周期の組み合わせだということがわかりにくいので、グラフを使って見てみよう。
 
-![](attachments/Pasted%20image%2020250805190115.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190115.png)
 
 これなら一定周期の組み合わせだから人間でも叩くことができる。このようにして人間は複雑なリズムを叩くことができる。
 
@@ -44,17 +44,17 @@ tags:
   
 次の単純なリズムを考えてみる。
 
-![](attachments/Pasted%20image%2020250805190159.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190159.png)
 
 １２０ＢＰＭ程度なら十分叩けるだろう。だが２００〜３００ＢＰＭになれば徐々に難しくなってくる。８分音符や１６分音符などの細かな音符を考えると、２００ＢＰＭで８分音符を演奏するなら２倍の４００ＢＰＭ相当、１６分音符なら８００ＢＰＭに到達するリズムを叩かなければならない。これは到底人間には叩くことができないリズムだ。
 
 そこでこれを分割することを考えてみる。
 
-![](attachments/Pasted%20image%2020250805190228.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190228.png)
 
 全く同じリズムでもこの様に分解すれば半分のＢＰＭで演奏できる。グラフでも確認してみよう。
 
-![](attachments/Pasted%20image%2020250805190240.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190240.png)
 
 この処理のことを**単純リズムの分解**と呼ぼう。
 
@@ -64,17 +64,17 @@ tags:
   
 前章の例では２つの拍の距離は１／２だったが、これをもし１／４にしたらどうなるだろうか。
 
-![](attachments/Pasted%20image%2020250805190259.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190259.png)
 
 この様に２つの拍の距離が１／４になるとそれは１／４の長さを持つ音符＝８分音符と同じ細かさを持つ。
 
-![](attachments/Pasted%20image%2020250805190309.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190309.png)
 
 同じ様にして２つの拍の距離が１／３になったらどうなるかを見てみよう。
 
-![](attachments/Pasted%20image%2020250805190445.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190445.png)
 
-![](attachments/Pasted%20image%2020250805190454.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190454.png)
 
 ２つの拍の距離が２／３になるとそれは２／３のの長さを持つ２拍３連２個分の細かさを持つことになる。  
   
@@ -87,13 +87,13 @@ tags:
 具体的に言うと、拍解像度はその小節内にある全ての音符の位置を数値として表した時の全ての数の最大公約数となる。例えば、１６分音符（音価が１／１６）があったとしても、拍解像度は必ずしも１／１６にならない。何故ならもしその１６分音符が４分音符と同じ位置にあったら拍解像度は１／４にしかならないからだ。  
   
 **例１**  
-![](attachments/Pasted%20image%2020250805190525.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190525.png)
 
-![](attachments/Pasted%20image%2020250805190532.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190532.png)
 
 １６分音符が全て４分音符と同じ場所にあれば拍解像度としては４分音符と同じになる。
 
-![](attachments/Pasted%20image%2020250805190546.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190546.png)
 
 この１６分音符は４分音符とおなじ拍解像度しか持たない。
 
@@ -101,7 +101,7 @@ tags:
 
 **例２**
 
-![](attachments/Pasted%20image%2020250805190646.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190646.png)
 
 この例２の拍解像度は２分音符が \[ 0/2, 1/2, 3/2, 4/2 \] ８分音符が\[ 3/8, 7/8, 11/8, 15/8 \] なので、最大公約数は 1/8 だ。よって拍解像度は1/8になる。  
   
@@ -113,11 +113,11 @@ tags:
 
 ８分音符でも４分音符と同じ位置にあれば４分音符と同じ拍解像度しか持たない。拍解像度を効率よく上げるには、４分音符と同じ位置にある８分音符を省いて考えたほうが簡単だ。 同様にして１６分音符でも８分音符と同じ位置にある１６分音符を省いて考えたほうが簡単になる。
 
-![](attachments/Pasted%20image%2020250805190721.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190721.png)
 
 このように重なった音符を一番拍解像度が高いものを残して省くと次のようになる。
 
-![](attachments/Pasted%20image%2020250805190731.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190731.png)
 
 これはつまり全ての音価の音符から裏拍だけを残したものだ。  
   
@@ -125,11 +125,11 @@ tags:
   
 **可約拍は表拍のことだ。**
 
-![](attachments/Pasted%20image%2020250805190745.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190745.png)
 
 **既約拍は裏拍のことだ。**
 
-![](attachments/Pasted%20image%2020250805190759.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190759.png)
 
 裏拍の意味についての詳しくは [裏拍の大切さ](https://oka-ats.blogspot.com/2019/01/oka01-gdqoqxundapoaemf.html) で説明した。
 
@@ -137,7 +137,7 @@ tags:
 
 [裏拍の大切さ](https://oka-ats.blogspot.com/2019/01/oka01-gdqoqxundapoaemf.html) で説明した通り表拍を叩くとそれは裏拍の存在感を減らす結果になり、音楽の拍解像度が下がったような印象（スピード感を失った）を与える。この拍解像度が下がった印象のことを**縦乗り(vertical riding)**という。縦乗りについては [何故、日本人は縦乗りなのか](https://oka-ats.blogspot.com/2018/01/oka01-qioaafwfeykuqiuj.html)で説明した。縦乗りを避けるためには裏拍だけを選択的に叩かなければいけない。
 
-![](attachments/Pasted%20image%2020250805190820.png)
+![](/distributed-groove-theory/attachments/Pasted%20image%2020250805190820.png)
 
 この様に音価ごとに無駄な音（表拍）を整理すると、音価が層になって横方向に広がり重なり合っている様子が観察できる。またそれぞれの音かの拍が異なる音価の拍と重なりあうことなく避けあっている点も観察できる。  
   
