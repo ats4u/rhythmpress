@@ -73,14 +73,13 @@ print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
 ### <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論 {#多層弱拍基軸律動理論}
 - [**<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論**](./beat-orientation/ja/)  
 音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
-
 ```{python}
 #| output: asis
 from lib import rhythmpedia
-print( rhythmpedia.create_toc_v4( 'beat-orientation/master-ja.qmd' ))
+print( rhythmpedia.create_toc_v3( 'beat-orientation/master-ja.md' ))
+
 
 ```
-
 
 <!--
 ### メタディヴィジョン理論

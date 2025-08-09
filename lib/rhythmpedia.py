@@ -353,7 +353,7 @@ def call_create_toc( input_qmd, create_toc ):
 
 #######################
 
-def _create_toc_v1(text: str, basedir: str, lang: str) -> None:
+def _create_toc_v3(text: str, basedir: str, lang: str) -> None:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -370,10 +370,8 @@ def _create_toc_v1(text: str, basedir: str, lang: str) -> None:
         description : str = it["description"].strip()
         title       : str = it["header_title"]
 
-        if link is not None:
-            indent_level = " " * (2 * max(0, lvl - 2))
-            lines_out.append( f"{indent_level}- [{title}]({link})" )
-            lines_out.append("")
+        indent_level = " " * (4 * max(0, lvl - 1))
+        lines_out.append( f"{indent_level}- [{title}]({link})" )
 
     return "\n".join(lines_out)
 
@@ -396,7 +394,7 @@ def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
         title       : str = it["header_title"]
 
         if link is not None:
-            indent_level = " " * (2 * max(0, lvl - 2))
+            indent_level = " " * (2 * max(0, lvl - 3))
             lines_out.append( f"{indent_level}- [{title}]({link})" )
             lines_out.append("")
 
