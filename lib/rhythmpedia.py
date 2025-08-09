@@ -501,9 +501,13 @@ def split_master_qmd(master_path: Path) -> None:
     # 3-liner per section: slice → mkdir → write (H2 only per spec)
     for it in h2s:
         beg, end = _hdr_start(text, it), int(it["section_end_char"])
+        section = text[beg:end]
+        title_raw = it["title_raw"]
+        # title_clean = TAG_RE.sub("", it["title_raw"]).strip()
+        fm = f"---\ntitle: \"{title_raw}\"\n---\n\n"
         p: Path = it["out_path"]
-        p.parent.mkdir( parents=True, exist_ok=True );
-        p.write_text( text[beg:end], encoding="utf-8" )
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(fm + section, encoding="utf-8")
         print(f"  ✅ {p}")
 
     # language index
