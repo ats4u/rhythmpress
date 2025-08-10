@@ -479,6 +479,7 @@ def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
         link        : str = it["link"]
         description : str = it["description"].strip()
         title       : str = it["header_title"]
+        indent_level = " " * (2 * max(0, lvl - 2))
 
         if link is not None:
             if description and lvl == 2:
@@ -486,7 +487,6 @@ def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
                 # description = indent(description, indent_level)
                 lines_out.append("")
                 lines_out.append( f"#### {title}" )
-                lines_out.append( f"* [{title}]({link})" )
                 lines_out.append( "" )
                 lines_out.append( "<!-- -->" )
                 lines_out.append( description )
@@ -495,8 +495,8 @@ def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
                 lines_out.append( "---" )
                 lines_out.append( "" )
                 lines_out.append( "<!-- -->" )
+                lines_out.append( f"{indent_level}- [{title}]({link})" )
             elif lvl == 3:
-                indent_level = " " * (2 * max(0, lvl - 3))
                 lines_out.append( f"{indent_level}- [{title}]({link})" )
 
 
