@@ -55,7 +55,7 @@ format:
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <script type="module" src="//assets/toc-ul.mjs"></script>
     grid:
-      sidebar-width: 300px
+      sidebar-width: 500px
       body-width: 800px
       margin-width: 600px
       gutter-width: 1.5rem
