@@ -76,7 +76,10 @@ print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
 ```{python}
 #| output: asis
 from lib import rhythmpedia
-print( rhythmpedia.create_toc_v3( 'beat-orientation/master-ja.qmd' ))
+print( rhythmpedia.create_toc_v5( 'beat-orientation/master-ja.qmd' ))
+
+
+
 
 
 ```

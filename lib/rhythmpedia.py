@@ -458,12 +458,57 @@ def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
 
     return "\n".join(lines_out)
 
+# =========================================
+# _create_toc_v5
+# =========================================
+# Added on Sun, 10 Aug 2025 19:20:03 +0900 by Ats
+def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
+    items = parse_qmd_teasers(
+        text,
+        min_level=2,
+        max_level=6,
+        strip_html_in_title=False,  # keep HTML to read <ruby> base
+        normalize_ws=False,
+        respect_frontmatter=True,
+    )
+    items = proc_qmd_teasers( items, basedir, lang )
+
+    lines_out = []
+    for it in items:
+        lvl         : int = it["level"]
+        link        : str = it["link"]
+        description : str = it["description"].strip()
+        title       : str = it["header_title"]
+
+        if link is not None:
+            if description and lvl == 2:
+                # description = dedent(description).strip()
+                # description = indent(description, indent_level)
+                lines_out.append("")
+                lines_out.append( f"### [{title}]({link})" )
+                lines_out.append( description )
+                lines_out.append( "<!-- -->" )
+                lines_out.append( "" )
+                lines_out.append( "---" )
+                lines_out.append( "" )
+                lines_out.append( "<!-- -->" )
+            elif lvl == 3:
+                indent_level = " " * (2 * max(0, lvl - 3))
+                lines_out.append( f"{indent_level}- [{title}]({link})" )
+
+
+    return "\n".join(lines_out)
+
+
 
 def create_toc_v3( input_qmd ):
     return call_create_toc( input_qmd, _create_toc_v3 )
 
 def create_toc_v4( input_qmd ):
     return call_create_toc( input_qmd, _create_toc_v4 )
+
+def create_toc_v5( input_qmd ):
+    return call_create_toc( input_qmd, _create_toc_v5 )
 
 
 #######################
