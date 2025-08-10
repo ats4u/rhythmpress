@@ -44,9 +44,7 @@ format:
     filters:
       - filters/include-files.lua
 #      - filters/obsidian-image-dimensions.lua
-    css: styles.css
-#    include-in-header:
-#      - file: banner.html
+    css: assets/styles.css
     toc: true
     toc-location: right
     toc-depth: 7
