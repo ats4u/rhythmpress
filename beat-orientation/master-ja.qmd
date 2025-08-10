@@ -1280,46 +1280,6 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 以下で頭合わせ・尻合わせが起こるメカニズムを見ていきます。
 
-<style>
-  table.offbeat-onbeat-table {
-    border-collapse: collapse;
-    border: black 1px solid;
-    text-align: center;
-    width: 100%;
-    table-layout: fixed;
-  }
-
-  table.offbeat-onbeat-table th,
-  table.offbeat-onbeat-table td {
-    border: 1px solid black;
-  }
-
-  table.offbeat-onbeat-table tr th {
-    width: 5em;
-    overflow: hidden;
-    font-size: smaller;
-    font-weight:1000;
-    background-color: green;
-    color: white;
-    white-space: nowrap;
-  }
-  table.offbeat-onbeat-table tr th:not(:first-of-type) {
-    background-color: orange;
-    color: white;
-  }
-  
-  body.quarto-dark  table.offbeat-onbeat-table th  {
-    background-color: green;
-    color: white;
-    font-weight:1000;
-  }
-  .offbeat-td {
-    background-color:orange;
-    color:white;
-    font-weight:1000;
-  }
-</style>
-
 
 次のように4分音符が1小節に4つあったとします。ここで音符を２個ずつのグループに分け、先に現れる方を強拍、後に現れる方を弱拍と定義します。
 
@@ -4022,17 +3982,3 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 <div class="center-box"><blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ja" dir="ltr">【外人が演奏する縦乗り】この方は日本語のリズムと英語のリズムの違いに気付いている ── が見事なまでに縦乗りに失敗している。これは彼が日本語話者でないことを表している。リエゾンによって倒置するオフビートがあり、オンビートは全てレイドバックして遅れている。<br><br> <a href="https://t.co/5MrK0hKUHo">https://t.co/5MrK0hKUHo</a> <a href="https://t.co/oJnPHqAaza">pic.twitter.com/oJnPHqAaza</a></p>&mdash; 岡敦/Ats🇯🇵 (@ats4u) <a href="https://twitter.com/ats4u/status/1573036257588178944?ref_src=twsrc%5Etfw">September 22, 2022</a></blockquote></div>
 -->
 
-
-<style>
-.stressed-bak {
-border : solid 1px black;
-padding : 1px;
-bordre-radius:1px;
-}
-  .rhythmpedia-iframe {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border: 0;
-      max-width:540px;
-  }
-</style>
