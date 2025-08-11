@@ -17,7 +17,12 @@ jobs:
         with:
           version: "1.7.31"
 #          version: "1.4.550"
-
+      - name: Install yq
+          run: |
+            YQ_VERSION=v4.47.1
+            wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/local/bin/yq
+            chmod +x /usr/local/bin/yq
+            yq --version
       - name: Install Python (if needed)
         uses: actions/setup-python@v5
         with:
