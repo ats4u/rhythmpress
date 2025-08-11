@@ -9,3 +9,5 @@
 __pycache__
 *_files
 .gitignore
+*.generated.yml
+*.generated.md

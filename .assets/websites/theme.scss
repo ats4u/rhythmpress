@@ -168,13 +168,13 @@ h6 {
 /* Outermost unordered/ordered lists */
 ul:not(ul ul):not(ul ol),
 ol:not(ol ol):not(ol ul) {
-  margin-left: 2em; /* increase only top-level margin */
+  margin-left: 1em; /* increase only top-level margin */
   margin-bottom: 1em; /* increase only top-level margin */
 }
 
 /* Outermost definition lists */
 dl:not(dl dl):not(dl ul):not(dl ol) {
-  margin-left: 2em; /* increase only top-level margin */
+  margin-left: 1em; /* increase only top-level margin */
   margin-bottom: 1em; /* increase only top-level margin */
 }
 
