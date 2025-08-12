@@ -351,7 +351,7 @@ def _slug_for_item(title_raw: str, explicit: Optional[str]) -> str:
     rb = _ruby_base_or_none(title_raw)
     return _slugify_unicode(rb if rb else title_raw)
 
-def proc_qmd_teasers(items, basedir: str | Path, lang: str):
+def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
     """
     Decorate parsed heading items with file/link metadata.
 
@@ -372,6 +372,12 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str):
     if base_name in ("", ".", "/"):
         base_name = base.resolve().name
 
+    # normalize link_prefix to end with one slash
+    if link_prefix == "":
+        link_prefix = "./"
+    if not link_prefix.endswith("/"):
+        link_prefix += "/"
+
     current_lv2_slug: Optional[str] = None
 
     for it in items:
@@ -387,25 +393,25 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str):
         it["lang_index_path"] = base / lang / "index.qmd" 
         if lvl == 2:
             current_lv2_slug = slug
-            it["link"] = f"./{base_name}/{slug}/{lang}/"
+            it["link"] = f"{link_prefix}{base_name}/{slug}/{lang}/"
         else:
             ancestor = current_lv2_slug or slug
-            it["link"] = f"./{base_name}/{ancestor}/{lang}/#{slug}"
+            it["link"] = f"{link_prefix}{base_name}/{ancestor}/{lang}/#{slug}"
 
     return items
 
 #######################
 
-def call_create_toc( input_qmd, create_toc ):
+def call_create_toc( create_toc, input_qmd, **kwargs ):
     p = Path(input_qmd)
     basedir = str( p.parent ) # directory path as string
     lang = _lang_id_from_filename(p)
     text = p.read_text(encoding="utf-8")
-    return create_toc(text, basedir, lang)
+    return create_toc(text, basedir, lang, **kwargs)
 
 #######################
 
-def _create_toc_v3(text: str, basedir: str, lang: str) -> None:
+def _create_toc_v3(text: str, basedir: str, lang: str, **_) -> str:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -427,7 +433,7 @@ def _create_toc_v3(text: str, basedir: str, lang: str) -> None:
 
     return "\n".join(lines_out)
 
-def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
+def _create_toc_v4(text: str, basedir: str, lang: str, **_) -> str:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -462,7 +468,7 @@ def _create_toc_v4(text: str, basedir: str, lang: str) -> None:
 # _create_toc_v5
 # =========================================
 # Added on Sun, 10 Aug 2025 19:20:03 +0900 by Ats
-def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
+def _create_toc_v5(text: str, basedir: str, lang: str, *, link_prefix: str = "/" ) -> str:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -471,7 +477,7 @@ def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
         normalize_ws=False,
         respect_frontmatter=True,
     )
-    items = proc_qmd_teasers( items, basedir, lang )
+    items = proc_qmd_teasers( items, basedir, lang, link_prefix )
 
     lines_out = []
     for it in items:
@@ -482,18 +488,20 @@ def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
         indent_level = " " * (2 * max(0, lvl - 2))
 
         if link is not None:
-            if description and lvl == 2:
+            if lvl == 2:
                 # description = dedent(description).strip()
                 # description = indent(description, indent_level)
                 lines_out.append("")
                 lines_out.append( f"#### {title}" )
-                lines_out.append( "" )
-                lines_out.append( "<!-- -->" )
-                lines_out.append( description )
-                lines_out.append( "<!-- -->" )
-                lines_out.append( "" )
-                lines_out.append( "---" )
-                lines_out.append( "" )
+                if description:
+                    lines_out.append( "" )
+                    lines_out.append( "<!-- -->" )
+                    lines_out.append( description )
+                    lines_out.append( "<!-- -->" )
+                    lines_out.append( "" )
+                    lines_out.append( "---" )
+                    lines_out.append( "" )
+
                 lines_out.append( "<!-- -->" )
                 lines_out.append( f"{indent_level}- [{title}]({link})" )
             elif lvl == 3:
@@ -504,14 +512,14 @@ def _create_toc_v5(text: str, basedir: str, lang: str) -> None:
 
 
 
-def create_toc_v3( input_qmd ):
-    return call_create_toc( input_qmd, _create_toc_v3 )
+def create_toc_v3( input_qmd, **kwargs ):
+    return call_create_toc( _create_toc_v3, input_qmd, **kwargs )
 
-def create_toc_v4( input_qmd ):
-    return call_create_toc( input_qmd, _create_toc_v4 )
+def create_toc_v4( input_qmd, **kwargs ):
+    return call_create_toc( _create_toc_v4, input_qmd, **kwargs )
 
-def create_toc_v5( input_qmd ):
-    return call_create_toc( input_qmd, _create_toc_v5 )
+def create_toc_v5( input_qmd, **kwargs ):
+    return call_create_toc( _create_toc_v5, input_qmd, **kwargs )
 
 
 #######################
@@ -617,6 +625,42 @@ def split_master_qmd(master_path: Path) -> None:
     yml_lang_path.write_text("\n".join(yml_lang_lines) + "\n", encoding="utf-8")
     print(f"  ✅ {yml_lang_path}")
 
+
+# --- new: copy master-<lang>.qmd -> ./<lang>/index.qmd using split_all_masters ---
+#######################
+# Master QMD SPlitter
+# Added by Ats on Mon, 11 Aug 2025 23:13:20 +0900
+#######################
+
+from pathlib import Path
+
+def copy_lang_index_splitter(master_path: Path) -> None:
+    """
+    Copy ./master-<lang>.qmd -> ./<lang>/index.qmd and emit
+    ./_quarto.index.<lang>.yml with a single contents entry.
+    Touch files only when content changed (prevents preview loops).
+    """
+    print(f"\n→ {master_path}")
+    lang = _lang_id_from_filename(master_path)
+    dst  = master_path.parent / lang / "index.qmd"
+    dst.parent.mkdir(parents=True, exist_ok=True)
+
+    # Copy master -> <lang>/index.qmd (idempotent)
+    src_text = master_path.read_text(encoding="utf-8")
+    if not dst.exists() or dst.read_text(encoding="utf-8") != src_text:
+        dst.write_text(src_text, encoding="utf-8")
+        print(f"  ✅ {dst}")
+    else:
+        print(f"  =  {dst} (unchanged)")
+
+    # Minimal sidebar include: no 'section', just the file path.
+    yml_path = master_path.parent / f"_quarto.index.{lang}.yml"
+    yml_text = f"website:\n  sidebar:\n    contents:\n      - {lang}/index.qmd\n"
+    if not yml_path.exists() or yml_path.read_text(encoding="utf-8") != yml_text:
+        yml_path.write_text(yml_text, encoding="utf-8")
+        print(f"  ✅ {yml_path}")
+    else:
+        print(f"  =  {yml_path} (unchanged)")
 
 
 

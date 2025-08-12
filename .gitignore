@@ -11,3 +11,4 @@ __pycache__
 .gitignore
 *.generated.yml
 *.generated.md
+.toc_title_cache.json

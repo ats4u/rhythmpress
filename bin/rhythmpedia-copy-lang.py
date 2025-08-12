@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import sys, pathlib;
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]));
+from lib import rhythmpedia
+
+# CLI
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1:
+        for a in sys.argv[1:]: rhythmpedia.copy_lang_index_splitter(Path(a))
+    else:
+        rhythmpedia.split_all_masters( rhythmpedia.copy_lang_index_splitter, ".")
+

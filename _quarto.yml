@@ -7,7 +7,7 @@ project:
     browser: false
   resources:
     - Ads.txt
-  pre-render: bin/render-sidebar.sh
+#  pre-render: bin/render-sidebar.sh
 
 website:
   title: "律動図鑑(リズムペディア)"
