@@ -68,7 +68,7 @@ ul ul {
 from lib import rhythmpedia
 input_md       = "tatenori-theory/ja/index.qmd"
 link_target_md = input_md
-print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
+## print( rhythmpedia.create_toc_v1( input_md, link_target_md ) )
 ```
 ### <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論 {#多層弱拍基軸律動理論}
 - [**<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論**](./beat-orientation/ja/)  

@@ -1,0 +1,7 @@
+set -euxo pipefail
+
+rhythmpedia clean     tatenori-theory  --apply --force
+rhythmpedia copy-lang tatenori-theory
+rhythmpedia clean     beat-orientation --apply --force
+rhythmpedia split     beat-orientation
+rhythmpedia render-sidebar

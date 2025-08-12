@@ -74,7 +74,7 @@ sidebar:
 
 toc:
 	@echo "==> Generating TOC"
-	$(if $(DRYRUN),echo ,) $(BIN_RHYTHM) render-toc
+	$(if $(DRYRUN),echo ,) $(BIN_RHYTHM) render-toc  _sidebar.conf
 
 prep: sidebar toc
 
