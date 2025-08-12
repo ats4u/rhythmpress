@@ -1,5 +1,3 @@
-Got it. Here’s a tight **v3.2 library spec** that encodes your four rules and removes any CWD dependence.
-
 # v3.2 Library Specification
 
 ## General rules
@@ -184,4 +182,133 @@ def clean_directories_except_attachments_qmd(root: Path) -> None:
 * Remove any lingering `pushd` wrappers that were only compensating for CWD.
 
 If you want, I can push a patch that enforces these checks and updates the two subcommands we’ve been editing to pass `Path` objects explicitly.
+
+
+# v3.2.1 Library & CLI Spec (revision of v3.2) (CLI Strict-Args Addendum)
+
+3.2.1 – CLI: stricter dir-only arguments; non-dir → exit 2. Library API unchanged.
+
+This is a small addendum after the 3.2 doc.
+
+No API changes; library remains v3.2. This addendum standardizes CLI behavior: directory-only positional args; exit 2 on invalid paths; no chdir/path mangling.
+
+All library rules remain as specified in v3.2.
+
+
+## General rules (unchanged)
+
+* **CWD-agnostic library.** No `chdir`. All FS functions take **explicit `Path`** args.
+* **Fail fast.** Validate inputs early with clear exceptions.
+
+---
+
+## `create_toc_v1` (unchanged)
+
+**Signature:** `create_toc_v1(input_md: Path, link_target_md: str) -> str`
+**Behavior & errors:** same as v3.2 — template fixed at `./lib/templates/toc`, absolute paths, `FileNotFoundError` for missing inputs/template, `RuntimeError` if `pandoc` missing/fails.
+
+---
+
+## `qmd_all_masters` (unchanged)
+
+**Signature:** `qmd_all_masters(qmd_fn: callable[[Path], None], root: Path) -> None`
+
+* `root` **must** be an existing **directory** (`ValueError` otherwise).
+* Non-recursive `root.glob("master-*.qmd")`.
+* No matches → no error.
+
+---
+
+## `clean_directories_except_attachments_qmd` (unchanged)
+
+**Signature:** `clean_directories_except_attachments_qmd(root: Path) -> None`
+
+* `root` **must** be an existing **directory** (`ValueError` otherwise).
+* Deletes immediate subdirs except names starting with `attachments`.
+
+---
+
+## Unchanged helpers
+
+Pure functions remain as in v3.2:
+
+* `split_master_qmd(master_path: Path)`, `copy_lang_qmd(master_path: Path)`
+* `parse_frontmatter`, `parse_qmd_teasers`, `proc_qmd_teasers`, etc.
+
+---
+
+## Exceptions summary (unchanged)
+
+* `ValueError` — invalid `root` (missing / not a dir / file).
+* `FileNotFoundError` — missing `input_md` or `lib/templates/toc`.
+* `RuntimeError` — `pandoc` missing/failure; YAML errors as applicable.
+
+---
+
+## NEW in v3.2.1 — Subcommand conventions (CLI wrappers)
+
+These rules standardize how **bin/** subcommands validate inputs and interact with the v3.2 library:
+
+1. **Directory-only arguments**
+
+* Positional paths, if provided, **must be existing directories**.
+* If any path is missing or not a directory → print an error to **stderr** and **exit 2**.
+* **No file→parent fallback. No skipping.**
+
+2. **Default target**
+
+* If **no paths** are provided, act on **`.`** (current working directory). The current dir must be a directory.
+
+3. **Multiple targets**
+
+* Subcommands may accept multiple directory arguments and process each independently. All must validate as directories up front; fail fast if any is invalid.
+
+4. **No implicit chdir**
+
+* Subcommands pass validated `Path` objects directly to the library; **do not** `chdir` before calling.
+
+5. **Exit codes**
+
+* `0` on success (even if there was “nothing to do”).
+* `1` reserved for tool-specific soft failures (e.g., `--strict` in TOC generator).
+* `2` for **argument/validation errors** (missing/non-dir paths, etc.).
+
+---
+
+## Minimal reference (CLI) — copy-lang & split
+
+```python
+# bin/rhythmpedia-copy-lang.py (v3.2.1)
+ap.add_argument("paths", nargs="*", type=Path, help="Article directories (default: .)")
+targets = args.paths or [Path(".")]
+
+roots = []
+for t in targets:
+    p = (t if t.is_absolute() else (Path.cwd() / t)).resolve()
+    if not p.exists():
+        print(f"[ERROR] not found: {t}", file=sys.stderr); sys.exit(2)
+    if not p.is_dir():
+        print(f"[ERROR] not a directory: {t}", file=sys.stderr); sys.exit(2)
+    roots.append(p)
+
+for root in roots:
+    rhythmpedia.qmd_all_masters(rhythmpedia.copy_lang_qmd, root)
+```
+
+```python
+# bin/rhythmpedia-split.py (v3.2.1)
+# same validation as above, then:
+for root in roots:
+    rhythmpedia.qmd_all_masters(rhythmpedia.split_master_qmd, root)
+```
+
+---
+
+## Migration notes (delta from v3.2)
+
+* The **library API** is unchanged.
+* **Subcommands** are now **strict** about directory arguments (no file handling, no skipping).
+* Keep using explicit `Path` objects to call library functions; remove any `pushd`/`chdir` logic.
+
+If you want, I can stamp the spec header/footer into your repo as `SPEC-v3.2.1.md` and add quick unit tests for the CLI exit codes.
 
