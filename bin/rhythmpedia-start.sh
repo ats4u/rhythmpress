@@ -1,5 +1,5 @@
 #!/bin/bash
 
 . .venv/bin/activate
-bin/render-sidebar.sh
+rhythmpedia render-sidebar
 quarto preview

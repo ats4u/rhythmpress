@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# rhythmpedia — dispatches to bin/rhythmpedia-<cmd>.* in this folder.
+set -euo pipefail
+
+BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+ROOT_DIR="$(cd "$BIN_DIR/.." && pwd -P)"
+export RHYTHMPEDIA_ROOT="$ROOT_DIR"
+
+# Ensure local bin and (if present) venv/bin are on PATH
+case ":$PATH:" in *":$BIN_DIR:"*) ;; *) PATH="$BIN_DIR:$PATH";; esac
+if [[ -d "$ROOT_DIR/.venv/bin" ]]; then
+  case ":$PATH:" in *":$ROOT_DIR/.venv/bin:"*) ;; *) PATH="$ROOT_DIR/.venv/bin:$PATH";; esac
+fi
+export PATH
+
+list_cmds() {
+  shopt -s nullglob
+  local f base cmd
+  for f in "$BIN_DIR"/rhythmpedia-*; do
+    [[ -f "$f" ]] || continue
+    base="$(basename "$f")"
+    cmd="${base#rhythmpedia-}"
+    cmd="${cmd%.*}"
+    echo "$cmd"
+  done | sort -u
+}
+
+usage() {
+  cat <<EOF
+Usage: rhythmpedia <command> [args...]
+
+Commands (discovered in bin/):
+  $(list_cmds | xargs echo)
+
+Examples:
+  rhythmpedia start
+  rhythmpedia split
+  rhythmpedia copy-lang
+  rhythmpedia clean
+  rhythmpedia render-sidebar
+  rhythmpedia render-toc
+EOF
+}
+
+[[ $# -lt 1 ]] && { usage; exit 1; }
+cmd="$1"; shift
+
+# Prefer exact match with or without extension
+candidates=(
+  "$BIN_DIR/rhythmpedia-$cmd"
+  "$BIN_DIR/rhythmpedia-$cmd.sh"
+  "$BIN_DIR/rhythmpedia-$cmd.py"
+)
+
+target=""
+for p in "${candidates[@]}"; do
+  if [[ -f "$p" ]]; then
+    target="$p"
+    break
+  fi
+done
+
+# Fallback: any file that starts with the prefix (handles e.g. .pl, etc.)
+if [[ -z "$target" ]]; then
+  shopt -s nullglob
+  matches=( "$BIN_DIR"/rhythmpedia-"$cmd".* )
+  (( ${#matches[@]} )) && target="${matches[0]}"
+fi
+
+[[ -z "$target" ]] && { echo "rhythmpedia: unknown command: $cmd" >&2; usage; exit 1; }
+
+# Execute based on file type / permissions
+if [[ -x "$target" ]]; then
+  exec "$target" "$@"
+else
+  case "$target" in
+    *.py) exec python3 "$target" "$@" ;;
+    *.sh) exec bash "$target" "$@" ;;
+    *)    echo "rhythmpedia: '$target' is not executable and has unknown type." >&2; exit 1 ;;
+  esac
+fi
+

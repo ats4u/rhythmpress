@@ -1,0 +1,36 @@
+# activate — source me:  . ./bin/activate
+# Activates .venv (if present) and adds ./bin to PATH.
+
+# Figure out where this file lives (bash/zsh friendly)
+if [ -n "${BASH_SOURCE-}" ]; then
+  _this="${BASH_SOURCE[0]}"
+elif [ -n "${ZSH_VERSION-}" ]; then
+  _this="${(%):-%N}"
+else
+  _this="$0"
+fi
+
+BIN_DIR="$(cd "$(dirname "$_this")" && pwd -P)"
+ROOT_DIR="$(cd "$BIN_DIR/.." && pwd -P)"
+VENV_DIR="$ROOT_DIR/.venv"
+echo $BIN_DIR
+echo $ROOT_DIR
+echo $VENV_DIR
+
+export RHYTHMPEDIA_ROOT="$ROOT_DIR"
+
+# Put project bin on PATH (idempotent)
+case ":$PATH:" in
+  *":$BIN_DIR:"*) ;;
+  *) export PATH="$BIN_DIR:$PATH" ;;
+esac
+
+# Activate venv if present
+if [ -d "$VENV_DIR" ] && [ -f "$VENV_DIR/bin/activate" ]; then
+  # shellcheck disable=SC1090
+  . "$VENV_DIR/bin/activate"
+else
+  echo "(!) No virtualenv at $VENV_DIR." >&2
+  echo "    Create one with:  python3 -m venv .venv && . ./bin/activate" >&2
+fi
+
