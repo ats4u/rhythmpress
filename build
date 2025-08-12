@@ -11,6 +11,12 @@ rhythmpedia split     beat-orientation
 rhythmpedia clean     offbeat-count-theory --apply --force
 rhythmpedia copy-lang offbeat-count-theory
 
+rhythmpedia clean     metadivision-theory --apply --force
+rhythmpedia copy-lang metadivision-theory
+
+rhythmpedia clean     three-to-n-groove-theory --apply --force
+rhythmpedia copy-lang three-to-n-groove-theory
+
 rhythmpedia clean     distributed-groove-theory --apply --force
 rhythmpedia copy-lang distributed-groove-theory
 

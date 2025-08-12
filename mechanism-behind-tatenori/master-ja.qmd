@@ -1,3 +1,15 @@
+---
+title: 縦乗りのメカニズム
+format: html
+execute:
+  enabled: true
+  echo: false
+  output: true
+  eval: true
+  cache: false
+title-block: false
+---
+
 ## 縦乗りのメカニズム {#mechanism-of-tatenori}
 
 

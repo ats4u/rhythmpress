@@ -1,6 +1,7 @@
 /_site
 /.site
 /.quarto/
+/_freeze/
 .DS_Store
 *.~undo-tree~
 .venv
@@ -8,7 +9,6 @@
 .vscode/
 __pycache__
 *_files
-.gitignore
 *.generated.yml
 *.generated.md
 .toc_title_cache.json

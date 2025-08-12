@@ -1,13 +1,14 @@
 project:
   title: "リズムペディア.com"
   type: website
-  output-dir: .site
+#  output-dir: .site
+  output-dir: ../_site   # <- outside the repo folder
   preview:
     port: 5150
     browser: false
+    watch-inputs: false
   resources:
     - Ads.txt
-#  pre-render: rhythmpedia render-sidebar
 
 website:
   title: "律動図鑑(リズムペディア)"
@@ -36,6 +37,8 @@ website:
     logo: /attachments/rhythmpedia-logo-dark.png
     collapse-level: 1
     contents: []
+execute:
+  freeze: auto            # optional: avoids re-execution unless sources change
 format:
   html:
     theme:

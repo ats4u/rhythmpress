@@ -1,3 +1,14 @@
+---
+title: 弱拍天動説と弱拍地動説 
+format: html
+execute:
+  enabled: true
+  echo: false
+  output: true
+  eval: true
+  cache: false
+title-block: false
+---
 
 
 ## 弱拍天動説と弱拍地動説 {#weakbeat-geocentrism-vs-heliocentrism}

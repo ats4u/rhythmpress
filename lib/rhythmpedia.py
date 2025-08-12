@@ -45,7 +45,7 @@ def create_toc_v1( input_md: Path, link_target_md: str ):
 
     # resolve template path relative to this module (./lib/templates/toc)
     module_dir = Path(__file__).resolve().parent
-    template = module_dir / "templates" / "toc"
+    template = module_dir / "templates" / "toc.markdown"
     if not template.exists():
         raise FileNotFoundError(f"pandoc template not found: {template}")
 
