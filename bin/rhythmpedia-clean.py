@@ -19,8 +19,12 @@ def find_project_root(start: Path) -> Path | None:
 def ensure_safe_dir(target: Path, sentinel: str) -> Path:
     p = target.resolve()
 
+    # allow file paths: treat as their parent directory
+    if p.is_file():
+        p = p.parent
+
     # 1) obvious no-gos
-    if p == p.root:
+    if p == Path(p.root):
         raise SystemExit("Refusing to operate on filesystem root.")
     if p == Path.home():
         raise SystemExit("Refusing to operate on your HOME directory.")
@@ -57,25 +61,16 @@ def confirm_interactive(paths: list[Path]) -> None:
     if ans != "DELETE":
         raise SystemExit("Aborted.")
 
-class pushd:
-    def __init__(self, d: Path):
-        self.prev = Path.cwd()
-        self.d = d
-    def __enter__(self):
-        os.chdir(self.d)
-    def __exit__(self, exc_type, exc, tb):
-        os.chdir(self.prev)
-
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description="Safely clean an article directory.")
-    # paths are now OPTIONAL; default = current working directory (set by dispatcher)
+    # paths are OPTIONAL; default = current working directory
     ap.add_argument("paths", nargs="*", type=Path, help="Directories to clean (default: .)")
     ap.add_argument("--apply", action="store_true", help="Actually perform deletions")
     ap.add_argument("--force", action="store_true", help="Skip interactive confirmation")
     ap.add_argument("--sentinel", default=SENTINEL_DEFAULT, help="Sentinel filename required in target dir")
     args = ap.parse_args(argv)
 
-    # If dispatcher already chdir'ed into the article, no paths given → use "."
+    # No paths given → use "."
     targets = args.paths or [Path(".")]
 
     safe_targets: list[Path] = []
@@ -95,17 +90,9 @@ def main(argv: list[str]) -> int:
     if not args.force:
         confirm_interactive(safe_targets)
 
-    # Optional: let the library read a deletion mode env var if you wire it up there
-    # os.environ.setdefault("RHythmpedia_DELETE_MODE", "trash")  # if you implement 'send2trash' in the library
-
+    # Perform clean per target (v3.2: call lib directly; no cwd/pushd; no qmd_all_masters)
     for p in safe_targets:
-        # Dispatcher normally set cwd already, but support explicit paths too.
-        with pushd(p):
-            # qmd_all_masters scans by CWD; passing '.' keeps behavior correct.
-            rhythmpedia.qmd_all_masters(
-                rhythmpedia.clean_directories_except_attachments_qmd,
-                Path("."),
-            )
+        rhythmpedia.clean_directories_except_attachments_qmd(p)
         print(f"[DONE] Cleaned: {p}")
 
     return 0

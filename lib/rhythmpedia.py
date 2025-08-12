@@ -1,4 +1,3 @@
-
 def greet(name):
     return f"Hello, {name}! This is mymodule speaking."
 
@@ -37,20 +36,41 @@ import subprocess
 import re 
 from pathlib import Path
 
-def create_toc_v1( input_md, link_target_md ):
-    # Run pandoc to get TOC as Markdown
-    toc_md = subprocess.run(
+def create_toc_v1( input_md: Path, link_target_md: str ):
+    # v3.2: input_md must be a Path to an existing file; template fixed at ./lib/templates/toc
+    if not isinstance(input_md, Path):
+        raise ValueError("input_md must be a pathlib.Path")
+    if not input_md.is_file():
+        raise FileNotFoundError(f"input_md not found: {input_md}")
+
+    # resolve template path relative to this module (./lib/templates/toc)
+    module_dir = Path(__file__).resolve().parent
+    template = module_dir / "templates" / "toc"
+    if not template.exists():
+        raise FileNotFoundError(f"pandoc template not found: {template}")
+
+    # ensure pandoc exists (no CWD dependence)
+    import shutil  # local import to avoid reordering global imports
+    if shutil.which("pandoc") is None:
+        raise RuntimeError("pandoc not found on PATH")
+
+    # Run pandoc to get TOC as Markdown (use absolute paths)
+    proc = subprocess.run(
         [
             "pandoc",
-            input_md,
+            str(input_md),
             "--toc",
             "--toc-depth=6",
             "--to=markdown",  # ← output pure Markdown TOC
-            "--template=templates/toc"  # optional: avoids front/back matter
+            f"--template={str(template)}"  # avoid front/back matter
         ],
         capture_output=True,
         text=True
-    ).stdout
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(f"pandoc failed ({proc.returncode}): {proc.stderr.strip()}")
+
+    toc_md = proc.stdout
 
     # Patch all links to include the HTML filename prefix
     # [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
@@ -120,8 +140,8 @@ def parse_qmd_teasers(
     5. Return the list.
 
     **Summary:**
-    Scan QMD for level-2+ headers, extract each title, optional slug, and the
-    section’s opening content until the first child or sibling header, and
+    Scan QMD for level-2+ headers, extract each title, optional slug, and
+    the section’s opening content until the first child or sibling header, and
     return them as a list of dictionaries.
     """
 
@@ -658,9 +678,16 @@ def copy_lang_qmd(master_path: Path) -> None:
     else:
         print(f"  =  {yml_path} (unchanged)")
 
-def clean_directories_except_attachments_qmd( root: Path | str = '.' ):
-    base = Path( root )
+def clean_directories_except_attachments_qmd( root: Path ):
+    # v3.2: require Path; explicit; root must be an existing directory (error if file/nonexistent)
+    if not isinstance(root, Path):
+        raise ValueError("root must be a pathlib.Path")
+    if not root.exists():
+        raise ValueError(f"root must exist: {root}")
+    if root.is_file() or not root.is_dir():
+        raise ValueError(f"root must be a directory, not a file: {root}")
 
+    base = root
     for item in base.iterdir():
         if item.is_dir():
             if item.name.startswith("attachments"):
@@ -670,8 +697,16 @@ def clean_directories_except_attachments_qmd( root: Path | str = '.' ):
             shutil.rmtree(item)
 
 
-def qmd_all_masters( qmd_splitter , root: str | Path = ".") -> None:
-    for p in sorted(Path(root).glob("master-*.qmd")):
+def qmd_all_masters( qmd_splitter , root: Path ) -> None:
+    # v3.2: require Path; explicit; root must be an existing directory (error if file/nonexistent)
+    if not isinstance(root, Path):
+        raise ValueError("root must be a pathlib.Path")
+    if not root.exists():
+        raise ValueError(f"root must exist: {root}")
+    if root.is_file() or not root.is_dir():
+        raise ValueError(f"root must be a directory: {root}")
+
+    for p in sorted(root.glob("master-*.qmd")):
         try: qmd_splitter(p)
         except Exception as e: print(f"  ✗ {p.name}: {e}")
 
@@ -682,3 +717,4 @@ def qmd_all_masters( qmd_splitter , root: str | Path = ".") -> None:
 #     lang = _lang_id_from_filename(p)
 #     text = p.read_text(encoding="utf-8")
 #     return _create_toc_v4(text, basedir, lang)
+

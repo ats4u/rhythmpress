@@ -1,18 +1,10 @@
 #!/usr/bin/env python3
-# minimal rhythmpedia dispatcher (cwd-proof) + `list` + 2nd-arg chdir
+# rhythmpedia dispatcher (v3.2) — pass-through; no chdir. Local bin only. Includes `list`.
 import os
 import sys
 from pathlib import Path
-from shutil import which
 
 # ---- helpers ---------------------------------------------------------------
-
-def find_root(start: Path) -> Path:
-    """Find project root by marker files; fallback to start."""
-    for p in [start, *start.parents]:
-        if (p / "_quarto.yml").exists() or (p / ".git").exists():
-            return p
-    return start
 
 def list_local(bin_dir: Path) -> list[str]:
     """List local subcommands in bin/ as command names."""
@@ -23,30 +15,14 @@ def list_local(bin_dir: Path) -> list[str]:
             names.add(base.replace("rhythmpedia-", ""))
     return sorted(names)
 
-def list_path_plugins(local: set[str]) -> list[str]:
-    """List PATH-installed rhythmpedia-* (excluding local names)."""
-    out = set()
-    for part in os.environ.get("PATH", "").split(":"):
-        d = Path(part)
-        if not d.is_dir():
-            continue
-        for f in d.glob("rhythmpedia-*"):
-            if not f.is_file():
-                continue
-            name = f.name.split(".", 1)[0].replace("rhythmpedia-", "")
-            if name not in local and os.access(f, os.X_OK):
-                out.add(name)
-    return sorted(out)
-
 def resolve_target(bin_dir: Path, cmd: str) -> Path | None:
-    """Pick target script: local first (no/ext/.py/.sh), then PATH plugin."""
+    """Pick target script in local bin: no/ext/.py/.sh (no PATH fallback)."""
     base = f"rhythmpedia-{cmd}"
     candidates = [bin_dir / base, bin_dir / (base + ".py"), bin_dir / (base + ".sh")]
     for c in candidates:
         if c.exists():
             return c
-    found = which(base, path=os.environ.get("PATH"))
-    return Path(found) if found else None
+    return None
 
 def exec_target(target: Path, args: list[str], env: dict) -> "NoReturn":
     """Exec the chosen script, replacing this process."""
@@ -61,68 +37,34 @@ def exec_target(target: Path, args: list[str], env: dict) -> "NoReturn":
 
 def main() -> None:
     if len(sys.argv) < 2:
-        print("Usage: rhythmpedia <command> [article-dir] [args...]\n       rhythmpedia list")
+        print("Usage: rhythmpedia <command> [args...]\n       rhythmpedia list")
         sys.exit(1)
     cmd, *rest = sys.argv[1:]
 
     bin_dir = Path(__file__).resolve().parent                   # .../rhythmpedia/bin
-    # guess project root; default to parent of 'rhythmpedia'
-    guess_root = bin_dir.parent.parent if (bin_dir.parent / "_quarto.yml").exists() else bin_dir.parent
-    root = find_root(guess_root)
+    root = bin_dir.parent.parent                                # project root
 
-    # prepare child environment: prefer venv/bin, then project bin
+    # Prepare child env: keep venv/bin first, then bin/ (subcommands may need venv tools)
     env = os.environ.copy()
     venv_bin = root / ".venv" / "bin"
-    path_parts = []
+    parts = []
     if venv_bin.is_dir():
-        path_parts.append(str(venv_bin))
+        parts.append(str(venv_bin))
         env.setdefault("VIRTUAL_ENV", str(venv_bin.parent))
-    path_parts.append(str(bin_dir))
-    env["PATH"] = ":".join(path_parts + [env.get("PATH", "")])
+    parts.append(str(bin_dir))
+    env["PATH"] = ":".join(parts + [env.get("PATH", "")])
 
-    # built-in: list available commands (local + PATH plugins)
+    # built-in: list available local commands
     if cmd in ("list", "help-commands"):
         local = list_local(bin_dir)
-        plugins = list_path_plugins(set(local))
         print("Local:", ", ".join(local) if local else "(none)")
-        print("PATH :", ", ".join(plugins) if plugins else "(none)")
         sys.exit(0)
 
-    # resolve & run target
+    # resolve & run target (no chdir; pass args as-is)
     target = resolve_target(bin_dir, cmd)
     if not target:
         print(f"rhythmpedia: unknown command: {cmd}")
         print("Try:  rhythmpedia list")
-        sys.exit(1)
-
-    # working directory:
-    # default = RHY_CWD (if set) else project root
-    workdir = Path(os.environ.get("RHY_CWD", str(root)))
-
-    # If second argument looks like a directory under the project, treat it as chdir
-    # Example: `rhythmpedia clean tatenori-theory --apply`
-    if not os.environ.get("RHY_CWD") and rest:
-        cand = rest[0]
-        if cand not in ("--",) and not cand.startswith("-"):
-            cand_path = Path(cand)
-            # interpret relative paths relative to project root
-            cand_abs = cand_path if cand_path.is_absolute() else (root / cand_path)
-            cand_abs = cand_abs.resolve()
-            # only accept directories that live under the project root
-            try:
-                cand_abs.relative_to(root)
-                within = True
-            except ValueError:
-                within = False
-            if within and cand_abs.is_dir():
-                workdir = cand_abs
-                rest = rest[1:]  # consume the article-dir arg
-
-    # chdir and exec
-    try:
-        os.chdir(workdir)
-    except Exception as e:
-        print(f"rhythmpedia: cd failed to {workdir}: {e}", file=sys.stderr)
         sys.exit(1)
 
     exec_target(target, rest, env)
