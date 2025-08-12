@@ -1,7 +1,26 @@
 set -euxo pipefail
 
+rm -rfv ./.quarto ./.site
+
 rhythmpedia clean     tatenori-theory  --apply --force
 rhythmpedia copy-lang tatenori-theory
+
 rhythmpedia clean     beat-orientation --apply --force
 rhythmpedia split     beat-orientation
+
+rhythmpedia clean     offbeat-count-theory --apply --force
+rhythmpedia copy-lang offbeat-count-theory
+
+rhythmpedia clean     distributed-groove-theory --apply --force
+rhythmpedia copy-lang distributed-groove-theory
+
+rhythmpedia clean     weak-beat-as-sun-strong-beat-as-earth --apply --force
+rhythmpedia copy-lang weak-beat-as-sun-strong-beat-as-earth
+
+rhythmpedia clean     tatenori-and-psychology --apply --force
+rhythmpedia copy-lang tatenori-and-psychology
+
+rhythmpedia clean     mechanism-behind-tatenori --apply --force
+rhythmpedia copy-lang mechanism-behind-tatenori
+
 rhythmpedia render-sidebar

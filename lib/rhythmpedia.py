@@ -671,7 +671,7 @@ def copy_lang_qmd(master_path: Path) -> None:
 
     # Minimal sidebar include: no 'section', just the file path.
     yml_path = master_path.parent / f"_quarto.index.{lang}.yml"
-    yml_text = f"website:\n  sidebar:\n    contents:\n      - /{base_name}/{lang}/index.qmd\n"
+    yml_text = f"website:\n  sidebar:\n    contents:\n      - {base_name}/{lang}/index.qmd\n"
     if not yml_path.exists() or yml_path.read_text(encoding="utf-8") != yml_text:
         yml_path.write_text(yml_text, encoding="utf-8")
         print(f"  ✅ {yml_path}")

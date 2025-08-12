@@ -45,18 +45,18 @@ tags:
 </style>
 <table class="ten-bulls-table"><tbody>
 <tr>
-<td><img src="./attachments/01-尋牛.jpg"/></td>
-<td><img src="./attachments/02-見跡.jpg"/></td>
-<td><img src="./attachments/03-見牛.jpg"/></td>
-<td><img src="./attachments/04-得牛.jpg"/></td>
-<td><img src="./attachments/05-牧牛.jpg"/></td>
+<td><img src="/tatenori-and-psychology/attachments/01-尋牛.jpg"/></td>
+<td><img src="/tatenori-and-psychology/attachments/02-見跡.jpg"/></td>
+<td><img src="/tatenori-and-psychology/attachments/03-見牛.jpg"/></td>
+<td><img src="/tatenori-and-psychology/attachments/04-得牛.jpg"/></td>
+<td><img src="/tatenori-and-psychology/attachments/05-牧牛.jpg"/></td>
 </tr>
 <tr>
-<td><img src="./attachments/06-騎牛帰家.jpg" /></td>
-<td><img src="./attachments/07-忘牛存人.jpg" /></td>
-<td><img src="./attachments/08-人牛倶忘.jpg" /></td>
-<td><img src="./attachments/09-返本還源.jpg" /></td>
-<td><img src="./attachments/10-入鄽垂手.jpg" /></td>
+<td><img src="/tatenori-and-psychology/attachments/06-騎牛帰家.jpg" /></td>
+<td><img src="/tatenori-and-psychology/attachments/07-忘牛存人.jpg" /></td>
+<td><img src="/tatenori-and-psychology/attachments/08-人牛倶忘.jpg" /></td>
+<td><img src="/tatenori-and-psychology/attachments/09-返本還源.jpg" /></td>
+<td><img src="/tatenori-and-psychology/attachments/10-入鄽垂手.jpg" /></td>
 </tr>
 </tbody></table>
 
@@ -69,70 +69,70 @@ tags:
 この十段階は、単なる順番的な修行ではなく、**あらゆる瞬間に悟りのチャンスがある**ことを示しています。文字や形式にとらわれず、心の本質に立ち返ることが重要であると説いています。
 
 #### 1. **尋牛（じんぎゅう）**
-<img src="./attachments/01-尋牛.jpg"/>
+<img src="/tatenori-and-psychology/attachments/01-尋牛.jpg"/>
 
 - 仏性を象徴する「牛」を探し求めて修行を始めたが、まだその牛を見つけることができない状態です。人間は本来仏性を備えているものの、それを忘れてしまい、煩悩や分別の世界に陥って真実の自己から遠ざかっています。
 
 迷いの中で、自分の本心を探し求めている段階です。牛（＝本心）は実は常にそこにあるのですが、私たちはそれに気づかず、外に求め続けます。仏法に出会い、ようやく「本心を探す」必要性に目覚めます。
 
 ####  2. **見跡（けんせき）**
-<img src="./attachments/02-見跡.jpg"/>
+<img src="/tatenori-and-psychology/attachments/02-見跡.jpg"/>
 
 - 経典や師の教えを手がかりとして仏性を探そうとしても、依然として煩悩や分別の世界から抜け出すことができず、牛そのものではなく牛の足跡しか見えていない状態です。
 
 ようやく牛の足跡（＝本心の痕跡）を見つけます。日常生活の中の見聞触覚や感情のすべてに、本心の働きが現れていることに気づき始めます。ですが、多くの人はまだ文字や形式に執着し、真実の自心を見失っています。
 
 ####  3. **見牛（けんぎゅう）**
-<img src="./attachments/03-見牛.jpg"/>
+<img src="/tatenori-and-psychology/attachments/03-見牛.jpg"/>
 
 - 修行を積み重ねていくうちに、ついに牛の姿を実際に目の当たりにする段階です。真実の自己、仏性を実感し始める境地です。
 
 牛の姿がはっきりと見えてきます。つまり、仏性や本心を直接感じ始める段階です。六根（目・耳・鼻・舌・身・意）を通じて、あらゆる現象の中に仏性の働きを見出します。
 
 ####  4. **得牛（とくぎゅう）**
-<img src="./attachments/04-得牛.jpg"/>
+<img src="/tatenori-and-psychology/attachments/04-得牛.jpg"/>
 
 - 牛（仏性）を一度捉えたとしても、それを完全にコントロールするのは容易ではなく、時には逃げ出してしまうこともあるでしょう。修行の難しさと忍耐の必要性を象徴しています。
 
 ようやく牛を捕まえることができました。悟りの感覚が明確になりますが、まだ心は安定しておらず、妄想や習気（くせ）が強く、修行の努力が必要です。
 
 #### 5. **牧牛（ぼくぎゅう）**
-<img src="./attachments/05-牧牛.jpg"/>
+<img src="/tatenori-and-psychology/attachments/05-牧牛.jpg"/>
 
 - 牛をしっかりと飼いならす段階を表します。自分の本性（仏性）を確かに手に入れたら、それを失わないよう注意深く見守り制御する必要があります。修行が深まるにつれ牛は徐々に従順になります。
 
 牛をしっかりと調教していく段階です。日常生活の中で心を見守り、妄想が起きたらすぐに気づくようにします。この「牧牛」の修行が、実際の修行の核心です。
 
 #### 6. **騎牛帰家（きぎゅうきか）**
-<img src="./attachments/06-騎牛帰家.jpg" />
+<img src="/tatenori-and-psychology/attachments/06-騎牛帰家.jpg" />
 
 - 牛と牧童（修行者）が完全に一体化し、心の平安が得られた状態を表します。もはや牛を制御する必要はなくなり本来あるべき場所へと穏やかに帰ってきたことを表します。
 
 牛に乗って、ゆったりと家に帰る段階です。心の安定と解放感があり、無理せずとも心が本質と調和しています。悟りの余韻の中で、自然体で生きることができるようになります。
 
 #### 7. **忘牛存人（ぼうぎゅうそんじん）**
-<img src="./attachments/07-忘牛存人.jpg" />
+<img src="/tatenori-and-psychology/attachments/07-忘牛存人.jpg" />
 
 - 心の本来の場所に戻った修行者は、牛を捉えたことすら忘れてしまう状態を表しています。この段階では、牛（仏性）は自然なものとなり、特別な意識の対象ではなくなります。
 
 牛（仏性）を忘れて、人（主体）だけが残ります。すでに牛は完全に調伏され、意識せずとも心は乱れず、平常心で生活できるようになります。悟りへの執着も消え、「無為自然」の境地に至ります。
 
 #### 8. **人牛倶忘（にんぎゅうぐぼう）**
-<img src="./attachments/08-人牛倶忘.jpg" />
+<img src="/tatenori-and-psychology/attachments/08-人牛倶忘.jpg" />
 
 - 牛を捉えようとした理由も、牛を捉えたことも、そしてその行為そのものも忘れ去られた状態を表します。主体と対象の区別が消え、忘れること自体もない完全な無我・無心の境地を表します。
 
 人も牛も共に忘れ去られる段階です。修行の対象や主体すら意識から消え、「無心」「無我」の状態となります。知や言葉の働きも超えており、言葉では言い表せない悟りの深みに達します。
 
 #### 9. **返本還源（へんぽんかんげん）**
-<img src="./attachments/09-返本還源.jpg" />
+<img src="/tatenori-and-psychology/attachments/09-返本還源.jpg" />
 
 - あらゆる執着や分別が消え去った清浄無垢な境地に戻った状態を表します。ありのままの世界をあるがままに受け入れ、真実の自己と世界の根源的な姿を認識する状態になったことを示しています。
 
 悟りを得た後、さらに「本来のあり方」へと帰っていきます。悟った人は、世俗にとらわれず、また悟りにもとらわれません。ただ静かに、自然のままに生きる姿が描かれます。
 
 #### 10. **入鄽垂手（にってんすいしゅ）**
-<img src="./attachments/10-入鄽垂手.jpg" />
+<img src="/tatenori-and-psychology/attachments/10-入鄽垂手.jpg" />
 
 - 悟りを得たとしても、その境地に留まっているだけでは無意味ということを表しています。再び俗世の中に入り、人々と共に生き、人々に安らぎを与え、慈悲と智慧をもって導くことこそが究極の目的だということを表しています。
 

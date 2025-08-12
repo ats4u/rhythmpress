@@ -7,7 +7,7 @@ project:
     browser: false
   resources:
     - Ads.txt
-  pre-render: rhythmpedia render-sidebar
+#  pre-render: rhythmpedia render-sidebar
 
 website:
   title: "律動図鑑(リズムペディア)"
