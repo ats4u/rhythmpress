@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 
 from pathlib import Path
 import sys, argparse, pathlib, os
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]));
-from lib import rhythmpedia
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+from lib import rhythmpedia  # noqa: E402
 
 SENTINEL_DEFAULT = ".article_dir"  # create this empty file in dirs you allow to clean
 
@@ -17,6 +18,7 @@ def find_project_root(start: Path) -> Path | None:
 
 def ensure_safe_dir(target: Path, sentinel: str) -> Path:
     p = target.resolve()
+
     # 1) obvious no-gos
     if p == p.root:
         raise SystemExit("Refusing to operate on filesystem root.")
@@ -55,16 +57,29 @@ def confirm_interactive(paths: list[Path]) -> None:
     if ans != "DELETE":
         raise SystemExit("Aborted.")
 
+class pushd:
+    def __init__(self, d: Path):
+        self.prev = Path.cwd()
+        self.d = d
+    def __enter__(self):
+        os.chdir(self.d)
+    def __exit__(self, exc_type, exc, tb):
+        os.chdir(self.prev)
+
 def main(argv: list[str]) -> int:
-    ap = argparse.ArgumentParser(description="Safe wrapper for cleaning directories.")
-    ap.add_argument("paths", nargs="+", type=Path, help="Directories to clean")
+    ap = argparse.ArgumentParser(description="Safely clean an article directory.")
+    # paths are now OPTIONAL; default = current working directory (set by dispatcher)
+    ap.add_argument("paths", nargs="*", type=Path, help="Directories to clean (default: .)")
     ap.add_argument("--apply", action="store_true", help="Actually perform deletions")
     ap.add_argument("--force", action="store_true", help="Skip interactive confirmation")
     ap.add_argument("--sentinel", default=SENTINEL_DEFAULT, help="Sentinel filename required in target dir")
     args = ap.parse_args(argv)
 
+    # If dispatcher already chdir'ed into the article, no paths given → use "."
+    targets = args.paths or [Path(".")]
+
     safe_targets: list[Path] = []
-    for a in args.paths:
+    for a in targets:
         try:
             safe_targets.append(ensure_safe_dir(Path(a), args.sentinel))
         except SystemExit as e:
@@ -84,11 +99,13 @@ def main(argv: list[str]) -> int:
     # os.environ.setdefault("RHythmpedia_DELETE_MODE", "trash")  # if you implement 'send2trash' in the library
 
     for p in safe_targets:
-        # Wrap the thunk: you can create more wrappers if you later add dry-run/plan support inside the library.
-        rhythmpedia.qmd_all_masters(
-            rhythmpedia.clean_directories_except_attachments_qmd,
-            p
-        )
+        # Dispatcher normally set cwd already, but support explicit paths too.
+        with pushd(p):
+            # qmd_all_masters scans by CWD; passing '.' keeps behavior correct.
+            rhythmpedia.qmd_all_masters(
+                rhythmpedia.clean_directories_except_attachments_qmd,
+                Path("."),
+            )
         print(f"[DONE] Cleaned: {p}")
 
     return 0

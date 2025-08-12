@@ -1,82 +1,135 @@
-#!/usr/bin/env bash
-# rhythmpedia — dispatches to bin/rhythmpedia-<cmd>.* in this folder.
-set -euo pipefail
+#!/usr/bin/env python3
+# minimal rhythmpedia dispatcher (cwd-proof) + `list` + 2nd-arg chdir
+import os
+import sys
+from pathlib import Path
+from shutil import which
 
-BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-ROOT_DIR="$(cd "$BIN_DIR/.." && pwd -P)"
-export RHYTHMPEDIA_ROOT="$ROOT_DIR"
+# ---- helpers ---------------------------------------------------------------
 
-# Ensure local bin and (if present) venv/bin are on PATH
-case ":$PATH:" in *":$BIN_DIR:"*) ;; *) PATH="$BIN_DIR:$PATH";; esac
-if [[ -d "$ROOT_DIR/.venv/bin" ]]; then
-  case ":$PATH:" in *":$ROOT_DIR/.venv/bin:"*) ;; *) PATH="$ROOT_DIR/.venv/bin:$PATH";; esac
-fi
-export PATH
+def find_root(start: Path) -> Path:
+    """Find project root by marker files; fallback to start."""
+    for p in [start, *start.parents]:
+        if (p / "_quarto.yml").exists() or (p / ".git").exists():
+            return p
+    return start
 
-list_cmds() {
-  shopt -s nullglob
-  local f base cmd
-  for f in "$BIN_DIR"/rhythmpedia-*; do
-    [[ -f "$f" ]] || continue
-    base="$(basename "$f")"
-    cmd="${base#rhythmpedia-}"
-    cmd="${cmd%.*}"
-    echo "$cmd"
-  done | sort -u
-}
+def list_local(bin_dir: Path) -> list[str]:
+    """List local subcommands in bin/ as command names."""
+    names = set()
+    for p in bin_dir.glob("rhythmpedia-*"):
+        if p.is_file():
+            base = p.name.split(".", 1)[0]  # drop extension
+            names.add(base.replace("rhythmpedia-", ""))
+    return sorted(names)
 
-usage() {
-  cat <<EOF
-Usage: rhythmpedia <command> [args...]
+def list_path_plugins(local: set[str]) -> list[str]:
+    """List PATH-installed rhythmpedia-* (excluding local names)."""
+    out = set()
+    for part in os.environ.get("PATH", "").split(":"):
+        d = Path(part)
+        if not d.is_dir():
+            continue
+        for f in d.glob("rhythmpedia-*"):
+            if not f.is_file():
+                continue
+            name = f.name.split(".", 1)[0].replace("rhythmpedia-", "")
+            if name not in local and os.access(f, os.X_OK):
+                out.add(name)
+    return sorted(out)
 
-Commands (discovered in bin/):
-  $(list_cmds | xargs echo)
+def resolve_target(bin_dir: Path, cmd: str) -> Path | None:
+    """Pick target script: local first (no/ext/.py/.sh), then PATH plugin."""
+    base = f"rhythmpedia-{cmd}"
+    candidates = [bin_dir / base, bin_dir / (base + ".py"), bin_dir / (base + ".sh")]
+    for c in candidates:
+        if c.exists():
+            return c
+    found = which(base, path=os.environ.get("PATH"))
+    return Path(found) if found else None
 
-Examples:
-  rhythmpedia start
-  rhythmpedia split
-  rhythmpedia copy-lang
-  rhythmpedia clean
-  rhythmpedia render-sidebar
-  rhythmpedia render-toc
-EOF
-}
+def exec_target(target: Path, args: list[str], env: dict) -> "NoReturn":
+    """Exec the chosen script, replacing this process."""
+    if target.suffix == ".py":
+        os.execvpe(sys.executable, [sys.executable, str(target), *args], env)
+    elif os.access(target, os.X_OK):
+        os.execvpe(str(target), [str(target), *args], env)
+    else:
+        os.execvpe("bash", ["bash", str(target), *args], env)
 
-[[ $# -lt 1 ]] && { usage; exit 1; }
-cmd="$1"; shift
+# ---- main ------------------------------------------------------------------
 
-# Prefer exact match with or without extension
-candidates=(
-  "$BIN_DIR/rhythmpedia-$cmd"
-  "$BIN_DIR/rhythmpedia-$cmd.sh"
-  "$BIN_DIR/rhythmpedia-$cmd.py"
-)
+def main() -> None:
+    if len(sys.argv) < 2:
+        print("Usage: rhythmpedia <command> [article-dir] [args...]\n       rhythmpedia list")
+        sys.exit(1)
+    cmd, *rest = sys.argv[1:]
 
-target=""
-for p in "${candidates[@]}"; do
-  if [[ -f "$p" ]]; then
-    target="$p"
-    break
-  fi
-done
+    bin_dir = Path(__file__).resolve().parent                   # .../rhythmpedia/bin
+    # guess project root; default to parent of 'rhythmpedia'
+    guess_root = bin_dir.parent.parent if (bin_dir.parent / "_quarto.yml").exists() else bin_dir.parent
+    root = find_root(guess_root)
 
-# Fallback: any file that starts with the prefix (handles e.g. .pl, etc.)
-if [[ -z "$target" ]]; then
-  shopt -s nullglob
-  matches=( "$BIN_DIR"/rhythmpedia-"$cmd".* )
-  (( ${#matches[@]} )) && target="${matches[0]}"
-fi
+    # prepare child environment: prefer venv/bin, then project bin
+    env = os.environ.copy()
+    venv_bin = root / ".venv" / "bin"
+    path_parts = []
+    if venv_bin.is_dir():
+        path_parts.append(str(venv_bin))
+        env.setdefault("VIRTUAL_ENV", str(venv_bin.parent))
+    path_parts.append(str(bin_dir))
+    env["PATH"] = ":".join(path_parts + [env.get("PATH", "")])
 
-[[ -z "$target" ]] && { echo "rhythmpedia: unknown command: $cmd" >&2; usage; exit 1; }
+    # built-in: list available commands (local + PATH plugins)
+    if cmd in ("list", "help-commands"):
+        local = list_local(bin_dir)
+        plugins = list_path_plugins(set(local))
+        print("Local:", ", ".join(local) if local else "(none)")
+        print("PATH :", ", ".join(plugins) if plugins else "(none)")
+        sys.exit(0)
 
-# Execute based on file type / permissions
-if [[ -x "$target" ]]; then
-  exec "$target" "$@"
-else
-  case "$target" in
-    *.py) exec python3 "$target" "$@" ;;
-    *.sh) exec bash "$target" "$@" ;;
-    *)    echo "rhythmpedia: '$target' is not executable and has unknown type." >&2; exit 1 ;;
-  esac
-fi
+    # resolve & run target
+    target = resolve_target(bin_dir, cmd)
+    if not target:
+        print(f"rhythmpedia: unknown command: {cmd}")
+        print("Try:  rhythmpedia list")
+        sys.exit(1)
+
+    # working directory:
+    # default = RHY_CWD (if set) else project root
+    workdir = Path(os.environ.get("RHY_CWD", str(root)))
+
+    # If second argument looks like a directory under the project, treat it as chdir
+    # Example: `rhythmpedia clean tatenori-theory --apply`
+    if not os.environ.get("RHY_CWD") and rest:
+        cand = rest[0]
+        if cand not in ("--",) and not cand.startswith("-"):
+            cand_path = Path(cand)
+            # interpret relative paths relative to project root
+            cand_abs = cand_path if cand_path.is_absolute() else (root / cand_path)
+            cand_abs = cand_abs.resolve()
+            # only accept directories that live under the project root
+            try:
+                cand_abs.relative_to(root)
+                within = True
+            except ValueError:
+                within = False
+            if within and cand_abs.is_dir():
+                workdir = cand_abs
+                rest = rest[1:]  # consume the article-dir arg
+
+    # chdir and exec
+    try:
+        os.chdir(workdir)
+    except Exception as e:
+        print(f"rhythmpedia: cd failed to {workdir}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    exec_target(target, rest, env)
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(130)
 
