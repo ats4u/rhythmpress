@@ -561,9 +561,11 @@ def split_master_qmd(master_path: Path) -> None:
         title_raw = it["title_raw"]
         # title_clean = TAG_RE.sub("", it["title_raw"]).strip()
         fm = f"---\ntitle: \"{title_raw}\"\n---\n\n"
+        # {{< include /_sidebar.generated.md >}}
+        footer =  '\n{{< include /_sidebar.generated.md >}}\n'
         p: Path = it["out_path"]
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(fm + section, encoding="utf-8")
+        p.write_text(fm + section + footer, encoding="utf-8")
         print(f"  ✅ {p}")
 
 
@@ -622,8 +624,9 @@ def split_master_qmd(master_path: Path) -> None:
 #######################
 
 from pathlib import Path
+import shutil
 
-def copy_lang_index_splitter(master_path: Path) -> None:
+def copy_lang_qmd(master_path: Path) -> None:
     """
     Copy ./master-<lang>.qmd -> ./<lang>/index.qmd and emit
     ./_quarto.index.<lang>.yml with a single contents entry.
@@ -636,25 +639,38 @@ def copy_lang_index_splitter(master_path: Path) -> None:
 
     # Copy master -> <lang>/index.qmd (idempotent)
     src_text = master_path.read_text(encoding="utf-8")
+    src_text = src_text + '\n{{< include /_sidebar.generated.md >}}\n'
+
     if not dst.exists() or dst.read_text(encoding="utf-8") != src_text:
         dst.write_text(src_text, encoding="utf-8")
         print(f"  ✅ {dst}")
     else:
         print(f"  =  {dst} (unchanged)")
 
+    base_name = str(master_path.parent.name)
+
     # Minimal sidebar include: no 'section', just the file path.
     yml_path = master_path.parent / f"_quarto.index.{lang}.yml"
-    yml_text = f"website:\n  sidebar:\n    contents:\n      - {lang}/index.qmd\n"
+    yml_text = f"website:\n  sidebar:\n    contents:\n      - /{base_name}/{lang}/index.qmd\n"
     if not yml_path.exists() or yml_path.read_text(encoding="utf-8") != yml_text:
         yml_path.write_text(yml_text, encoding="utf-8")
         print(f"  ✅ {yml_path}")
     else:
         print(f"  =  {yml_path} (unchanged)")
 
+def clean_directories_except_attachments_qmd( root: Path | str = '.' ):
+    base = Path( root )
+
+    for item in base.iterdir():
+        if item.is_dir():
+            if item.name.startswith("attachments"):
+                print(f"🛡️  Skipping: {item}")
+                continue
+            print(f"🧹 Removing: {item}")
+            shutil.rmtree(item)
 
 
-
-def split_all_masters( qmd_splitter , root: str | Path = ".") -> None:
+def qmd_all_masters( qmd_splitter , root: str | Path = ".") -> None:
     for p in sorted(Path(root).glob("master-*.qmd")):
         try: qmd_splitter(p)
         except Exception as e: print(f"  ✗ {p.name}: {e}")

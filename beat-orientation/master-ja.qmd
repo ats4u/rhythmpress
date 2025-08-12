@@ -3938,16 +3938,15 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 強拍でも弱拍でもない単独の音符が現れてしまう ─── これがモーラ拍リズム（日本語）話者が持っている１つ目の盲点です。
 
 ### 拍リズムによって頭合わせ尻合わせの違いが生まれるメカニズム
+
 #### モーラ拍リズムのリボ払い
+
 #### シラブル拍リズムの月末締め一括払い
 
 ### 桃太郎さん現象について
 
-{{< include /_sidebar.generated.md >}}
-
 ### 最初に聴こえた拍が１拍目強拍に聞こえる症候群について
 
-{{< include /_sidebar.generated.md >}}
 
 
 <!--

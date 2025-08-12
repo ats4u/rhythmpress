@@ -9,7 +9,12 @@ from lib import rhythmpedia
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
-        for a in sys.argv[1:]: rhythmpedia.split_master_qmd(Path(a))
+        for a in sys.argv[1:]:
+            rhythmpedia.qmd_all_masters( rhythmpedia.split_master_qmd, Path(a) )
     else:
-        rhythmpedia.split_all_masters( rhythmpedia.split_master_qmd, ".")
+        rhythmpedia.qmd_all_masters( rhythmpedia.split_master_qmd, "." )
 
+#    if len(sys.argv) > 1:
+#        for a in sys.argv[1:]: rhythmpedia.split_master_qmd(Path(a))
+#    else:
+#        rhythmpedia.qmd_all_masters( rhythmpedia.split_master_qmd, ".")

@@ -10,9 +10,9 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
         for a in sys.argv[1:]:
-            rhythmpedia.qmd_all_masters( rhythmpedia.copy_lang_qmd, Path(a) )
+            rhythmpedia.qmd_all_masters( rhythmpedia.clean_directories_except_attachments_qmd, Path(a) )
     else:
-        rhythmpedia.qmd_all_masters( rhythmpedia.copy_lang_qmd, ".")
+        rhythmpedia.qmd_all_masters( rhythmpedia.clean_directories_except_attachments_qmd, ".")
 
 #    if len(sys.argv) > 1:
 #        for a in sys.argv[1:]: rhythmpedia.copy_lang_qmd(Path(a))

@@ -3,8 +3,8 @@
 from pathlib import Path
 import shutil
 
-def clean_directories_except_attachments():
-    base = Path('.')
+def clean_directories_except_attachments( root: Path | str = '.' ):
+    base = Path( root )
 
     for item in base.iterdir():
         if item.is_dir():

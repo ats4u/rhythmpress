@@ -1,0 +1,4 @@
+website:
+  sidebar:
+    contents:
+      - distributed-groove-theory/ja/index.qmd
