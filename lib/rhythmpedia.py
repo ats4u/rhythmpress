@@ -566,28 +566,17 @@ def split_master_qmd(master_path: Path) -> None:
         p.write_text(fm + section, encoding="utf-8")
         print(f"  ✅ {p}")
 
-    # language index
+
+    # Language index via create_toc_v5 (absolute links)
     idx: Path = h2s[0]["lang_index_path"]
-    lines = []
-    if preamble.strip(): lines += [preamble.rstrip(), ""]
-    lines += ["## Contents", ""]
-    for it in h2s:
-        base_name = it["base_name"]
-        title = it["header_title"]
-        slug  = it["slug"]
-        desc  = (it["description"] or "").strip()
-        # href  = f"../{slug}/{lang}/"   # <-- lang at the end
-        href  = f"/{base_name}/{slug}/{lang}/"   # <-- lang at the end
-
-        lines.append(f"### [{title}]({href})")
-
-        if desc: lines.append(desc)
-        lines.append("")
-
+    toc_md = create_toc_v5(str(master_path), link_prefix="/")
+    idx_lines: List[str] = []
+    if preamble.strip():
+        idx_lines += [preamble.rstrip(), ""]
+    idx_lines += ["## Contents💦 ", "", toc_md]
     idx.parent.mkdir(parents=True, exist_ok=True)
-    idx.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    idx.write_text("\n".join(idx_lines).rstrip() + "\n", encoding="utf-8")
     print(f"  ✅ {idx}")
-
 
     # section_title = ""
     # yml_lang_path = master_path.parent / f"_quarto.index.{lang}.yml"

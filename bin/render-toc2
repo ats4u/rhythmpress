@@ -33,7 +33,8 @@ SCRIPT_PATH = Path(__file__).resolve()
 PROJECT_ROOT = SCRIPT_PATH.parent.parent  # bin/.. → project root
 
 DEFAULT_LANGUAGE_TAILS = ("ja", "en")
-DEFAULT_CACHE_NAME = ".toc_title_cache.json"
+# DEFAULT_CACHE_NAME = ".toc_title_cache.json"
+DEFAULT_CACHE_NAME = "-"
 
 # ----------------------------
 # YAML loaders (ruamel preferred for line numbers)
