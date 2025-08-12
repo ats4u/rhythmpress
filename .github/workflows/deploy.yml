@@ -39,11 +39,7 @@ jobs:
 
       - name: Run sidebar renderer
         run: |
-          ./bin/render-sidebar.sh
-      - name: Run builder script
-        run: |
-          cd beat-orientation
-          python ../bin/rhythmpedia-split.py
+          ./build
       - name: Render Quarto project
         run: quarto render
 

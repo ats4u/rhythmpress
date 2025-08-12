@@ -1,8 +1,7 @@
 project:
   title: "リズムペディア.com"
   type: website
-#  output-dir: .site
-  output-dir: ../_site   # <- outside the repo folder
+  output-dir: .site
   preview:
     port: 5150
     browser: false
