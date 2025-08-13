@@ -4,8 +4,8 @@ project:
   output-dir: .site
   preview:
     port: 5150
-    browser: false
-    watch-inputs: false
+#    browser: false
+#    watch-inputs: false
   resources:
     - Ads.txt
 
@@ -36,8 +36,8 @@ website:
     logo: /attachments/rhythmpedia-logo-dark.png
     collapse-level: 1
     contents: []
-execute:
-  freeze: auto            # optional: avoids re-execution unless sources change
+# execute:
+#  freeze: auto            # optional: avoids re-execution unless sources change
 format:
   html:
     theme:
