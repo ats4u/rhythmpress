@@ -1,6 +1,6 @@
 set -euxo pipefail
 
-. ./bin/activate
+# . ./bin/activate
 
 rm -rfv ./.quarto ./.site
 
@@ -30,5 +30,20 @@ rhythmpedia copy-lang tatenori-and-psychology
 
 rhythmpedia clean     mechanism-behind-tatenori --apply --force
 rhythmpedia copy-lang mechanism-behind-tatenori
+
+rhythmpedia clean     about     --apply --force
+rhythmpedia copy-lang about     --no-toc
+
+rhythmpedia clean     disclaimer     --apply --force
+rhythmpedia copy-lang disclaimer     --no-toc
+
+rhythmpedia clean     contact        --apply --force
+rhythmpedia copy-lang contact        --no-toc
+
+rhythmpedia clean     contact-form   --apply --force
+rhythmpedia copy-lang contact-form   --no-toc
+
+rhythmpedia clean     privacy-policy --apply --force
+rhythmpedia copy-lang privacy-policy --no-toc
 
 rhythmpedia render-sidebar

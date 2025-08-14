@@ -646,7 +646,7 @@ def split_master_qmd(master_path: Path) -> None:
 from pathlib import Path
 import shutil
 
-def copy_lang_qmd(master_path: Path) -> None:
+def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     """
     Copy ./master-<lang>.qmd -> ./<lang>/index.qmd and emit
     ./_quarto.index.<lang>.yml with a single contents entry.
@@ -659,7 +659,10 @@ def copy_lang_qmd(master_path: Path) -> None:
 
     # Copy master -> <lang>/index.qmd (idempotent)
     src_text = master_path.read_text(encoding="utf-8")
-    src_text = src_text + '\n{{< include /_sidebar.generated.md >}}\n'
+
+    # Optionally append sidebar include as a TOC block
+    if toc:
+        src_text = src_text + '\n{{< include /_sidebar.generated.md >}}\n'
 
     if not dst.exists() or dst.read_text(encoding="utf-8") != src_text:
         dst.write_text(src_text, encoding="utf-8")
@@ -697,7 +700,8 @@ def clean_directories_except_attachments_qmd( root: Path ):
             shutil.rmtree(item)
 
 
-def qmd_all_masters( qmd_splitter , root: Path ) -> None:
+def qmd_all_masters( qmd_splitter, root: Path, *args, **kwargs) -> None:
+
     # v3.2: require Path; explicit; root must be an existing directory (error if file/nonexistent)
     if not isinstance(root, Path):
         raise ValueError("root must be a pathlib.Path")
@@ -707,7 +711,7 @@ def qmd_all_masters( qmd_splitter , root: Path ) -> None:
         raise ValueError(f"root must be a directory: {root}")
 
     for p in sorted(root.glob("master-*.qmd")):
-        try: qmd_splitter(p)
+        try: qmd_splitter(p, *args, **kwargs )
         except Exception as e: print(f"  ✗ {p.name}: {e}")
 
 
@@ -717,4 +721,115 @@ def qmd_all_masters( qmd_splitter , root: Path ) -> None:
 #     lang = _lang_id_from_filename(p)
 #     text = p.read_text(encoding="utf-8")
 #     return _create_toc_v4(text, basedir, lang)
+
+
+# =========================================
+# Article page scaffolder (idempotent)
+# =========================================
+from datetime import datetime
+
+def _write_if_absent(path: Path, content: str) -> bool:
+    """
+    Write text to path only if the file does not exist.
+    Returns True if the file was created, False if it already existed.
+    """
+    if path.exists():
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return True
+
+def create_article_page(target: Path, *, lang: str = "ja") -> list[Path]:
+    """
+    Create a new article directory with:
+      - an empty sentinel file `.article_dir`
+      - a `.gitignore`
+      - a starter master file: `master-{lang}.qmd` (default: ja)
+
+    * Idempotent: existing files are left untouched.
+    * Safe: refuses to operate on project root; target must be inside the project.
+
+    Returns a list of paths that now exist (created or pre-existing).
+    """
+    if not isinstance(target, Path):
+        raise ValueError("target must be a pathlib.Path")
+
+    target = target if target.is_absolute() else Path.cwd() / target
+    target = target.resolve()
+
+    # Find project root (git or Quarto)
+    proj = target
+    found_root = None
+    for p in [proj, *proj.parents]:
+        if (p / ".git").exists() or (p / "_quarto.yml").exists():
+            found_root = p
+            break
+    if found_root is None:
+        raise RuntimeError("Not inside a recognized project (no .git or _quarto.yml found).")
+    try:
+        target.relative_to(found_root)
+    except ValueError:
+        raise RuntimeError("Target must be inside the project root.")
+
+    if target == found_root:
+        raise RuntimeError("Refusing to operate on the project root; specify a subdirectory.")
+
+    created_paths: list[Path] = []
+
+    # Ensure directory exists
+    target.mkdir(parents=True, exist_ok=True)
+
+    # 1) .article_dir (empty)
+    sentinel = target / ".article_dir"
+    if _write_if_absent(sentinel, ""):
+        created_paths.append(sentinel)
+
+    # 2) .gitignore (basic)
+    gi = target / ".gitignore"
+    gi_body = "\n".join([
+        "# Project-local ignores",
+        ".DS_Store",
+        ".quarto/",
+        ".site/",
+        "*/",
+        "!attachments*/",
+        "_quarto.index*",
+        "_sidebar.index*",
+        "",
+    ]) + "\n"
+    if _write_if_absent(gi, gi_body):
+        created_paths.append(gi)
+
+    # 3) master-{lang}.qmd (starter)
+    master = target / f"master-{lang}.qmd"
+    today = datetime.now().strftime("%Y-%m-%d")
+    qmd = "\n".join([
+        "---",
+        f'title: "Untitled"',
+        f'date: {today}',
+        f'lang: {lang}',
+        "format:",
+        "  html:",
+        "    toc: true",
+        "---",
+        "",
+        "> Draft. Replace this with your content.",
+        "",
+        "## Overview",
+        "",
+        "Write your section intro here.",
+        "",
+    ]) + "\n"
+    if _write_if_absent(master, qmd):
+        created_paths.append(master)
+
+    # Always return the canonical set of paths (for clarity), whether created or not
+    return [sentinel, gi, master]
+
+# Public stable alias requested by Ats
+def create_page(target: Path, *, lang: str = "ja") -> list[Path]:
+    """Thin alias for create_article_page for script callers."""
+    return create_article_page(target, lang=lang)
+
+
 

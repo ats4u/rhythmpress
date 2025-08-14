@@ -9,7 +9,7 @@ from lib import rhythmpedia  # noqa: E402
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description="Copy master-<lang>.qmd -> <lang>/index.qmd and emit sidebar YAML."
+        description="Copy master-<lang>.qmd -> <lang>/index.qmd and emit sidebar YAML (use --no-toc to skip appending the sidebar include)."
     )
     ap.add_argument(
         "paths",
@@ -17,7 +17,14 @@ def main() -> int:
         type=Path,
         help="Article directories (default: .)",
     )
+    ap.add_argument(
+        "--no-toc",
+        action="store_true",
+        help="Suppress appending the sidebar include (/_sidebar.generated.md) to <lang>/index.qmd",
+    )
     args = ap.parse_args()
+
+    toc = not args.no_toc
 
     targets = args.paths or [Path(".")]
 
@@ -36,6 +43,7 @@ def main() -> int:
         rhythmpedia.qmd_all_masters(
             rhythmpedia.copy_lang_qmd,
             root,  # v3.2: explicit Path dir
+            toc=toc,
         )
         print(f"[DONE] Copied language files in: {root}")
 
@@ -43,5 +51,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-

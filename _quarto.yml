@@ -13,6 +13,15 @@ website:
   title: "律動図鑑(リズムペディア)"
   description: "グルーヴを科学する律動図鑑〜リズムペディア"
   site-url: "https://rhythmpedia.com/"
+  page-footer:
+    left: "© 2018-2025 律動図鑑リズムペディア — All rights reserved."
+    right: |
+      [運営者](/about/ja/) |
+      [連絡先](/contact/ja/) |
+      [問い合わせ](/contact-form/ja/)
+      [免責事項](/disclaimer/ja/) |
+      [プライバシーポリシー](/privacy-policy/ja/) |
+
   page-navigation: true     # show Previous / Next buttons in the footer
   bread-crumbs: true
 #  site-url: "https://ats4u.github.io/jpn-master-workinglog-markdown/"

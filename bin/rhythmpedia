@@ -41,8 +41,8 @@ def main() -> None:
         sys.exit(1)
     cmd, *rest = sys.argv[1:]
 
-    bin_dir = Path(__file__).resolve().parent                   # .../rhythmpedia/bin
-    root = bin_dir.parent.parent                                # project root
+    bin_dir = Path(__file__).resolve().parent            # .../rhythmpedia/bin
+    root = bin_dir.parent                                # project root
 
     # Prepare child env: keep venv/bin first, then bin/ (subcommands may need venv tools)
     env = os.environ.copy()
