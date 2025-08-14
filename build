@@ -13,6 +13,9 @@ rhythmpedia split     beat-orientation
 rhythmpedia clean     offbeat-count-theory --apply --force
 rhythmpedia copy-lang offbeat-count-theory
 
+rhythmpedia clean     offbeat-count-phonetics --apply --force
+rhythmpedia copy-lang offbeat-count-phonetics
+
 rhythmpedia clean     metadivision-theory --apply --force
 rhythmpedia copy-lang metadivision-theory
 
@@ -25,14 +28,20 @@ rhythmpedia copy-lang distributed-groove-theory
 rhythmpedia clean     weak-beat-as-sun-strong-beat-as-earth --apply --force
 rhythmpedia copy-lang weak-beat-as-sun-strong-beat-as-earth
 
+rhythmpedia clean     offbeat-count-polyrhythm --apply --force
+rhythmpedia copy-lang offbeat-count-polyrhythm
+
 rhythmpedia clean     tatenori-and-psychology --apply --force
 rhythmpedia copy-lang tatenori-and-psychology
 
 rhythmpedia clean     mechanism-behind-tatenori --apply --force
 rhythmpedia copy-lang mechanism-behind-tatenori
 
-rhythmpedia clean     about     --apply --force
-rhythmpedia copy-lang about     --no-toc
+rhythmpedia clean     influence-of-japanese-language-on-cognition --apply --force
+rhythmpedia copy-lang influence-of-japanese-language-on-cognition
+
+rhythmpedia clean     about          --apply --force
+rhythmpedia copy-lang about          --no-toc
 
 rhythmpedia clean     disclaimer     --apply --force
 rhythmpedia copy-lang disclaimer     --no-toc
