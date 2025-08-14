@@ -2,8 +2,6 @@ set -euxo pipefail
 
 . ./bin/activate
 
-rm -rfv ./.quarto ./.site
-
 rhythmpedia clean     tatenori-theory  --apply --force
 rhythmpedia copy-lang tatenori-theory
 

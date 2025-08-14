@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . .venv/bin/activate
-# rm -rfv ./.site ./.quarto
+rm -rfv ./.site ./.quarto
 
 # rhythmpedia render-sidebar
 # quarto preview --log-level debug
