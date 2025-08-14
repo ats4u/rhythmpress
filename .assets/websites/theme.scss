@@ -4,19 +4,21 @@
 // @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=M+PLUS+1:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 // @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap');
-body {
-}
+
+body {}
 
 /* Hide the "On This Page" caption on the right sidebar.*/
-#quarto-sidebar > h2,  /* old layout */
-.sidebar-title,        /* newer layout */
-#toc-title {           /* fallback */
+#quarto-sidebar>h2,
+/* old layout */
+.sidebar-title,
+/* newer layout */
+#toc-title {
+  /* fallback */
   display: none !important;
 }
 
 /* Hide texts inside the container and set the logo of the website */
-.quarto-title h1:first-of-type::before
-{
+.quarto-title h1:first-of-type::before {
   content: "";
   display: inline-block;
   // text-indent: -9999px;
@@ -26,7 +28,7 @@ body {
   background-position: center center;
   height: 300px;
   width: 100%;
-  margin:0px;
+  margin: 0px;
   padding: 0px;
 }
 
@@ -81,8 +83,7 @@ body.quarto-dark .logo {
 
 .center-box blockquote,
 .center-box div,
-.center-box iframe
-{
+.center-box iframe {
   width: 100%;
   // height: 100px;
   // border: 2px solid rgb(96 139 168);
@@ -92,13 +93,13 @@ body.quarto-dark .logo {
 
 
 $font-size-base: 1.20em; // calc( 1em / 30 ); // 1.20rem;
-$font-size-step: calc( 1em / 30 ); // 1.20rem;
-$h1-font-size: calc( $font-size-base + 2.00em );  // 0.5rem  
-$h2-font-size: calc( $font-size-base + 1.00em );  // 0.10rem 
-$h3-font-size: calc( $font-size-base + 0.50em );  // 0.08rem 
-$h4-font-size: calc( $font-size-base + 0.15em );  // 0.06rem 
-$h5-font-size: calc( $font-size-base + 0.00em );  // 0.04rem 
-$h6-font-size: calc( $font-size-base + 0.25em );  // 0.02rem 
+$font-size-step: calc(1em / 30); // 1.20rem;
+$h1-font-size: calc($font-size-base + 2.00em); // 0.5rem  
+$h2-font-size: calc($font-size-base + 1.00em); // 0.10rem 
+$h3-font-size: calc($font-size-base + 0.50em); // 0.08rem 
+$h4-font-size: calc($font-size-base + 0.15em); // 0.06rem 
+$h5-font-size: calc($font-size-base + 0.00em); // 0.04rem 
+$h6-font-size: calc($font-size-base + 0.25em); // 0.02rem 
 
 /*-- scss:rules --*/
 body {
@@ -114,41 +115,50 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-size : 1.00em;
+  font-size: 1.00em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 1000;
   margin: 15px 0px 0px 0px;
   margin-top: 40px;
   margin-bottom: 5px;
-  padding:0px;
-  padding-left:15px;
-  padding-bottom:5px;
+  padding: 0px;
+  padding-left: 15px;
+  padding-bottom: 5px;
 }
 
 h1 {
   // border-bottom: 5px silver double;
-  text-align:center;
-  padding:30px 0px 30px 0px;
+  text-align: center;
+  padding: 30px 0px 30px 0px;
   // border: double 5px silver;
 }
 
 h2 {
-  text-align:center;
-  padding:30px 0px 30px 0px;
+  text-align: center;
+  padding: 30px 0px 30px 0px;
   border: double 5px silver;
   border-bottom: 5px silver double;
 }
+
 h3 {
   border-bottom: 5px silver double;
 }
+
 h4 {
   border-bottom: 3px silver solid;
 }
+
 h5 {
   border-bottom: 1px silver solid;
 }
+
 h6 {
   border-bottom: 1px silver solid;
 }
@@ -168,14 +178,18 @@ h6 {
 /* Outermost unordered/ordered lists */
 ul:not(ul ul):not(ul ol),
 ol:not(ol ol):not(ol ul) {
-  margin-left: 1em; /* increase only top-level margin */
-  margin-bottom: 1em; /* increase only top-level margin */
+  margin-left: 1em;
+  /* increase only top-level margin */
+  margin-bottom: 1em;
+  /* increase only top-level margin */
 }
 
 /* Outermost definition lists */
 dl:not(dl dl):not(dl ul):not(dl ol) {
-  margin-left: 1em; /* increase only top-level margin */
-  margin-bottom: 1em; /* increase only top-level margin */
+  margin-left: 1em;
+  /* increase only top-level margin */
+  margin-bottom: 1em;
+  /* increase only top-level margin */
 }
 
 
@@ -225,3 +239,6 @@ dl:not(dl dl):not(dl ul):not(dl ol) {
 }
 
 
+.quarto-page-footer .footer-right {
+  white-space: nowrap;
+}
