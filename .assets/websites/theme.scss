@@ -94,7 +94,7 @@ body.quarto-dark .logo {
 
 $font-size-base: 1.20em; // calc( 1em / 30 ); // 1.20rem;
 $font-size-step: calc(1em / 30); // 1.20rem;
-$h1-font-size: calc($font-size-base + 2.00em); // 0.5rem  
+$h1-font-size: calc($font-size-base + 1.80em); // 0.5rem  
 $h2-font-size: calc($font-size-base + 1.00em); // 0.10rem 
 $h3-font-size: calc($font-size-base + 0.50em); // 0.08rem 
 $h4-font-size: calc($font-size-base + 0.15em); // 0.06rem 
@@ -239,6 +239,6 @@ dl:not(dl dl):not(dl ul):not(dl ol) {
 }
 
 
-.quarto-page-footer .footer-right {
+.nav-footer-right {
   white-space: nowrap;
 }
