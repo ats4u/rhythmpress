@@ -16,7 +16,14 @@ def main() -> int:
         type=Path,
         help="Article directories (default: .)",
     )
+    ap.add_argument(
+        "--no-toc",
+        action="store_true",
+        help="Suppress appending the sidebar include (/_sidebar.generated.md) to <lang>/index.qmd",
+    )
     args = ap.parse_args()
+
+    toc = not args.no_toc
 
     targets = args.paths or [Path(".")]
 
@@ -32,7 +39,7 @@ def main() -> int:
         roots.append(p)
 
     for root in roots:
-        rhythmpedia.qmd_all_masters(rhythmpedia.split_master_qmd, root)  # v3.2: explicit Path dir
+        rhythmpedia.qmd_all_masters(rhythmpedia.split_master_qmd, root,toc=toc )  # v3.2: explicit Path dir
         print(f"[DONE] Split masters in: {root}")
 
     return 0

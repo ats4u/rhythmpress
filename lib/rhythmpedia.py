@@ -554,7 +554,7 @@ def _hdr_start(text: str, it) -> int:
     # start of the header line (prev '\n' before section_start_char; -1→0)
     return text.rfind("\n", 0, int(it["section_start_char"])) + 1
 
-def split_master_qmd(master_path: Path) -> None:
+def split_master_qmd(master_path: Path, *, toc: bool = True) -> None:
     print(f"\n→ {master_path}")
     lang = _lang_id_from_filename(master_path)
     text = master_path.read_text(encoding="utf-8")
@@ -581,8 +581,14 @@ def split_master_qmd(master_path: Path) -> None:
         title_raw = it["title_raw"]
         # title_clean = TAG_RE.sub("", it["title_raw"]).strip()
         fm = f"---\ntitle: \"{title_raw}\"\n---\n\n"
-        # {{< include /_sidebar.generated.md >}}
-        footer =  '\n{{< include /_sidebar.generated.md >}}\n'
+
+        # Optionally append sidebar include as a TOC block
+        if toc:
+            # {{< include /_sidebar.generated.md >}}
+            footer =  '\n{{< include /_sidebar.generated.md >}}\n'
+        else:
+            footer =  ''
+
         p: Path = it["out_path"]
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(fm + section + footer, encoding="utf-8")

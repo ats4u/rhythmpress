@@ -41,7 +41,7 @@ rhythmpedia clean     influence-of-japanese-language-on-cognition --apply --forc
 rhythmpedia copy-lang influence-of-japanese-language-on-cognition
 
 rhythmpedia clean     about          --apply --force
-rhythmpedia copy-lang about          --no-toc
+rhythmpedia split     about          --no-toc
 
 rhythmpedia clean     disclaimer     --apply --force
 rhythmpedia copy-lang disclaimer     --no-toc
