@@ -1,6 +1,6 @@
 set -euxo pipefail
 
-# . ./bin/activate
+. ./bin/activate
 
 rm -rfv ./.quarto ./.site
 
