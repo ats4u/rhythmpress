@@ -53,4 +53,7 @@ rhythmpedia copy-lang contact-form   --no-toc
 rhythmpedia clean     privacy-policy --apply --force
 rhythmpedia copy-lang privacy-policy --no-toc
 
+rhythmpedia clean     cookies        --apply --force
+rhythmpedia copy-lang cookies        --no-toc
+
 rhythmpedia render-sidebar

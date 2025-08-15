@@ -13,6 +13,7 @@ website:
   title: "律動図鑑(リズムペディア)"
   description: "グルーヴを科学する律動図鑑〜リズムペディア"
   site-url: "https://rhythmpedia.com/"
+  site-path: /
   page-footer:
     left: "© 2018-2025 律動図鑑リズムペディア — All rights reserved."
     right: |
@@ -23,6 +24,8 @@ website:
       [問い合わせ](/contact-form/ja/) |
       [免責事項](/disclaimer/ja/) |
       [プライバシーポリシー](/privacy-policy/ja/) |
+      <a href="/cookies/en/">Cookie Policy</a> |
+      <a href="#" id="cookie-settings" rel="nofollow">Cookie Settings</a> |
 
   page-navigation: true     # show Previous / Next buttons in the footer
   bread-crumbs: true
@@ -68,6 +71,21 @@ format:
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <script type="module" src="/assets/toc-ul.mjs"></script>
+          <script type="module" src="/assets/cookie-settings.mjs"></script>
+          <script
+            id="Cookiebot"
+            src="https://consent.cookiebot.com/uc.js"
+            data-cbid="433ccb98-31ce-449c-8e85-fb6d0101b2b3"
+            data-blockingmode="auto"
+            type="text/javascript">
+          </script>
+          <script data-cookieconsent="marketing">
+            (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-6838486775293179",
+              enable_page_level_ads: true
+            });
+          </script>
+
     grid:
       sidebar-width: 500px
       body-width: 800px
