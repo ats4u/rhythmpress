@@ -4,6 +4,7 @@
 console.log("[cookie-settings] module loaded");
 
 export function openCookieSettings() {
+  console.log("[cookie-settings] openCookieSettings() → called");
   // Cookiebot ready?
   if (window.Cookiebot && typeof window.Cookiebot.renew === "function") {
     console.log("[cookie-settings] Cookiebot.renew()");
