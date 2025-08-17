@@ -1,14 +1,17 @@
 
 ## Content Pages (% Done / Progress since 08/17 update)
-- tatenori-theory   --- 100%
-- beat-orientation  --- 100%
-- offbeat-count-theory --- 80%
-- offbeat-count-phonetics  --- 30%
-- metadivision-theory --- 10%
-- three-to-n-groove-theory --- 20%
-- distributed-groove-theory --- 100%
-- weak-beat-as-sun-strong-beat-as-earth --- 10%
-- offbeat-count-polyrhythm  --- 0%
-- tatenori-and-psychology --- 30%
-- mechanism-behind-tatenori --- 10%
-- influence-of-japanese-language-on-cognition --- 0%
+- [tatenori-theory](tatenori-theory)   --- 100%
+- [beat-orientation](beat-orientation)  --- 100%
+- [offbeat-count-theory](offbeat-count-theory) --- 80%
+- [offbeat-count-phonetics](offbeat-count-phonetics)  --- 30%
+- [metadivision-theory](metadivision-theory) --- 50%
+- [three-to-n-groove-theory](three-to-n-groove-theory) --- 20%
+- [distributed-groove-theory](distributed-groove-theory) --- 100%
+- [weak-beat-as-sun-strong-beat-as-earth](weak-beat-as-sun-strong-beat-as-earth) --- 10%
+- [offbeat-count-polyrhythm](offbeat-count-polyrhythm)  --- 0%
+- [tatenori-and-psychology](tatenori-and-psychology) --- 30%
+- [mechanism-behind-tatenori](mechanism-behind-tatenori) --- 10%
+- [influence-of-japanese-language-on-cognition](influence-of-japanese-language-on-cognition) --- 0%
+
+
+- 過去に書いた記事を読み返して見ると、私は「何故声出しカウントをすべきか」から始まり「２重オフビートカウント」「３重オフビートカウント」と多重化を増やして、更に３拍子、３拍子の２重、３拍子の３重（3^n カウント）…と順に複雑化に対応してきたことがわかった。これも想定より遥かに長い。[link](https://x.com/ats4u/status/1952049357894959578)

@@ -1,16 +1,442 @@
 ---
 title: メタディヴィジョン理論
 created: 2025-05-27T11:07
+format: html
+execute:
+  enabled: true
+  echo: false
+  output: true
+  eval: true
+  cache: false
+title-block: false
 tags:
   - foo
 ---
 
 ## メタディヴィジョン理論とは
 
-メタディヴィジョン理論とは、小節も拍とみなすという
+メタディヴィジョン理論とは、拍の数え方を拡張する為の理論です。
+
+これまで拍（ディヴィジョン）に対して行ってきたカウントを、**合拍（マクロディヴィジョン＝小節）**や **分拍（サブディヴィジョン＝◯分音符や連符）** も拍とみなして再定義することで、より複雑なリズムを表現する方法を定義します。
+
+更にサブディヴィジョンよりも更に小さな単位で、譜面上に表せない音符のずれを表す拍を**微分拍（マイクロディヴィジョン=タイミングニュアンス）** と定義することで、音符のニュアンスを表現する方法を提唱します。
+
+また拍・合拍・分拍に対して、再帰的に弱拍先行と多層を適用できると考える理論です。
+
+### 多層化とは
+
+これまでオフビートカウントで拍を数えるにあたって、４分音符１つを１拍とする単位（ディヴィジョン）で数えて来ました。
+
+そして４分音符を分割して出来る８分音符や３連符などの拍（サブ・ディヴィジョン）については、数字ではなく **＆** **Ｅ** **Ａ** の３つの 記号/アルファベット を割り当てることで数えてきました。
+
+**メタディヴィジョン理論**は、より複雑なリズムを適切に認識するために、この音符に数/記号/アルファベットを割り当てる方法を**多層化**という方法を使って拡張します。
+
+<style>
+  .divisions {
+    border : 1px silver solid;
+  }
+  .divisions td {
+    border : 1px silver solid;
+    padding: 10px;
+  }
+  .divisions td.one {
+    border-left : 5px silver double;
+  }
+
+  .divisions tr.r1 td,
+  .divisions tr.r2 td,
+  .divisions tr.r3 td,
+  .divisions tr.r4 td {
+    border-top : 5px silver double;
+  }
+
+  .divisions td.l1,
+  .divisions td.l2,
+  .divisions td.l3,
+  .divisions td.l4,
+
+  .divisions td.m1,
+  .divisions td.m2,
+  .divisions td.m3,
+  .divisions td.m4,
+
+  .divisions td.n1,
+  .divisions td.n2,
+  .divisions td.n3,
+  .divisions td.n4
+  {
+    color : white;
+    font-weight: 1000;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+
+  .divisions td.l1 {
+    background-color : #DFD;
+  }
+  .divisions td.l2 {
+    background-color : #9F9;
+  }
+  .divisions td.l3 {
+    background-color : #5F5;
+  }
+  .divisions td.l4 {
+    background-color : #1F1;
+  }
+  .divisions td.m1 {
+    background-color : #DDF;
+  }
+  .divisions td.m2 {
+    background-color : #99F;
+  }
+  .divisions td.m3 {
+    background-color : #55F;
+  }
+  .divisions td.m4 {
+    background-color : #11F;
+  }
+  .divisions td.n1 {
+    background-color : #FDD;
+  }
+  .divisions td.n2 {
+    background-color : #FAA;
+  }
+  .divisions td.n3 {
+    background-color : #F66;
+  }
+  .divisions td.n4 {
+    background-color : #F22;
+  }
+</style>
+```{python}
+#| output: asis
+
+from html import escape
+from typing import Any, Iterable, Sequence
+
+def show_beat(beats: Sequence[Sequence[Any]],
+              col_classes : Sequence[Sequence[Any]] | None = None,
+              row_classes : Sequence[Any]           | None = None ) -> str:
+    """
+    Render a 2D HTML table from `beats`, using `col_classes` for per-cell CSS classes.
+
+    - beats[y][x]: cell text (any type; converted to string).
+    - col_classes[y][x]: CSS class string (used if truthy and not None).
+      If col_classes is None or missing indices, no class attribute is added.
+
+    Returns a complete <table class="divisions">…</table> string.
+    """
+    # Determine max columns across all beat rows (supports ragged input)
+    max_cols = max((len(row) for row in beats), default=0)
+
+    html_parts: list[str] = []
+    html_parts.append('<table class="divisions">')
+
+    for y, row in enumerate(beats):
+        if row_classes is not None and y < len(row_classes):
+            crow = row_classes[y]
+            html_parts.append( f"<tr class=\"{crow}\">")
+        else:
+            html_parts.append("<tr>")
+
+        for x in range(max_cols):
+            # Cell content
+            if x < len(row):
+                cell_text = escape(str(row[x]))
+            else:
+                cell_text = ""  # pad short rows with empty cells
+
+            # Resolve class from col_classes if present/valid
+            klass_attr = ""
+            if col_classes is not None and y < len(col_classes):
+                krow = col_classes[y]
+                if x < len(krow):
+                    k = krow[x]
+                    if k is not None:
+                        k_str = str(k).strip()
+                        if k_str:
+                            klass_attr = f' class="{escape(k_str)}"'
+
+            html_parts.append(f"<td{klass_attr}>{cell_text}</td>")
+        html_parts.append("</tr>")
+
+    html_parts.append("</table>")
+
+    return "".join(html_parts)
+
+R1="one r1"
+R2="one r2"
+R3="one r3"
+R4="one r4"
+
+L1="one l1"
+L2="one l2"
+L3="one l3"
+L4="one l4"
+M1="one m1"
+M2="one m2"
+M3="one m3"
+M4="one m4"
+N1="one n1"
+N2="one n2"
+N3="one n3"
+N4="one n4"
+N=None
+
+```
+
+### ディヴィジョンの多層化
+
+これまで拍を数えるとき１２３４、１２３４と拍数を数えて来ました。
+
+この数の単位を**ディヴィジョン**と呼びます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4 ] *4
+        ],
+        [
+            [M1, N, N, N ] *4
+        ]
+    )
+)
+```
+
+この拍数を数える時に、次の様に小節数を同時に数える事が出来ます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ]
+        ],
+        [
+            [N1, N, N, N ] *4
+        ]
+    )
+)
+```
+
+この様に拍数を一定の周期で数える時に、その周期の先頭拍で周期が来た回数（小節数）を数えることを、ここでは「小節数入りカウント」または **マクロディヴィジョン (Macrodivision)** と呼びます。
+
+### マクロディヴィジョンの多層化
+
+このように、小節数入りで数えている時、ある数の小節のまとまりに対して更にもうひとつ階層を増やして数えることも出来ます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+        ],
+        [
+            [N1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+        ]
+    )
+)
+```
+
+このように数えることを**マクロディヴィジョンの多層化** と呼びます。
+
+### 多層化したマクロディヴィジョンの多層化
+
+既に多層化したマクロディヴィジョンを更に多層化することも可能です。 次の様に更にもう１階層増やすことで**三階層マクロディヴィジョン(Double-Layered Macrodivision)** を構築できます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+        ],
+        [
+            [L1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [L2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [L3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [L4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+        ],
+        [
+            N,
+            N,
+            N,
+            N,
+            R1,
+            N,
+            N,
+            N,
+            R1,
+            N,
+            N,
+            N,
+            R1,
+            N,
+            N,
+            N,
+        ]
+    )
+)
+```
 
 
-これまで「ディヴィジョン（４分音符の拍）」と、ディヴィジョンを更に分割して出来る「サブディヴィジョン」に対して弱拍先行と多層を適用するとどうなるかを見てきました。
+### 多層化したマクロディヴィジョンの呼び方
+
+多層化したマクロディヴィジョンの層の呼び方を説明します。 
+
+#### １階層マクロディヴィジョン＝第１階層
+次の様に数えることを**一階層（単層）マクロディヴィジョン(Single-Layered Macrodivision)**と呼びます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+        ],
+        [
+            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
+        ]
+    )
+)
+```
+そしてここでは、この階層を **第１階層** と呼びます。
+
+#### ２階層マクロディヴィジョン＝第２階層
+次の様に数えることを**二階層マクロディヴィジョン(Double-Layered Macrodivision)** と呼びます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+        ],
+        [
+            [N1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+        ]
+    )
+)
+```
+そしてここでは、この階層を **第2階層** と呼びます。
+
+#### ３階層マクロディヴィジョン＝第３階層
+次の様に数えることを**三階層マクロディヴィジョン(Triple-Layered Macrodivision)** と呼びます。
+
+```{python}
+#| output: asis
+print(
+    show_beat(
+        [
+            [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 2, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 3, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+            [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
+        ],
+        [
+            [L1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [L2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [L3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [L4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
+            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+        ],
+        [
+            N,
+            N,
+            N,
+            N,
+            R1,
+            N,
+            N,
+            N,
+            R1,
+            N,
+            N,
+            N,
+            R1,
+            N,
+            N,
+            N,
+        ]
+    )
+)
+```
+
+この３つ目の階層を**第3階層**と呼びます。
+
+## 拍のレイヤー
+
+これまで「拍 (ディヴィジョン=４分音符）」と、ディヴィジョンを更に分割して出来る「サブディヴィジョン」に対して弱拍先行と多層を適用するとどうなるかを見てきました。
 
 メタディヴィジョン理論とは、拍以外の要素も拍とみなし、再帰的に弱拍先行と多層を適用できると考える理論です。
 
