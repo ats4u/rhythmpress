@@ -1,0 +1,4 @@
+
+```
+pandoc band-material-0005-the-basic-of-dabbi-dibba-method.odt -f odt -t gfm --standalone --shift-heading-level-by=1 -o output22.md
+```

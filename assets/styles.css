@@ -86,3 +86,10 @@ body.quarto-dark  table.offbeat-onbeat-table th  {
   font-weight:1000;
 }
 
+.ats4u-twitter-video-caption {
+  text-align: center;
+  font-size:75%;
+  font-weight:300;
+  margin:-10px 10px 10px 10px;
+}
+
