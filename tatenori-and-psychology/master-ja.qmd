@@ -515,5 +515,3 @@ tags:
 * 日本特有のリズム文化を、グローバルインフォームに翻訳して伝える。
 
 -->
-
-{{< include /_sidebar.generated.md >}}
