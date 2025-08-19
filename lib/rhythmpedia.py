@@ -607,7 +607,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True) -> None:
     print(f"  ✅ {idx}")
 
     # section_title = ""
-    # yml_lang_path = master_path.parent / f"_quarto.index.{lang}.yml"
+    # yml_lang_path = master_path.parent / f"_quarto-{lang}.yml"
     # yml_lang_lines = [
     #     "website:",
     #     "  sidebar:",
@@ -624,9 +624,9 @@ def split_master_qmd(master_path: Path, *, toc: bool = True) -> None:
     # print(f"  ✅ {yml_lang_path}")
 
 
-    # --- NEW: per-language YAML include: _quarto.index.<lang>.yml ---
+    # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
     section_title = frontmatter.get("title") or "untitled"
-    yml_lang_path = master_path.parent / f"_quarto.index.{lang}.yml"
+    yml_lang_path = master_path.parent / f"_sidebar-{lang}.yml"
     yml_lang_lines = [
         "website:",
         "  sidebar:",
@@ -655,7 +655,7 @@ import shutil
 def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     """
     Copy ./master-<lang>.qmd -> ./<lang>/index.qmd and emit
-    ./_quarto.index.<lang>.yml with a single contents entry.
+    ./_sidebar-<lang>.yml with a single contents entry.
     Touch files only when content changed (prevents preview loops).
     """
     print(f"\n→ {master_path}")
@@ -679,7 +679,7 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     base_name = str(master_path.parent.name)
 
     # Minimal sidebar include: no 'section', just the file path.
-    yml_path = master_path.parent / f"_quarto.index.{lang}.yml"
+    yml_path = master_path.parent / f"_sidebar-{lang}.yml"
     yml_text = f"website:\n  sidebar:\n    contents:\n      - {base_name}/{lang}/index.qmd\n"
     if not yml_path.exists() or yml_path.read_text(encoding="utf-8") != yml_text:
         yml_path.write_text(yml_text, encoding="utf-8")
@@ -799,8 +799,7 @@ def create_article_page(target: Path, *, lang: str = "ja") -> list[Path]:
         ".site/",
         "*/",
         "!attachments*/",
-        "_quarto.index*",
-        "_sidebar.index*",
+        "_sidebar-*",
         "",
     ]) + "\n"
     if _write_if_absent(gi, gi_body):
