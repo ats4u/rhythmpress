@@ -5,6 +5,8 @@ lang: ja
 format:
   html:
     toc: true
+rhythmpedia-preproc: copy
+rhythmpedia-preproc-args: ['--no-toc']
 ---
 
 ※内容によっては返信に数日いただく場合があります。ご了承ください。

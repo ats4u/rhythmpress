@@ -39,21 +39,21 @@ rhythmpedia preproc-clean  influence-of-japanese-language-on-cognition --apply -
 rhythmpedia preproc        influence-of-japanese-language-on-cognition
 
 rhythmpedia preproc-clean  about          --apply --force
-rhythmpedia preproc        about          --no-toc
+rhythmpedia preproc        about
 
 rhythmpedia preproc-clean  disclaimer     --apply --force
-rhythmpedia preproc        disclaimer     --no-toc
+rhythmpedia preproc        disclaimer
 
 rhythmpedia preproc-clean  contact        --apply --force
-rhythmpedia preproc        contact        --no-toc
+rhythmpedia preproc        contact
 
 rhythmpedia preproc-clean  contact-form   --apply --force
-rhythmpedia preproc        contact-form   --no-toc
+rhythmpedia preproc        contact-form
 
 rhythmpedia preproc-clean  privacy-policy --apply --force
 rhythmpedia preproc        privacy-policy --no-toc
 
 rhythmpedia preproc-clean  cookies        --apply --force
-rhythmpedia preproc        cookies        --no-toc
+rhythmpedia preproc        cookies
 
 rhythmpedia render-sidebar _sidebar-ja.conf

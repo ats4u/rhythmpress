@@ -5,6 +5,8 @@ lang: ja
 format:
   html:
     toc: true
+rhythmpedia-preproc: copy
+rhythmpedia-preproc-args: ['--no-toc']
 ---
 
 > 最終更新日: 2025-08-15
