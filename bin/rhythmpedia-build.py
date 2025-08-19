@@ -116,7 +116,7 @@ def main(argv: List[str]) -> int:
         die(2, f"Not a directory: {workdir}")
     os.chdir(workdir)
 
-    # Inherit current environment (explicit for clarity; adjust here if you add vars)
+    # Explicit environment (easy place to inject vars later if needed)
     env = os.environ.copy()
 
     targets = load_def_dirs(ns.defs)
@@ -136,7 +136,7 @@ def main(argv: List[str]) -> int:
     for d in existing:
         if not ns.skip_clean:
             rc = run(["rhythmpedia", "preproc-clean", d, *ns.apply_flags],
-                     verbose=ns.verbose, dry_run=ns.dry_run)
+                     verbose=ns.verbose, dry_run=ns.dry_run, env=env)
             if rc != 0:
                 print(f"[FAIL] preproc-clean: {d} (exit {rc})", file=sys.stderr)
                 if not ns.keep_going:
@@ -145,7 +145,7 @@ def main(argv: List[str]) -> int:
                     continue
 
         rc = run(["rhythmpedia", "preproc", d],
-                 verbose=ns.verbose, dry_run=ns.dry_run)
+                 verbose=ns.verbose, dry_run=ns.dry_run, env=env)
         if rc != 0:
             print(f"[FAIL] preproc: {d} (exit {rc})", file=sys.stderr)
             if not ns.keep_going:
@@ -153,7 +153,7 @@ def main(argv: List[str]) -> int:
 
     if not ns.no_sidebar:
         rc = run(["rhythmpedia", "render-sidebar", ns.sidebar],
-                 verbose=ns.verbose, dry_run=ns.dry_run)
+                 verbose=ns.verbose, dry_run=ns.dry_run, env=env)
         if rc != 0 and not ns.keep_going:
             return rc
 
