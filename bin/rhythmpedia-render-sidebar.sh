@@ -8,9 +8,19 @@ CONF="${1:-_sidebar.conf}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# 1) Merge YAMLs listed in _sidebar.conf
-#    (expects one path per line; adjust if your list uses a different delimiter)
-xargs <"$CONF" yq ea '. as $i ireduce ({}; . *+ $i)' > _sidebar.generated.yml
+# # 1) Merge YAMLs listed in _sidebar.conf
+# #    (expects one path per line; adjust if your list uses a different delimiter)
+# xargs <"$CONF" yq ea '. as $i ireduce ({}; . *+ $i)' > _sidebar.generated.yml
+
+# collect file list (strip inline/full-line # comments, drop blanks)
+FILES="$(sed 's/#.*//' "$CONF" | grep -v '^[[:space:]]*$' || true)"
+
+# 1) Merge YAMLs (empty -> {})
+if [ -n "$FILES" ]; then
+  printf '%s\n' "$FILES" | xargs yq ea '. as $i ireduce ({}; . *+ $i)' > _sidebar.generated.yml
+else
+  echo '{}' > _sidebar.generated.yml
+fi
 
 # 2) Write header with proper newlines (printf is more portable than echo -e)
 printf '**目次**\n\n' > _sidebar.generated.md
