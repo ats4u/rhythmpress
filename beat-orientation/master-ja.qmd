@@ -4,6 +4,8 @@ created: 2025-05-24T00:17
 tags:
   - foo
 RHYME: <ruby><rb>ライム</rb><rt>英語の俳句</rt></ruby>
+rhythmpedia-preproc: split
+rhythmpedia-preproc-args: []
 ---
 *※2025/06/16 11:16:35 更新*
 

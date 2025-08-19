@@ -3,57 +3,57 @@ set -euxo pipefail
 . ./bin/activate
 
 rhythmpedia preproc-clean  tatenori-theory  --apply --force
-rhythmpedia preproc-copy   tatenori-theory
+rhythmpedia preproc        tatenori-theory
 
 rhythmpedia preproc-clean  beat-orientation --apply --force
-rhythmpedia preproc-split  beat-orientation
+rhythmpedia preproc        beat-orientation
 
 rhythmpedia preproc-clean  offbeat-count-theory --apply --force
-rhythmpedia preproc-copy   offbeat-count-theory
+rhythmpedia preproc        offbeat-count-theory
 
 rhythmpedia preproc-clean  offbeat-count-phonetics --apply --force
-rhythmpedia preproc-copy   offbeat-count-phonetics
+rhythmpedia preproc        offbeat-count-phonetics
 
 rhythmpedia preproc-clean  metadivision-theory --apply --force
-rhythmpedia preproc-copy   metadivision-theory
+rhythmpedia preproc        metadivision-theory
 
 rhythmpedia preproc-clean  three-to-n-groove-theory --apply --force
-rhythmpedia preproc-copy   three-to-n-groove-theory
+rhythmpedia preproc        three-to-n-groove-theory
 
 rhythmpedia preproc-clean  distributed-groove-theory --apply --force
-rhythmpedia preproc-copy   distributed-groove-theory
+rhythmpedia preproc        distributed-groove-theory
 
 rhythmpedia preproc-clean  weak-beat-as-sun-strong-beat-as-earth --apply --force
-rhythmpedia preproc-copy   weak-beat-as-sun-strong-beat-as-earth
+rhythmpedia preproc        weak-beat-as-sun-strong-beat-as-earth
 
 rhythmpedia preproc-clean  offbeat-count-polyrhythm --apply --force
-rhythmpedia preproc-copy   offbeat-count-polyrhythm
+rhythmpedia preproc        offbeat-count-polyrhythm
 
 rhythmpedia preproc-clean  tatenori-and-psychology --apply --force
-rhythmpedia preproc-copy   tatenori-and-psychology
+rhythmpedia preproc        tatenori-and-psychology
 
 rhythmpedia preproc-clean  mechanism-behind-tatenori --apply --force
-rhythmpedia preproc-copy   mechanism-behind-tatenori
+rhythmpedia preproc        mechanism-behind-tatenori
 
 rhythmpedia preproc-clean  influence-of-japanese-language-on-cognition --apply --force
-rhythmpedia preproc-copy   influence-of-japanese-language-on-cognition
+rhythmpedia preproc        influence-of-japanese-language-on-cognition
 
 rhythmpedia preproc-clean  about          --apply --force
-rhythmpedia preproc-split  about          --no-toc
+rhythmpedia preproc        about          --no-toc
 
 rhythmpedia preproc-clean  disclaimer     --apply --force
-rhythmpedia preproc-copy   disclaimer     --no-toc
+rhythmpedia preproc        disclaimer     --no-toc
 
 rhythmpedia preproc-clean  contact        --apply --force
-rhythmpedia preproc-copy   contact        --no-toc
+rhythmpedia preproc        contact        --no-toc
 
 rhythmpedia preproc-clean  contact-form   --apply --force
-rhythmpedia preproc-copy   contact-form   --no-toc
+rhythmpedia preproc        contact-form   --no-toc
 
 rhythmpedia preproc-clean  privacy-policy --apply --force
-rhythmpedia preproc-copy   privacy-policy --no-toc
+rhythmpedia preproc        privacy-policy --no-toc
 
 rhythmpedia preproc-clean  cookies        --apply --force
-rhythmpedia preproc-copy   cookies        --no-toc
+rhythmpedia preproc        cookies        --no-toc
 
 rhythmpedia render-sidebar _sidebar-ja.conf
