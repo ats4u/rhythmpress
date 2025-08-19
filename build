@@ -56,4 +56,4 @@ rhythmpedia copy-lang privacy-policy --no-toc
 rhythmpedia clean     cookies        --apply --force
 rhythmpedia copy-lang cookies        --no-toc
 
-rhythmpedia render-sidebar
+rhythmpedia render-sidebar _sidebar-ja.conf

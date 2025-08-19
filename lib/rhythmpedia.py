@@ -585,7 +585,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True) -> None:
         # Optionally append sidebar include as a TOC block
         if toc:
             # {{< include /_sidebar.generated.md >}}
-            footer =  '\n{{< include /_sidebar.generated.md >}}\n'
+            footer =  f"\n{{{{< include /_sidebar-{lang}.generated.md >}}}}\n"
         else:
             footer =  ''
 
@@ -668,7 +668,7 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
     # Optionally append sidebar include as a TOC block
     if toc:
-        src_text = src_text + '\n{{< include /_sidebar.generated.md >}}\n'
+        src_text = src_text + f"\n{{{{< include /_sidebar-{lang}.generated.md >}}}}\n"
 
     if not dst.exists() or dst.read_text(encoding="utf-8") != src_text:
         dst.write_text(src_text, encoding="utf-8")
