@@ -51,7 +51,7 @@ rhythmpedia preproc-clean  contact-form   --apply --force
 rhythmpedia preproc        contact-form
 
 rhythmpedia preproc-clean  privacy-policy --apply --force
-rhythmpedia preproc        privacy-policy --no-toc
+rhythmpedia preproc        privacy-policy
 
 rhythmpedia preproc-clean  cookies        --apply --force
 rhythmpedia preproc        cookies

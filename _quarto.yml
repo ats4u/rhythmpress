@@ -94,4 +94,4 @@ format:
       gutter-width: 1.5rem
 
 metadata-files:
-  - _sidebar.generated.yml
+  - _sidebar-ja.generated.yml

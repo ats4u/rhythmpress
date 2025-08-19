@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Allow override: first arg = path to _sidebar.conf, default to local file
-CONF="${1:-_sidebar.conf}"
-
-
 # <<< ADDED Wed, 20 Aug 2025 06:18:07 +0900
 # Allow override: first arg = path to _sidebar.conf, default to local file
 CONF="${1:-_sidebar.conf}"
