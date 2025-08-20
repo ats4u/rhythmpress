@@ -10,7 +10,7 @@ execute:
 title-block: false
 ---
 
-## 縦乗りのメカニズム {#mechanism-of-tatenori}
+## 縦乗りのメカニズム
 
 
 ### モーラ拍ネイティブが陥りがちなリズム習癖

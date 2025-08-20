@@ -742,9 +742,17 @@ def qmd_all_masters( qmd_splitter, root: Path, *args, **kwargs) -> None:
     if root.is_file() or not root.is_dir():
         raise ValueError(f"root must be a directory: {root}")
 
-    for p in sorted(root.glob("master-*.qmd")):
-        try: qmd_splitter(p, *args, **kwargs )
-        except Exception as e: print(f"  ✗ {p.name}: {e}")
+    # Include both Quarto and Markdown masters; prefer .qmd if both exist.
+    masters = {}
+    for pat in ("master-*.qmd", "master-*.md"):
+        for pth in root.glob(pat):
+            key = (pth.parent, pth.stem)  # e.g., (dir, "master-ja")
+            masters.setdefault(key, pth)  # .qmd wins because it’s added first
+    for p in sorted(masters.values()):
+        try:
+            qmd_splitter(p, *args, **kwargs)
+        except Exception as e:
+            print(f"  ✗ {p.name}: {e}")
 
 
 # def create_toc( input_qmd ):
