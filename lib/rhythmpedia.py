@@ -966,4 +966,142 @@ def create_page(target: Path, *, lang: str = "ja") -> list[Path]:
     return create_article_page(target, lang=lang)
 
 
+# =========================================
+# Global Navigation Generator 
+# ADDED Thu, 21 Aug 2025 02:22:13 +0900
+# =========================================
+
+from typing import List, Tuple
+
+def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, logger=None) -> str:
+    """
+    Assemble a single Markdown navigation by concatenating TOCs from each
+    article directory listed in `input_conf`.
+
+    For each directory:
+      - Pick master-{lang_id}.qmd (preferred) or master-{lang_id}.md.
+      - Read front matter key `rhythmpedia-preproc`:
+          "split" -> use create_toc_v5 (split layout)
+          "copy"  -> use create_toc_v1 (copy-as-is layout)
+        If the key is absent, default to "copy".
+
+    Parameters
+    ----------
+    input_conf : str | os.PathLike
+        Path to a conf file with one directory per line. Lines may contain
+        inline comments after '#' and blank lines are ignored. Order is
+        preserved and defines output order.
+    lang_id : str
+        Language id used to choose the master file (mandatory).
+    strict : bool, default True
+        If True, unknown/invalid lines, YAML entries, missing dirs/masters,
+        and unknown preproc values raise. If False, they are warned and
+        skipped when possible.
+    logger : logging.Logger | None
+        Optional logger to emit info/warning/debug messages.
+
+    Returns
+    -------
+    str
+        Concatenated Markdown suitable for direct inclusion (e.g., in a Quarto page).
+    """
+    from pathlib import Path
+    import re
+
+    def _log(level: str, msg: str):
+        if logger is not None:
+            getattr(logger, level, logger.info)(msg)
+        else:
+            import sys
+            print(f"[{level.upper()}] {msg}", file=sys.stderr)
+
+    conf_path = Path(input_conf).expanduser().resolve()
+    if not conf_path.exists():
+        raise FileNotFoundError(f"conf not found: {conf_path}")
+    if not conf_path.is_file():
+        raise ValueError(f"conf is not a file: {conf_path}")
+    conf_dir = conf_path.parent
+
+    # Parse lines (sed 's/#.*//' style): strip inline comments and blanks
+    entries: List[Tuple[int, str]] = []
+    for i, raw_line in enumerate(conf_path.read_text(encoding="utf-8").splitlines(), start=1):
+        line = re.sub(r"#.*$", "", raw_line).strip()
+        if line:
+            entries.append((i, line))
+
+    out_parts: List[str] = []
+    seen_dirs = set()
+
+    for lineno, rel in entries:
+        # Directories only — YAML entries are errors
+        low = rel.lower()
+        if low.endswith(".yml") or low.endswith(".yaml"):
+            msg = f"{conf_path.name}:{lineno}: expected a directory path, got a YAML file: {rel}"
+            if strict:
+                raise ValueError(msg)
+            _log("warning", msg)
+            continue
+
+        d = (conf_dir / rel).resolve() if not Path(rel).is_absolute() else Path(rel)
+        if not d.exists() or not d.is_dir():
+            msg = f"{conf_path.name}:{lineno}: not a directory: {rel} -> {d}"
+            if strict:
+                raise FileNotFoundError(msg)
+            _log("warning", msg)
+            continue
+
+        # Deduplicate directories while preserving first occurrence
+        key = str(d)
+        if key in seen_dirs:
+            _log("warning", f"{conf_path.name}:{lineno}: duplicate directory ignored: {d}")
+            continue
+        seen_dirs.add(key)
+
+        # Choose master for lang_id
+        qmd = d / f"master-{lang_id}.qmd"
+        md  = d / f"master-{lang_id}.md"
+        master = qmd if qmd.exists() else (md if md.exists() else None)
+        if master is None:
+            msg = f"{d}: master file not found (tried {qmd.name} and {md.name})"
+            if strict:
+                raise FileNotFoundError(msg)
+            _log("warning", msg)
+            continue
+
+        # Decide mode from front matter (default: copy)
+        text = master.read_text(encoding="utf-8")
+        fm = parse_frontmatter(text) if text else {}
+        raw_mode = fm.get("rhythmpedia-preproc", None)
+        if isinstance(raw_mode, bool):
+            mode = "split" if raw_mode else "copy"
+        elif isinstance(raw_mode, str):
+            mode = raw_mode.strip().lower()
+        else:
+            mode = "copy"
+
+        if mode not in {"copy", "split"}:
+            msg = f"{d.name}: unknown rhythmpedia-preproc='{raw_mode}'; falling back to 'copy'"
+            if strict:
+                raise ValueError(msg)
+            _log("warning", msg)
+            mode = "copy"
+
+        _log("info", f"[{d.name}] {master.name} → mode={mode}")
+
+        # Delegate
+        try:
+            block = create_toc_v5(master) if mode == "split" else create_toc_v1(master)
+        except Exception as e:
+            if strict:
+                raise
+            _log("warning", f"{d.name}: TOC generation failed: {e}")
+            continue
+
+        block = (block or "").rstrip()
+        if block:
+            out_parts.append(block)
+
+    return "\n\n".join(out_parts) + ("\n" if out_parts else "")
+
+
 

@@ -118,4 +118,16 @@ create\_global\_navigation(input\_conf, lang\_id, \*, strict=True, logger=None) 
 * Front-matter-driven mode keeps the dispatcher stateless and future-proof.
 * Pure Markdown passthrough prevents bloat and fragile transformations.
 
+---------------------
+
+## Additional Notes
+
+_ADDED Thu, 21 Aug 2025 02:36:25 +0900_
+
+- Paths in the conf are resolved relative to the conf file’s directory (not CWD).
+- If both master-{lang}.qmd and .md exist, .qmd wins.
+- Unknown rhythmpedia-preproc values raise in strict=True and warn→copy in strict=False.
+- YAML lines in the conf (ending in .yml/.yaml) are rejected (strict error).
+
+If you also want a tiny CLI thunk later (e.g., rhythmpedia-render-nav), I can wire that too to call this and write _sidebar-{lang}.generated.md.
 

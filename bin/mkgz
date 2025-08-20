@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tar -czvf rhythmpedia.tar.gz lib bin index.qmd
