@@ -56,20 +56,30 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         help="Path to the definitions file listing article directories (default: %(default)s).",
     )
     p.add_argument(
-        "--out",
-        default=None,
-        help="Output file path. Defaults to '<defs dir>/_sidebar-<lang>.generated.md'.",
+        "--out", 
+        default="-", 
+        help="Output path or '-' for stdout (default)"
     )
     p.add_argument(
         "--stdout",
         action="store_true",
         help="Print to stdout instead of writing a file.",
     )
+
+    # New: opt-in strict mode; default is non-strict (skip missing masters)
+    p.add_argument(
+        "--strict",
+        action="store_true",
+        help="Fail on missing dirs/masters or invalid entries (default: non-strict).",
+    )
+
+    # Back-compat: keep --no-strict but it’s now the default; leave as deprecated
     p.add_argument(
         "--no-strict",
         action="store_true",
-        help="Relax errors into warnings when possible.",
+        help="(deprecated) Non-strict mode is now the default.",
     )
+
     p.add_argument(
         "--dry-run",
         action="store_true",
@@ -148,7 +158,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     if not defs_path.exists() or not defs_path.is_file():
         die(1, f"defs not found or not a file: {defs_path}")
 
-    strict = not ns.no_strict
+    if ns.strict and ns.no_strict:
+        die(1, "--strict and --no-strict cannot both be set")
+    # Default is non-strict unless --strict is provided
+    strict = bool(ns.strict)
 
     try:
         md = rp.create_global_navigation(defs_path, ns.lang, strict=strict, logger=logger)
@@ -159,17 +172,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     if md and not md.endswith("\n"):
         md += "\n"
 
-    if ns.stdout or (ns.dry_run and ns.out is None):
+    # Default: write to stdout (or when --out "-")
+    if ns.stdout or ns.out in (None, "", "-"):
         sys.stdout.write(md)
         return 0
 
-    out_path = Path(ns.out) if ns.out else defs_path.parent / f"_sidebar-{ns.lang}.generated.md"
-    out_path = out_path.expanduser().resolve()
-
+    # Only write a file if explicitly requested via --out <path>
+    out_path = Path(ns.out).expanduser().resolve()
     if ns.dry_run:
         logger.info(f"[dry-run] Would write: {out_path} ({len(md)} bytes)")
         return 0
-
     try:
         atomic_write(out_path, md)
         logger.info(f"Wrote: {out_path}")

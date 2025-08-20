@@ -59,6 +59,7 @@ ul ul {
 <nav id="toc"></nav>
 
 以下で順に見ていきましょう。
+
 ```{python}
 #| output: asis
 from pathlib import Path
@@ -81,8 +82,7 @@ def v5(project_path):
 ```
 ```{python}
 #| output: asis
-v1(  "tatenori-theory" )
-
+v1( "tatenori-theory" )
 ```
 ```{python}
 #| output: asis

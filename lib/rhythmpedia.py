@@ -1071,6 +1071,14 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
         # Decide mode from front matter (default: copy)
         text = master.read_text(encoding="utf-8")
         fm = parse_frontmatter(text) if text else {}
+
+        # Respect per-article sidebar opt-out
+        # If front matter has: rhythmpedia-preproc-sidebar: false → skip this directory
+        sidebar_opt = fm.get("rhythmpedia-preproc-sidebar", None)
+        if sidebar_opt is False:
+            _log("info", f"[{d.name}] {master.name} → sidebar=false (skipped)")
+            continue
+
         raw_mode = fm.get("rhythmpedia-preproc", None)
         if isinstance(raw_mode, bool):
             mode = "split" if raw_mode else "copy"
