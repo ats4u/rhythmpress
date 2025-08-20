@@ -38,6 +38,7 @@ ul ul {
 
 このユニークなリズム理論をここで御紹介致します。
 
+---
 
 ## オフビートカウント理論
 オフビートカウント理論とは、**声出しオフビートカウント法**という演奏技術を核としたリズム理論です。リズムによって立体的/多次元的な空間を作り出し静けさや激しさを表現する **リズム=グルーヴ** を演奏する為の理論です。オフビートカウント理論は主に4つの理論によって構成されます。
@@ -73,6 +74,11 @@ def v1(project_path):
         rhythmpedia.create_toc_v1( 
             Path( project_path + "/master-ja.qmd" ),
             project_path + "/ja/"  ) )
+
+def v5(project_path):
+    print(
+        rhythmpedia.create_toc_v5(
+            Path( project_path + "/master-ja.qmd" )))
 ```
 
 ### 縦乗りリズム理論
@@ -83,12 +89,13 @@ def v1(project_path):
 v1(  "tatenori-theory" )
 ```
 
+<!--
 ### <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論 {#多層弱拍基軸律動理論}
 - [**<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論**](./beat-orientation/ja/)  
-音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
+-->
 ```{python}
 #| output: asis
-print( rhythmpedia.create_toc_v5( 'beat-orientation/master-ja.qmd' ) )
+v5( 'beat-orientation')
 ```
 
 ### メタディヴィジョン理論

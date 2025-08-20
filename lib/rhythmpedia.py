@@ -120,42 +120,38 @@ def parse_qmd_teasers(
     max_description_chars: Optional[int] = None,
 ) -> List[Dict[str, str]]:
     """
-    Parse a QMD/Markdown document and return an ordered list of dicts:
-      { "header_title": str, "header_slug": str|None, "description": str }
-    - Matches ATX headers ##..###### only (not Setext).
-    - Ignores headers inside fenced code blocks and YAML front matter (optional).
-    - The description is the leading run of content after the header until
-      the first subsequent header line; does not cut through a code fence.
+    Parse a QMD/Markdown document and return an ordered list of dicts describing
+    the file-level teaser (level==0) and each section teaser (levels 2..6):
 
-    I want a simple QMD parser function:
+      {
+        "header_title": str | None,   # None for master teaser
+        "header_slug" : str | None,   # explicit {#id} if present (sections only)
+        "description" : str,          # teaser text (trimmed/normalized)
+        "level"       : int,          # 0 (file) or 2..6 (sections)
+        "title_raw"   : str,          # original header text ("" for file-level)
+        "section_start_line": int,    # first content line in teaser slice
+        "section_end_line"  : int,    # first line after teaser slice
+        "section_start_char": int,    # char offset of start
+        "section_end_char"  : int,    # char offset of end
+      }
 
-    1. Match each header using:
-       ```python
-       match = re.match(r'^(#{2,6})\\s+(.*?)\\s*(?:\\{#([^\\}]+)\\})?\\s*$', header_line)
-       ```
-    2. For each match, get the header title, the optional slug (if present),
-       and the first part of the section — from the line after the header
-       until the first child header if it exists, otherwise until the next
-       sibling header.
-    3. Create a dictionary:
+    Rules
+    - Skips YAML front matter at top (--- … --- or ...), if respect_frontmatter=True.
+    - Recognizes ATX headers ##..###### only (not Setext).
+    - Honors fenced code blocks (``` or ~~~ of any length ≥3) so we never split a fence.
+    - The file-level “master teaser” spans from end of front matter to just before the
+      first header (or EOF if no headers).
+    - Each section’s teaser spans from the header line’s next line up to (but not
+      including) the next header of level <= current level; teaser text stops early
+      if any header is encountered before that (unless inside an open fence).
 
-       ```python
-       {
-            "header_title": header_title,
-            "header_slug" : header_slug,
-            "description" : first_part_of_section 
-       }
-       ```
-    4. Append each dictionary to a list.
-    5. Return the list.
-
-    **Summary:**
-    Scan QMD for level-2+ headers, extract each title, optional slug, and
-    the section’s opening content until the first child or sibling header, and
-    return them as a list of dictionaries.
+    Title normalization
+    - If strip_html_in_title=True, header titles have HTML tags removed and are
+      HTML-unescaped for display; raw header text is preserved in "title_raw".
     """
 
-
+    frontmatter = parse_frontmatter(text)
+    section_title = frontmatter.get("title") or "Untitled"
     lines = text.splitlines()
 
     # 1) Skip YAML front matter at file head (--- ... --- or ...)
@@ -170,14 +166,59 @@ def parse_qmd_teasers(
         if end is not None:
             start_idx = end + 1
 
-    # 2) Scan for headers while respecting fenced code blocks
+    # 2) Build a "master teaser": from after front matter to before first header
+    out: List[Dict[str, str]] = []
+    in_fence_mt = False
+    fence_close_mt = None
+    first_header_line = None
+    j = start_idx
+    while j < len(lines):
+        ln = lines[j]
+        if not in_fence_mt:
+            m = FENCE_OPEN_RE.match(ln)
+            if m:
+                seq = m.group(1)
+                fence_close_mt = FENCE_CLOSE_RE(seq[0], len(seq))
+                in_fence_mt = True
+                j += 1
+                continue
+            if HEADER_RE.match(ln):
+                first_header_line = j
+                break
+            j += 1
+        else:
+            if fence_close_mt and fence_close_mt.match(ln):
+                in_fence_mt = False
+                fence_close_mt = None
+            j += 1
+
+    mt_end = first_header_line if first_header_line is not None else len(lines)
+    master_block = "\n".join(lines[start_idx:mt_end])
+    if normalize_ws:
+        master_block = _normalize_ws(master_block)
+    if max_description_chars is not None and len(master_block) > max_description_chars:
+        master_block = master_block[:max_description_chars].rstrip()
+    if master_block.strip():
+        out.append({
+            "header_title"      : section_title,
+            "header_slug"       : None,
+            "description"       : master_block,
+            "level"             : 0,
+            "title_raw"         : section_title,
+            "section_start_line": start_idx,
+            "section_end_line"  : mt_end,
+            "section_start_char": sum(len(lines[i]) + 1 for i in range(start_idx)),
+            "section_end_char"  : sum(len(lines[i]) + 1 for i in range(mt_end)),
+        })
+
+    # 3) Scan for headers while respecting fenced code blocks
     headers = []  # list of dicts with index, level, title_raw, slug, title_norm
     in_fence = False
     fence_char = ""
     fence_len = 0
     fence_close_re = None
 
-    for i in range(start_idx, len(lines)):
+    for i in range(mt_end, len(lines)):  # start after master teaser slice
         line = lines[i]
 
         # Fence open/close detection
@@ -208,19 +249,18 @@ def parse_qmd_teasers(
                 continue
         else:
             # inside fence; look for closing fence of same kind/length
-            if fence_close_re.match(line):
+            if fence_close_re and fence_close_re.match(line):
                 in_fence = False
                 fence_char = ""
                 fence_len = 0
                 fence_close_re = None
             continue
 
-    # Early exit if no headers
+    # Early exit if no headers: return only the master teaser (if any)
     if not headers:
-        return []
+        return out
 
-    # 3) Build teaser/description for each header
-    out: List[Dict[str, str]] = []
+    # 4) Build teaser/description for each header
     total_lines = len(lines)
 
     for idx, h in enumerate(headers):
@@ -271,7 +311,7 @@ def parse_qmd_teasers(
                 j += 1
             else:
                 teaser_lines.append(line)
-                if fence_close_re.match(line):
+                if fence_close_re and fence_close_re.match(line):
                     in_fence = False
                     fence_char = ""
                     fence_len = 0
@@ -294,8 +334,8 @@ def parse_qmd_teasers(
             "header_title"      : h["title_norm"],
             "header_slug"       : h["slug"],           # explicit only; may be None
             "description"       : description,
-            "level"             : h["level"],          # ← add
-            "title_raw"         : h["title_raw"],      # ← add
+            "level"             : h["level"],
+            "title_raw"         : h["title_raw"],
             "section_start_line": section_start,       # first content line after header
             "section_end_line"  : next_bound,          # first line after section
             "section_start_char": section_start_char,  # char offset of section_start
@@ -421,7 +461,9 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
         it["out_path"] = base / slug / lang / "index.qmd"
         # convenience: same for all items
         it["lang_index_path"] = base / lang / "index.qmd" 
-        if lvl == 2:
+        if lvl == 0:
+            it["link"] = f"{link_prefix}{base_name}/{lang}/"
+        elif lvl == 2:
             current_lv2_slug = slug
             it["link"] = f"{link_prefix}{base_name}/{slug}/{lang}/"
         else:
@@ -510,6 +552,7 @@ def _create_toc_v5(text: str, basedir: str, lang: str, *, link_prefix: str = "/"
     items = proc_qmd_teasers( items, basedir, lang, link_prefix )
 
     lines_out = []
+
     for it in items:
         lvl         : int = it["level"]
         link        : str = it["link"]
@@ -518,7 +561,20 @@ def _create_toc_v5(text: str, basedir: str, lang: str, *, link_prefix: str = "/"
         indent_level = " " * (2 * max(0, lvl - 2))
 
         if link is not None:
-            if lvl == 2:
+            if lvl == 0:
+                lines_out.append("")
+                lines_out.append( f"### {title}" )
+                if description:
+                    lines_out.append( "" )
+                    lines_out.append( f"{indent_level}- [**{title}**]({link})" )
+                    lines_out.append( "" )
+                    lines_out.append( "<!-- -->" )
+                    lines_out.append( description )
+                    lines_out.append( "<!-- -->" )
+                    lines_out.append( "" )
+
+                lines_out.append( "<!-- -->" )
+            elif lvl == 2:
                 # description = dedent(description).strip()
                 # description = indent(description, indent_level)
                 lines_out.append("")
@@ -578,11 +634,13 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     if not items: print("  (no headers)"); return
 
     items = proc_qmd_teasers(items, str(master_path.parent), lang)
+    h0s   = [it for it in items if int(it["level"]) == 0] # ADDED BY ATS Wed, 20 Aug 2025 17:48:44 +0900
     h2s   = [it for it in items if int(it["level"]) == 2]
     if not h2s: print("  (no H2)"); return
 
     # preamble (everything before earliest H2 header)
-    preamble = text[:min(_hdr_start(text, it) for it in h2s)]
+    # preamble = text[:min(_hdr_start(text, it) for it in h2s)]
+    preamble = h0s[0] if 0 < len(h0s) else "" # ADDED BY ATS Wed, 20 Aug 2025 18:02:26 +0900
 
     # 3-liner per section: slice → mkdir → write (H2 only per spec)
     for it in h2s:
@@ -611,7 +669,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     idx_lines: List[str] = []
     if preamble.strip():
         idx_lines += [preamble.rstrip(), ""]
-    idx_lines += ["## Contents💦 ", "", toc_md]
+    # idx_lines += ["## Contents💦 ", "", toc_md]
     idx.parent.mkdir(parents=True, exist_ok=True)
     idx.write_text("\n".join(idx_lines).rstrip() + "\n", encoding="utf-8")
     print(f"  ✅ {idx}")
@@ -635,7 +693,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
 
     # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
-    section_title = frontmatter.get("title") or "untitled"
+    section_title = frontmatter.get("title") or "Untitled"
     yml_lang_path = master_path.parent / f"_sidebar-{lang}.yml"
     yml_lang_lines = [
         "website:",
