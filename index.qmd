@@ -64,67 +64,9 @@ ul ul {
 #| output: asis
 from pathlib import Path
 from lib import rhythmpedia
-def _v1(input, link_target):
-    print(
-        rhythmpedia.create_toc_v1( 
-            Path( input ), 
-            link_target  ) )
-
-def v1(project_path):
-    print(
-        rhythmpedia.create_toc_v1( 
-            Path( project_path + "/master-ja.qmd" )))
-
-def v5(project_path):
-    print(
-        rhythmpedia.create_toc_v5(
-            Path( project_path + "/master-ja.qmd" )))
+out = rhythmpedia.create_global_navigation( '_rhythmpedia.conf', 'ja', strict=False )
+print(out)
 ```
-```{python}
-#| output: asis
-v1( "tatenori-theory" )
-```
-```{python}
-#| output: asis
-v5( 'beat-orientation')
-```
-```{python}
-#| output: asis
-v1(  "metadivision-theory" )
-```
-```{python}
-#| output: asis
-v1(  "three-to-n-groove-theory" )
-```
-```{python}
-#| output: asis
-v1(  "distributed-groove-theory" )
-```
-```{python}
-#| output: asis
-v1(  "offbeat-count-theory" )
-```
-```{python}
-#| output: asis
-v1(  "weak-beat-as-sun-strong-beat-as-earth" )
-```
-```{python}
-#| output: asis
-v1(  "offbeat-count-polyrhythm" )
-```
-```{python}
-#| output: asis
-v1(  "tatenori-and-psychology" )
-```
-```{python}
-#| output: asis
-v1(  "mechanism-behind-tatenori" )
-```
-```{python}
-#| output: asis
-v1(  "influence-of-japanese-language-on-cognition" )
-```
-
 -------
 
 <ruby>律動<rt>リズム</rt>図鑑<rt>ペディア</rt></ruby> は、ミュージシャン、語学学習者、教育者をはじめ、TOEIC900点を取ったけど全く英語が話せない事に悩む貴方や、英語の壁に苦しむプログラマー、英語論文の執筆に悩む研究者など、縦乗りと横乗りの架け橋になる理論ポータルサイトです。

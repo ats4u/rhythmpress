@@ -970,6 +970,8 @@ def create_page(target: Path, *, lang: str = "ja") -> list[Path]:
 # Global Navigation Generator 
 # ADDED Thu, 21 Aug 2025 02:22:13 +0900
 # =========================================
+#
+import os, sys
 
 from typing import List, Tuple
 
@@ -1011,9 +1013,9 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
     def _log(level: str, msg: str):
         if logger is not None:
             getattr(logger, level, logger.info)(msg)
-        else:
-            import sys
-            print(f"[{level.upper()}] {msg}", file=sys.stderr)
+        #else:
+        #    import sys
+        #    # print(f"[{level.upper()}] {msg}", file=sys.stderr)
 
     conf_path = Path(input_conf).expanduser().resolve()
     if not conf_path.exists():
