@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Run Sidebar Renderer
         run: |
-          ./build
+          ./bin/rhythmpedia build
       - name: Render Quarto project
         run: quarto render
 
