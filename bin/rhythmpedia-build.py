@@ -152,10 +152,45 @@ def main(argv: List[str]) -> int:
                 return rc
 
     if not ns.no_sidebar:
-        rc = run(["rhythmpedia", "render-sidebar", ns.sidebar],
-                 verbose=ns.verbose, dry_run=ns.dry_run, env=env)
-        if rc != 0 and not ns.keep_going:
-            return rc
+        # 1) Ask rhythmpedia for all lang IDs (one per line)
+        if ns.verbose or ns.dry_run:
+            print("[RUN]", "rhythmpedia sidebar-langs --defs", shlex.quote(ns.defs))
+        if ns.dry_run:
+            langs = []
+        else:
+            proc = subprocess.run(
+                ["rhythmpedia", "sidebar-langs", "--defs", ns.defs],
+                env=env,
+                capture_output=True,
+                text=True,
+            )
+            if proc.returncode != 0:
+                print(f"[WARN] sidebar-langs failed (exit {proc.returncode}); falling back to single sidebar",
+                      file=sys.stderr)
+                langs = []
+            else:
+                langs = [ln.strip() for ln in proc.stdout.splitlines() if ln.strip()]
+
+        # 2) If we received lang IDs, render each _sidebar-<lang>.yml
+        if langs:
+            seen = set()
+            for lang in langs:
+                if lang in seen:
+                    continue
+                seen.add(lang)
+                out_name = f"_sidebar-{lang}.yml"
+                rc = run(["rhythmpedia", "render-sidebar", out_name],
+                         verbose=ns.verbose, dry_run=ns.dry_run, env=env)
+                if rc != 0:
+                    print(f"[FAIL] render-sidebar: {out_name} (exit {rc})", file=sys.stderr)
+                    if not ns.keep_going:
+                        return rc
+        else:
+            # 3) Fallback to the original single call if no langids were found
+            rc = run(["rhythmpedia", "render-sidebar", ns.sidebar],
+                     verbose=ns.verbose, dry_run=ns.dry_run, env=env)
+            if rc != 0 and not ns.keep_going:
+                return rc
 
     print("[DONE] Build completed.")
     return 0
