@@ -152,9 +152,18 @@ def main(argv: List[str]) -> int:
                 return rc
 
     if not ns.no_sidebar:
+        # 0) First generate aggregated sidebar confs per language
+        rc = run(["rhythmpedia", "sidebar-confs", "--defs", ns.defs],
+                 verbose=ns.verbose, dry_run=ns.dry_run, env=env)
+        if rc != 0:
+            print(f"[FAIL] sidebar-confs (exit {rc})", file=sys.stderr)
+            if not ns.keep_going:
+                return rc
+
         # 1) Ask rhythmpedia for all lang IDs (one per line)
         if ns.verbose or ns.dry_run:
             print("[RUN]", "rhythmpedia sidebar-langs --defs", shlex.quote(ns.defs))
+
         if ns.dry_run:
             langs = []
         else:
@@ -178,7 +187,7 @@ def main(argv: List[str]) -> int:
                 if lang in seen:
                     continue
                 seen.add(lang)
-                out_name = f"_sidebar-{lang}.yml"
+                out_name = f"_sidebar-{lang}.generated.conf"
                 rc = run(["rhythmpedia", "render-sidebar", out_name],
                          verbose=ns.verbose, dry_run=ns.dry_run, env=env)
                 if rc != 0:
