@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-import sys, argparse, pathlib, os
+import sys, argparse, pathlib, os, shutil
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from lib import rhythmpedia  # noqa: E402
 
@@ -61,6 +61,44 @@ def confirm_interactive(paths: list[Path]) -> None:
     if ans != "DELETE":
         raise SystemExit("Aborted.")
 
+# ---------- NEW: sidebar purge helpers ----------
+def _sidebar_candidates(root: Path, lang: str | None) -> list[Path]:
+    """
+    Return sidebar files in `root` (non-recursive).
+    If `lang` is provided, only language-specific files are targeted.
+    """
+    pats: list[str]
+    if lang:
+        pats = [f"_sidebar-{lang}.yml", f"_sidebar-{lang}.generated.*"]
+    else:
+        pats = ["_sidebar-*.yml", "_sidebar-*.generated.*", "_sidebar.generated.*"]
+
+    found: list[Path] = []
+    for pat in pats:
+        found.extend(root.glob(pat))
+    # Dedup & sort for stable output
+    uniq = sorted(set(p.resolve() for p in found))
+    return uniq
+
+def _purge_sidebars(root: Path, *, lang: str | None, apply: bool) -> int:
+    """
+    Delete matching sidebar files in `root`. Returns count deleted (or would delete in dry-run).
+    """
+    files = _sidebar_candidates(root, lang)
+    count = 0
+    for f in files:
+        if apply:
+            try:
+                f.unlink()
+                print(f"🗑️  removed: {f}")
+            except FileNotFoundError:
+                pass
+        else:
+            print(f"[DRY-RUN] Would remove sidebar: {f}")
+        count += 1
+    return count
+# ------------------------------------------------
+
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description="Safely clean an article directory.")
     # paths are OPTIONAL; default = current working directory
@@ -68,6 +106,17 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--apply", action="store_true", help="Actually perform deletions")
     ap.add_argument("--force", action="store_true", help="Skip interactive confirmation")
     ap.add_argument("--sentinel", default=SENTINEL_DEFAULT, help="Sentinel filename required in target dir")
+    # NEW flags
+    # Default: purge sidebars (use --no-purge-sidebars to keep them)
+    ap.add_argument(
+        "--purge-sidebars",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Delete _sidebar-*.yml and *_generated.* in target dirs (default: yes). "
+             "Use --no-purge-sidebars to keep them.",
+    )
+
+    ap.add_argument("--lang", help="Limit sidebar purge to a language id (e.g., ja)")
     args = ap.parse_args(argv)
 
     # No paths given → use "."
@@ -81,18 +130,24 @@ def main(argv: list[str]) -> int:
             print(f"[SAFEGUARD] {e}", file=sys.stderr)
             return 2
 
+    # Dry-run preview
     if not args.apply:
         for p in safe_targets:
             print(f"[DRY-RUN] Would clean: {p}")
+            if args.purge_sidebars:
+                _purge_sidebars(p, lang=args.lang, apply=False)
         print("Add --apply to actually modify files.")
         return 0
 
+    # Confirm destructive action
     if not args.force:
         confirm_interactive(safe_targets)
 
-    # Perform clean per target (v3.2: call lib directly; no cwd/pushd; no qmd_all_masters)
+    # Perform operations
     for p in safe_targets:
         rhythmpedia.clean_directories_except_attachments_qmd(p)
+        if args.purge_sidebars:
+            _purge_sidebars(p, lang=args.lang, apply=True)
         print(f"[DONE] Cleaned: {p}")
 
     return 0

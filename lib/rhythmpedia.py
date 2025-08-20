@@ -26,6 +26,16 @@ def parse_frontmatter(text: str) -> Dict[str, Any]:
     except Exception as e:
         raise RuntimeError(f"Error parsing YAML front matter: {e}")
 
+def as_bool(v, default=True):
+    if v is None:
+        return default
+    if isinstance(v, bool):
+        return v
+    if isinstance(v, str):
+        return v.strip().lower() in {"1","true","yes","on"}
+    if isinstance(v, int):
+        return v != 0
+    return bool(v)
 
 # ======================
 # version 1
@@ -554,7 +564,7 @@ def _hdr_start(text: str, it) -> int:
     # start of the header line (prev '\n' before section_start_char; -1→0)
     return text.rfind("\n", 0, int(it["section_start_char"])) + 1
 
-def split_master_qmd(master_path: Path, *, toc: bool = True) -> None:
+def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     print(f"\n→ {master_path}")
     lang = _lang_id_from_filename(master_path)
     text = master_path.read_text(encoding="utf-8")
@@ -639,8 +649,15 @@ def split_master_qmd(master_path: Path, *, toc: bool = True) -> None:
         slug      = it["slug"]
         href      = f"{base_name}/{slug}/{lang}/index.qmd"
         yml_lang_lines.append(f"          - {href}")
-    yml_lang_path.write_text("\n".join(yml_lang_lines) + "\n", encoding="utf-8")
-    print(f"  ✅ {yml_lang_path}")
+
+    sidebar = as_bool( frontmatter.get("rhythmpedia-preproc-sidebar", None), default=True )
+    print(f"[DEBUG] {yml_lang_path} sidebar = {sidebar}")
+
+    if sidebar:
+        yml_lang_path.write_text("\n".join(yml_lang_lines) + "\n", encoding="utf-8")
+        print(f"  ✅ {yml_lang_path}")
+    else:
+        print(f"  = {yml_lang_path} (suppressed)")
 
 
 # --- new: copy master-<lang>.qmd -> ./<lang>/index.qmd using split_all_masters ---
@@ -663,8 +680,13 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     dst  = master_path.parent / lang / "index.qmd"
     dst.parent.mkdir(parents=True, exist_ok=True)
 
-    # Copy master -> <lang>/index.qmd (idempotent)
+    # Copy master -> <lang>/index.qmd (idempotent) & read front matter
     src_text = master_path.read_text(encoding="utf-8")
+
+    frontmatter = parse_frontmatter(src_text)
+    # Follow front matter flag (default True, explicit false suppresses YAML)
+    sidebar = as_bool( frontmatter.get("rhythmpedia-preproc-sidebar", None), default=True )
+    print(f"[DEBUG] {dst} sidebar = {sidebar}")
 
     # Optionally append sidebar include as a TOC block
     if toc:
@@ -680,12 +702,16 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
     # Minimal sidebar include: no 'section', just the file path.
     yml_path = master_path.parent / f"_sidebar-{lang}.yml"
-    yml_text = f"website:\n  sidebar:\n    contents:\n      - {base_name}/{lang}/index.qmd\n"
-    if not yml_path.exists() or yml_path.read_text(encoding="utf-8") != yml_text:
-        yml_path.write_text(yml_text, encoding="utf-8")
-        print(f"  ✅ {yml_path}")
+    if sidebar:
+        yml_text = f"website:\n  sidebar:\n    contents:\n      - {base_name}/{lang}/index.qmd\n"
+        if not yml_path.exists() or yml_path.read_text(encoding="utf-8") != yml_text:
+            yml_path.write_text(yml_text, encoding="utf-8")
+            print(f"  ✅ {yml_path}")
+        else:
+            print(f"  =  {yml_path} (unchanged)")
     else:
-        print(f"  =  {yml_path} (unchanged)")
+        print(f"  =  {yml_path} (suppressed)")
+
 
 def clean_directories_except_attachments_qmd( root: Path ):
     # v3.2: require Path; explicit; root must be an existing directory (error if file/nonexistent)

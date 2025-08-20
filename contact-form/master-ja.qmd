@@ -7,6 +7,7 @@ format:
     toc: true
 rhythmpedia-preproc: copy
 rhythmpedia-preproc-args: ['--no-toc']
+rhythmpedia-preproc-sidebar: false
 ---
 
 ※内容によっては返信に数日いただく場合があります。ご了承ください。

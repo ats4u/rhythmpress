@@ -3,6 +3,7 @@ title: 免責事項
 created: 2025-08-14T08:16
 rhythmpedia-preproc: copy
 rhythmpedia-preproc-args: ['--no-toc']
+rhythmpedia-preproc-sidebar: false
 ---
 
 本サイトに掲載している内容は、管理人による独自の研究・観察・解釈に基づくものであり、学術的・専門的な助言を提供するものではありません。
