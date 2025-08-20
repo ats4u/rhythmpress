@@ -4,16 +4,7 @@ created: 2025-05-27T11:08
 tags:
   - foo
 ---
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".ats4u-twitter-video").forEach((el) => {
-      const twitterId = (el.innerText)?.replaceAll?.( "x.com", "twitter.com" );
-      if (twitterId !== null) {
-        el.outerHTML = (`<blockquote class="twitter-tweet" data-conversation="none" data-media-max-width="560"><a href="${twitterId}">${twitterId}</a></blockquote>` );
-      }
-    });
-  });
-</script>
+メタディヴィジョン理論を踏まえた上で、拍子やポリリズムの限界を超え、階層的で動的な時間構造を持つ新しいリズム理論を提案します。
 
 ## 世界は3拍子で出来ている
 
@@ -36,7 +27,6 @@ tags:
 ### 何故世界の音楽は三拍子で出来ているのか。そして何故日本人は三拍子が聴き取れないのか。
 
 ![](/three-to-n-groove-theory/attachments/three-to-n-groove-01.png)
-
 
 <!--
 
@@ -62,6 +52,16 @@ tags:
 
 ## ３拍子で出来ている世界の音楽集
 現在ある音楽のグルーヴ ─── 特に歴史的に見て、ジャズのスイングの起源となったと推測される音楽のリンク集です。
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".ats4u-twitter-video").forEach((el) => {
+      const twitterId = (el.innerText)?.replaceAll?.( "x.com", "twitter.com" );
+      if (twitterId !== null) {
+        el.outerHTML = (`<blockquote class="twitter-tweet" data-conversation="none" data-media-max-width="560"><a href="${twitterId}">${twitterId}</a></blockquote>` );
+      }
+    });
+  });
+</script>
 
 <div class="ats4u-twitter-video" >https://x.com/ats4u/status/1660288431828918275</div>
 <div class="ats4u-twitter-video-caption">伝統的なジャズに近い『ザ・ビッグアップル』リンク先で情関連報を紹介</div>
