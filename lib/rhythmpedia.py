@@ -46,12 +46,32 @@ import subprocess
 import re 
 from pathlib import Path
 
-def create_toc_v1( input_md: Path, link_target_md: str ):
+def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
     # v3.2: input_md must be a Path to an existing file; template fixed at ./lib/templates/toc
     if not isinstance(input_md, Path):
         raise ValueError("input_md must be a pathlib.Path")
     if not input_md.is_file():
         raise FileNotFoundError(f"input_md not found: {input_md}")
+
+    # Now create_toc_v1 also parse the current QMD. But we don't use its `link`
+    # field yet; we will migrate `parse_qmd_teasers` fully in future.
+    # Wed, 20 Aug 2025 19:05:52 +0900
+    items = parse_qmd_teasers(
+        text,
+        min_level=2,
+        max_level=6,
+        strip_html_in_title=False,  # keep HTML to read <ruby> base
+        normalize_ws=False,
+        respect_frontmatter=True,
+    )
+    items = proc_qmd_teasers( items, basedir, lang )
+
+    # Now it reads frontmatter in order to check its title
+    frontmatter = parse_frontmatter(text)
+    section_title = frontmatter.get("title") or "Untitled"
+
+    h0s   = [it for it in items if int(it["level"]) == 0] # ADDED BY ATS Wed, 20 Aug 2025 19:06:14 +0900
+    preamble = h0s[0] if 0 < len(h0s) else None # ADDED BY ATS Wed, 20 Aug 2025 19:06:26 +0900
 
     # resolve template path relative to this module (./lib/templates/toc)
     module_dir = Path(__file__).resolve().parent
@@ -84,7 +104,7 @@ def create_toc_v1( input_md: Path, link_target_md: str ):
 
     # Patch all links to include the HTML filename prefix
     # [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
-    patched = re.sub(r'\]\(#', f']({link_target_md}#', toc_md)
+    patched = re.sub(r'\]\(#', f']({basedir}/{lang}#', toc_md)
 
     # Add 2 extra spaces to every indented line
     shifted = '\n'.join(
@@ -92,7 +112,21 @@ def create_toc_v1( input_md: Path, link_target_md: str ):
         for line in patched.splitlines()
         if line.strip() != ''
     )
-    return shifted
+
+    output = shifted
+    if preamble is not None:
+        link        : str = preamble["link"]
+        description : str = preamble["description"].rstrip()
+        title       : str = preamble["header_title"]
+
+        if link is not None:
+            output = f"- [**{title}**]({link})\n{description}\n\n" + output
+        else:
+            output = f"- [**{title}**](#)\n{description}\n\n" + output
+
+    return output
+
+
 
 # ======================
 # version 2 and later
@@ -124,7 +158,7 @@ def parse_qmd_teasers(
     the file-level teaser (level==0) and each section teaser (levels 2..6):
 
       {
-        "header_title": str | None,   # None for master teaser
+        "header_title": str | None,   # frontmatter's ttile for master teaser
         "header_slug" : str | None,   # explicit {#id} if present (sections only)
         "description" : str,          # teaser text (trimmed/normalized)
         "level"       : int,          # 0 (file) or 2..6 (sections)
@@ -479,11 +513,11 @@ def call_create_toc( create_toc, input_qmd, **kwargs ):
     basedir = str( p.parent ) # directory path as string
     lang = _lang_id_from_filename(p)
     text = p.read_text(encoding="utf-8")
-    return create_toc(text, basedir, lang, **kwargs)
+    return create_toc( input_qmd, text, basedir, lang, **kwargs )
 
 #######################
 
-def _create_toc_v3(text: str, basedir: str, lang: str, **_) -> str:
+def _create_toc_v3(input_qmd: Path, text: str, basedir: str, lang: str, **_) -> str:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -505,7 +539,7 @@ def _create_toc_v3(text: str, basedir: str, lang: str, **_) -> str:
 
     return "\n".join(lines_out)
 
-def _create_toc_v4(text: str, basedir: str, lang: str, **_) -> str:
+def _create_toc_v4(input_qmd: Path, text: str, basedir: str, lang: str, **_) -> str:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -540,7 +574,7 @@ def _create_toc_v4(text: str, basedir: str, lang: str, **_) -> str:
 # _create_toc_v5
 # =========================================
 # Added on Sun, 10 Aug 2025 19:20:03 +0900 by Ats
-def _create_toc_v5(text: str, basedir: str, lang: str, *, link_prefix: str = "/" ) -> str:
+def _create_toc_v5(input_qmd: Path, text: str, basedir: str, lang: str, *, link_prefix: str = "/" ) -> str:
     items = parse_qmd_teasers(
         text,
         min_level=2,
@@ -597,6 +631,9 @@ def _create_toc_v5(text: str, basedir: str, lang: str, *, link_prefix: str = "/"
     return "\n".join(lines_out)
 
 
+
+def create_toc_v1( input_qmd, **kwargs ):
+    return call_create_toc( _create_toc_v1, input_qmd, **kwargs )
 
 def create_toc_v3( input_qmd, **kwargs ):
     return call_create_toc( _create_toc_v3, input_qmd, **kwargs )
