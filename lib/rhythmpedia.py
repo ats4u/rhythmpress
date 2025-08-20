@@ -120,9 +120,9 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
         title       : str = preamble["header_title"]
 
         if link is not None:
-            output = f"- [**{title}**]({link})\n{description}\n\n" + output
+            output = f"### {title}\n- [**{title}**]({link})\n{description}\n\n" + output
         else:
-            output = f"- [**{title}**](#)\n{description}\n\n" + output
+            output = f"### {title}\n- [**{title}**](#)\n{description}\n\n" + output
 
     return output
 
