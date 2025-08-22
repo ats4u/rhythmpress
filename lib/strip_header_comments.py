@@ -1,30 +1,17 @@
 import re
-from typing import Iterable
 
-_FENCE_OPEN_RE = re.compile(r'^(\s*)(`{3,}|~{3,})')      # ``` or ~~~ (len ≥ 3), any info string allowed
-_ATX_RE        = re.compile(r'^\s{0,3}#{1,6}\s+')        # #..###### + space
-_SETEXT_RE     = re.compile(r'^\s{0,3}(=+|-+)\s*$')      # ===... or ---...
-_COMMENT_RE    = re.compile(r'<!--.*?-->', re.DOTALL)    # HTML comments (non-greedy)
+_FENCE_OPEN_RE = re.compile(r'^(\s*)(`{3,}|~{3,})')      # ``` or ~~~ (len ≥ 3)
+_ATX_RE        = re.compile(r'^\s{0,3}#{1,6}\s+')        # ATX headers
+_SETEXT_RE     = re.compile(r'^\s{0,3}(=+|-+)\s*$')      # Setext underlines
+_UNWRAP_RE     = re.compile(r'<!--\s*(.*?)\s*-->')       # capture inner, no DOTALL
 
 def strip_header_comments(text: str) -> str:
     """
-    Remove HTML comments ONLY from Markdown headers, returning the transformed text.
-
-    Rules:
-      - Strip comments in ATX headers (`# ...`) and Setext headers (title line + underline).
-      - Do NOT touch anything inside fenced code blocks (``` / ~~~).
-      - Pass YAML front matter at the very top through untouched (--- ... --- or ...).
-      - Leave all other comments unchanged.
-
-    Parameters
-    ----------
-    text : str
-        Input Markdown.
-
-    Returns
-    -------
-    str
-        Output Markdown with header-only comments removed.
+    Unwrap HTML comments ONLY in Markdown headers, returning a new string.
+      - ATX:    "# Title <!-- {#id} -->" → "# Title {#id}"
+      - Setext: "Title <!-- {.x} -->" + "-----" → "Title {.x}" + "-----"
+    Leaves everything else (including non-header comments) unchanged.
+    Skips fenced code blocks (```/~~~) and YAML front matter at top.
     """
     lines = text.splitlines(keepends=True)
 
@@ -32,11 +19,9 @@ def strip_header_comments(text: str) -> str:
     in_fence = False
     fence_char = None
     fence_len = 0
-
     in_front_matter = False
     at_file_start = True
-
-    prev_line: str | None = None  # buffer to detect Setext header
+    prev_line: str | None = None  # buffer to detect Setext titles
 
     def flush_prev():
         nonlocal prev_line
@@ -45,7 +30,7 @@ def strip_header_comments(text: str) -> str:
             prev_line = None
 
     for line in lines:
-        # Detect YAML front matter only at the very start
+        # YAML front matter only at very start
         if at_file_start:
             at_file_start = False
             if line.strip() == '---':
@@ -59,7 +44,7 @@ def strip_header_comments(text: str) -> str:
                 in_front_matter = False
             continue
 
-        # Inside a fenced code block → pass through until fence closes
+        # Fenced code blocks
         if in_fence:
             stripped = line.lstrip()
             if stripped and fence_char:
@@ -73,20 +58,20 @@ def strip_header_comments(text: str) -> str:
             out.append(line)
             continue
         else:
-            # Maybe entering a fenced code block
             m = _FENCE_OPEN_RE.match(line)
             if m:
-                flush_prev()  # any buffered Setext candidate must be emitted before entering a fence
+                flush_prev()
                 in_fence = True
                 fence_char = m.group(2)[0]
                 fence_len = len(m.group(2))
                 out.append(line)
                 continue
 
-        # If we buffered a potential Setext title line, decide based on current line
+        # Resolve any buffered Setext candidate with current line
         if prev_line is not None:
             if _SETEXT_RE.match(line):
-                cleaned = _COMMENT_RE.sub('', prev_line).rstrip() + '\n'
+                cleaned = _UNWRAP_RE.sub(r'\1', prev_line)
+                cleaned = re.sub(r'[ \t]{2,}', ' ', cleaned).rstrip() + '\n'
                 out.append(cleaned)
                 out.append(line)
                 prev_line = None
@@ -94,21 +79,20 @@ def strip_header_comments(text: str) -> str:
             else:
                 flush_prev()
 
-        # ATX headers: strip comments inline
+        # ATX: unwrap inline
         if _ATX_RE.match(line):
-            cleaned = _COMMENT_RE.sub('', line).rstrip() + '\n'
+            cleaned = _UNWRAP_RE.sub(r'\1', line)
+            cleaned = re.sub(r'[ \t]{2,}', ' ', cleaned).rstrip() + '\n'
             out.append(cleaned)
             continue
 
-        # Potential Setext header text line: buffer to check next line for ===/---
+        # Potential Setext title line (buffer and inspect next line)
         if line.strip() and not line.lstrip().startswith('#') and not _FENCE_OPEN_RE.match(line):
             prev_line = line
             continue
 
-        # Everything else (including blank lines)
         out.append(line)
 
-    # End of file: flush leftover buffered line (not a Setext header)
     if prev_line is not None:
         out.append(prev_line)
 
