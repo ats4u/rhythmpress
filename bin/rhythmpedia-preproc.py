@@ -45,21 +45,77 @@ def parse_args(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
     return p.parse_known_args(argv)
 
 
+# def find_langid(dirpath: Path) -> Tuple[str, Path]:
+#     env_lang = os.environ.get("LANG_ID")
+#     if env_lang:
+#         p = dirpath / f"master-{env_lang}.qmd"
+#         if p.exists():
+#             return env_lang, p
+#     matches = sorted(dirpath.glob("master-*.qmd"))
+#     if not matches:
+#         die(2, f"No master-*.qmd found under {dirpath}")
+#     if len(matches) > 1:
+#         die(2, f"Ambiguous: {', '.join(m.name for m in matches)}. Set $LANG_ID.")
+#     m = re.match(r"master-(.+)\.qmd$", matches[0].name)
+#     if not m:
+#         die(2, f"Cannot extract langid from {matches[0].name}")
+#     return m.group(1), matches[0]
+
+import os, re
+from pathlib import Path
+from typing import Tuple
+
 def find_langid(dirpath: Path) -> Tuple[str, Path]:
+    """
+    Find master-{lang}.qmd or master-{lang}.md under dirpath.
+    Preference order per lang: .qmd > .md
+    If $LANG_ID is set: require that lang; check .qmd first then .md.
+    """
     env_lang = os.environ.get("LANG_ID")
+
+    # Helper: path for a given lang with preference .qmd > .md
+    def pick_for_lang(lang: str) -> Path | None:
+        qmd = dirpath / f"master-{lang}.qmd"
+        if qmd.exists():
+            return qmd
+        md = dirpath / f"master-{lang}.md"
+        if md.exists():
+            return md
+        return None
+
     if env_lang:
-        p = dirpath / f"master-{env_lang}.qmd"
-        if p.exists():
+        p = pick_for_lang(env_lang)
+        if p:
             return env_lang, p
-    matches = sorted(dirpath.glob("master-*.qmd"))
-    if not matches:
-        die(2, f"No master-*.qmd found under {dirpath}")
-    if len(matches) > 1:
-        die(2, f"Ambiguous: {', '.join(m.name for m in matches)}. Set $LANG_ID.")
-    m = re.match(r"master-(.+)\.qmd$", matches[0].name)
-    if not m:
-        die(2, f"Cannot extract langid from {matches[0].name}")
-    return m.group(1), matches[0]
+        # Show what *does* exist to help the user
+        existing = sorted([*dirpath.glob("master-*.qmd"), *dirpath.glob("master-*.md")])
+        names = ", ".join(x.name for x in existing) or "none"
+        die(2, f"No master-{env_lang}.qmd/md found under {dirpath}. Existing: {names}")
+
+    # Auto-detect: collect candidates for all langs, preferring .qmd when both exist
+    candidates = {}
+    for p in sorted([*dirpath.glob("master-*.qmd"), *dirpath.glob("master-*.md")]):
+        m = re.match(r"master-(.+)\.(qmd|md)$", p.name)
+        if not m:
+            continue
+        lang = m.group(1)
+        # prefer .qmd if present; only set if lang not seen or current is .qmd
+        if lang not in candidates or p.suffix == ".qmd":
+            candidates[lang] = p
+
+    if not candidates:
+        die(2, f"No master-*.qmd/md found under {dirpath}")
+
+    if len(candidates) > 1:
+        # Ambiguous across languages
+        listed = ", ".join(sorted(p.name for p in dirpath.glob("master-*.qmd")) +
+                           sorted(p.name for p in dirpath.glob("master-*.md")))
+        die(2, f"Ambiguous: {listed}. Set $LANG_ID.")
+
+    # Exactly one language selected
+    lang, path = next(iter(candidates.items()))
+    return lang, path
+
 
 
 def parse_front_matter(block: str) -> tuple[str, List[str]]:

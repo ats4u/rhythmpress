@@ -8,6 +8,9 @@ project:
 #    watch-inputs: false
   resources:
     - Ads.txt
+  render:
+    - "**/*.qmd"       # render only qmd
+    - "!**/master*.md" # explicitly ignore master*.md anywhere 
 
 website:
   title: "律動図鑑(リズムペディア)"
