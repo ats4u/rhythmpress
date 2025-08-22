@@ -511,7 +511,7 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
 from lib.strip_header_comments import strip_header_comments
 def call_create_toc( create_toc, input_qmd, **kwargs ):
     p = Path(input_qmd)
-    basedir = str( p.parent ) # directory path as string
+    basedir = str( p.parent.name ) # directory path as string
     lang = _lang_id_from_filename(p)
     text = p.read_text(encoding="utf-8")
     text = strip_header_comments(text)

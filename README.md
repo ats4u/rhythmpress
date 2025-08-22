@@ -42,3 +42,16 @@ PY
 # 8) Ask Quarto to verify Python wiring
 quarto check python
 ```
+
+Merge pull request #85 from ats4u/master
+Remove HTML Comment in ATX headers.  Replace *.md into *.qmd. Added Automatic Builder.
+73748632ec8beb86a5e907a42f2ce8905bcd2b03
+
+fix broken index page of sub pages
+7ad02f5f1bbbcd15ba8f03b06abbb86525e66111
+
+make dark-mode more darker
+3230cd1aec7259752e7399d32cac5b78a7309c78
+
+add sidebar-confs to aggregate all _sidebar-[langid].yml
+21b3a9fef32a46f4e4ab1ecade7eff72d32f1471
