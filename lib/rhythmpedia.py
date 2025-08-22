@@ -508,11 +508,13 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
 
 #######################
 
+from lib.strip_header_comments import strip_header_comments
 def call_create_toc( create_toc, input_qmd, **kwargs ):
     p = Path(input_qmd)
     basedir = str( p.parent ) # directory path as string
     lang = _lang_id_from_filename(p)
     text = p.read_text(encoding="utf-8")
+    text = strip_header_comments(text)
     return create_toc( input_qmd, text, basedir, lang, **kwargs )
 
 #######################
@@ -649,9 +651,15 @@ def create_toc_v5( input_qmd, **kwargs ):
 # Master QMD SPlitter
 #######################
 
+import pathlib
+import os
 from pathlib import Path
-import sys, pathlib;
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]));
+sys.path.append(os.path.dirname(__file__))
+
+import sys, pathlib;
+from lib.strip_header_comments import strip_header_comments
 
 def _hdr_start(text: str, it) -> int:
     # start of the header line (prev '\n' before section_start_char; -1→0)
@@ -661,6 +669,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     print(f"\n→ {master_path}")
     lang = _lang_id_from_filename(master_path)
     text = master_path.read_text(encoding="utf-8")
+    text = strip_header_comments(text)
 
     frontmatter = parse_frontmatter(text)
 
@@ -695,9 +704,9 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
             footer =  ''
 
         p: Path = it["out_path"]
-        p.parent.mkdir(parents=True, exist_ok=True)
         sub_text = fm + section + footer
         if not p.exists() or p.read_text(encoding="utf-8") != sub_text:
+            p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(sub_text, encoding="utf-8")
             print(f"  ✅ {p}")
         else:
@@ -712,10 +721,9 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
         idx_lines += [preamble["description"].rstrip(), ""]
 
     idx_lines += [ toc_md ]
-
-    idx.parent.mkdir(parents=True, exist_ok=True)
     idx_text = "\n".join(idx_lines).rstrip() + "\n"
     if not idx.exists() or idx.read_text(encoding="utf-8") != idx_text:
+        idx.parent.mkdir(parents=True, exist_ok=True)
         idx.write_text(idx_text, encoding="utf-8")
         print(f"  ✅ SUB INDEX {idx}")
     else:
@@ -759,8 +767,13 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     print(f"[DEBUG] {yml_lang_path} sidebar = {sidebar}")
 
     if sidebar:
-        yml_lang_path.write_text("\n".join(yml_lang_lines) + "\n", encoding="utf-8")
-        print(f"  ✅ {yml_lang_path}")
+
+        yml_text = "\n".join(yml_lang_lines) + "\n"
+        if not yml_lang_path.exists() or yml_lang_path.read_text(encoding="utf-8") != yml_text:
+            yml_lang_path.write_text(yml_text, encoding="utf-8")
+            print(f"  ✅ {yml_lang_path}")
+        else:
+            print(f"  =  {yml_lang_path} (unchanged)")
     else:
         print(f"  = {yml_lang_path} (suppressed)")
 
@@ -773,6 +786,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
 from pathlib import Path
 import shutil
+from lib.strip_header_comments import strip_header_comments
 
 def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     """
@@ -783,10 +797,10 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     print(f"\n→ {master_path}")
     lang = _lang_id_from_filename(master_path)
     dst  = master_path.parent / lang / "index.qmd"
-    dst.parent.mkdir(parents=True, exist_ok=True)
 
     # Copy master -> <lang>/index.qmd (idempotent) & read front matter
     src_text = master_path.read_text(encoding="utf-8")
+    src_text = strip_header_comments(src_text)
 
     frontmatter = parse_frontmatter(src_text)
     # Follow front matter flag (default True, explicit false suppresses YAML)
@@ -798,6 +812,7 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
         src_text = src_text + f"\n{{{{< include /_sidebar-{lang}.generated.md >}}}}\n"
 
     if not dst.exists() or dst.read_text(encoding="utf-8") != src_text:
+        dst.parent.mkdir(parents=True, exist_ok=True)
         dst.write_text(src_text, encoding="utf-8")
         print(f"  ✅ {dst}")
     else:
