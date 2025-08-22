@@ -677,7 +677,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
     # preamble (everything before earliest H2 header)
     # preamble = text[:min(_hdr_start(text, it) for it in h2s)]
-    preamble = h0s[0] if 0 < len(h0s) else "" # ADDED BY ATS Wed, 20 Aug 2025 18:02:26 +0900
+    preamble = h0s[0] if 0 < len(h0s) else None # ADDED BY ATS Wed, 20 Aug 2025 18:02:26 +0900
 
     # 3-liner per section: slice → mkdir → write (H2 only per spec)
     for it in h2s:
@@ -696,20 +696,30 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
         p: Path = it["out_path"]
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(fm + section + footer, encoding="utf-8")
-        print(f"  ✅ {p}")
+        sub_text = fm + section + footer
+        if not p.exists() or p.read_text(encoding="utf-8") != sub_text:
+            p.write_text(sub_text, encoding="utf-8")
+            print(f"  ✅ {p}")
+        else:
+            print(f"  ✅ {p} skipped")
 
 
     # Language index via create_toc_v5 (absolute links)
     idx: Path = h2s[0]["lang_index_path"]
     toc_md = create_toc_v5(str(master_path), link_prefix="/")
     idx_lines: List[str] = []
-    if preamble.strip():
-        idx_lines += [preamble.rstrip(), ""]
-    # idx_lines += ["## Contents💦 ", "", toc_md]
+    if preamble and preamble["description"].strip():
+        idx_lines += [preamble["description"].rstrip(), ""]
+
+    idx_lines += [ toc_md ]
+
     idx.parent.mkdir(parents=True, exist_ok=True)
-    idx.write_text("\n".join(idx_lines).rstrip() + "\n", encoding="utf-8")
-    print(f"  ✅ {idx}")
+    idx_text = "\n".join(idx_lines).rstrip() + "\n"
+    if not idx.exists() or idx.read_text(encoding="utf-8") != idx_text:
+        idx.write_text(idx_text, encoding="utf-8")
+        print(f"  ✅ SUB INDEX {idx}")
+    else:
+        print(f"  ✅ SUB INDEX {idx} skipped")
 
     # section_title = ""
     # yml_lang_path = master_path.parent / f"_quarto-{lang}.yml"
@@ -827,6 +837,8 @@ def clean_directories_except_attachments_qmd( root: Path ):
             shutil.rmtree(item)
 
 
+import traceback
+
 def qmd_all_masters( qmd_splitter, root: Path, *args, **kwargs) -> None:
 
     # v3.2: require Path; explicit; root must be an existing directory (error if file/nonexistent)
@@ -848,6 +860,7 @@ def qmd_all_masters( qmd_splitter, root: Path, *args, **kwargs) -> None:
             qmd_splitter(p, *args, **kwargs)
         except Exception as e:
             print(f"  ✗ {p.name}: {e}")
+            traceback.print_exc()
 
 
 # def create_toc( input_qmd ):
