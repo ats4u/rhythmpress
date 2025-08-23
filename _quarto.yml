@@ -68,6 +68,7 @@ format:
     toc-expand: 1
     include-in-header:
       - text: |
+          <script async type="module" src="/assets/ats4u-twitter-video.mjs"></script>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <script async type="module" src="/assets/toc-ul.mjs"></script>
