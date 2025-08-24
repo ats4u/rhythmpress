@@ -10,7 +10,7 @@ rhythmpedia-preproc-args: []
 
 音楽の拍には弱拍と強拍があります。実はこの弱拍と強拍というものの認識の仕方は、母国語とする言語によって全く違うのです ─── これは音韻学の「モーラ拍リズム」「ストレス拍リズム」という発音上のリズム特性と深い関係があります。まず弱拍と強拍が生まれる理由を言語学的に解析した上で、音韻学を用いて分析した結果生まれた「基軸拍」という概念を通して、グルーヴの本質を多角的に探ります。
 
-## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの {#benefits-of-multi-layered-weak-beat-oriented-rhythm-theory}
+## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論で得られるもの <!-- {#benefits-of-multi-layered-weak-beat-oriented-rhythm-theory} -->
 
 **<ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論** は、日本人語学学習者、日本人音楽家に向けて、日本人が何故グルーヴしないのかを理論的に説明し、どうしらグルーヴする様になるのかについて具体的な指針を与えます。
 
@@ -77,7 +77,7 @@ rhythmpedia-preproc-args: []
 
 **多層弱拍基軸リズム理論** は、この状況に一石を投じます。
 
-## 強拍弱拍の順序に対する認識の違い {#headians-and-bottomians-of-beat-orientation}
+## 強拍弱拍の順序に対する認識の違い <!-- {#headians-and-bottomians-of-beat-orientation} -->
 
 音符が現れる順序の認識は、その人が母国語とする言語によって大きな違いが生まれます。
 
@@ -177,7 +177,7 @@ rhythmpedia-preproc-args: []
 
 このシラブル拍リズム、ストレス拍リズムについてを以降の節で見ていきます。
 
-## 言語の拍リズムと音韻学的分析 {#phonological-analysis-of-rhythm-types-in-languages}
+## 言語の拍リズムと音韻学的分析 <!-- {#phonological-analysis-of-rhythm-types-in-languages} -->
 
 日本人が演奏する音楽のリズムは、海外の人が演奏する音楽と比べて何かが違います。この違いは、海外の人々が弱拍が強拍の前に来ていると認識している事に対し、日本人は強拍が弱拍の前に来ていると認識している事が原因として起こります。この認識の違いは言語自体が持っているリズム認識の違いから生まれます。このリズム認識の事を音韻学(Phonetics)で**拍リズム**(timed-rhythm)と呼びます。
 
@@ -270,7 +270,7 @@ rhythmpedia-preproc-args: []
 
 ![](/beat-orientation/attachments/syllable-linking.png)
 
-#### シラブルには頭子音最大化原則(MOP=Maximize Onset Principle)がある {#シラブルには頭子音最大化原則がある}
+#### シラブルには頭子音最大化原則(MOP=Maximize Onset Principle)がある <!-- {#シラブルには頭子音最大化原則がある} -->
 リンキングは、可能であれば可能な限り起こるという規則があります。このことを**頭子音最大化原則（とうしおんさいだいかげんそく）**、または英語表記「Maximal Onset Principle」の頭文字をとって**MOP原則**と呼びます。
 
 この図中で帽子が頭子音、猫が音節核、靴が末子音を表しています。
@@ -675,7 +675,7 @@ rhythmpedia-preproc-args: []
 
 オフビートカウント理論は、このモーラ拍リズムを母国語とする人が、シラブル拍リズムや次に紹介するストレス拍リズムを第二言語として習得する為にどのようにしたら最も効率よく習得することが出来るかに着目し考察した結果として生まれた練習方法です。
 
-## モーラ拍リズム言語を母国語とする方々への手紙 {#letter-to-native-mora-timed-speakers}
+## モーラ拍リズム言語を母国語とする方々への手紙 <!-- {#letter-to-native-mora-timed-speakers} -->
 
 言語リズムの違いは、モーラ拍リズム言語を母国語とする人にとってしばしば、とても厳しい直視し難い厳しい現実です。日本語のリズムは特殊 ─── 日本人にとっての海外世界の適応は、それまでの習慣を全て例外なく否定される理不尽を受け入れることから始まります。しかも、この巨大なハンデは日本語を母国語とする人だけに特有の問題でもあります。
 
@@ -773,7 +773,7 @@ rhythmpedia-preproc-args: []
 
 どうか諦めることなく、粘り強くこの節以降を読んで頂けましたら幸いです ─── きっと期待以上の成果を得ることが出来るでしょう。
 
-## 言語のリズムと音楽のリズムの交差点 {#the-crossing-point-of-language-and-music}
+## 言語のリズムと音楽のリズムの交差点 <!-- {#the-crossing-point-of-language-and-music} -->
 
 ### 最初の拍が強拍弱拍かを判断する感覚は言語リズムの影響を受ける
 
@@ -982,7 +982,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 <div class="center-box"><iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/5gZOYKHXwyQ?si=IU87MAlbWB343re6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
-## <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>について {#multi-layered-weak-beat-precedence}
+## <ruby>多層弱拍先行<rt>グルーヴ</rt></ruby>について <!-- {#multi-layered-weak-beat-precedence} -->
 
 拍には強拍と弱拍の2種類があることを見ていきます。そして強拍は必ずしも先に現れるわけではなく、しばしば弱拍が先に演奏されることを見ていきます。次に弱拍・強拍は、4分音符だけではなく全ての音価の音符に存在することを見てみます。各音価の強拍弱拍は、結果的に弱拍に多層構造を生み出します。この弱拍の多層構造に弱拍先行が加わると、リズムが**頭合わせ構造**から**尻合わせ構造**へと移行することを見てみます。
 
@@ -3570,7 +3570,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 **弱拍が属する音価の判定** の訓練として考え出された方法が **声出しオフビートカウント練習法**です。
 
-## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論まとめ {#multi-layered-weak-beat-oriented-rhythm-theory-summary}
+## <ruby><rb>多層弱拍基軸律動</rb><rt>グルーヴィダンスミュージック</rt></ruby>理論まとめ <!-- {#multi-layered-weak-beat-oriented-rhythm-theory-summary} -->
 
 ### バダムツーは二層弱拍先行認識
 
@@ -3881,7 +3881,7 @@ _[Macron and breve](https://en.wikipedia.org/wiki/Systems_of_scansion#Classical_
 
 
 
-## 縦乗りのメカニズム {#mechanism-of-tatenori}
+## 縦乗りのメカニズム <!--{#mechanism-of-tatenori}-->
 
 
 ### モーラ拍ネイティブが陥りがちなリズム習癖
