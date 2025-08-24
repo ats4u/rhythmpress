@@ -1,0 +1,57 @@
+{
+  "resources": [
+    {
+      "filePath": "tatenori-theory",
+      "group": "Default"
+    },
+    {
+      "filePath": "beat-orientation",
+      "group": "Default"
+    },
+    {
+      "filePath": "offbeat-count-theory",
+      "group": "Default"
+    },
+    {
+      "filePath": "offbeat-count-phonetics",
+      "group": "Default"
+    },
+    {
+      "filePath": "metadivision-theory",
+      "group": "Default"
+    },
+    {
+      "filePath": "distributed-groove-theory",
+      "group": "Default"
+    },
+    {
+      "filePath": "weak-beat-as-sun-strong-beat-as-earth",
+      "group": "Default"
+    },
+    {
+      "filePath": "offbeat-count-polyrhythm",
+      "group": "Default"
+    },
+    {
+      "filePath": "tatenori-and-psychology",
+      "group": "Default"
+    },
+    {
+      "filePath": "mechanism-behind-tatenori",
+      "group": "Default"
+    },
+    {
+      "filePath": "influence-of-japanese-language-on-cognition",
+      "group": "Default"
+    },
+    {
+      "filePath": ".vsfavorite",
+      "group": "Default"
+    }
+  ],
+  "groups": [
+    "Default"
+  ],
+  "refreshTime": "8/22/2025, 9:07:30 PM 859",
+  "sortOrder": "MANUAL"
+}
