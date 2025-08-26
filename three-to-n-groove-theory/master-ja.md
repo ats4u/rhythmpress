@@ -224,11 +224,9 @@ Bobo Stenson Trio -Dormattan 北欧ジャズのフリーテンポの様に聴こ
 
 <div class="ats4u-twitter-video" >https://x.com/ats4u/status/1885731982577217639</div>
 
-
 ### Spaceflight Simulator の旧テーマ曲
 
 <div class="ats4u-twitter-video" >https://x.com/ats4u/status/1957084023928291419</div>
-
 
 ### 君を探してサラカムへ帰る
 

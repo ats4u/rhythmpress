@@ -2,6 +2,7 @@ project:
   title: "リズムペディア.com"
   type: website
   output-dir: .site
+#  execute-dir: project
   preview:
     port: 5150
 #    browser: false
@@ -69,6 +70,8 @@ format:
     include-in-header:
       - text: |
           <script async type="module" src="/assets/ats4u-twitter-video.mjs"></script>
+          <link href="/assets/groovespace.css" rel="stylesheet" />
+          <script async type="module" src="/assets/groovespace.mjs"></script>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6838486775293179" crossorigin="anonymous"></script>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <script async type="module" src="/assets/toc-ul.mjs"></script>

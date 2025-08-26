@@ -54,257 +54,21 @@ tags:
 
 そしてこの４つのグルーヴ空間の特徴を説明致します。
 
-<style>
-  .divisions {
-    border : 1px silver solid;
-  }
-  .divisions td {
-    border : 1px silver solid;
-    padding: 10px;
-  }
-  .divisions td.one {
-    border-left : 5px silver double;
-  }
-
-  .divisions tr.r1 td,
-  .divisions tr.r2 td,
-  .divisions tr.r3 td,
-  .divisions tr.r4 td {
-    border-top : 5px silver double;
-  }
-
-  .divisions td.l1,
-  .divisions td.l2,
-  .divisions td.l3,
-  .divisions td.l4,
-
-  .divisions td.m1,
-  .divisions td.m2,
-  .divisions td.m3,
-  .divisions td.m4,
-
-  .divisions td.n1,
-  .divisions td.n2,
-  .divisions td.n3,
-  .divisions td.n4
-  {
-    color : white;
-    font-weight: 1000;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  }
-
-  .divisions td.l1 {
-    background-color : #DFD;
-  }
-  .divisions td.l2 {
-    background-color : #9F9;
-  }
-  .divisions td.l3 {
-    background-color : #5F5;
-  }
-  .divisions td.l4 {
-    background-color : #1F1;
-  }
-  .divisions td.m1 {
-    background-color : #DDF;
-  }
-  .divisions td.m2 {
-    background-color : #99F;
-  }
-  .divisions td.m3 {
-    background-color : #55F;
-  }
-  .divisions td.m4 {
-    background-color : #11F;
-  }
-  .divisions td.n1 {
-    background-color : #FDD;
-  }
-  .divisions td.n2 {
-    background-color : #FAA;
-  }
-  .divisions td.n3 {
-    background-color : #F66;
-  }
-  .divisions td.n4 {
-    background-color : #F22;
-  }
-
-  .perspwrap{
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;   /* center horizontally in the column */
-    perspective: var(--persp, 600px);
-    perspective-origin: 50% 0%;
-  }
-
-  .perspinner{
-    position: absolute;
-    transform-origin: top center;
-  }
-
-  .perspinner > table{
-    border-collapse: collapse;
-  }
-
-  .persptable {
-    /*transform: perspective(600px) rotateX(70deg);*/
-    transform-origin: top center;
-    border-collapse: collapse;
-  }
-  .persptable th, 
-  .persptable td {
-    border: 1px solid #666;
-    padding: 0.4em 0.6em;
-    background: white;
-  }
-</style>
-<script>
-(function(){
-  function fitPerspective(wrap){
-    const tilt  = parseFloat(wrap.dataset.tilt  || 70);
-    const persp = parseFloat(wrap.dataset.persp || 600);
-
-    // ensure wrapper has the camera + origin centered
-    wrap.style.setProperty('--persp', `${persp}px`);
-    wrap.style.perspectiveOrigin = '50% 0%';
-
-    let inner = wrap.querySelector(':scope > .perspinner');
-    if(!inner){
-      inner = document.createElement('div');
-      inner.className = 'perspinner';
-      const child = wrap.firstElementChild;
-      wrap.appendChild(inner);
-      inner.appendChild(child);
-    }
-
-    inner.style.transform = 'none';
-    wrap.style.height = 'auto';
-    const h = inner.getBoundingClientRect().height;
-    const rad = tilt * Math.PI / 180;
-    wrap.style.height = (h * Math.cos(rad)) + 'px';
-    inner.style.transform = ` rotateY(15deg) rotateX(${tilt}deg) `; // camera on wrapper
-  }
-
-  function init(){ document.querySelectorAll('.perspwrap').forEach(fitPerspective); }
-  addEventListener('load', init);
-  addEventListener('resize', init);
-})();
-
-
-</script>
 ```{python}
 #| output: asis
+from pathlib import Path
+import sys
 
-from html import escape
-from typing import Any, Iterable, Sequence
+# Go one directory up from the current working dir
+parent = Path.cwd().parent.parent
 
-def show_beat(beats: Sequence[Sequence[Any]],
-              col_classes : Sequence[Sequence[Any]] | None = None,
-              row_classes : Sequence[Any]           | None = None,
-              table_class : str = "divisions" ) -> str:
-    """
-    Render a 2D HTML table from `beats`, using `col_classes` for per-cell CSS classes.
+if str(parent) not in sys.path:
+    sys.path.insert(0, str(parent))
 
-    - beats[y][x]: cell text (any type; converted to string).
-    - col_classes[y][x]: CSS class string (used if truthy and not None).
-      If col_classes is None or missing indices, no class attribute is added.
+# now imports from project root work
 
-    Returns a complete <table class="divisions">…</table> string.
-    """
+from lib.groovespace import *
 
-    col_classes and interpolate2d(col_classes)
-    row_classes and interpolate2d(row_classes)
-
-    # Determine max columns across all beat rows (supports ragged input)
-    max_cols = max((len(row) for row in beats), default=0)
-
-    html_parts: list[str] = []
-    html_parts.append( f'<table class="{table_class}">' )
-
-    for y, row in enumerate(beats):
-        if row_classes is not None and y < len(row_classes):
-            crow = row_classes[y]
-            html_parts.append( f"<tr class=\"{crow}\">")
-        else:
-            html_parts.append("<tr>")
-
-        for x in range(max_cols):
-            # Cell content
-            if x < len(row):
-                cell_text = escape(str(row[x]))
-            else:
-                cell_text = ""  # pad short rows with empty cells
-
-            # Resolve class from col_classes if present/valid
-            klass_attr = ""
-            if col_classes is not None and y < len(col_classes):
-                krow = col_classes[y]
-                if x < len(krow):
-                    k = krow[x]
-                    if k is not None:
-                        k_str = str(k).strip()
-                        if k_str:
-                            klass_attr = f' class="{escape(k_str)}"'
-
-            html_parts.append(f"<td{klass_attr}>{cell_text}</td>")
-        html_parts.append("</tr>")
-
-    html_parts.append("</table>")
-
-    return "".join(html_parts)
-
-def interpolate2d(array2d):
-    # Replace matching variable names with their values, but skip None
-    for i, row in enumerate(array2d):
-        if row is None:
-            continue
-        for j, val in enumerate(row):
-            if val is None:
-                continue
-            if val in globals():           # variable name exists
-                value = globals()[val]
-                if value is not None:      # skip replacing with None
-                    array2d[i][j] = value
-
-def split2d(text):
-    return [ line.split() for line in text.strip().split("\n") ]
-
-R1="one r1"
-R2="one r2"
-R3="one r3"
-R4="one r4"
-
-L1="one l1"
-L2="one l2"
-L3="one l3"
-L4="one l4"
-M1="one m1"
-M2="one m2"
-M3="one m3"
-M4="one m4"
-N1="one n1"
-N2="one n2"
-N3="one n3"
-N4="one n4"
-
-l1="l1"
-l2="l2"
-l3="l3"
-l4="l4"
-m1="m1"
-m2="m2"
-m3="m3"
-m4="m4"
-n1="n1"
-n2="n2"
-n3="n3"
-n4="n4"
-
-N0="one"
-N=None
-n=None
 
 ```
 
@@ -322,7 +86,7 @@ print(
             [ 1, 2, 3, 4 ] *4
         ],
         [
-            [M1, N, N, N ] *4
+            [B1, N, N, N ] *4
         ]
     )
 )
@@ -340,7 +104,7 @@ print(
             [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ]
         ],
         [
-            [N1, N, N, N ] *4
+            [R1, N, N, N ] *4
         ]
     )
 )
@@ -364,7 +128,7 @@ print(
             [ 1, 2, 3, 4 ] *4
         ],
         [
-            [M1, N, N, N ] *4
+            [B1, N, N, N ] *4
         ]
     )
 )
@@ -380,7 +144,7 @@ print(
             [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ]
         ],
         [
-            [N1, N, N, N ] *4
+            [R1, N, N, N ] *4
         ]
     )
 )
@@ -403,10 +167,10 @@ print(
             [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
         ],
         [
-            [N1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [R1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
         ]
     )
 )
@@ -441,37 +205,37 @@ print(
             [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
         ],
         [
-            [L1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [L2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [L3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [L4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [G1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [G2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [G3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [G4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
         ],
         [
             N,
             N,
             N,
             N,
-            R1,
+            ROW1,
             N,
             N,
             N,
-            R1,
+            ROW1,
             N,
             N,
             N,
-            R1,
+            ROW1,
             N,
             N,
             N,
@@ -498,10 +262,10 @@ print(
             [ 1, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
         ],
         [
-            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [M1, N, N, N ] + [ M1, N, N, N ] * 3,
+            [B1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [B1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [B1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [B1, N, N, N ] + [ B1, N, N, N ] * 3,
         ]
     )
 )
@@ -522,10 +286,10 @@ print(
             [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
         ],
         [
-            [N1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [R1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
         ]
     )
 )
@@ -558,37 +322,37 @@ print(
             [ 4, 2, 3, 4, 2, 2, 3, 4, 3, 2, 3, 4, 4, 2, 3, 4 ],
         ],
         [
-            [L1, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [L2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [L3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [L4, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N2, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N3, N, N, N ] + [ M1, N, N, N ] * 3,
-            [N4, N, N, N ] + [ M1, N, N, N ] * 3,
+            [G1, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [G2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [G3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [G4, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R2, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R3, N, N, N ] + [ B1, N, N, N ] * 3,
+            [R4, N, N, N ] + [ B1, N, N, N ] * 3,
         ],
         [
             N,
             N,
             N,
             N,
-            R1,
+            ROW1,
             N,
             N,
             N,
-            R1,
+            ROW1,
             N,
             N,
             N,
-            R1,
+            ROW1,
             N,
             N,
             N,
@@ -611,7 +375,7 @@ print(
             1 e & a 2 e & a 3 e & a 4 e & a
         """),
         split2d("""
-            N0 m1 m1 m1 N0 m1 m1 m1 N0 m1 m1 m1 N0 m1 m1 m1
+            N0 b1 b1 b1 N0 b1 b1 b1 N0 b1 b1 b1 N0 b1 b1 b1
         """)
     )
 )
@@ -639,7 +403,7 @@ print(
             1 e & a 
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 
         """)
     )
 )
@@ -662,10 +426,10 @@ print(
             a e & a
         """),
         split2d("""
-            M1 n0 n0 n0
-            M1 n0 n0 n0
-            M1 n0 n0 n0
-            M1 n0 n0 n0
+            B1 n0 n0 n0
+            B1 n0 n0 n0
+            B1 n0 n0 n0
+            B1 n0 n0 n0
         """)
     )
 )
@@ -681,7 +445,7 @@ print(
             1 e & a e e & a & e & a a e & a
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """)
     )
 )
@@ -704,10 +468,10 @@ print(
             a e & a e e & a & e & a a e & a
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
-            M2 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
-            M3 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
-            M4 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
+            B2 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
+            B3 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
+            B4 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """)
     )
 )
@@ -727,7 +491,7 @@ print(
             a e & a
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """),
         [],
         "persptable divisions"
@@ -748,7 +512,7 @@ print(
             a e & a
         """),
         split2d("""
-            M2 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B2 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """),
         [],
         "persptable divisions"
@@ -769,7 +533,7 @@ print(
             a e & a
         """),
         split2d("""
-            M3 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B3 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """),
         [],
         "persptable divisions"
@@ -790,7 +554,7 @@ print(
             a e & a
         """),
         split2d("""
-            M4 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B4 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """),
         [],
         "persptable divisions"
@@ -812,7 +576,7 @@ print(
             1 e & a 
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 
         """)
     )
 )
@@ -830,7 +594,7 @@ print(
             1 e & a e e & a & e & a a e & a
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """)
     )
 )
@@ -852,10 +616,10 @@ print(
             a e & a e e & a & e & a a e & a
         """),
         split2d("""
-            M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
-            M2 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
-            M3 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
-            M4 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0 M1 n0 n0 n0
+            B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
+            B2 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
+            B3 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
+            B4 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0 B1 n0 n0 n0
         """)
     )
 )
@@ -872,6 +636,7 @@ print(
 メタディヴィジョンは細かすぎる為にはっきりと数えることが出来ません。しかしここで仮説としてメタディヴィジョンを以下の通りに定義します。
 
 * **メタディヴィジョンは、サブディヴィジョンを多次元化する事で定義できる。**
+* メタディヴィジョンは、マクロディヴィジョン及び、サブディヴィジョンと同じ性質を持っている。
 
 ## グルーヴ空間次元転送について
 
@@ -889,6 +654,8 @@ print(
     * → その他の遅れることで生まれるニュアンスは全てここに含まれる。
 * **特にプッシュは、メタディヴィジョンでの弱起である。**
     * → その他の早いまることで生まれるニュアンスは全てここに含まれる。
+
+このように全てのグルーヴ空間をひとつずらすことで、認識が難しいメタディヴィジョン・グルーヴ空間を認識しやすくすることをここでは **グルーヴ空間次元転送** と呼びます。
 
 この**グルーヴ空間次元転送**がこの**ハイパーグルーヴ理論の最も重要な理論**と言って過言ではありません。
 
