@@ -92,8 +92,8 @@ format:
           </script>
 
     grid:
-      sidebar-width: 500px
-      body-width: 800px
+      sidebar-width: 300px
+      body-width: 1000px
       margin-width: 600px
       gutter-width: 1.5rem
 
