@@ -132,6 +132,15 @@ from lib.groovespace import *
 
 <style>
 
+  /* 1) Let tables scroll horizontally instead of breaking layout */
+  .quarto-container table.table {
+    display: block;          /* enables overflow on the element itself */
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable both-edges;
+  }
+
   table.pron {
     width:100%;
     height:auto;
@@ -167,6 +176,12 @@ from lib.groovespace import *
     background-color: #330;
   }
 
+  .header-center th {
+    text-align : center !important;
+  }
+  .pron2 col {
+    width: auto !important;
+  }
   .pron2 :is( th, td ) {
     font-size: 0.8em;
     min-height:40px;
@@ -184,6 +199,23 @@ from lib.groovespace import *
     background-color:auto;
   }
 
+/*
+  table.pron3 { 
+    table-layout: fixed; /* prevents auto expansion */
+  }
+*/
+  .pron3 :is( th, td ) {
+    font-size: 0.8em;
+    min-height:40px;
+    margin : 10px;
+    padding : 1px;
+    vertical-align: center;
+    white-space:nowrap;
+  }
+  table.pron3 thead :is( td, th ) {
+  }
+  table.pron3 tbody :is( td ) {
+  }
 
 </style>
 <table class="pron">
@@ -304,192 +336,542 @@ from lib.groovespace import *
 
 ### 凡例
 
-#### 略称
+#### 音韻規則を表す用語
 
-|     略記      |                     解説                     |
-| :---------: | :----------------------------------------: |
-|   **GA**    |         アメリカ英語 (General American)          |
-|   **MLE**   |  多文化ロンドン英語 (Multicultural London English   |
-|  **AAVE**   | 黒人英語 (African American Vernacular English) |
-| **Cockney** |           コックニー英語（東ロンドンの労働者階級英語）           |
-| **Estuary** |         現代ロンドン英語(イギリス西南部テムズ川流域の英語)         |
+音韻学で使われる発音規則を書き表す表記法に SPE表記法(SPE notation) というものがあります。
+
+SPE表記法は音韻学の研究が立ち遅れている我が国日本では全く使われていません。[^spe3]
+
+そこでここではSPE表記法を避け、漢語の訳語を当てて表現します。
+
+| SPE表記法       | 日本語の呼び方          | 英語の呼び方                     | 説明                                          |
+|-----------------|-------------------------|----------------------------------|-----------------------------------------------|
+| `_`             | 規則適用位置            | **Site of Application**          | 規則が適用される位置（X _ Y）※１             |
+| `#`             | 語界                    | **Word Boundary**                | 単語と単語の境界を表す                        |
+| `C`             | 任意の子音              | **Consonant**                    | 包括記号( **Cover Symbols** ) のひとつ ※2    |
+| `V`             | 任意の母音              | **Vowel**                        | 包括記号( **Cover Symbols** ) のひとつ ※2    |
+| `{ … }`        | 特定のセグメントの集合  | **Set of Specific Segments**     | ※ 例：{t, d, n} の **segments**              |
+| `[ … ]`        | 特徴束                  | **Feature Bundle**               | 例：`[+syllabic]`、`[-voice]`                 |
+| `( … )`        | 省略可能                | **Optional**                     | 任意要素の括弧                                |
+| `+`             | 形態素境界              | **Morpheme Boundary**            | 語内部                                        |
+| `##`            | 発話境界                | **Utterance Boundary**           | 発話全体の端                                  |
+| `V́`             | 強勢母音                | **Stressed  Vowel**              |                                               |
+| `V̆`             | 無強勢母音              | **Unstressed Vowel**             |                                               |
+| `N̩`             | 音節的子音              | **Syllabic Consonant**           |                                               |
+| `O`             | 音節頭                  | **Onset**                        | `σ` **sigma**(後述)の構成要素のひとつ。      |
+| `N`             | 音節核                  | **Nucleus**                      | `σ` **sigma**(後述)の構成要素のひとつ。      |
+| `Co`            | 音節末                  | **Coda**                         | `σ` **sigma**(後述)の構成要素のひとつ。      |
+| `σ` **sigma**  | 音節                    | **Syllable**                     |                                               |
+| `ω` **omega**  | 韻律語                  | **Prosodic Word**                |                                               |
+| `φ` **phi**    | 音韻句                  | **Phonological Phrase**          |                                               |
+| `ι` **iota**   | イントネーション句      | **Intonational Phrase**          |                                               |
+| `μ` **mu**     | モーラ                  | **Mora**                         | 日本語発音分析で必須                          |
+| `∅`             | 空列（ゼロ音）          | **Null** / **Zero**              | 挿入・脱落規則に使う（例：`∅ → t / V _ V`）  |
+| `α`（変数）    | アルファ変数            | **Alpha Notation**               | 同値特徴（例：C → [αvoice] / _ [αvoice]）  |
+| `.`             | 音節境界                | **Syllable Boundary**            | 転写や環境に用いることがある                  |
+| `R` / `ρ`      | ライム(核＋末)          | **Rime**                         | `R = N + Coda`                                |
+| `Ft`            | フット                  | **Foot**                         | `σ`の上位単位                                |
+| `U`             | 発話                    | **Utterance**                    | `ι`の上位；`##`の実体                        |
+
+:  {.pron2}
+
+- 🗣️ 1 `A → B / X _ Y` は「X と Y のあいだ（**between**）で A が B に変わる（**becomes**）」と読む。
+- ※1 挿入・脱落にも用いる。
+- ※2 CとVは、CV用語の**タイミング・スロット (timing slots)**とは異なる概念。混同に注意。
+
+[^spe3]: Some specialist generative-phonology works do use SPE-style rules, but this guide targets general readers.
+
+
+
+#### 発音変化の位置に関する用語
+
+##### 単語 - Word level (ω / `#`)
+
+* **語頭** = **word-initial** → `# _` or `ω[ _`
+* **語末** = **word-final** → `_ #` or `_ ]ω`
+* **語中** = **word-medial (non-edge)** → no `#` on either side
+
+##### 音節 - Syllable level (σ)
+
+* **音節頭** = **syllable onset** → `σ[ _` or `O _`
+* **音節末** = **syllable coda** → `_ ]σ` or `_ Co`
+
+##### 要素間 - Segmental neighbors
+
+* **母音間** = **intervocalic** → `V _ V`
+* **子音間** = **interconsonantal** → `C _ C`
+* **母音前** = **before a vowel** → `_ V`
+* **子音前** = **before a consonant** → `_ C`
+* **母音後** = **after a vowel** → `V _`
+* **子音後** = **after a consonant** → `C _`
+
+##### 形態素間 - Morphology & larger prosody
+
+* **語素界** = **morpheme boundary** → `+`
+* **話語界** = **utterance boundary** → `##`
+* **短語頭** = **phonological-phrase initial** → `φ[ _`
+* **短語末** = **phonological-phrase final** → `_ ]φ`
+* **語調短語頭** = **intonational-phrase initial** → `ι[ _`
+* **語調短語末** = **intonational-phrase final** → `_ ]ι`
+
+##### ストレス拍とシラブル拍 Stress & syllabicity
+
+* **重音後・非重音前** = **after stressed, before unstressed** → `V́ _ V̆`
+  (classic flapping environment)
+* **成音節子音前** = **before a syllabic consonant** → `_ N̩`
+
+##### 集合と類 - Sets & classes
+
+* **音集** = **set of segments** → `{…}` (e.g., `{t,d,n,s,z,l}`)
+* **子音 / 母音** = **consonant / vowel** → `C / V` (natural class shorthands)
+
+#### Quick crosswalk
+
+* **“Word-initial”** → **語頭** (`# _` / `ω[ _`)
+* **“Word-final”** → **語末** (`_ #` / `_ ]ω`)
+* **“Syllable onset”** → **音節頭** (`σ[ _` / `O _`)
+* **“Syllable coda”** → **音節末** (`_ ]σ` / `_ Co`)
+* **“Between vowels”** → **母音間** (`V _ V`)
+* **“Before a consonant”** → **子音前** (`_ C`)
+* **“After a vowel”** → **母音後** (`V _`)
+* **“Across V#V”** (e.g., linking) → **語末 + 語頭** across words (`_ # V`)
+* **“After alveolars {t,d,n,s,z,l}”** → **音集後** (`{t,d,n,s,z,l} _`)
+* **“After stressed, before unstressed”** → **重音後・非重音前** (`V́ _ V̆`)
+* **“Before syllabic N”** → **成音節子音前** (`_ N̩`)
+* **“At a morpheme boundary”** → **語素界** (`+`)
+* **“At phrase edge”** → **短語頭 / 短語末** (`φ[ _` / `_ ]φ`)
+* **“At intonational-phrase edge”** → **語調短語頭 / 語調短語末** (`ι[ _` / `_ ]ι`)
+
+
+* 🗣️ When you want **syllable-initial** in prosodic notation, write **`σ[ _`** (not `[σ _`).
+* 🗣️ **C/V here are class shorthands**, not CV-skeleton timing slots. If you switch to true CV-skeleton talk, use **O/N/Co** or **C/V-slots** explicitly.
+* 🗣️ For **linking/intrusive r** in non-rhotic accents, the context is **V # V** (i.e., **語末 + 語頭** with vowels on both sides).
+* 🗣️ Use **`_ ]σ`** (or `_ Co`) for “in coda,” and **`σ[ _`** (or `O _`) for “in onset.”
+
+#### 方言の略称
+
+|    英語     |  日本語  | 日本語名                    | 英語名                              | 解説                                   |
+| :---------: | :------: | --------------------------- | ----------------------------------- | -------------------------------------- |
+|   **GA**    |  **米**  | アメリカ英語                | General American                    |                                        |
+|   **GA**    | **米南** | アメリカ南部方言            | South American                      |                                        |
+|  **AAVE**   | **ア米** | アフリカ系米国英語/黒人英語 | African American Vernacular English |                                        |
+|   **RP**    |  **英**  | 容認発音英語                | Received Pronunciation              | イギリス英語の伝統的な事実上の標準発音 |
+|   **MLE**   | **多英** | 多文化ロンドン英語          | Multicultural London English        |                                        |
+| **Cockney** |  **コ**  | コックニー英語              | Cockney                             | 東ロンドンの労働者階級英語             |
+| **Estuary** |  **エ**  | 河口域英語/エスチュアリ英語 | Estuary English                     | イギリス西南部テムズ川流域の英語       |
+
+:  {.pron2 .header-center tbl-colwidths=[1,1,1,1,1]}
+
+Here’s a **dialect–change cross-table**: rows are phonological/phonetic changes, columns are dialects (GA, MLE, AAVE, Cockney, Estuary, Southern AmE). I marked **●** where the change is attested/characteristic, and left blank otherwise. Notes are condensed so it fits as a quick comparative overview.
+
+---
+
+#### 方言別 子音変化マトリクス
+
+| 発音変化名                 | 発音変化           |      米       |    米南    |    ア米    |   コ    |  エ   | 多英  |
+| :------------------------- | :----------------- | :-----------: | :--------: | :--------: | :-----: | :---: | :---: |
+| TH-fronting                | `/θ/->[f]`        |               | (語末一部) | (語末一部) |   ●    |       |  ●   |
+| TH-stopping                | `/ð/->[d]`        |               |            |  ●(初頭)  |         |       |       |
+| TH-frontingvoiced          | `/ð/->[v]`        |               |            |            |   ●    |       |  ●   |
+| T-glottalization           | `/t/->[ʔ]`         | (語末/限局的) |            |   (語末)   |   ●    |  ●   |       |
+| Flapping                   | `/t,d/->[ɾ]`       |      ●       |     ●     |     ●     |         |       |       |
+| -ing->-in’                | `/ŋ/->[n]`        |               |     ●     |     ●     |   ●    |       |       |
+| L-vocalization             | `/l/->[w,o]`       |               |            |            |   ●    |  ●   |       |
+| h-dropping                 | `/h/->∅`           |               |            |            |   ●    |       |       |
+| Yod-coalescence            | `/tj,dj/->[tʃ,dʒ]` |               |            |            |   ●    |       |  ●   |
+| Yod-dropping               | `/juː/->[uː]`    |      ●       |     ●     |   (一部)   |         |       |       |
+| wh–wcontrast              | `/hw/->[ʍ]`        |               |  ●(保存)  |   (一部)   |         |       |       |
+| Finalclustersimplification |                    |      ●       |     ●     |            |         |       |       |
+| t-deletion                 | /nt/->[n]          |   ●(口語)    |            |     ●     |         |       |       |
+| Linkingr                   | `∅->[ɹ]`           |               |            |            | ●(非r) |  ●   |       |
+| Intrusiver                 |                    |               |            |            |   ●    |  ●   |       |
+| Non-rhoticity              | `/ɹ/->∅`           |               |            |            |   ●    |  ●   |       |
+| Retroflex/bunchedr         |                    |      ●       |     ●     |     ●     |         |       |       |
+| Dentalization              | `t,d,n->[t̪,d̪,n̪]`   |      ●       |            |            |   ●    |  ●   |  ●   |
+
+:  {.pron2 .pron3 .header-center }
+
+* **●** = strong/characteristic
+* ( ) = limited / environment-restricted presence
+
+hello world foo bar ^[あああああ] 
+
+aaa [^spe22]
+
+[^spe22]: いいいいいいいいいいい
+
 
 ### 母音
 
 #### 単母音
 
-|   IPA   |     実例      |  舌の位置   | 説明                                      |
-| :-----: | :---------: | :-----: | :-------------------------------------- |
-| **/i/** |  (_beat_)   |   高・前   | 日本語「イー」より前で緊張、口は横に。                     |
-| **/ɪ/** |   (_bit_)   |   高・前   | 「イ」だが力を抜く。「イ」と「エ」の間、短い。                 |
-| **/ɛ/** |   (_bet_)   |   中・前   | 日本語「エ」より低く開く、横に広げる。                     |
-| **/æ/** |   (_bat_)   |   低・前   | 大きく開く。「アとエの間」。日本語に無い。                   |
-| **/ɑ/** | (_father_)  |   低・後   | 唇広め、喉奥で「ア」。                             |
-| **/ɔ/** | (_thought_) |   中・後   | 軽く丸めた「オー」。※多くの米語で /ɑ/ と合流。              |
-| **/ʊ/** |  (_book_)   |   高・後   | 力を抜く。「ウとオの間」、軽く丸める。                     |
-| **/u/** |  (_boot_)   |   高・後   | 緊張。「ウー」より強く丸め後方。                        |
-| **/ʌ/** |  (_strut_)  | 中央・短く平ら | 「アとオの間」。日本語に無い。                         |
-| **/ə/** |  (_sofa_)   |         | 弱勢の中央母音＝『**シュワ**』と呼ばれる。短く弱い曖昧な母音。       |
-| **/ɝ/** |  (_bird_)   |         | **強勢**の r 化母音。舌を後方やや反り気味に /r/ 的発音に変化。   |
-| **/ɚ/** | (_butter_)  |         | **弱勢**の r 化母音。日本語「ア」と全く違う。flap と連動しやすい。 |
+|   IPA    |    実例     |    舌の位置    | 説明                                                               |
+| :------: | :---------: | :------------: | :----------------------------------------------------------------- |
+| **/i/**  |  (_beat_)   |     高・前     | 日本語「イー」より前で緊張、口は横に。                             |
+| **/ɪ/**  |   (_bit_)   |     高・前     | 「イ」だが力を抜く。「イ」と「エ」の間、短い。                     |
+| **/ɛ/**  |   (_bet_)   |     中・前     | 日本語「エ」より低く開く、横に広げる。                             |
+| **/æ/** |   (_bat_)   |     低・前     | 大きく開く。「アとエの間」。日本語に無い。                         |
+| **/ɑ/** | (_father_)  |     低・後     | 唇広め、喉奥で「ア」。                                             |
+| **/ɔ/**  | (_thought_) |     中・後     | 軽く丸めた「オー」。※多くの米語で /ɑ/ と合流。                   |
+| **/ʊ/**  |  (_book_)   |     高・後     | 力を抜く。「ウとオの間」、軽く丸める。                             |
+| **/u/**  |  (_boot_)   |     高・後     | 緊張。「ウー」より強く丸め後方。                                   |
+| **/ʌ/**  |  (_strut_)  | 中央・短く平ら | 「アとオの間」。日本語に無い。                                     |
+| **/ə/**  |  (_sofa_)   |                | 弱勢の中央母音＝『**シュワ**』と呼ばれる。短く弱い曖昧な母音。     |
+| **/ɝ/**  |  (_bird_)   |                | **強勢**の r 化母音。舌を後方やや反り気味に /r/ 的発音に変化。     |
+| **/ɚ/**  | (_butter_)  |                | **弱勢**の r 化母音。日本語「ア」と全く違う。flap と連動しやすい。 |
+
 :  {.pron2}
 
 #### 二重母音（滑り音）
 
-|   IPA    |     実例     |   動き    | 説明                  |
-| :------: | :--------: | :-----: | ------------------- |
+|   IPA    |    実例    |   動き   | 説明                                   |
+| :------: | :--------: | :------: | -------------------------------------- |
 | **/eɪ/** |  (_bait_)  | /e/→/ɪ/ | 短く滑る。日本語「エイ」より後半短い。 |
 | **/oʊ/** |  (_goat_)  | /o/→/ʊ/ | 日本語「オウ」より後半短く、丸め維持。 |
-| **/aɪ/** | (_price_)  | /a/→/ɪ/ | 開始を低く大きく開く。         |
-| **/aʊ/** | (_mouth_)  | /a/→/ʊ/ | 後半で丸める。             |
-| **/ɔɪ/** | (_choice_) | /ɔ/→/ɪ/ | 開始は丸め気味の「オ」。        |
+| **/aɪ/** | (_price_)  | /a/→/ɪ/ | 開始を低く大きく開く。                 |
+| **/aʊ/** | (_mouth_)  | /a/→/ʊ/ | 後半で丸める。                         |
+| **/ɔɪ/** | (_choice_) | /ɔ/→/ɪ/ | 開始は丸め気味の「オ」。               |
 : {.pron2}
 
 #### r 付き（r-colored）複合
 
-|   IPA    |     実例     |        動き         | 説明                                        |
-| :------: | :--------: | :---------------: | :---------------------------------------- |
-| **/ɪɚ/** |  (*near*)  | **/ɪ/** → **/ɚ/** | **母音＋\[ɚ]**の一まとまり。**終端でr化**（舌端は**触れない**）。 |
-| **/ɛɚ/** | (*square*) | **/ɛ/** → **/ɚ/** | 開始母音の**質を保ち**、**末尾でr色**。                  |
-| **/ʊɚ/** |  (*cure*)  | **/ʊ/** → **/ɚ/** | **短いウ**から**r化**へ。語により **/kjʊr/** など変異。    |
-| **/ɔɚ/** | (*north*)  | **/ɔ/** → **/ɚ/** | **丸めたオ**始まり→**r化**。方言差大。                  |
-| **/ɑɚ/** | (*start*)  | **/ɑ/** → **/ɚ/** | **広いア**始まり→**r化**。                        |
+|    IPA    |    実例    |        動き         | 説明                                                              |
+| :-------: | :--------: | :-----------------: | :---------------------------------------------------------------- |
+| **/ɪɚ/**  |  (_near_)  | **/ɪ/** → **/ɚ/**  | **母音＋\[ɚ]**の一まとまり。**終端でr化**（舌端は**触れない**）。 |
+| **/ɛɚ/**  | (_square_) | **/ɛ/** → **/ɚ/**  | 開始母音の**質を保ち**、**末尾でr色**。                           |
+| **/ʊɚ/**  |  (_cure_)  | **/ʊ/** → **/ɚ/**  | **短いウ**から**r化**へ。語により **/kjʊr/** など変異。           |
+| **/ɔɚ/**  | (_north_)  | **/ɔ/** → **/ɚ/**  | **丸めたオ**始まり→**r化**。方言差大。                           |
+| **/ɑɚ/** | (_start_)  | **/ɑ/** → **/ɚ/** | **広いア**始まり→**r化**。                                       |
+
 :  {.pron2}
 
 ### 子音
 
 #### 破裂音 (Plosives)
 
-|   IPA    |      Examples       | 分類           | 説明                                  | 地方                                                               |
-| :------: | :-----------------: | :----------- | :---------------------------------- | :--------------------------------------------------------------- |
-| **/p/**  |     *pin, cap*      | **無声両唇破裂音**  | 両唇を閉じて破裂；語頭は**強い息（帯気）**             | 全般                                                               |
-| **/b/**  |     *bin, cab*      | **有声両唇破裂音**  | /p/ と同動作だが**声帯振動**                  | 全般                                                               |
-| **/t/**  |     *two, cat*      | **無声歯茎破裂音**  | 語頭は帯気；**/s/** の後は無帯気（*spin*）        | 全般                                                               |
-| **/d/**  |      *do, ad*       | **有声歯茎破裂音**  | /t/ の有声版                            | 全般                                                               |
-| **/k/**  |     *key, back*     | **無声軟口蓋破裂音** | 語頭は帯気；/s/ の後は無帯気（*ski*）             | 全般                                                               |
-| **/g/**  |      *go, bag*      | **有声軟口蓋破裂音** | /k/ の有声版                            | 全般                                                               |
-| **\[ʔ]** | *bo\[ʔ]le ≈ bottle* | **無声音声門破裂音** | **T-glottalization**：/t/ が \[ʔ] に置換 | Cockney, Estuary, MLE, 米国 では<br/> /t/ が子音前・音節末で可変<br/>AAVE/GA 一部 |
-: {.pron2}
+|   IPA    |      Examples        | 分類                 | 説明                                       | 地方                                                                              |
+| :------: | :-----------------:  | :------------------- | :----------------------------------------- | :-------------------------------------------------------------------------------- |
+| **/p/**  |     _pin, cap_       | **無声両唇破裂音**   | 両唇を閉じて破裂；語頭は**強い息（帯気）** | 全般                                                                              |
+| **/b/**  |     _bin, cab_       | **有声両唇破裂音**   | /p/ と同動作だが**声帯振動**               | 全般                                                                              |
+| **/t/**  |     _two, cat_       | **無声歯茎破裂音**   | 語頭は帯気；**/s/** の後は無帯気（_spin_） | 全般                                                                              |
+| **/d/**  |      _do, ad_        | **有声歯茎破裂音**   | /t/ の有声版                               | 全般                                                                              |
+| **/k/**  |     _key, back_      | **無声軟口蓋破裂音** | 語頭は帯気；/s/ の後は無帯気（_ski_）      | 全般                                                                              |
+| **/g/**  |      _go, bag_       | **有声軟口蓋破裂音** | /k/ の有声版                               | 全般                                                                              |
+| **\[ʔ]** | _bo\[ʔ]le ≈ bottle_ | **無声音声門破裂音** | **T-glottalization**：/t/ が \[ʔ] に置換   | Cockney, Estuary, MLE, 米国 では<br/> /t/ が子音前・音節末で可変<br/>AAVE/GA 一部 |
 
----
+: {.pron2}
 
 #### 破擦音 (Affricates)
 
-|         IPA         |      Examples      | 分類           | 説明                               | 地方                |
-| :-----------------: | :----------------: | :----------- | :------------------------------- | :---------------- |
-|      **/tʃ/**       |   *chin, match*    | **無声後部歯茎破擦** | 「**ch**」＝**/t/ + /ʃ/** の一体化。     | 全般                |
-|      **/dʒ/**       |    *jam, badge*    | **有声後部歯茎破擦** | 「**j**」＝**/d/ + /ʒ/** の一体化。      | 全般                |
-| **\[t͡ʃ] (< /tj/)** | *tune → \[t͡ʃ]une* | **派生破擦**     | **Yod-coalescence**（/tj/→\[t͡ʃ]） | **英 (特にCockney)** |
-| **\[d͡ʒ] (< /dj/)** | *duty → \[d͡ʒ]uty* | **派生破擦**     | **/dj/→\[d͡ʒ]**                  | **英 (特にCockney)** |
-: {.pron2}
-
----
+|        IPA         |     Examples       | 分類                 | 説明                                  | 地方                 |
+| :----------------: | :---------------:  | :------------------- | :-----------------------------------  | :------------------- |
+|      **/tʃ/**      |   _chin, match_    | **無声後部歯茎破擦** | 「**ch**」＝**/t/ + /ʃ/** の一体化。  | 全般                 |
+|      **/dʒ/**      |   _jam, badge_     | **有声後部歯茎破擦** | 「**j**」＝**/d/ + /ʒ/** の一体化。   | 全般                 |
+| **\[t͡ʃ] (< /tj/)** | _tune → \[t͡ʃ]une_ | **派生破擦**         | **Yod-coalescence**（/tj/→\[t͡ʃ]）    | **英 (特にCockney)** |
+| **\[d͡ʒ] (< /dj/)** | _duty → \[d͡ʒ]uty_ | **派生破擦**         | **/dj/→\[d͡ʒ]**                       | **英 (特にCockney)** |
 
 #### 歯摩擦音 (Fricatives)
 
-|   IPA   |   Examples  | 分類            | 説明                  | 地方                       |
-| :-----: | :---------: | :------------ | :------------------ | :----------------------- |
-| **/f/** |   (*fine*)  | **無声唇歯摩擦**    | 上歯を下唇に軽く当てる。        | 全般                       |
-| **/v/** |   (*vine*)  | **有声唇歯摩擦**    | /f/ に**声帯振動**を加える。  | 全般                       |
-| **/θ/** |   (*thin*)  | **無声（舌端）歯摩擦** | 日本語に無い。             | 全般（※方言交替は下表）             |
-| **/ð/** |   (*this*)  | **有声（舌端）歯摩擦** | /θ/ と同形で**声帯振動**。   | 全般（※方言交替は下表）             |
-| **/s/** |   (*see*)   | **無声歯茎摩擦**    | 唇は**平ら**。           | 全般                       |
-| **/z/** |   (*zoo*)   | **有声歯茎摩擦**    | /s/ の有声版。           | 全般                       |
-| **/ʃ/** |   (*she*)   | **無声後部歯茎摩擦**  | 舌をやや後ろ，**唇を軽く丸める**。 | 全般                       |
-| **/ʒ/** | (*measure*) | **有声後部歯茎摩擦**  | 外来語中心；語頭は稀。         | 全般                       |
-| **/h/** |   (*hat*)   | **無声声門摩擦**    | **次の母音の口形**で息だけ通す。  | 全般（※Cockney等で**h脱落**が頻発） |
-: {.pron2}
+|   IPA    |  Examples   | 分類                   | 説明                               | 地方                                |
+| :-----:  | :---------: | :--------------------- | :--------------------------------- | :---------------------------------- |
+| **/f/**  |  (_fine_)   | **無声唇歯摩擦**       | 上歯を下唇に軽く当てる。           | 全般                                |
+| **/v/**  |  (_vine_)   | **有声唇歯摩擦**       | /f/ に**声帯振動**を加える。       | 全般                                |
+| **/θ/** |  (_thin_)   | **無声（舌端）歯摩擦** | 日本語に無い。                     | 全般（※方言交替は下表）             |
+| **/ð/** |  (_this_)   | **有声（舌端）歯摩擦** | /θ/ と同形で**声帯振動**。        | 全般（※方言交替は下表）             |
+| **/s/**  |   (_see_)   | **無声歯茎摩擦**       | 唇は**平ら**。                     | 全般                                |
+| **/z/**  |   (_zoo_)   | **有声歯茎摩擦**       | /s/ の有声版。                     | 全般                                |
+| **/ʃ/**  |   (_she_)   | **無声後部歯茎摩擦**   | 舌をやや後ろ，**唇を軽く丸める**。 | 全般                                |
+| **/ʒ/**  | (_measure_) | **有声後部歯茎摩擦**   | 外来語中心；語頭は稀。             | 全般                                |
+| **/h/**  |   (_hat_)   | **無声声門摩擦**       | **次の母音の口形**で息だけ通す。   | 全般（※Cockney等で**h脱落**が頻発） |
 
----
+: {.pron2}
 
 #### 鼻音 (Nasals)
 
-|   IPA   | Examples | 分類        | 説明                      | 地方                                                      |
-| :-----: | :------: | :-------- | :---------------------- | :------------------------------------------------------ |
-| **/m/** |  (*me*)  | **両唇鼻音**  | 口を閉じて**鼻へ**共鳴。          | 全般                                                      |
-| **/n/** |  (*no*)  | **歯茎鼻音**  | 舌先を歯茎に当てる。              | 全般                                                      |
-| **/ŋ/** | (*sing*) | **軟口蓋鼻音** | 上顎に舌の奥を当てる。<br>先頭に表れない。 | 全般<br>※AAVE/南部/Cockney で<br>-ing → in’ の様に\[ŋ]→\[n] に変化 |
-: {.pron2}
+|   IPA   | Examples | 分類           | 説明                                       | 地方                                                                    |
+| :-----: | :------: | :------------- | :----------------------------------------- | :---------------------------------------------------------------------- |
+| **/m/** |  (_me_)  | **両唇鼻音**   | 口を閉じて**鼻へ**共鳴。                   | 全般                                                                    |
+| **/n/** |  (_no_)  | **歯茎鼻音**   | 舌先を歯茎に当てる。                       | 全般                                                                    |
+| **/ŋ/**| (_sing_) | **軟口蓋鼻音** | 上顎に舌の奥を当てる。<br>先頭に表れない。 | 全般<br>※AAVE/南部/Cockney で<br>-ing → in’ の様に\[ŋ]→\[n] に変化 |
 
----
+: {.pron2}
 
 #### 接近音 (Approximants)
 
-|    IPA   |       Examples      | 分類               | 説明                                             | 地方                                    |
-| :------: | :-----------------: | :--------------- | :--------------------------------------------- | :------------------------------------ |
-|  **/ɹ/** |       (*run*)       | **歯茎接近音**        | **舌先は触れない**（日本語ら行\[ɾ]と別）。                      | 全般<br>**Cockney は語末・子音前で非R**          |
-|  **/j/** |       (*yes*)       | **硬口蓋近接**        | 「**y**」音；舌前部を上げる。                              | 全般<br>英の一部で<br>/tj,dj/ と合流→上欄         |
-|  **/w/** |        (*we*)       | **両唇・軟口蓋近接**     | **丸唇＋後舌**の協調。                                  | 全般                                    |
-| **\[ʍ]** | (*which* ≠ *witch*) | **無声両唇‐軟口蓋近接**   | **/hw/** 由来の「息混じりの w」。<br>**whine–wine**対立を保持。 | 米南部の一部<br>スコットランド<br>アイルランド<br>一部AAVE |
-| **\[ɻ]** |          —          | **後舌巻き舌的 ɹ**（異音） | **retroflex/bunched r**。                       | 北米英<br>GA<br>AAVE など                  |
-: {.pron2}
+|   IPA    |      Examples       | 分類                       | 説明                                                            | 地方                                                       |
+| :------: | :-----------------: | :------------------------- | :-------------------------------------------------------------- | :--------------------------------------------------------- |
+| **/ɹ/**  |       (_run_)       | **歯茎接近音**             | **舌先は触れない**（日本語ら行\[ɾ]と別）。                      | 全般<br>**Cockney は語末・子音前で非R**                    |
+| **/j/**  |       (_yes_)       | **硬口蓋近接**             | 「**y**」音；舌前部を上げる。                                   | 全般<br>英の一部で<br>/tj,dj/ と合流→Yod合流              |
+| **/w/**  |       (_we_)        | **両唇・軟口蓋近接**       | **丸唇＋後舌**の協調。                                          | 全般                                                       |
+| **\[ʍ]** | (_which_ ≠ _witch_)| **無声両唇‐軟口蓋近接**   | **/hw/** 由来の「息混じりの w」。<br>**whine–wine**対立を保持。| 米南部の一部<br>スコットランド<br>アイルランド<br>一部AAVE |
+| **\[ɻ]** |          —         | **後舌巻き舌的 ɹ**（異音） | **retroflex/bunched r**。                                       | 北米英<br>GA<br>AAVE など                                  |
 
----
+: {.pron2}
 
 #### 側面接近音 (Lateral)
 
-|                IPA                 |        Examples        | 分類          | 説明                                        | 地方                   |
-| :--------------------------------: | :--------------------: | :---------- | :---------------------------------------- | :------------------- |
-|              **/l/**               |    (*light, fill*)     | **側面接近音**   | 語末・子音前は **暗い L \[ɫ]**<br>（舌後部を上げる）になりやすい。 | 全般                   |
-|              **\[ɫ]**              |           —            | **暗いL（異音）** | とくに語末/子音前で顕著。                             | **英米全般**             |
-| **L-vocalization \[w \~ ʊ̯ \~ o]** | (*people → peop\[ʊ̯]*) | **交替**      | /l/ が後舌化・半母音化し<br>**母音/半母音に近づく**。         | **Cockney, Estuary** |
+|                IPA                |        Examples        | 分類              | 説明                                                               | 地方                 |
+| :---------------------------------: | :----------------------: | :----------------- | :------------------------------------------------------------------ | :-------------------- |
+|              **/l/**              |    (*light, fill*)     | **側面接近音**    | 語末・子音前は **暗い L \[ɫ]**<br>（舌後部を上げる）になりやすい。 | 全般                 |
+|             **\[ɫ]**              |           —           | **暗いL（異音）** | とくに語末/子音前で顕著。                                          | **英米全般**         |
+| **L-vocalization \[w \~ ʊ̯ \~ o]** | (*people → peop\[ʊ̯]*) | **交替**          | /l/ が後舌化・半母音化し<br>**母音/半母音に近づく**。              | **Cockney, Estuary** |
 : {.pron2}
-
----
-
-#### 英語の 子音転訛一覧
-
-| 記号・交替                                            | 例                         | 説明                                         | 地方                                             |
-| :----------------------------------------------- | :------------------------ | :----------------------------------------- | :--------------------------------------------- |
-| **\[ɾ]（flap）**                                   | (*wa\[ɾ]er*)              | **/t, d/** が母音間で**弾音化**。                   | **北米英全般・AAVE**<br>英では稀                         |
-| **\[ʔ]<br/>（glottal stop）**                      | (*ki\[ʔ]en ≈ kitten*)     | **T-glottalization**<br/>/t/ が \[ʔ] 置換／強化。 | **Cockney/Estuary/MLE；<br>米の一部でも語末・子音前**       |
-| **/θ/→\[f]<br/>（TH-fronting）**                   | (*three → free*)          | 歯摩擦の**前唇歯化**。                              | **Cockney, MLE；<br>AAVE/南部/カリブ系では語末中心**        |
-| **/ð/→\[v]／\[d]<br/>（TH-front./stopping）**       | (*brother → brovah / d-*) | 有声歯摩擦の**前唇歯化**<br/>または**破裂化**。             | **Cockney（\[v]）<br>AAVE/アイルランド/カリブ系（\[d] 初頭）** |
-| **/h/→∅<br/>（h-dropping）**                       | (*house → ’ouse*)         | 語頭 **h 脱落**。                               | **Cockney, 都市英の一部**                            |
-| **/ŋ/→\[n]<br/>（-ing → -in’）**                   | (*walking → walkin’*)     | 語末 **ng** の前舌化。                            | AAVE, 南部英, <br>Cockney など口語                    |
-| **/tj, dj/ → \[t͡ʃ, d͡ʒ]<br/>（Yod-coalescence）** | (*tune/due*)              | 子音＋/j/ が**破擦化**。                           | **英（Cockney/都市英）**                             |
-| **Linking Intrusive r<br/> \[ɹ]**                | (*law\[r] and…*)          | 非ローティック英語<br>母音連結時に **r**を **挿入**。         | **英（Cockney/Estuary/RP系）**                     |
-: {.pron2}
-
-> **方言名の略記**：MLE=Multicultural London English, GA=General American, RP=英標準寄り
-
----
 
 ### 使い分けの要点（最小セット）
 
-* **Cockney 系**：**\[ʔ]**（T-グロッタル化）、**TH-fronting**（/θ, ð/ → \[f, v]）、**h-dropping**、**L-vocalization**、**Yod-coalescence**、**非R（linking/intrusive r）**。
-* **Southern American English（米南部）**：**\[ʍ]**（whine–wine対立の保持）、語末 **-in’**、クラスター簡略化（子音脱落）など。
-* **AAVE**：語末 **-in’**、**TH-stopping/fronting**の分布、クラスター簡略化、**flap \[ɾ]**は北米一般同様に出現（/t,d/間）。基本は**R音声（rhotic）**。
+- **Cockney 系**：**\[ʔ]**（T-グロッタル化）、**TH-fronting**（/θ, ð/ → \[f, v]）、**h-dropping**、**L-vocalization**、**Yod-coalescence**、**非R（linking/intrusive r）**。
+- **Southern American English（米南部）**：**\[ʍ]**（whine–wine対立の保持）、語末 **-in’**、クラスター簡略化（子音脱落）など。
+- **AAVE**：語末 **-in’**、**TH-stopping/fronting**の分布、クラスター簡略化、**flap \[ɾ]**は北米一般同様に出現（/t,d/間）。基本は**R音声（rhotic）**。
 
 
-
----
 
 ### 方言別子音入れ替わりまとめ
 
-| Phenomenon                       | Exchange (Input → Output)     | Typical Environment                | Examples                            | 地方 (Dialects)                                | Notes                |
-| -------------------------------- | ----------------------------- | ---------------------------------- | ----------------------------------- | -------------------------------------------- | -------------------- |
-| **TH-fronting**                  | /θ/ → **\[f]**                | Coda > elsewhere                   | *three → free*, *mouth → mouf*      | **Cockney, MLE**；（語末のみ）**AAVE/米南部/カリブ系都市**   | Cockneyは広範、他方言は語末中心  |
-| **TH-stopping (voiced)**         | /ð/ → **\[d]**                | Word-initial                       | *this → dis*, *them → dem*          | **AAVE**, **Irish/Caribbean英**, 都市変種         | 語中・語末では \[d]/\[v] 可変 |
-| **TH-fronting (voiced)**         | /ð/ → **\[v]**                | Medial/Final                       | *brother → bruvva*                  | **Cockney, MLE**                             | Cockneyで顕著           |
-| **T-glottalization**             | /t/ → **\[ʔ]**                | Coda / 子音前 / 弱勢音節                  | *bottle → boʔ(ɫ)*, *kitten → kɪʔn̩* | **Cockney, Estuary**；（限定的に）**GA/AAVE**       | 英で強勢、米は語末・子音前可変      |
-| **Flapping**                     | /t, d/ → **\[ɾ]**             | Vowel\_V́ \_\_ V̆                  | *water → waɾer*, *city → sɪɾi*      | **GA 全般**, **AAVE**                          | 強勢母音後＋弱勢母音前          |
-| **-ing 弱化**                      | /ŋ/ → **\[n]**                | -ing coda                          | *walking → walkin’*                 | **AAVE**, **米南部**, **Cockney**（口語）           | スタイル依存で広範            |
-| **L-vocalization**               | /l/ → **\[w \~ ʊ̯ \~ o]**     | Coda                               | *ball → baw*, *people → peopʊ̯*     | **Cockney, Estuary**                         | ロンドン周辺で顕著            |
-| **h-dropping**                   | /h/ → **∅**                   | Word-initial                       | *house → ’ouse*, *have → ’ave*      | **Cockney**, 都市英の一部                          | 機能語で頻度↑              |
-| **Yod-coalescence**              | /tj, dj/ → **\[t͡ʃ, d͡ʒ]**    | t/d + /j/                          | *tune → choon*, *duty → jooty*      | **Cockney, 都市英（MLE等）**                       | 連続音化（破擦化）            |
-| **Yod-dropping**                 | /juː/ → **\[uː]**             | After alveolars (t, d, n, s, z, l) | *tune → toon*, *news → nooz*        | **GA**, **米南部**, 一部 **AAVE**                 | 北米で一般的               |
-| **/hw/ 対立保持**                    | /hw/ → **\[ʍ]** (≠ /w/)       | Word-initial                       | *which \[ʍɪtʃ]* vs *witch \[wɪtʃ]*  | **米南部の一部**, **Scots**, **Irish**，一部 **AAVE** | “息混じりの w”            |
-| **Final cluster simplification** | Coda clusters → simplified    | Word-final（次語子音で強化）                | *hand → han*, *cold → col’*         | **AAVE**, **米南部**（口語）                        | 有声阻害音で顕著             |
-| **/t/ 省略（NT クラスタ）**              | /nt/ → **\[n]**（しばしば鼻母音化/延長）  | Intervocalic / 早口                  | *internet → innernet*               | **GA**, **AAVE**（口語）                         | flap共存も              |
-| **Linking r**                    | ∅ → **\[ɹ]**                  | Vowel#Vowel                        | *law(r) and*, *idea(r) of*          | **非r方言**：**Cockney/Estuary/RP系**             | 語彙的 r 連結             |
-| **Intrusive r**                  | ∅ → **\[ɹ]**                  | Vowel#Vowel (無語源 r)                | *saw(r) it*                         | **非r方言**：**Cockney/Estuary/RP系**             | 語源に r 無しでも挿入         |
-| **Non-rhoticity (R-loss)**       | /ɹ/ → **∅**                   | Coda                               | *car → caː*                         | **Cockney/Estuary/RP系**                      | r は母音前のみ発音           |
-| **Retroflex/bunched r**          | /ɹ/ → **\[ɻ \~ ɚ]**           | General                            | *right, bird*                       | **GA**, **AAVE**                             | 後舌/巻き舌傾向             |
-| **Dentalization**                | /t, d, n/ → **\[t̪, d̪, n̪]** | before /θ, ð/                      | *eighth \[eɪt̪θ]*                   | **英全般**, **GA**                              | 接触同化（学術的補足）          |
+- THの唇歯化 (TH-fronting)
+  - Exchange (Input → Output)
+    - /θ/ → **\[f]**
+  - Typical Environment
+    - Coda > elsewhere
+  - Examples
+    - *three → free*, *mouth → mouf*
+  - 地方 (Dialects)
+    - **Cockney, MLE**；（語末のみ）**AAVE/米南部/カリブ系都市**
+  - Notes
+    - Cockneyは広範、他方言は語末中心
+- 有声THの破裂化 (TH-stopping (voiced))
+  - Exchange (Input → Output)
+    - /ð/ → **\[d]**
+  - Typical Environment
+    - Word-initial
+  - Examples
+    - *this → dis*, *them → dem*
+  - 地方 (Dialects)
+    - **AAVE**、**Irish/Caribbean英**、都市変種
+  - Notes
+    - 語中・語末では \[d]/\[v] 可変
+- 有声THの唇歯化 (TH-fronting (voiced))
+  - Exchange (Input → Output)
+    - /ð/ → **\[v]**
+  - Typical Environment
+    - Medial/Final
+  - Examples
+    - *brother → bruvva*
+  - 地方 (Dialects)
+    - **Cockney, MLE**
+  - Notes
+    - Cockneyで顕著
+- Tの声門化（グロッタル化） (T-glottalization)
+  - Exchange (Input → Output)
+    - /t/ → **\[ʔ]**
+  - Typical Environment
+    - Coda / 子音前 / 弱勢音節
+  - Examples
+    - *bottle → boʔ(ɫ)*, *kitten → kɪʔn̩*
+  - 地方 (Dialects)
+    - **Cockney, Estuary**；（限定的に）**GA/AAVE**
+  - Notes
+    - 英で強勢、米は語末・子音前可変
+- T/Dのフラッピング (Flapping)
+  - Exchange (Input → Output)
+    - /t, d/ → **\[ɾ]**
+  - Typical Environment
+    - Vowel\_V́ \_\_ V̆
+  - Examples
+    - *water → waɾer*, *city → sɪɾi*
+  - 地方 (Dialects)
+    - **GA 全般**, **AAVE**
+  - Notes
+    - 強勢母音後＋弱勢母音前
+- -ing弱化 (g-dropping)
+  - Exchange (Input → Output)
+    - /ŋ/ → **\[n]**
+  - Typical Environment
+    - -ing coda
+  - Examples
+    - *walking → walkin’*
+  - 地方 (Dialects)
+    - **AAVE**、**米南部**、**Cockney**（口語）
+  - Notes
+    - スタイル依存で広範
+- Lの母音化 (L-vocalization)
+  - Exchange (Input → Output)
+    - /l/ → **\[w \~ ʊ̯ \~ o]**
+  - Typical Environment
+    - Coda
+  - Examples
+    - *ball → baw*, *people → peopʊ̯*
+  - 地方 (Dialects)
+    - **Cockney, Estuary**
+  - Notes
+    - ロンドン周辺で顕著
+- h脱落 (h-dropping)
+  - Exchange (Input → Output)
+    - /h/ → **∅**
+  - Typical Environment
+    - Word-initial
+  - Examples
+    - *house → ’ouse*, *have → ’ave*
+  - 地方 (Dialects)
+    - **Cockney**、都市英の一部
+  - Notes
+    - 機能語で頻度↑
+- ヨッド合流 (Yod-coalescence)
+  - Exchange (Input → Output)
+    - /tj, dj/ → **\[t͡ʃ, d͡ʒ]**
+  - Typical Environment
+    - t/d + /j/
+  - Examples
+    - *tune → choon*, *duty → jooty*
+  - 地方 (Dialects)
+    - **Cockney、都市英（MLE等）**
+  - Notes
+    - 連続音化（破擦化）
+- ヨッド脱落 (Yod-dropping)
+  - Exchange (Input → Output)
+    - /juː/ → **\[uː]**
+  - Typical Environment
+    - After alveolars (t, d, n, s, z, l)
+  - Examples
+    - *tune → toon*, *news → nooz*
+  - 地方 (Dialects)
+    - **GA**、**米南部**、一部 **AAVE**
+  - Notes
+    - 北米で一般的
+- /hw/と/w/の対立保持 (wh–w contrast maintained)
+  - Exchange (Input → Output)
+    - /hw/ → **\[ʍ]** (≠ /w/)
+  - Typical Environment
+    - Word-initial
+  - Examples
+    - *which \[ʍɪtʃ]* vs *witch \[wɪtʃ]*
+  - 地方 (Dialects)
+    - **米南部の一部**、**Scots**、**Irish**，一部 **AAVE**
+  - Notes
+    - “息混じりの w”
+- 語末子音群の単純化 (Final cluster simplification)
+  - Exchange (Input → Output)
+    - Coda clusters → simplified
+  - Typical Environment
+    - Word-final（次語子音で強化）
+  - Examples
+    - *hand → han*, *cold → col’*
+  - 地方 (Dialects)
+    - **AAVE**、**米南部**（口語）
+  - Notes
+    - 有声阻害音で顕著
+- /t/ 省略（NTクラスタ） (t-deletion (NT cluster))
+  - Exchange (Input → Output)
+    - /nt/ → **\[n]**（しばしば鼻母音化/延長）
+  - Typical Environment
+    - Intervocalic / 早口
+  - Examples
+    - *internet → innernet*
+  - 地方 (Dialects)
+    - **GA**、**AAVE**（口語）
+  - Notes
+    - flap共存も
+- リンキングr (Linking r)
+  - Exchange (Input → Output)
+    - ∅ → **\[ɹ]**
+  - Typical Environment
+    - Vowel#Vowel
+  - Examples
+    - *law(r) and*, *idea(r) of*
+  - 地方 (Dialects)
+    - **非r方言**：**Cockney/Estuary/RP系**
+  - Notes
+    - 語彙的 r 連結
+- イントルーシブr (Intrusive r)
+  - Exchange (Input → Output)
+    - ∅ → **\[ɹ]**
+  - Typical Environment
+    - Vowel#Vowel（無語源 r）
+  - Examples
+    - *saw(r) it*
+  - 地方 (Dialects)
+    - **非r方言**：**Cockney/Estuary/RP系**
+  - Notes
+    - 語源に r 無しでも挿入
+- 非r音性（r脱落） (Non-rhoticity (R-loss))
+  - Exchange (Input → Output)
+    - /ɹ/ → **∅**
+  - Typical Environment
+    - Coda
+  - Examples
+    - *car → caː*
+  - 地方 (Dialects)
+    - **Cockney/Estuary/RP系**
+  - Notes
+    - r は母音前のみ発音
+- 反り舌/バンチドr (Retroflex/bunched r)
+  - Exchange (Input → Output)
+    - /ɹ/ → **\[ɻ \~ ɚ]**
+  - Typical Environment
+    - General
+  - Examples
+    - *right, bird*
+  - 地方 (Dialects)
+    - **GA**, **AAVE**
+  - Notes
+    - 後舌/巻き舌傾向
+- 歯音化 (Dentalization)
+  - Exchange (Input → Output)
+    - /t, d, n/ → **\[t̪, d̪, n̪]**
+  - Typical Environment
+    - before /θ, ð/
+  - Examples
+    - *eighth \[eɪt̪θ]*
+  - 地方 (Dialects)
+    - **英全般**, **GA**
+  - Notes
+    - 接触同化（学術的補足）
+
 
 ## オフビートカウントでの正しい発音の為の基礎
 
+
+```{.lilypond}
+\version "2.24.0"
+\include "lilypond-book-preamble.ly"
+
+\layout {
+  \context {
+    \Lyrics
+    \override LyricText.font-name = "Charis SIL Bold Italic"
+  }
+}
+
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "v" {
+        \voiceOne
+        \time 9/8
+        \partial 8
+        c8 |
+        c8 c8 c8 
+        c8 c8 c8 
+        c8 c8 c8 
+        c8 c8 c8 
+      }
+    >>
+    \new Lyrics \lyricsto "v" {
+        ʔ -- | ɔɚ -- n tw | o o thr | ee
+    }
+    \new Lyrics \lyricsto "v" {
+        ʔ -- | a -- n tw | o o thr | ee
+    }
+  >>
+}
+```
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
 
 
 

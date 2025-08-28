@@ -7,6 +7,7 @@ project:
     port: 5150
 #    browser: false
 #    watch-inputs: false
+    browser: false
   resources:
     - Ads.txt
   render:
@@ -59,8 +60,10 @@ format:
       light : [ cosmo,  .assets/websites/theme.scss, .assets/websites/theme-light.scss ]
       dark  : [ darkly, .assets/websites/theme.scss, .assets/websites/theme-dark.scss  ]
     lightbox: true
+    reference-location: block
     filters:
       - filters/include-files.lua
+      - lilypond.lua
 #      - filters/obsidian-image-dimensions.lua
     css: assets/styles.css
     toc: true
