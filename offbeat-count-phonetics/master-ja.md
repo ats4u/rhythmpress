@@ -411,39 +411,28 @@ tags:
 :  {.tbl-pron2 .tbl-header-center .tbl-forth-column-wrapping tbl-colwidths=[1,1,1,10] }
 
 
-### 方言別 子音変化マトリクス
-
-Got it — thanks for the precision. So:
-
-* Every **“yes”** = plain **●**.
-* Every **“yes, but limited”** = **●\[^id]** (with the footnote marker, but no inline explanation).
-* The table body shows only dots and markers, no text clutter.
-* Footnotes section (after table) holds the full explanations.
-
-Here’s the corrected version:
-
 ### 方言による発音変化一覧 (Overview of Dialectal Pronunciation Changes)
 
 | 変化名                       | 変化                   | {{< var GA-ja>}} | {{< var SAmE-ja>}} | {{< var AAVE-ja>}} | {{< var Cockney-ja>}} | {{< var Estuary-ja >}} | {{< var MLE-ja>}} |
-| ---------------------------- | ---------------------- | :--------------: | :----------------: | :----------------: | :-------------------: | :-------------------: | :---------------: |
-| TH-fronting                  | /θ/ → \[f]           |                  |       ●[^1]       |       ●[^1]       |          ●           |                       |        ●         |
-| TH-stopping                  | /ð/ → \[d]           |                  |                    |         ●         |                       |                       |                   |
-| TH-fronting (voiced)         | /ð/ → \[v]           |                  |                    |                    |          ●           |                       |        ●         |
-| T-glottalization             | /t/ → \[ʔ]            |      ●[^2]      |                    |       ●[^2]       |          ●           |          ●           |                   |
-| Flapping                     | /t, d/ → \[ɾ]         |        ●        |         ●         |         ●         |                       |                       |                   |
-| -ing → -in’                | /ŋ/ → \[n]           |                  |         ●         |         ●         |          ●           |                       |                   |
-| L-vocalization               | /l/ → \[w, o]         |                  |                    |                    |          ●           |          ●           |                   |
-| h-dropping                   | /h/ → ∅               |                  |                    |                    |          ●           |                       |                   |
-| Yod-coalescence              | /tj, dj/ → \[tʃ, dʒ]  |                  |                    |                    |          ●           |                       |        ●         |
-| Yod-dropping                 | /juː/ → \[uː]       |        ●        |         ●         |       ●[^3]       |                       |                       |                   |
-| wh–w contrast               | /hw/ → \[ʍ]           |                  |       ●[^4]       |       ●[^4]       |                       |                       |                   |
-| Final cluster simplification | (e.g., /-st/ → /-s/)  |        ●        |         ●         |                    |                       |                       |                   |
-| t-deletion                   | /nt/ → \[n]           |        ●        |                    |         ●         |                       |                       |                   |
-| Linking r                    | ∅ → \[ɹ]              |                  |                    |                    |          ●           |          ●           |                   |
-| Intrusive r                  | ∅ → \[ɹ] (epenthetic) |                  |                    |                    |          ●           |          ●           |                   |
-| Non-rhoticity                | /ɹ/ → ∅               |                  |                    |                    |          ●           |          ●           |                   |
-| Retroflex/bunched r          | (r-coloring type)      |        ●        |         ●         |         ●         |                       |                       |                   |
-| Dentalization                | t, d, n → \[t̪, d̪, n̪]  |        ●        |                    |                    |          ●           |          ●           |        ●         |
+| ---------------------------- | ---------------------- | :--------------: | :----------------: | :----------------: | :-------------------: | :--------------------: | :---------------: |
+| TH-fronting                  | /θ/ → \[f]           |                  |       ●[^1]       |       ●[^1]       |          ●           |                        |        ●         |
+| TH-stopping                  | /ð/ → \[d]           |                  |                    |         ●         |                       |                        |                   |
+| TH-fronting (voiced)         | /ð/ → \[v]           |                  |                    |                    |          ●           |                        |        ●         |
+| T-glottalization             | /t/ → \[ʔ]            |      ●[^2]      |                    |       ●[^2]       |          ●           |           ●           |                   |
+| Flapping                     | /t, d/ → \[ɾ]         |        ●        |         ●         |         ●         |                       |                        |                   |
+| -ing → -in’                | /ŋ/ → \[n]           |                  |         ●         |         ●         |          ●           |                        |                   |
+| L-vocalization               | /l/ → \[w, o]         |                  |                    |                    |          ●           |           ●           |                   |
+| h-dropping                   | /h/ → ∅               |                  |                    |                    |          ●           |                        |                   |
+| Yod-coalescence              | /tj, dj/ → \[tʃ, dʒ]  |                  |                    |                    |          ●           |                        |        ●         |
+| Yod-dropping                 | /juː/ → \[uː]       |        ●        |         ●         |       ●[^3]       |                       |                        |                   |
+| wh–w contrast               | /hw/ → \[ʍ]           |                  |       ●[^4]       |       ●[^4]       |                       |                        |                   |
+| Final cluster simplification | (e.g., /-st/ → /-s/)  |        ●        |         ●         |                    |                       |                        |                   |
+| t-deletion                   | /nt/ → \[n]           |        ●        |                    |         ●         |                       |                        |                   |
+| Linking r                    | ∅ → \[ɹ]              |                  |                    |                    |          ●           |           ●           |                   |
+| Intrusive r                  | ∅ → \[ɹ] (epenthetic) |                  |                    |                    |          ●           |           ●           |                   |
+| Non-rhoticity                | /ɹ/ → ∅               |                  |                    |                    |          ●           |           ●           |                   |
+| Retroflex/bunched r          | (r-coloring type)      |        ●        |         ●         |         ●         |                       |                        |                   |
+| Dentalization                | t, d, n → \[t̪, d̪, n̪]  |        ●        |                    |                    |          ●           |           ●           |        ●         |
 
 :  {.tbl-pron2 .tbl-header-center }
 
@@ -711,21 +700,20 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 :  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping tbl-colwidths=[1,1,1] }
 
-<!--
 ###  英語でのCore Glossary for Describing Pronunciation Alterations
 
 #### Places of Articulation
 
 | Term            | Japanese Name | Explanation                                                                                                       |
 | --------------- | ------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Alveolar        | 歯茎音         | sounds made with the tongue at the alveolar ridge (just behind the upper front teeth). Examples: /t, d, n, s, l/. |
-| Dental          | 歯音           | tongue against the teeth. Examples: /θ, ð/.                                                                     |
-| Labiodental     | 唇歯音         | lower lip against upper teeth. Examples: /f, v/.                                                                  |
-| Velar           | 軟口蓋音       | back of tongue against soft palate. Examples: /k, g, ŋ/.                                                         |
-| Glottal         | 声門音         | sound at the vocal folds. Example: \[ʔ] (glottal stop).                                                           |
-| Retroflex       | そり舌音       | tongue tip curled back toward palate. Example: \[ɻ].                                                              |
-| Palatal         | 硬口蓋音       | tongue against hard palate. Example: \[j].                                                                        |
-| Palato-alveolar | 歯茎硬口蓋音   | tongue blade just behind alveolar ridge, slightly toward palate. Examples: \[tʃ], \[dʒ].                          |
+| Alveolar        | 歯茎音        | sounds made with the tongue at the alveolar ridge (just behind the upper front teeth). Examples: /t, d, n, s, l/. |
+| Dental          | 歯音          | tongue against the teeth. Examples: /θ, ð/.                                                                     |
+| Labiodental     | 唇歯音        | lower lip against upper teeth. Examples: /f, v/.                                                                  |
+| Velar           | 軟口蓋音      | back of tongue against soft palate. Examples: /k, g, ŋ/.                                                         |
+| Glottal         | 声門音        | sound at the vocal folds. Example: \[ʔ] (glottal stop).                                                           |
+| Retroflex       | そり舌音      | tongue tip curled back toward palate. Example: \[ɻ].                                                              |
+| Palatal         | 硬口蓋音      | tongue against hard palate. Example: \[j].                                                                        |
+| Palato-alveolar | 歯茎硬口蓋音  | tongue blade just behind alveolar ridge, slightly toward palate. Examples: \[tʃ], \[dʒ].                          |
 
 :  {.tbl-pron2 .tbl-header-center .tbl-second-column-wrapping tbl-colwidths=[1,1,1,1,1] }
 
@@ -733,21 +721,21 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 | Term           | Japanese Name | Explanation                                                       |
 | -------------- | ------------- | ----------------------------------------------------------------- |
-| Stop (Plosive) | 破裂音         | complete closure and release of airflow. Examples: /p, t, k/.     |
-| Fricative      | 摩擦音         | narrow constriction with turbulent airflow. Examples: /f, s, θ/. |
-| Affricate      | 破擦音         | stop released into a fricative. Examples: \[tʃ], \[dʒ].           |
-| Nasal          | 鼻音           | airflow through the nose. Examples: /m, n, ŋ/.                   |
-| Approximant    | 接近音         | open constriction, vowel-like consonant. Examples: /l, ɹ, j, w/.  |
-| Tap/Flap       | はじき音       | very quick contact, like \[ɾ] in American *water*.                |
-| Glottal stop   | 声門閉鎖音     | closure at the vocal folds, \[ʔ].                                 |
-| Vowel          | 母音           | open vocal tract sound, nucleus of a syllable.                    |
+| Stop (Plosive) | 破裂音        | complete closure and release of airflow. Examples: /p, t, k/.     |
+| Fricative      | 摩擦音        | narrow constriction with turbulent airflow. Examples: /f, s, θ/. |
+| Affricate      | 破擦音        | stop released into a fricative. Examples: \[tʃ], \[dʒ].           |
+| Nasal          | 鼻音          | airflow through the nose. Examples: /m, n, ŋ/.                   |
+| Approximant    | 接近音        | open constriction, vowel-like consonant. Examples: /l, ɹ, j, w/.  |
+| Tap/Flap       | はじき音      | very quick contact, like \[ɾ] in American *water*.                |
+| Glottal stop   | 声門閉鎖音    | closure at the vocal folds, \[ʔ].                                 |
+| Vowel          | 母音          | open vocal tract sound, nucleus of a syllable.                    |
 
 :  {.tbl-pron2 .tbl-header-center .tbl-second-column-wrapping tbl-colwidths=[1,1,1,1,1] }
 
 #### Phonological Processes
 
-| Term                   | Japanese Name | Explanation                                                          |
-| ---------------------- | ------------- | -------------------------------------------------------------------- |
+| Term                   | Japanese Name  | Explanation                                                          |
+| ---------------------- | -------------- | -------------------------------------------------------------------- |
 | Deletion (∅)           | 脱落           | sound omitted (e.g. h-dropping).                                     |
 | Insertion / Epenthetic | 挿入（介入音） | sound added (e.g. intrusive r).                                      |
 | Assimilation           | 同化           | sound changes to resemble a neighbor (e.g. /t/ → \[t̪] before /θ/). |
@@ -761,14 +749,13 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 | Term      | Japanese Name | Explanation                                                          |
 | --------- | ------------- | -------------------------------------------------------------------- |
-| Voiced    | 有声           | vocal folds vibrate (e.g. /b, d, v/).                                |
-| Voiceless | 無声           | no vocal fold vibration (e.g. /p, t, f/).                            |
+| Voiced    | 有声          | vocal folds vibrate (e.g. /b, d, v/).                                |
+| Voiceless | 無声          | no vocal fold vibration (e.g. /p, t, f/).                            |
 | Rhoticity | R音性         | presence/absence of /r/ sounds.                                      |
-| Linking   | リンキング     | insertion of /r/ between vowels across word boundaries.              |
-| Contrast  | 対立           | difference in sounds changes word meaning (e.g. *witch* vs *which*). |
+| Linking   | リンキング    | insertion of /r/ between vowels across word boundaries.              |
+| Contrast  | 対立          | difference in sounds changes word meaning (e.g. *witch* vs *which*). |
 
 :  {.tbl-pron2 .tbl-header-center .tbl-second-column-wrapping tbl-colwidths=[1,1,1,1,1] }
--->
 
 ### 英語で使われる主な母音
 
