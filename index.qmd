@@ -58,6 +58,7 @@ from lib import rhythmpedia
 out = rhythmpedia.create_global_navigation( '_rhythmpedia.conf', 'ja', strict=False )
 print(out)
 ```
+
 -------
 
 <ruby>律動<rt>リズム</rt>図鑑<rt>ペディア</rt></ruby> は、ミュージシャン、語学学習者、教育者をはじめ、TOEIC900点を取ったけど全く英語が話せない事に悩む貴方や、英語の壁に苦しむプログラマー、英語論文の執筆に悩む研究者など、縦乗りと横乗りの架け橋になる理論ポータルサイトです。

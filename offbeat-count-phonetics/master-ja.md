@@ -15,22 +15,6 @@ tags:
 
 この節ではオフビートカウントと音韻学の関係を説明し、オフビートカウントを行う上での適切な発音方法について学びます。 リズムに合わせて英語で数字の数えるときのその発音とリズムだけに絞って完璧に習得すると、英語全体の話す能力と聞き取る能力が完璧になります。またこの練習方法はジャズなどの音楽でのグルーヴ能力を大幅に向上させます。
 
-```{python}
-#| output: asis
-from pathlib import Path
-import sys
-
-# Go one directory up from the current working dir
-parent = Path.cwd().parent.parent
-
-if str(parent) not in sys.path:
-    sys.path.insert(0, str(parent))
-
-# now imports from project root work
-
-from lib.groovespace import *
-```
-
 ## リズム認識型とリズム感
 
 ８分音符１つ分はやくカウントするオフビートカウントを練習すると、すぐにできようになる人と、長期間に渡ってなかなかできないままの人の二手にはっきりと分かれます。「リズム感がある」「リズム感がない」と言ってしまえばそれまでですが、出来る様になる人はすぐ出来る様になるのに対して、出来る様にならない人は数年単位の時間を掛けてもあまり変化が表れません。
@@ -1202,6 +1186,21 @@ flowchart LR
 
 ![](/offbeat-count-phonetics/attachments-src/nonuplets-offbeat-count.png)
 
+```{python}
+#| output: asis
+from pathlib import Path
+import sys
+
+# Go one directory up from the current working dir
+parent = Path.cwd().parent.parent
+
+if str(parent) not in sys.path:
+    sys.path.insert(0, str(parent))
+
+# now imports from project root work
+
+from lib.groovespace import *
+```
 
 ```{bash}
 #| output: asis
