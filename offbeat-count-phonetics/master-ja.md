@@ -327,21 +327,36 @@ tags:
 
 ### 英語の方言の一覧
 
-| 日本語名                                        | 日本語の解説                                                                                                                         |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| アメリカ英語 []{#GA-ja}                         | 全米で広く使われる標準的な発音。地域色が薄く、中立的なアクセント。                                                                   |
-| ニューヨーク英語 []{#NYCE-ja}                   | ニューヨーク市を中心とする都市型の英語。高めの /ɔ/（*coffee* など）、短母音 /æ/ の分裂（*bad* と *bat* の対立）、独特のイントネーション。高齢層は非R音声、若年層ではR音声化が進む。 |
-| ユダヤ系米国英語 []{#JAE-ja}                    | ユダヤ系米国人に結びつく英語。語彙・談話標識・イントネーションにイディッシュ語やヘブライ語の影響。地域差が大きく、NYC英語との重なりも見られる。 |
-| アメリカ南部方言 []{#SAmE-ja}                   | 米国南部で話される英語。古い世代では非R音声が多く、二重母音の単母音化や特徴的な母音変化が見られる。                                  |
-| アフリカ系米国英語/黒人英語 []{#AAVE-ja}        | アフリカ系アメリカ人の共同体で発達した体系的な変種。子音連結の簡略化、*be* の習慣的用法、独特の発音体系が特徴。                      |
-| オーストラリア英語 []{#AusE-ja}                 | オーストラリアで話される国家的変種。非R音声で、イギリス英語の影響を受けつつ独自の母音変化がある。                                    |
-| カナダ英語 []{#CanE-ja}                         | カナダで話される英語。R音声を保持し、GAに近いが、*about* が [əˈbʌʊt] となるなどカナダ特有の母音上げがある。                          |
-| スコットランド英語 []{#ScotE-ja}                | スコットランドで話されるR音声の英語。ゲール語とは別で、[ʍ] と [w] の対立や、弾音 /r/ の保持、独特の母音体系がある。                  |
-| アイルランド英語 []{#IrE-ja}                    | アイルランドで話される英語。一般にR音声を保持し、/θ/→[t] の変化、二重母音の単母音化、歌うようなイントネーションが特徴。            |
-| 容認発音英語 []{#RP-ja}                         | イギリスの伝統的な標準発音。上流階級やBBCで用いられたが、現在は使用者が減少している。                                                |
-| 多文化ロンドン英語 []{#MLE-ja}                  | ロンドンの若者文化から生まれた多民族混交の変種。コックニーやエスチュアリの特徴に加え、カリブ系・アフリカ系・南アジア系の影響を含む。 |
-| コックニー英語 []{#Cockney-ja}                  | ロンドン東部の労働者階級に根ざした伝統的な方言。ライミングスラング、h脱落、Tの声門化、非R音声が特徴。                                |
-| 河口域英語/エスチュアリ英語 []{#Estuary-ja}     | テムズ川河口域を中心に広まった英語。RPとコックニーの中間的な特徴を持ち、Tの声門化や非R音声が見られる。                               |
+| 日本語名                                               | 日本語の解説                                                                                                                                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| アメリカ英語 []{#GA-ja}                                | 全米で広く使われる標準的な発音。地域色が薄く、中立的なアクセント（ニュースキャスター的な話し方）。                                                                                   |
+| ニューヨーク英語 []{#NYCE-ja}                          | ニューヨーク市を中心とする都市型の英語。高めの /ɔ/（*coffee* など）、短母音 /æ/ の分裂（*bad* と *bat* の対立）、独特のイントネーション。高齢層は非R音声、若年層ではR音声化が進む。 |
+| ユダヤ系米国英語 []{#JAE-ja}                           | ユダヤ系米国人に結びつく英語。語彙・談話標識・イントネーションにイディッシュ語やヘブライ語の影響。NYC英語と重なる場合もあり、地域・共同体による差が大きい。                          |
+| アメリカ南部方言 []{#SAmE-ja}                          | 米国南部で話される英語。古い世代では非R音声が多く、二重母音の単母音化や特徴的な母音変化が見られる。                                                                                  |
+| アフリカ系米国英語/黒人英語 []{#AAVE-ja}               | アフリカ系アメリカ人の共同体で発達した体系的な変種。子音連結の簡略化、習慣的 *be* の使用、独特の音韻体系が特徴。                                                                     |
+| ボストン英語 []{#BostE-ja}                             | ニューイングランド東部の変種。非R音声（「pahk the cah」）、前寄りの /a/（*car*）、侵襲的R、独自の短母音 /æ/ の体系が特徴。                                                          |
+| 西部アメリカ英語 []{#WAmE-ja}                          | 米国西部全体に広がる比較的均質な変種。cot–caught の母音合流が見られる。                                                                                                             |
+| アパラチア英語 []{#AppE-ja}                            | アパラチア地域で話される独自の変種。古風な語彙、a-接頭辞 (*a-running*)、強い母音変化が特徴。                                                                                         |
+| 中西部（五大湖地方）英語 []{#MidwE-ja}                 | シカゴ・デトロイト・バッファローなど五大湖地方で話される。北方都市母音推移（Northern Cities Vowel Shift）が知られるが、若年層では衰退傾向。                                          |
+| オーストラリア英語 []{#AusE-ja}                        | オーストラリアで話される国家的変種。非R音声で、イギリス英語の影響を受けつつ独自の母音変化がある。                                                                                    |
+| カナダ英語 []{#CanE-ja}                                | カナダで話される英語。R音声を保持し、GAに近いが、*about* が [əˈbʌʊt] となるなどカナダ特有の母音上げがある。                                                                          |
+| スコットランド英語 []{#ScotE-ja}                       | スコットランドで話されるR音声の英語（スコットランド・ゲール語とは別）。[ʍ] と [w] の対立、弾音 /r/ の保持、独特の母音体系がある。                                                    |
+| アイルランド英語 []{#IrE-ja}                           | アイルランドで話される英語。一般にR音声を保持し、THストッピング（*think → tink*）、FACE/GOAT 母音の単母音化、歌うようなイントネーションが特徴。                                     |
+| 北部英語（イングランド） []{#NEngE-ja}                 | イングランド北部の非南部方言の総称。trap–bath 分裂がなく、*bus* や *cup* の母音が短い。                                                                                             |
+| ジョーディー英語（ニューカッスル英語） []{#Geordie-ja} | タインサイド地方の独自の変種。母音の独特な実現、上昇イントネーション、強い地域語彙が特徴。                                                                                           |
+| ヨークシャー英語 []{#YorkE-ja}                         | ヨークシャー地方の変種。thee/thou 代名詞、定冠詞の短縮 (*t’pub*)、平坦なイントネーションが特徴。                                                                                    |
+| ウェールズ英語 []{#WelshE-ja}                          | ウェールズで話される英語。歌うようなイントネーション、明確なR音声、ウェールズ語の音韻的影響がある。                                                                                  |
+| 容認発音英語 []{#RP-ja}                                | イギリスの伝統的な標準発音（権威的アクセント）。かつては広く使われたが、現在は使用者が減少。                                                                                         |
+| 多文化ロンドン英語 []{#MLE-ja}                         | ロンドンで発達した多民族混交の変種。コックニーやエスチュアリ英語の特徴に加え、カリブ系・アフリカ系・南アジア系の影響を含む。                                                         |
+| コックニー英語 []{#Cockney-ja}                         | ロンドン東部の労働者階級に根ざした伝統的な方言。ライミングスラング、h脱落、T声門化、非R音声が特徴。                                                                                  |
+| 河口域英語/エスチュアリ英語 []{#Estuary-ja}            | テムズ川河口域を中心に広まった英語。RPとコックニーの中間的な特徴を持ち、T声門化や非R音声が見られる。                                                                                 |
+| インド英語 []{#IndE-ja}                                | インドで話される英語。現地言語の影響を受け、そり舌破裂音、モーラ的リズム、独特のイントネーションを持つ。                                                                             |
+| シンガポール英語（シングリッシュ） []{#SgE-ja}         | シンガポールで話される英語。中国語・マレー語の影響を受け、声調的なイントネーション、時制・相の単純化、コードスイッチングが見られる。                                                 |
+| 南アフリカ英語 []{#SAfE-ja}                            | 独自の母音体系（例: *kit* → [kət]）。白人南アフリカ英語やケープ・フラッツ英語など複数の下位変種がある。                                                                             |
+| ニュージーランド英語 []{#NZE-ja}                       | オーストラリア英語に近いが、独自の母音変化がある（例: *fish and chips* → [fʌʃ ənd ʧʌps]）。                                                                                         |
+| 東アフリカ英語 []{#EAfE-ja}                            | ケニア・タンザニア・ウガンダなどで話される英語。一般にR音声を保持し、二重母音の単純化、THストッピング、子音連続の簡略化、モーラ的リズムが見られる。スワヒリ語などの影響が強い。      |
+| 西アフリカ英語 []{#WAfE-ja}                            | ナイジェリア・ガーナ・シエラレオネなどで話される英語。多くはモーラ的リズムで、THストッピング（*this → dis*）、語末子音連続の簡略化、明瞭なR音声、声調言語の影響がある。             |
+
 
 :  {.tbl-pron2 .tbl-header-center .tbl-second-column-wrapping tbl-colwidths=[1,9] }
 
@@ -367,21 +382,36 @@ tags:
 
 ### 英語の方言の一覧(英語での説明)
 
-| English Name                                | English Description                                                                                                                                                                        |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| General American []{#GA}                    | General American (neutralized, “newscaster” type American accent).                                                                                                                        |
-| New York City English []{#NYCE}             | Urban variety centered in New York City; raised THOUGHT vowel [ɔ] (*coffee*), split short-a system (e.g., *bad* vs *bat*), distinctive intonation; older speakers often non-rhotic, younger speakers increasingly rhotic. |
-| Jewish American English []{#JAE}            | American English associated with Jewish Americans; influenced by Yiddish and Hebrew in lexicon, discourse markers, and prosody; overlaps with NYC English in some communities; highly variable by region and community. |
-| Southern American English []{#SAmE}         | Varieties spoken in the U.S. South; noted for non-rhoticity in older speech, monophthongal diphthongs, and distinctive vowel shifts.                                                      |
-| African American Vernacular English []{#AAVE} | A systematic, rule-governed variety of English historically associated with African American communities. Known for consonant cluster reduction, habitual *be*, and distinctive phonology. |
-| Australian English []{#AusE}                | National variety of English in Australia; shares features with BrE but with unique vowel shifts and a non-rhotic system.                                                                   |
-| Canadian English []{#CanE}                  | English spoken in Canada; often rhotic, close to GA but with unique features like Canadian Raising (*about → [əˈbʌʊt]*).                                                                   |
-| Scottish English []{#ScotE}                 | Encompasses rhotic varieties spoken in Scotland, distinct from Scottish Gaelic. Retains [ʍ] vs [w] contrast, has tapped /r/, and unique vowel system.                                      |
-| Irish English []{#IrE}                      | Varieties spoken in Ireland; generally rhotic, with TH-stopping (*think → tink*), monophthongal FACE/GOAT vowels, and a “sing-song” intonation.                                           |
-| Received Pronunciation []{#RP}              | Received Pronunciation (the “standard” prestige British accent, though less common today).                                                                                                 |
-| Multicultural London English []{#MLE}       | Multiethnolect developed in London; combines Cockney/Estuary features with Caribbean, African, and South Asian influences.                                                                 |
-| Cockney []{#Cockney}                        | Traditional working-class dialect of East London; famous for rhyming slang, h-dropping, T-glottalization, and non-rhoticity.                                                              |
-| Estuary English []{#Estuary}                | Southeastern British variety along the Thames Estuary; intermediate between RP and Cockney, with features like T-glottalization and non-rhoticity.                                         |
+| English Name                                  | English Description                                                                                                                                                                                                        |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| General American []{#GA}                      | General American (neutralized, “newscaster” type American accent).                                                                                                                                                       |
+| New York City English []{#NYCE}               | Urban variety centered in New York City; raised THOUGHT vowel [ɔ] (*coffee*), split short-a system (*bad* vs *bat*), distinctive intonation; older speakers often non-rhotic, younger speakers increasingly rhotic.        |
+| Jewish American English []{#JAE}              | American English associated with Jewish Americans; influenced by Yiddish and Hebrew in lexicon, discourse markers, and prosody; overlaps with NYC English in some communities; highly variable by region and community.    |
+| Southern American English []{#SAmE}           | Varieties spoken in the U.S. South; noted for non-rhoticity in older speech, monophthongal diphthongs, and distinctive vowel shifts.                                                                                       |
+| African American Vernacular English []{#AAVE} | A systematic, rule-governed variety of English historically associated with African American communities. Known for consonant cluster reduction, habitual *be*, and distinctive phonology.                                 |
+| Boston English []{#BostE}                     | Eastern New England variety; stereotypically non-rhotic (“pahk the cah”), fronted /a/ in *car*, intrusive /r/, and distinctive short-a system.                                                                           |
+| Western American English []{#WAmE}            | Broad catch-all for the western U.S.; relatively homogeneous with features like the cot–caught merger.                                                                                                                    |
+| Appalachian English []{#AppE}                 | Distinct variety in the Appalachian region; archaic vocabulary, a-prefixing (*a-running*), and strong vowel shifts.                                                                                                        |
+| Midwestern (Inland North) English []{#MidwE}  | Great Lakes region (Chicago, Detroit, Buffalo); known for the Northern Cities Vowel Shift (though receding among younger speakers).                                                                                        |
+| Australian English []{#AusE}                  | National variety of English in Australia; shares features with BrE but with unique vowel shifts and a non-rhotic system.                                                                                                   |
+| Canadian English []{#CanE}                    | English spoken in Canada; often rhotic, close to GA but with unique features like Canadian Raising (*about → [əˈbʌʊt]*).                                                                                                  |
+| Scottish English []{#ScotE}                   | Encompasses rhotic varieties spoken in Scotland, distinct from Scottish Gaelic. Retains [ʍ] vs [w] contrast, has tapped /r/, and unique vowel system.                                                                      |
+| Irish English []{#IrE}                        | Varieties spoken in Ireland; generally rhotic, with TH-stopping (*think → tink*), monophthongal FACE/GOAT vowels, and a “sing-song” intonation.                                                                         |
+| Northern English []{#NEngE}                   | Umbrella term for non-southern varieties in England; absence of the trap–bath split, short vowels in *bus* and *cup*.                                                                                                     |
+| Geordie (Newcastle English) []{#Geordie}      | Distinct Tyneside accent; unique vowel realizations, rising intonation, and strong regional vocabulary.                                                                                                                    |
+| Yorkshire English []{#YorkE}                  | Northern English variety; features thee/thou pronouns, definite article reduction (*t’pub*), and flat intonation.                                                                                                         |
+| Welsh English []{#WelshE}                     | English spoken in Wales; sing-song prosody, clear rhotic /r/, and influence from Welsh phonology.                                                                                                                          |
+| Received Pronunciation []{#RP}                | Received Pronunciation (the “standard” prestige British accent, though less common today).                                                                                                                               |
+| Multicultural London English []{#MLE}         | Multiethnolect developed in London; combines Cockney/Estuary features with Caribbean, African, and South Asian influences.                                                                                                 |
+| Cockney []{#Cockney}                          | Traditional working-class dialect of East London; famous for rhyming slang, h-dropping, T-glottalization, and non-rhoticity.                                                                                               |
+| Estuary English []{#Estuary}                  | Southeastern British variety along the Thames Estuary; intermediate between RP and Cockney, with features like T-glottalization and non-rhoticity.                                                                         |
+| Indian English []{#IndE}                      | English in India; influenced by local languages, with retroflex stops, syllable-timed rhythm, and distinct prosody.                                                                                                        |
+| Singapore English (Singlish) []{#SgE}         | English in Singapore; shaped by Chinese and Malay influence, tone-like intonation, simplification of tense/aspect, and code-switching.                                                                                     |
+| South African English []{#SAfE}               | Distinct vowel system (e.g., *kit* → [kət]); multiple sub-varieties including White South African English and Cape Flats English.                                                                                         |
+| New Zealand English []{#NZE}                  | Close to Australian English, but with distinctive vowel shifts (e.g., *fish and chips* → [fʌʃ ənd ʧʌps]).                                                                                                                 |
+| East African English []{#EAfE}                | English in Kenya, Tanzania, Uganda, and neighboring countries; generally rhotic, with reduced diphthongs, TH-stopping, cluster simplification, and syllable-timed rhythm; influenced by Swahili and other local languages. |
+| West African English []{#WAfE}                | English in Nigeria, Ghana, Sierra Leone, and surrounding countries; often syllable-timed with TH-stopping (*this → dis*), simplification of final clusters, clear [r], and influence from tonal languages.                |
+
 
 :  {.tbl-pron2 .tbl-header-center .tbl-second-column-wrapping tbl-colwidths=[1,1,1,1,1] }
 
