@@ -8,11 +8,14 @@ project:
 #    browser: false
 #    watch-inputs: false
     browser: false
-  resources:
-    - Ads.txt
   render:
     - "**/*.qmd"       # render only qmd
     - "!**/master*.md" # explicitly ignore master*.md anywhere 
+
+resources:
+  - Ads.txt
+  - _redirects
+  - 404.html
 
 website:
   title: "律動図鑑(リズムペディア)"

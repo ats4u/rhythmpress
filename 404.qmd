@@ -1,0 +1,21 @@
+---
+title: ファイルが見つかりません
+created: 2025-08-30T10:00
+format: html
+execute:
+  enabled: true
+  echo: false
+  output: true
+  eval: true
+  cache: false
+title-block: false
+toc: false
+tags:
+  - foo
+---
+
+ファイルが見つかりませんでした。
+
+<span style="font-size:3em">
+[トップへ](/)
+</span>
