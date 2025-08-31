@@ -912,6 +912,7 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     src_text = strip_header_comments(src_text)
 
     frontmatter = parse_frontmatter(src_text)
+
     # Follow front matter flag (default True, explicit false suppresses YAML)
     sidebar = as_bool( frontmatter.get("rhythmpedia-preproc-sidebar", None), default=True )
     print(f"[DEBUG] {dst} sidebar = {sidebar}")
@@ -925,20 +926,28 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     # Parse and update/insert YAML front matter
     m = _FM_RE.match(src_text)
     if m:
-        block = m.group(1)
-        body  = src_text[m.end():]
-        # Drop any existing cdate/mdate lines
-        import re as _re
-        block = _re.sub(r'(?m)^\s*cdate\s*:\s*.*\n?', '', block)
-        block = _re.sub(r'(?m)^\s*mdate\s*:\s*.*\n?', '', block)
-        # Rebuild YAML with cdate/mdate appended
-        new_yaml = f"---\n{block.rstrip()}\n" \
-                   f"cdate: {_cdate}\n" \
-                   f"mdate: {_mdate}\n---\n"
-        new_text = new_yaml + body
+        body = src_text[m.end():]
     else:
-        # No front matter: create one
-        new_text = f"---\ncdate: {_cdate}\nmdate: {_mdate}\n---\n" + src_text
+        body = src_text
+
+    if "title" not in frontmatter:
+        frontmatter[ "title" ] = "Untitled"
+
+    # Inject cdate/mdate into section front matter via the serializer
+    new_yaml = dump_frontmatter({
+        **frontmatter,   # shallow copy all keys/values
+        # "title": title_raw,
+        "cdate": _cdate,   # assume already YYYY-MM-DD or ISO8601 strings
+        "mdate": _mdate,
+    })
+
+    # ensure exactly one blank line after FM
+    if not new_yaml.endswith("\n\n"):
+        new_yaml = new_yaml.rstrip("\n") + "\n\n"
+
+    new_text = new_yaml + body
+
+
 
     # Optionally append sidebar include as a TOC block (preserve existing behavior)
     if toc:
