@@ -37,6 +37,97 @@ def as_bool(v, default=True):
         return v != 0
     return bool(v)
 
+
+from typing import Any, Mapping
+from pathlib import Path
+from datetime import date, datetime
+
+#------------------------------------------------
+# Added on Mon, 01 Sep 2025 01:55:08 +0900
+#------------------------------------------------
+def dump_frontmatter(data: Mapping[str, Any] | None, *, line_ending: str = "\n", allow_empty: bool = False) -> str:
+    """
+    Serialize a front-matter object to a YAML front-matter block.
+
+    Inverse of `parse_frontmatter`:
+
+        parse_frontmatter(dump_frontmatter(M)) == M
+        # and for non-mapping payloads:
+        parse_frontmatter(dump_frontmatter({"_frontmatter": X})) == {"_frontmatter": X}
+
+    Behavior:
+    - If `data` is falsy (None or {}), returns "" unless `allow_empty=True`
+      (then returns an empty front matter block).
+    - If `data` is exactly {"_frontmatter": X}, emits a bare YAML document `X`
+      (not wrapped in a mapping) to faithfully invert `parse_frontmatter`.
+
+    Parameters:
+      line_ending: "\n" by default. Use "\r\n" on Windows if you prefer.
+      allow_empty: If True and data is falsy, emit:
+                   "---\\n---\\n" (with your chosen line ending)
+    """
+    if not data:
+        return f"---{line_ending}---{line_ending}" if allow_empty else ""
+
+    try:
+        import yaml
+    except ModuleNotFoundError:
+        raise RuntimeError(
+            "PyYAML is required to dump front matter. "
+            "Install it with: python -m pip install pyyaml"
+        )
+
+    # Use a custom SafeDumper that:
+    # - preserves key order (sort_keys=False)
+    # - avoids YAML anchors/aliases (ignore_aliases)
+    # - formats multiline strings in block style (|)
+    class _Dumper(yaml.SafeDumper):
+        pass
+
+    # Avoid anchors/aliases to keep FM clean
+    _Dumper.ignore_aliases = lambda self, data: True  # type: ignore[method-assign]
+
+    # Multiline strings -> block style (|)
+    def _repr_str(dumper: yaml.SafeDumper, value: str):
+        style = '|' if '\n' in value else None
+        return dumper.represent_scalar('tag:yaml.org,2002:str', value, style=style)
+
+    # Path -> string
+    def _repr_path(dumper: yaml.SafeDumper, value: Path):
+        return dumper.represent_scalar('tag:yaml.org,2002:str', str(value))
+
+    # Dates/DateTimes -> ISO8601 (Quarto/Pandoc friendly)
+    def _repr_date(dumper: yaml.SafeDumper, value: date):
+        # date only (YYYY-MM-DD)
+        return dumper.represent_scalar('tag:yaml.org,2002:timestamp', value.isoformat())
+
+    def _repr_datetime(dumper: yaml.SafeDumper, value: datetime):
+        # keep timezone info if present
+        return dumper.represent_scalar('tag:yaml.org,2002:timestamp', value.isoformat())
+
+    _Dumper.add_representer(str, _repr_str)
+    _Dumper.add_representer(Path, _repr_path)
+    _Dumper.add_representer(date, _repr_date)
+    _Dumper.add_representer(datetime, _repr_datetime)
+
+    # If the caller passed {"_frontmatter": X}, emit X as the root (bare document)
+    payload: Any = data["_frontmatter"] if (isinstance(data, dict) and set(data.keys()) == {"_frontmatter"}) else data
+
+    yaml_text = yaml.dump(
+        payload,
+        Dumper=_Dumper,
+        default_flow_style=False,  # block style
+        sort_keys=False,           # preserve insertion order
+        allow_unicode=True
+    )
+
+    # Ensure trailing newline inside the block
+    if not yaml_text.endswith(line_ending):
+        yaml_text += line_ending
+
+    return f"---{line_ending}{yaml_text}---{line_ending}"
+
+
 # ======================
 # version 1
 # ======================
