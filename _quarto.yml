@@ -9,8 +9,10 @@ project:
 #    watch-inputs: false
     browser: false
   render:
-    - "**/*.qmd"       # render only qmd
-    - "!**/master*.md" # explicitly ignore master*.md anywhere 
+    - "**/*.qmd"        # render only qmd
+    - "!**/master*.md"  # explicitly ignore master*.md anywhere 
+    - "!**/master*.qmd" # explicitly ignore master*.md anywhere 
+    - "!drafts/*"       # exclude paths
   post-render:
     - bin/rhythmpedia-sitemap.py   # Sun, 31 Aug 2025 03:22:23 +0900 runs after every build
 
