@@ -792,14 +792,17 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
         section = text[beg:end]
         title_raw = it["title_raw"]
 
-        # Inject cdate/mdate into section front matter
-        fm = (
-            "---\n"
-            f'title: "{title_raw}"\n'
-            f"cdate: {_cdate}\n"
-            f"mdate: {_mdate}\n"
-            "---\n\n"
-        )
+        # Inject cdate/mdate into section front matter via the serializer
+        fm = dump_frontmatter({
+            **frontmatter,   # shallow copy all keys/values
+            "title": title_raw,
+            "cdate": _cdate,   # assume already YYYY-MM-DD or ISO8601 strings
+            "mdate": _mdate,
+        })
+
+        # ensure exactly one blank line after FM
+        if not fm.endswith("\n\n"):
+            fm = fm.rstrip("\n") + "\n\n"
 
         if toc:
             # {{< include /_sidebar.generated.md >}}
