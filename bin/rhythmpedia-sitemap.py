@@ -35,12 +35,16 @@ SITE_DIR = load_output_dir()
 BASE_URL = load_site_url()
 
 # --- HTML <head> parser for robots + canonical ---
+# --- Modified HeadScanner ---
 class HeadScanner(HTMLParser):
     def __init__(self):
         super().__init__()
         self.noindex = False
         self.canonical = None
+        self.cdate = None
+        self.mdate = None
         self.in_head = False
+
     def handle_starttag(self, tag, attrs):
         a = {k.lower(): v for k, v in attrs}
         t = tag.lower()
@@ -48,13 +52,32 @@ class HeadScanner(HTMLParser):
             self.in_head = True
         if not self.in_head:
             return
-        if t == "meta" and (a.get("name","").lower() == "robots"):
-            content = (a.get("content") or "").lower()
-            if "noindex" in content or content.strip() == "none":
-                self.noindex = True
-        # rel may be space-separated; handle common forms
-        if t == "link" and "rel" in a and "canonical" in a.get("rel","").lower():
+        # if t == "meta" and (a.get("name","").lower() == "robots"):
+        #     content = (a.get("content") or "").lower()
+        #     if "noindex" in content or content.strip() == "none":
+        #         self.noindex = True
+        # # rel may be space-separated; handle common forms
+        # if t == "link" and "rel" in a and "canonical" in a.get("rel","").lower():
+
+        if t == "meta":
+            name = a.get("name", "").lower()
+            prop = a.get("property", "").lower()
+            content = a.get("content")
+
+            if name == "robots":
+                if content and ("noindex" in content.lower() or content.strip().lower() == "none"):
+                    self.noindex = True
+
+            # --- extract cdate/mdate ---
+            if content:
+                if name == "mdate" or prop == "article:modified_time":
+                    self.mdate = content
+                if name == "cdate" or prop == "article:published_time":
+                    self.cdate = content
+
+        if t == "link" and "rel" in a and "canonical" in a.get("rel", "").lower():
             self.canonical = a.get("href")
+
     def handle_endtag(self, tag):
         if tag.lower() == "head":
             self.in_head = False
@@ -109,11 +132,16 @@ for root, _, files in os.walk(SITE_DIR):
         url = encode_url(raw_url)
 
         # Per-file lastmod from mtime; fallback to today if anything odd
-        try:
-            lastmod = datetime.date.fromtimestamp(os.path.getmtime(full)).isoformat()
-        except Exception:
-            lastmod = NOW
+        # --- Choose lastmod: prefer mdate meta > filesystem ---
+        if info.mdate:
+            lastmod = info.mdate.split("T")[0]  # normalize to YYYY-MM-DD
+        else:
+            try:
+                lastmod = datetime.date.fromtimestamp(os.path.getmtime(full)).isoformat()
+            except Exception:
+                lastmod = NOW
 
+        # (Optional) Could also record cdate separately if you plan <news:> or <publication_date> usage
         entries.append((url, lastmod))
 
 # --- Write sitemap.xml ---
