@@ -660,6 +660,7 @@ sys.path.append(os.path.dirname(__file__))
 
 import sys, pathlib;
 from lib.strip_header_comments import strip_header_comments
+from lib.git_dates import get_git_dates, GitDatesError  # add near other imports
 
 def _hdr_start(text: str, it) -> int:
     # start of the header line (prev '\n' before section_start_char; -1→0)
@@ -688,15 +689,27 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     # preamble = text[:min(_hdr_start(text, it) for it in h2s)]
     preamble = h0s[0] if 0 < len(h0s) else None # ADDED BY ATS Wed, 20 Aug 2025 18:02:26 +0900
 
+    # Resolve dates once per master (policy: all sections inherit master’s Git dates)
+    try:
+        _cdate, _mdate = get_git_dates(str(master_path))
+    except GitDatesError as e:
+        raise  # strict; if you prefer permissive, replace with a WARN + fallback
+
     # 3-liner per section: slice → mkdir → write (H2 only per spec)
     for it in h2s:
         beg, end = _hdr_start(text, it), int(it["section_end_char"])
         section = text[beg:end]
         title_raw = it["title_raw"]
-        # title_clean = TAG_RE.sub("", it["title_raw"]).strip()
-        fm = f"---\ntitle: \"{title_raw}\"\n---\n\n"
 
-        # Optionally append sidebar include as a TOC block
+        # Inject cdate/mdate into section front matter
+        fm = (
+            "---\n"
+            f'title: "{title_raw}"\n'
+            f"cdate: {_cdate}\n"
+            f"mdate: {_mdate}\n"
+            "---\n\n"
+        )
+
         if toc:
             # {{< include /_sidebar.generated.md >}}
             footer =  f"\n{{{{< include /_sidebar-{lang}.generated.md >}}}}\n"
@@ -712,6 +725,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
         else:
             print(f"  ✅ {p} skipped")
 
+    # (rest of function unchanged…)
 
     # Language index via create_toc_v5 (absolute links)
     idx: Path = h2s[0]["lang_index_path"]
@@ -787,6 +801,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 from pathlib import Path
 import shutil
 from lib.strip_header_comments import strip_header_comments
+from lib.git_dates import get_git_dates, GitDatesError  # add near other imports
 
 def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     """
@@ -807,16 +822,44 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     sidebar = as_bool( frontmatter.get("rhythmpedia-preproc-sidebar", None), default=True )
     print(f"[DEBUG] {dst} sidebar = {sidebar}")
 
-    # Optionally append sidebar include as a TOC block
-    if toc:
-        src_text = src_text + f"\n{{{{< include /_sidebar-{lang}.generated.md >}}}}\n"
+    # Resolve dates from Git (single source of truth)
+    try:
+        _cdate, _mdate = get_git_dates(str(master_path))
+    except GitDatesError as e:
+        raise  # strict; switch to permissive with fallback if desired
 
-    if not dst.exists() or dst.read_text(encoding="utf-8") != src_text:
+    # Parse and update/insert YAML front matter
+    m = _FM_RE.match(src_text)
+    if m:
+        block = m.group(1)
+        body  = src_text[m.end():]
+        # Drop any existing cdate/mdate lines
+        import re as _re
+        block = _re.sub(r'(?m)^\s*cdate\s*:\s*.*\n?', '', block)
+        block = _re.sub(r'(?m)^\s*mdate\s*:\s*.*\n?', '', block)
+        # Rebuild YAML with cdate/mdate appended
+        new_yaml = f"---\n{block.rstrip()}\n" \
+                   f"cdate: {_cdate}\n" \
+                   f"mdate: {_mdate}\n---\n"
+        new_text = new_yaml + body
+    else:
+        # No front matter: create one
+        new_text = f"---\ncdate: {_cdate}\nmdate: {_mdate}\n---\n" + src_text
+
+    # Optionally append sidebar include as a TOC block (preserve existing behavior)
+    if toc:
+        new_text = new_text + f"\n{{{{< include /_sidebar-{lang}.generated.md >}}}}\n"
+
+    if not dst.exists() or dst.read_text(encoding="utf-8") != new_text:
         dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_text(src_text, encoding="utf-8")
+        dst.write_text(new_text, encoding="utf-8")
         print(f"  ✅ {dst}")
     else:
         print(f"  =  {dst} (unchanged)")
+
+    # (rest of function unchanged…)
+
+
 
     base_name = str(master_path.parent.name)
 
