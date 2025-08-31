@@ -11,6 +11,8 @@ project:
   render:
     - "**/*.qmd"       # render only qmd
     - "!**/master*.md" # explicitly ignore master*.md anywhere 
+  post-render:
+    - bin/rhythmpedia-sitemap.py   # Sun, 31 Aug 2025 03:22:23 +0900 runs after every build
 
 resources:
   - Ads.txt

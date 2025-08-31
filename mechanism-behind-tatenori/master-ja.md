@@ -14,7 +14,7 @@ rhythmpedia-preproc-args: []
 
 縦乗りという現象が起こる原理を説明します。
 
-## 縦乗りのメカニズム
+## 縦乗りのメカニズム <!-- {#mechanism-behind-tatenori }-->
 
 ### モーラ拍ネイティブが陥りがちなリズム習癖
 
