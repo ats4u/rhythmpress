@@ -69,6 +69,7 @@ format:
     lightbox: true
     reference-location: block
     filters:
+      - filters/meta-dates.lua
       - filters/include-files.lua
       - lilypond.lua
 #      - filters/obsidian-image-dimensions.lua
