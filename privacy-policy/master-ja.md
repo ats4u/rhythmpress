@@ -69,7 +69,7 @@ Cookieとは、ウェブサイトがブラウザに保存する小さなテキ�
 
 ただし、第三者である Google が提供する Google AdSense 広告サービスにより、広告配信・効果測定・不正防止等の目的でクッキー等が使用される場合があります。  
 
-これらは訪問者の同意に基づき、[Cookie settings](/about/cookies/) からいつでも変更・撤回できます。  
+これらは訪問者の同意に基づき、[Cookie settings](javascript:Cookiebot.renew()) からいつでも変更・撤回できます。  
 
 Google によるクッキー利用の詳細は、[Google のポリシーと規約](https://policies.google.com/technologies/ads) をご参照ください。
 

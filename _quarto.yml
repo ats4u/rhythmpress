@@ -89,12 +89,12 @@ format:
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <script async type="module" src="/assets/toc-ul.mjs"></script>
           <script async type="module" src="/assets/cookie-settings.mjs"></script>
-          <script
+          <script 
             async
-            id="Cookiebot"
-            src="https://consent.cookiebot.com/uc.js"
-            data-cbid="433ccb98-31ce-449c-8e85-fb6d0101b2b3"
-            data-blockingmode="auto"
+            id="Cookiebot" 
+            src="https://consent.cookiebot.com/uc.js" 
+            data-cbid="edc31cf5-a736-498e-916b-965351c95f41" 
+            data-blockingmode="auto" 
             type="text/javascript">
           </script>
           <script data-cookieconsent="marketing">
