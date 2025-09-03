@@ -63,6 +63,8 @@ website:
     contents: []
 # execute:
 #  freeze: auto            # optional: avoids re-execution unless sources change
+metadata:
+  lilypond-preamble: "filters/lilypond-preamble.ly"
 format:
   html:
     theme:

@@ -1,120 +1,436 @@
--- lilypond.lua — Quarto/Pandoc filter for LilyPond
--- HTML: inline SVG.  PDF: include generated PDF.
--- Caches by hashing snippet. Works when LilyPond cd’s into outdir.
+-- lilypond.lua — Quarto/Pandoc filter (simple, cache-first, **SVG**)
+-- v1.0
+--
+-- • Turns ```{.lilypond ...}``` code blocks into LilyPond-rendered **SVG**.
+-- • Caches by SHA-1 of (preamble + code + compile_opts).
+-- • Writes stable hashed files (ly-<H>.ly/.svg) under lilypond-out/,
+--   and also creates timestamp-named symlinks (or copies) for findability.
+--
+-- Metadata:
+--   lilypond-preamble: |   (string/block)  → prepended to every snippet
+--     \version "2.24.0"
+--     \paper { indent = 0\mm }
+--   lilypond: off       (bool/string 'off') → disable filter globally
+--
+-- Per-block supported attributes:
+--   width, height, alt, title, align(left|center|right)
+--
+-- Notes:
+-- • Requires `lilypond` in PATH.
+-- • For LaTeX/PDF output, use a PDF engine that supports SVG (e.g. lualatex with `svg`).
+-- • Never crashes a build; on failure emits a fenced code block with class .lilypond-error.
 
-local DEFAULT_VERSION = "2.24.0"
-local OUTDIR = "lilypond-out"
+local CFG = {
+  outdir = "lilypond-out",
+  utc = true,
+  compile_opts = "--svg", -- included in cache hash (fixed in v1)
+}
 
--- Resolve lilypond binary
-local function file_exists(p)
-  local f = io.open(p, "rb"); if f then f:close(); return true end
+local META = {
+  preamble = "",
+  disabled = false,
+}
+
+local is_windows = package.config:sub(1,1) == "\\"
+
+-- ---------- tiny fs helpers ----------
+local function file_exists(path)
+  if type(path) ~= "string" or path == "" then return false end
+  local f = io.open(path, "rb")
+  if f then f:close(); return true end
   return false
 end
 
-local function resolve_lilypond()
-  local env = os.getenv("LILYPOND")
-  if env and env ~= "" then return env end
-  local mac = "/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
-  if file_exists(mac) then return mac end
-  return "lilypond"
-end
-
-local LILYPOND = resolve_lilypond()
-
--- Outdir creation (ignore “exists”)
-local did_mkdir = false
-local function ensure_outdir()
-  if did_mkdir then return end
-  local ok, err = pcall(function() pandoc.system.make_directory(OUTDIR) end)
-  if not ok then
-    local em = tostring(err or "")
-    if not em:match("exists") then
-      error("[lilypond] mkdir failed: " .. em)
-    end
-  end
-  did_mkdir = true
-end
-
--- Small utils
-local function write_file(path, txt)
-  local f, e = io.open(path, "wb")
-  assert(f, "[lilypond] cannot write: " .. path .. " (" .. tostring(e) .. ")")
-  f:write(txt); f:close()
-end
-
 local function read_file(path)
-  local f, e = io.open(path, "rb")
-  assert(f, "[lilypond] cannot read: " .. path .. " (" .. tostring(e) .. ")")
-  local data = f:read("*a"); f:close(); return data
+  local f = io.open(path, "rb")
+  if not f then return nil end
+  local s = f:read("*a")
+  f:close()
+  return s
 end
 
-local function q(s) return '"' .. s .. '"' end
+local function write_file(path, text)
+  local f, err = io.open(path, "wb")
+  if not f then
+    return false, ("write_file: %s"):format(err or "unknown error")
+  end
+  f:write(text or "")
+  f:close()
+  return true
+end
 
--- Run a shell command with CWD = OUTDIR (Pandoc 3 API if available)
-local function run_in_outdir(cmd)
-  if pandoc.system and pandoc.system.with_working_directory then
-    local ok = pandoc.system.with_working_directory(OUTDIR, function()
-      local r = os.execute(cmd)
-      return (r == true or r == 0)
+local function mkdir_p(dir)
+  if is_windows then
+    -- Powershell: creates if missing; succeeds if already exists.
+    os.execute(('powershell -NoProfile -Command "New-Item -ItemType Directory -Force -Path \'%s\' | Out-Null"'):format(dir))
+  else
+    os.execute(('mkdir -p %q'):format(dir))
+  end
+end
+
+local function nowstamp_utc()
+  -- ISO 8601 basic, UTC: YYYYMMDDThhmmss
+  return os.date(CFG.utc and "!%Y%m%dT%H%M%S" or "%Y%m%dT%H%M%S")
+end
+
+-- ---------- hashing ----------
+local function sha1_hex(s)
+  return pandoc.utils.sha1(s or "")
+end
+
+-- ---------- symlink/copy timestamp anchors ----------
+local function copy_file(src, dst)
+  local data = read_file(src)
+  if not data then return false, "copy: read failed: "..src end
+  return write_file(dst, data)
+end
+
+local function make_timestamp_links(base_h)
+  -- base_h like: lilypond-out/ly-<H> (no extension)
+  local ts = nowstamp_utc()
+  local base_ts = CFG.outdir .. "/ly-" .. ts
+  local src_ly, src_svg = base_h .. ".ly", base_h .. ".svg"
+  local dst_ly, dst_svg = base_ts .. ".ly", base_ts .. ".svg"
+
+  if not file_exists(src_ly) or not file_exists(src_svg) then
+    return -- nothing to do
+  end
+
+  if is_windows then
+    -- Symlinks are unreliable without dev/admin; fall back to copies.
+    copy_file(src_ly, dst_ly)
+    copy_file(src_svg, dst_svg)
+    return
+  end
+
+  -- Try symlinks; if it fails, fall back to copies.
+  local function ln_sf(target, linkname)
+    local cmd = ('ln -sf %q %q'):format(target, linkname)
+    local ok = os.execute(cmd)
+    return ok == true or ok == 0 or ok == 256 -- Lua/os differences
+  end
+
+  -- Prefer relative targets for nicer UX inside outdir.
+  local rel_ly = "ly-" .. (base_h:match("ly%-(.+)$") or "") .. ".ly"
+  local rel_svg = "ly-" .. (base_h:match("ly%-(.+)$") or "") .. ".svg"
+
+  -- We run ln in the outdir for neat relative links.
+  local cwd = pandoc.system.get_working_directory and pandoc.system.get_working_directory() or "."
+  local chdir = pandoc.system.with_working_directory
+
+  if chdir then
+    chdir(CFG.outdir, function()
+      if not ln_sf(rel_ly, "ly-"..ts..".ly") then copy_file("ly-"..(rel_ly:sub(4)), "ly-"..ts..".ly") end
+      if not ln_sf(rel_svg, "ly-"..ts..".svg") then copy_file("ly-"..(rel_svg:sub(4)), "ly-"..ts..".svg") end
     end)
-    return ok and true or false
   else
-    local r = os.execute('cd ' .. q(OUTDIR) .. ' && ' .. cmd)
-    return (r == true or r == 0)
+    -- No chdir helper: just use absolute paths.
+    if not ln_sf(src_ly, dst_ly) then copy_file(src_ly, dst_ly) end
+    if not ln_sf(src_svg, dst_svg) then copy_file(src_svg, dst_svg) end
   end
 end
 
--- Hash (Pandoc 3+)
-local sha1 = (pandoc.utils and pandoc.utils.sha1) or
-             function(s) return tostring(#s) end  -- weak fallback
+local function dirname(p) return p:match("^(.*)/[^/]+$") end
+local function find_project_root(start_dir)
+  local d = start_dir
+  while d and d ~= "" do
+    if file_exists(d .. "/_quarto.yml") then return d end
+    local up = dirname(d)
+    if not up or up == d then break end
+    d = up
+  end
+  return start_dir
+end
 
-function CodeBlock(el)
-  if not (el.classes and el.classes:includes("lilypond")) then return nil end
-
-  ensure_outdir()
-
-  local code = el.text or ""
-  local version = (el.attributes and el.attributes["version"]) or DEFAULT_VERSION
-  if not code:match("\\version") then
-    code = '\\version "' .. version .. '"\n' .. code
+-- returns canonical absolute path (resolves symlinks)
+local function realpath(path)
+  -- try system realpath
+  local ok, out = pcall(pandoc.pipe, "realpath", {path}, "")
+  if ok and out and out ~= "" then
+    return out:gsub("%s+$", "")  -- strip newline
   end
 
-  local h = sha1(code)
-  local base = "ly-" .. h           -- basename only
-  local ly_path = OUTDIR .. "/" .. base .. ".ly"
-
-  if not file_exists(ly_path) then
-    write_file(ly_path, code)
-  end
-
-  local is_html = FORMAT and FORMAT:match("html")
-
-  if is_html then
-    -- Produce SVG(s)
-    if not file_exists(OUTDIR .. "/" .. base .. ".svg")
-       and not file_exists(OUTDIR .. "/" .. base .. "-1.svg") then
-      local cmd = q(LILYPOND) .. " -dbackend=svg -o " .. q(base) .. " " .. q(base .. ".ly")
-      assert(run_in_outdir(cmd), "[lilypond] SVG generation failed. Is LilyPond on PATH?")
-    end
-    -- Prefer single-page filename, otherwise use -1.svg
-    local svg_path = OUTDIR .. "/" .. base .. ".svg"
-    if not file_exists(svg_path) then
-      svg_path = OUTDIR .. "/" .. base .. "-1.svg"
-      assert(file_exists(svg_path), "[lilypond] SVG not found after compile")
-    end
-    local svg = read_file(svg_path)
-    return pandoc.RawBlock("html", svg)
-
+  -- fallback: simple absolute path (no symlink resolution)
+  local base = (PANDOC_STATE and PANDOC_STATE.cwd) or "."
+  if path:match("^/") then
+    return path
   else
-    -- Produce PDF
-    local pdf_path = OUTDIR .. "/" .. base .. ".pdf"
-    if not file_exists(pdf_path) then
-      local cmd = q(LILYPOND) .. " -o " .. q(base) .. " " .. q(base .. ".ly")
-      assert(run_in_outdir(cmd), "[lilypond] PDF generation failed. Is LilyPond on PATH?")
-    end
-    return pandoc.Para{ pandoc.Image({}, pdf_path) }
+    return (base .. "/" .. path):gsub("//+", "/")
   end
 end
 
--- io.stderr:write("[lilypond] using: " .. LILYPOND .. "\n")
+
+local function project_root(outdir_abs)
+  local env = os.getenv("QUARTO_PROJECT_DIR")
+  if env and env ~= "" then return env end
+  io.stderr:write("[lilypond] ERROR: QUARTO_PROJECT_DIR not set. Please export it in your build.\n")
+  error("lilypond.lua: missing QUARTO_PROJECT_DIR")
+end
+
+-- ---------- lilypond compile ----------
+local function compile_svg(base_h)
+
+  -- base_h: lilypond-out/ly-<H> (no extension). We already wrote .ly.
+  -- local args = { "--svg",                              "-o", base_h, base_h .. ".ly" }
+  -- local args = { "--svg", "-I", ".", "-I", CFG.outdir, "-o", base_h, base_h .. ".ly" }
+  -- base_h is already lilypond-out/ly-<hash> (no extension)
+
+  -- local SRC_DIR = pandoc.path.directory(PANDOC_STATE.input_files[1])        -- absolute
+  -- local PROJECT_ROOT = find_project_root(SRC_DIR)                           -- absolute
+  -- local OUTDIR_ABS = pandoc.path.make_absolute(CFG.outdir)                  -- absolute
+
+  local OUTDIR_ABS   = realpath(CFG.outdir)
+  local SRC_FILE     = realpath(PANDOC_STATE.input_files[1] or ".")
+  local SRC_DIR      = SRC_FILE:match("^(.*)/[^/]+$") or "."
+  local PROJECT_ROOT = realpath(project_root(SRC_DIR))
+
+  io.stderr:write( "[lilypond] PROJECT_ROOT =" .. PROJECT_ROOT  .. "\n" );
+  io.stderr:write( "[lilypond] OUTPUTDIR_ABS=" .. OUTDIR_ABS  .. "\n" );
+  io.stderr:write( "[lilypond] SRC_DIR      =" .. SRC_DIR  .. "\n" );
+
+  local args = {
+    "--svg",
+    "-I", PROJECT_ROOT,   -- project root (so \include "filters/..." works)
+    "-I", OUTDIR_ABS,     -- lilypond-out (where the temp .ly is)
+    "-I", SRC_DIR,        -- the page directory (so ../../includes work)
+    "-o", base_h,
+    base_h .. ".ly"
+  }
+
+  -- Run lilypond; capture stdout; on nonzero exit pandoc.pipe throws (we show the error message).
+  local ok, out_or_err = pcall(pandoc.pipe, "lilypond", args, "")
+  if not ok then
+    return false, out_or_err or "lilypond: unknown error"
+  end
+  return true
+end
+
+-- -------------------------------
+-- pick the actual SVG LilyPond produced (handles -page1.svg etc.)
+local function pick_svg(base_h)
+  -- base_h: lilypond-out/ly-<hash> (no extension)
+  local outdir = dirname(base_h) or CFG.outdir
+  local base   = base_h:match("([^/]+)$")
+  local tries = {
+    base_h .. ".svg",
+    base_h .. "-page1.svg",
+    base_h .. "-1.svg",
+  }
+  for _, p in ipairs(tries) do
+    if file_exists(p) then return p end
+  end
+  -- fallback: list the outdir and pick the first match
+  local ok, out = pcall(pandoc.pipe, "bash", {"-lc", string.format("ls -1 %q", outdir)}, "")
+  if ok and out and out ~= "" then
+    for line in (out .. "\n"):gmatch("([^\n]+)\n") do
+      if line:match("^" .. base .. "[%.%-].*%.svg$") then
+        return outdir .. "/" .. line
+      end
+    end
+  end
+  return nil
+end
+
+
+
+
+
+
+-- ---------- meta handling ----------
+local function meta_to_string(mv)
+  if not mv then return "" end
+  return pandoc.utils.stringify(mv)
+end
+
+local function resolve_preamble1(mv)
+  if type(mv) == "table" and mv.t == "MetaList" then
+    local parts = {}
+    for _, item in ipairs(mv) do parts[#parts+1] = pandoc.utils.stringify(item) end
+    local txt = table.concat(parts, "\n")
+    if txt ~= "" and txt:sub(-1) ~= "\n" then txt = txt .. "\n" end
+    return txt
+  end
+  -- fallback (may be collapsed to one line by Quarto)
+  local s = pandoc.utils.stringify(mv or "")
+  if s ~= "" and s:sub(-1) ~= "\n" then s = s .. "\n" end
+  return s
+end
+
+-- in your filter:
+local function slurp(p) local f=io.open(p,"rb"); if not f then return nil end local s=f:read("*a"); f:close(); return s end
+local function resolve_preamble2(mv)
+  local s = pandoc.utils.stringify(mv or ""):gsub("^%s+",""):gsub("%s+$","")
+  if s:match("%.ly$") or s:find("[/\\]") then
+    local body = slurp(s) or ""
+    if body ~= "" and body:sub(-1) ~= "\n" then body = body .. "\n" end
+    return body
+  end
+  if s ~= "" and s:sub(-1) ~= "\n" then s = s .. "\n" end
+  return s
+end
+
+local function resolve_preamble(mv)
+  return resolve_preamble2(mv)
+end
+
+function Meta(m)
+  -- io.stderr:write("[lilypond] preamble\n")
+  -- io.stderr:write("All metadata:\n")
+  -- for k,v in pairs(m) do
+  --   io.stderr:write("  ", k, " = ", pandoc.utils.stringify(v), "\n")
+  -- end
+
+  -- global disable
+  local lv = m["lilypond"]
+  if lv ~= nil then
+    local s = tostring(pandoc.utils.stringify(lv)):lower()
+    if s == "off" or s == "false" or s == "0" then
+      io.stderr:write("[lilypond] disabled\n")
+      META.disabled = true
+    end
+  end
+
+
+  -- preamble
+  local pre = m["lilypond-preamble"]
+  if pre then
+    local s = resolve_preamble(pre)
+    -- io.stderr:write("[lilypond] preamble start<<<\n")
+    -- io.stderr:write( s .. "\n")
+    -- io.stderr:write("[lilypond] preamble end>>>\n")
+    if #s > 0 and s:sub(-1) ~= "\n" then s = s .. "\n" end
+    META.preamble = s
+  end
+end
+
+
+
+-- ---------- attr helpers ----------
+local function first_nonempty_line(s)
+  for line in (s .. "\n"):gmatch("([^\n]*)\n") do
+    local t = line:gsub("^%s+", ""):gsub("%s+$", "")
+    if #t > 0 then return t end
+  end
+  return ""
+end
+
+local function shorten(s, n)
+  n = n or 80
+  if #s <= n then return s end
+  return s:sub(1, n - 1) .. "…"
+end
+
+local function build_image_block(svg_path, cb)
+  -- alt
+  local alt = cb.attributes and cb.attributes.alt
+  if not alt or alt == "" then
+    alt = shorten(first_nonempty_line(cb.text or "LilyPond"))
+  end
+  local alt_inlines = { pandoc.Str(alt) }
+
+  -- title
+  local title = cb.attributes and cb.attributes.title or ""
+
+  -- image attributes
+  local img_attr = pandoc.Attr("", {}, {})
+  if cb.attributes then
+    local w = cb.attributes.width
+    local h = cb.attributes.height
+    if w and w ~= "" then img_attr.attributes.width = w end
+    if h and h ~= "" then img_attr.attributes.height = h end
+  end
+
+  local image = pandoc.Image(alt_inlines, svg_path, title, img_attr)
+  local para = pandoc.Para({ image })
+
+  -- alignment wrapper
+  local align = cb.attributes and cb.attributes.align
+  if align then
+    align = tostring(align):lower()
+    if align == "left" or align == "center" or align == "right" then
+      local div_attr = pandoc.Attr("", {}, { style = ("text-align:%s;"):format(align) })
+      return pandoc.Div({ para }, div_attr)
+    end
+  end
+
+  return para
+end
+
+-- ---------- main handler ----------
+local function handle_codeblock(cb)
+  if META.disabled then return nil end
+  if not cb.classes:includes("lilypond") then return nil end
+
+  mkdir_p(CFG.outdir)
+
+  -- local mv = PANDOC_DOCUMENT.meta["lilypond-preamble"]
+  -- META.preamble = mv and pandoc.utils.stringify(mv) or ""
+
+  local code = cb.text or ""
+  local effective = (META.preamble or "") .. code
+  io.stderr:write("[lilypond] preamble-2 start<<<\n")
+  io.stderr:write( (META.preamble or "") .. "\n")
+  io.stderr:write("[lilypond] preamble-2 end>>>\n")
+  local hash_input = effective .. "\n-- compile_opts:" .. (CFG.compile_opts or "")
+  local H = sha1_hex(hash_input)
+
+  local base_h = CFG.outdir .. "/ly-" .. H
+  local ly_path = base_h .. ".ly"
+
+  -- write .ly if missing or content changed
+  local need_write = true
+  if file_exists(ly_path) then
+    local cur = read_file(ly_path)
+    if cur == effective then need_write = false end
+  end
+  if need_write then
+    local ok, err = write_file(ly_path, effective)
+    if not ok then
+      local msg = ("[lilypond.lua] failed to write %s\n%s"):format(ly_path, err or "")
+      io.stderr:write(msg.."\n")
+      return pandoc.CodeBlock(msg, pandoc.Attr("", {"lilypond-error"}, {}))
+    end
+  end
+
+  local ok, err = compile_svg(base_h)
+  if not ok then
+    local cmd_disp = ("lilypond --svg -o %s %s"):format(base_h, ly_path)
+    local err_head = (err or "unknown error"):gsub("%s+$","")
+    -- show only the first ~20 lines of error text
+    local lines, shown, limit = {}, 0, 20
+    for line in (err_head .. "\n"):gmatch("([^\n]*)\n") do
+      shown = shown + 1
+      if shown > limit then
+        table.insert(lines, "… (truncated) …")
+        break
+      end
+      table.insert(lines, line)
+    end
+    local msg = ("# lilypond compile failed\n$ %s\n%s"):format(cmd_disp, table.concat(lines, "\n"))
+    io.stderr:write("[lilypond.lua] compile error: " .. err_head .. "\n")
+    return pandoc.CodeBlock(msg, pandoc.Attr("", {"lilypond-error"}, {}))
+  end
+
+  -- local svg_path = base_h .. ".svg"
+  local svg_path = pick_svg( base_h )
+
+  -- compile if svg missing
+  if not file_exists(svg_path) then
+  end
+
+  -- try to create timestamp symlinks (or copies)
+  make_timestamp_links(base_h)
+
+  if not svg_path then
+    io.stderr:write("[lilypond] no SVG produced for " .. base_h .. "\n")
+    return pandoc.CodeBlock("# lilypond: no SVG produced", pandoc.Attr("", {"lilypond-error"}, {}))
+  end
+  -- return image node
+  return build_image_block(svg_path, cb)
+end
+
+return {
+  { Meta=Meta },
+  { CodeBlock = handle_codeblock },
+}
 

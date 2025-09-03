@@ -788,19 +788,20 @@ tags:
 
 ### IPAでの全調音法(Manners of Articulation)一覧
 
-| 英語名               | 日本語名   | 日本語読み           |  IPAの例                                                                  | 日本語の説明                                                                         |
-| -------------------- | ---------- | -------------------- |  -----------------------------------------------------------------------  | ------------------------------------------------------------------------------------ |
-| Plosive (Stop)       | 破裂音     | はれつおん           |  [p, b, t, d, ʈ, ɖ, c, ɟ, k, g, q, ɢ, ʔ]                                  | 調音器官を完全に閉鎖し、その後に開放することで生じる子音。                           |
-| Nasal                | 鼻音       | びおん               |  [m, ɱ, n, ɳ, ɲ, ŋ, ɴ]                                                   | 口腔を閉鎖し、鼻腔に気流を通すことによって生じる子音。                               |
-| Trill                | ふるえ音   | ふるえおん           |  [ʙ, r, ʀ]                                                                | 調音器官が連続的に振動して生じる子音。                                               |
-| Tap / Flap           | はじき音   | はじきおん           |  [ⱱ, ɾ, ɽ]                                                                | 調音器官が一度だけ瞬間的に接触して生じる子音。                                       |
-| Fricative            | 摩擦音     | まさつおん           |  [ɸ, β, f, v, θ, ð, s, z, ʃ, ʒ, ʂ, ʐ, ç, ʝ, x, ɣ, χ, ʁ, ħ, ʕ, h, ɦ]  | 狭められた調音器官の間を気流が通過し、摩擦によって生じる子音。                       |
-| Lateral Fricative    | 側面摩擦音 | そくめんまさつおん   |  [ɬ, ɮ]                                                                   | 舌の中央を閉鎖し、側面に狭い通路を作って摩擦を伴う気流を通すことによって生じる子音。 |
-| Approximant          | 接近音     | せっきんおん         |  [ʋ, ɹ, ɻ, j, ɰ, w]                                                       | 調音器官が接近するが、摩擦を生じるほどには狭まらない子音。                           |
-| Lateral Approximant  | 側面接近音 | そくめんせっきんおん |  [l, ɭ, ʎ, ʟ]                                                             | 舌の中央を閉鎖し、側面を開放して気流を通すことで生じる子音。                         |
-| Affricate (combined) | 破擦音     | はさつおん           |  [p͡f, b͡v, t͡s, d͡z, t͡ʃ, d͡ʒ, ʈ͡ʂ, ɖ͡ʐ, t͡ɕ, d͡ʑ, k͡x, ɡ͡ɣ]                        | 破裂の直後に摩擦を伴う一連の調音として生じる子音。                                   |
+| 英語名               | 日本語名   | 日本語読み           | IPAの例                                      | 日本語の説明                                                                         |
+| -------------------- | ---------- | -------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Plosive (Stop)       | 破裂音     | はれつおん           | [p, b, t, d, k, g, q, ɢ, ʔ]                  | 調音器官を完全に閉鎖し、その後に開放することで生じる子音。                           |
+| Nasal                | 鼻音       | びおん               | [m, n, ɲ, ŋ, ɴ]                             | 口腔を閉鎖し、鼻腔に気流を通すことによって生じる子音。                               |
+| Trill                | ふるえ音   | ふるえおん           | [r, ʀ, ʙ]                                    | 調音器官が連続的に振動して生じる子音。                                               |
+| Tap / Flap           | はじき音   | はじきおん           | [ɾ, ɽ]                                       | 調音器官が一度だけ瞬間的に接触して生じる子音。                                       |
+| Fricative            | 摩擦音     | まさつおん           | [f, v, s, z, ʃ, ʒ, x, ɣ, χ, ʁ, h, ɦ, ħ, ʕ] | 狭められた調音器官の間を気流が通過し、摩擦によって生じる子音。                       |
+| Lateral Fricative    | 側面摩擦音 | そくめんまさつおん   | [ɬ, ɮ]                                       | 舌の中央を閉鎖し、側面に狭い通路を作って摩擦を伴う気流を通すことによって生じる子音。 |
+| Approximant          | 接近音     | せっきんおん         | [j, w, ɹ, ɰ]                                 | 調音器官が接近するが、摩擦を生じるほどには狭まらない子音。                           |
+| Lateral Approximant  | 側面接近音 | そくめんせっきんおん | [l, ʎ, ʟ]                                    | 舌の中央を閉鎖し、側面を開放して気流を通すことで生じる子音。                         |
+| Affricate (combined) | 破擦音     | はさつおん           | [t͡s, d͡z, t͡ʃ, d͡ʒ]                             | 破裂の直後に摩擦を伴う一連の調音として生じる子音。                                   |
 
 :  {.tbl-pron2 .pron3 .tbl-header-center }
+
 
 <!--
 
@@ -1164,17 +1165,52 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 ## オフビートカウントでの正しい発音の為の基礎
 
+<!--
 ```{.lilypond}
-\version "2.24.0"
-\include "lilypond-book-preamble.ly"
-
-\layout {
-  \context {
-    \Lyrics
-    \override LyricText.font-name = "Charis SIL Bold Italic"
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  \relative c'' {
+    \time 3/4
+    do'4 di re ri mi fa fi sol si la li ti |
+    do4  ti te la le sol se fa mi me re ra |
+    do
   }
 }
+```
+-->
 
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  <<
+    \new Voice = "v"
+    \relative {
+      \voiceOne
+        \time 3/4
+        do'4 di re ri mi fa fi sol si la li ti | \break
+        do4  ti te la le sol se fa mi me re ra |
+        do
+    }
+
+    \new Lyrics \lyricsto "v" {
+       do di re ri mi fa fi sol si la li ti do |
+       do ti te la le sol se fa mi me re ra do |
+    }
+  >>
+}
+%sss
+```
+
+hello
+hello
+hello
+
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1182,22 +1218,25 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
         \voiceOne
         \time 9/8
         \partial 8
-        c8 |
-        c8 c8 c8 
-        c8 c8 c8 
-        c8 c8 c8 
-        c8 c8 c8 
+        do8 |
+        do8 do8 do8 
+        do8 do8 do8 
+        do8 do8 do8 
+        do8 do8 do8 
       }
     >>
+
     \new Lyrics \lyricsto "v" {
-        ʔ -- | ɔɚ -- n tw | o o thr | ee
+        ʔ -- | a -- n tw | o o thr | ee
     }
     \new Lyrics \lyricsto "v" {
         ʔ -- | a -- n tw | o o thr | ee
     }
   >>
 }
+%sss
 ```
+
 
 ```{mermaid}
 flowchart LR
