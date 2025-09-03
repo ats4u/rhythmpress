@@ -100,13 +100,13 @@ end
 
 -- returns canonical absolute path (resolves symlinks)
 local function realpath(path)
-  -- try system realpath
-  local ok, out = pcall(pandoc.pipe, "realpath", {path}, "")
-  if ok and out and out ~= "" then
-    return out:gsub("%s+$", "")  -- strip newline
+  local ok, out = pcall(function()
+    return pandoc.pipe("realpath", {path}, "")
+  end)
+  if ok and type(out) == "string" and out ~= "" then
+    return out:gsub("%s+$", "")
   end
-
-  -- fallback: simple absolute path (no symlink resolution)
+  -- fallback: construct absolute path
   local base = (PANDOC_STATE and PANDOC_STATE.cwd) or "."
   if path:match("^/") then
     return path
@@ -114,7 +114,6 @@ local function realpath(path)
     return (base .. "/" .. path):gsub("//+", "/")
   end
 end
-
 
 local function project_root(outdir_abs)
   local env = os.getenv("QUARTO_PROJECT_DIR")
@@ -189,7 +188,11 @@ end
 -- in your filter:
 local function slurp(p) local f=io.open(p,"rb"); if not f then return nil end local s=f:read("*a"); f:close(); return s end
 local function resolve_preamble2(mv)
-  local s = pandoc.utils.stringify(mv or ""):gsub("^%s+",""):gsub("%s+$","")
+
+  local s = pandoc.utils.stringify(mv or "")
+  if type(s) ~= "string" then s = "" end
+  s = s:gsub("^%s+",""):gsub("%s+$","")
+
   if s:match("%.ly$") or s:find("[/\\]") then
     local body = slurp(s) or ""
     if body ~= "" and body:sub(-1) ~= "\n" then body = body .. "\n" end
@@ -289,6 +292,7 @@ local function build_image_block(svg_path, cb)
   end
 
   local image = pandoc.Image(alt_inlines, svg_path, title, img_attr)
+  image.classes:insert("lilypond")
   local para = pandoc.Para({ image })
 
   -- alignment wrapper

@@ -98,3 +98,15 @@ body.quarto-dark  table.offbeat-onbeat-table th  {
   margin:-10px 10px 10px 10px;
 }
 
+
+/*
+ * Only in dark mode (Quarto adds .quarto-dark on <body>)
+ * Added on 2025/09/04 01:05:14
+ * */
+.quarto-dark img.lilypond {
+  filter: invert(1) hue-rotate(180deg) contrast(0.9) saturate(1.1);
+}
+
+/* If you also emit PNG fallbacks, don't invert those */
+.quarto-dark img.lilypond[src$=".png"] { filter: none; }
+
