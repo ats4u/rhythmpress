@@ -221,6 +221,14 @@ tags:
   .tbl-header-center th {
     text-align : center !important;
   }
+  .tbl-spacy :is( th, td ) {
+    padding : 0.2em 1.0em 0.2em 1.0em !important;
+  }
+  .ipa {
+    font-family:"Charis SIL", serif !important;
+    font-weight: 1000 !important;
+    font-style: italic !important;
+  }
   .tbl-pron2 :is( th, td ) {
     font-size: 0.8em;
     min-height:40px;
@@ -1165,47 +1173,43 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 ## オフビートカウントでの正しい発音の為の基礎
 
-<!--
-```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
-\score {
-  \relative c'' {
-    \time 3/4
-    do'4 di re ri mi fa fi sol si la li ti |
-    do4  ti te la le sol se fa mi me re ra |
-    do
-  }
-}
-```
--->
+### オフビートカウントに必要な全ての単語とその単語
 
-```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
-\score {
-  <<
-    \new Voice = "v"
-    \relative {
-      \voiceOne
-        \time 3/4
-        do'4 di re ri mi fa fi sol si la li ti | \break
-        do4  ti te la le sol se fa mi me re ra |
-        do
-    }
+オフビートカウントは、数字と簡単な単語と記号を使って数えるだけの作業です。必要な単語を最小限にとどめることでストレス拍リズム・シラブル拍リズムのリズム構造を集中して練習することが可能になります。
 
-    \new Lyrics \lyricsto "v" {
-       do di re ri mi fa fi sol si la li ti do |
-       do ti te la le sol se fa mi me re ra do |
-    }
-  >>
-}
-%sss
-```
+* 数字
+    * 1,2,3,4,5,6,7,8,9
+* 記号
+    * & ( and )
+* アルファベット
+    * E (イー) 
+    * A (アー)
 
-hello
-hello
-hello
+#### ０から１０までのIPA表記
+
+|   数 | 英語表記 | IPA                                                  |
+| ---: | :------: | :--------------------------------------------------- |
+|    0 |  *zero*  | <span class="ipa" >/ˈzɪəɹoʊ/ 又は /ˈziːɹoʊ/ </span> |
+|    1 |  *one*   | <span class="ipa" >/wʌn/                     </span> |
+|    2 |  *two*   | <span class="ipa" >/tuː/                    </span> |
+|    3 | *three*  | <span class="ipa" >/θɹiː/                  </span> |
+|    4 |  *four*  | <span class="ipa" >/fɔɹ/ 又は /foʊɹ/         </span> |
+|    5 |  *five*  | <span class="ipa" >/faɪv/                    </span> |
+|    6 |  *six*   | <span class="ipa" >/sɪks/                    </span> |
+|    7 | *seven*  | <span class="ipa" >/ˈsɛvən/                  </span> |
+|    8 | *eight*  | <span class="ipa" >/eɪt/                     </span> |
+|    9 |  *nine*  | <span class="ipa" >/naɪn/                    </span> |
+|   10 |  *ten*   | <span class="ipa" >/tɛn/                     </span> |
+:  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping .tbl-spacy tbl-colwidths=[8,8,40] }
+
+
+|   数 | 英語表記 | IPA                                                                                                                                                    |
+| ---: | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    - |  *and*   | <span class="ipa">/ænd/</span> ※ 非アクセント時 <span class="ipa">/ən/</span> 又は     <span class="ipa">/n̩/</span>                                      |
+|    - |   *e*    | <span class="ipa">/iː/</span > ※ 非アクセント時 <span class="ipa">/i/</span > )                                                                        |
+|    - |   *a*    | <span class="ipa">/eɪ/</span  > ※ 非アクセント時 <span class="ipa">/ə/</span >(シュワ), <span class="ipa">/əː/</span> 又は <span class="ipa">/ʌ/</span> |
+:  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping .tbl-spacy tbl-colwidths=[8,8,40] }
+
 
 
 ```{.lilypond}
@@ -1218,47 +1222,101 @@ hello
         \voiceOne
         \time 9/8
         \partial 8
-        do8 |
-        do8 do8 do8 
-        do8 do8 do8 
-        do8 do8 do8 
-        do8 do8 do8 
+                                        do8 |
+        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
+        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
+        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
+        do8 do8 do8
       }
     >>
 
     \new Lyrics \lyricsto "v" {
-        ʔ -- | a -- n tw | o o thr | ee
+        \markup { | w } ʌ  n
+        \markup { | t } uː\markup { _ }
+        \markup { | θɹ } iː \markup { _ }
+        \markup { | f } ɔ ɹ
+        \markup { | f } aɪ v
+        \markup { | s } ɪ ks
+        \markup { | ˈs } ɛ vən
+        \markup { | ʔ } eɪ t
+        \markup { | n } aɪ n
+        \markup { | w } ʌ  n
+        _ _
     }
     \new Lyrics \lyricsto "v" {
-        ʔ -- | a -- n tw | o o thr | ee
+        \markup { | o } - ne
+        \markup { | t } - wo
+        \markup { | thr } - ee
+        \markup { | f } - our
+        \markup { | f } -i ve
+        \markup { | s } -i x
+        \markup { | se } -ve n
+        \markup { | ʔ } -eigh t
+        \markup { | n } -i ne
+        \markup { | o } - ne
+        _ _
     }
   >>
 }
-%sss
+```
+
+#### 27/16
+
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "v" {
+        \voiceOne
+        \time 3/4
+        \partial 3/8
+                                        do8 |
+        \tuplet 3/2 { do8 do8 do8 }  do8 do8 do8   do8 do8 do8 |
+        \tuplet 3/2 { do8 do8 do8 }  do8 do8 do8   do8 do8 do8 |
+        \tuplet 3/2 { do8 do8 do8 }  do8 do8 do8   do8 do8 do8 |
+        \tuplet 3/2 { do8 do8 do8 }
+      }
+    >>
+
+    \new Lyrics \lyricsto "v" {
+        \markup { | w } ʌ  n
+        \markup { | t } uː\markup { _ }
+        \markup { | θɹ } iː \markup { _ }
+        \markup { | f } ɔ ɹ
+        \markup { | f } aɪ v
+        \markup { | s } ɪ ks
+        \markup { | ˈs } ɛ vən
+        \markup { | ʔ } eɪ t
+        \markup { | n } aɪ n
+        \markup { | w } ʌ  n
+        _ _
+    }
+    \new Lyrics \lyricsto "v" {
+        \markup { | o } - ne
+        \markup { | t } - wo
+        \markup { | thr } - ee
+        \markup { | f } - our
+        \markup { | f } -i ve
+        \markup { | s } -i x
+        \markup { | se } -ve n
+        \markup { | ʔ } -eigh t
+        \markup { | n } -i ne
+        \markup { | o } - ne
+        _ _
+    }
+  >>
+}
 ```
 
 
-```{mermaid}
-flowchart LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
-```
 
 
 
 
 
-オフビートカウントは、数字と簡単な単語と記号を使って数えるだけの作業です。必要な単語を最小限にとどめることでストレス拍リズム・シラブル拍リズムのリズム構造を集中して練習することが可能になります。
-
-* 数字
-    * 1,2,3,4,5,6,7,8,9
-* 記号
-    * & ( and )
-* アルファベット
-    * E (イー) 
-    * A (アー)
 
 ## 三連符オフビートカウントの発音
 
@@ -1337,3 +1395,40 @@ flowchart LR
 | &   | &   | a   |
 | a   | &   | a   |
 
+<!--
+### 付録
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  <<
+    \new Voice = "v"
+    \relative  do' {
+      \voiceOne
+        \time 3/4
+        \autoLineBreaksOff
+        do4  di re ri mi fa fi sol si la li ti | \break
+        do4  ti te la le sol se fa mi me re ra | \break
+        do4  di re ri mi fa fi sol si la li ti | \break
+        do4  ti te la le sol se fa mi me re ra | \break
+        do
+    }
+    \new Lyrics \lyricsto "v" {
+       do di re ri mi fa fi sol si la li ti |
+       do ti te la le sol se fa mi me re ra |
+       do di re ri mi fa fi sol si la li ti |
+       do ti te la le sol se fa mi me re ra |
+       do
+    }
+  >>
+}
+```
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+-->

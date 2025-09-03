@@ -85,50 +85,6 @@ local function copy_file(src, dst)
   return write_file(dst, data)
 end
 
-local function make_timestamp_links(base_h)
-  -- base_h like: lilypond-out/ly-<H> (no extension)
-  local ts = nowstamp_utc()
-  local base_ts = CFG.outdir .. "/ly-" .. ts
-  local src_ly, src_svg = base_h .. ".ly", base_h .. ".svg"
-  local dst_ly, dst_svg = base_ts .. ".ly", base_ts .. ".svg"
-
-  if not file_exists(src_ly) or not file_exists(src_svg) then
-    return -- nothing to do
-  end
-
-  if is_windows then
-    -- Symlinks are unreliable without dev/admin; fall back to copies.
-    copy_file(src_ly, dst_ly)
-    copy_file(src_svg, dst_svg)
-    return
-  end
-
-  -- Try symlinks; if it fails, fall back to copies.
-  local function ln_sf(target, linkname)
-    local cmd = ('ln -sf %q %q'):format(target, linkname)
-    local ok = os.execute(cmd)
-    return ok == true or ok == 0 or ok == 256 -- Lua/os differences
-  end
-
-  -- Prefer relative targets for nicer UX inside outdir.
-  local rel_ly = "ly-" .. (base_h:match("ly%-(.+)$") or "") .. ".ly"
-  local rel_svg = "ly-" .. (base_h:match("ly%-(.+)$") or "") .. ".svg"
-
-  -- We run ln in the outdir for neat relative links.
-  local cwd = pandoc.system.get_working_directory and pandoc.system.get_working_directory() or "."
-  local chdir = pandoc.system.with_working_directory
-
-  if chdir then
-    chdir(CFG.outdir, function()
-      if not ln_sf(rel_ly, "ly-"..ts..".ly") then copy_file("ly-"..(rel_ly:sub(4)), "ly-"..ts..".ly") end
-      if not ln_sf(rel_svg, "ly-"..ts..".svg") then copy_file("ly-"..(rel_svg:sub(4)), "ly-"..ts..".svg") end
-    end)
-  else
-    -- No chdir helper: just use absolute paths.
-    if not ln_sf(src_ly, dst_ly) then copy_file(src_ly, dst_ly) end
-    if not ln_sf(src_svg, dst_svg) then copy_file(src_svg, dst_svg) end
-  end
-end
 
 local function dirname(p) return p:match("^(.*)/[^/]+$") end
 local function find_project_root(start_dir)
@@ -205,32 +161,6 @@ local function compile_svg(base_h)
   return true
 end
 
--- -------------------------------
--- pick the actual SVG LilyPond produced (handles -page1.svg etc.)
-local function pick_svg(base_h)
-  -- base_h: lilypond-out/ly-<hash> (no extension)
-  local outdir = dirname(base_h) or CFG.outdir
-  local base   = base_h:match("([^/]+)$")
-  local tries = {
-    base_h .. ".svg",
-    base_h .. "-page1.svg",
-    base_h .. "-1.svg",
-  }
-  for _, p in ipairs(tries) do
-    if file_exists(p) then return p end
-  end
-  -- fallback: list the outdir and pick the first match
-  local ok, out = pcall(pandoc.pipe, "bash", {"-lc", string.format("ls -1 %q", outdir)}, "")
-  if ok and out and out ~= "" then
-    for line in (out .. "\n"):gmatch("([^\n]+)\n") do
-      if line:match("^" .. base .. "[%.%-].*%.svg$") then
-        return outdir .. "/" .. line
-      end
-    end
-  end
-  return nil
-end
-
 
 
 
@@ -303,6 +233,24 @@ function Meta(m)
   end
 end
 
+
+local function collect_svgs(base_h)
+  local single = base_h .. ".svg"
+  if file_exists(single) then
+    return { single }
+  end
+  local svgs, i = {}, 1
+  while true do
+    local p = string.format("%s-%d.svg", base_h, i)
+    if file_exists(p) then
+      svgs[#svgs+1] = p
+      i = i + 1
+    else
+      break
+    end
+  end
+  return svgs
+end
 
 
 -- ---------- attr helpers ----------
@@ -411,22 +359,17 @@ local function handle_codeblock(cb)
     return pandoc.CodeBlock(msg, pandoc.Attr("", {"lilypond-error"}, {}))
   end
 
-  -- local svg_path = base_h .. ".svg"
-  local svg_path = pick_svg( base_h )
-
-  -- compile if svg missing
-  if not file_exists(svg_path) then
-  end
-
-  -- try to create timestamp symlinks (or copies)
-  make_timestamp_links(base_h)
-
-  if not svg_path then
+  local svg_paths = collect_svgs(base_h)
+  if #svg_paths == 0 then
     io.stderr:write("[lilypond] no SVG produced for " .. base_h .. "\n")
     return pandoc.CodeBlock("# lilypond: no SVG produced", pandoc.Attr("", {"lilypond-error"}, {}))
   end
-  -- return image node
-  return build_image_block(svg_path, cb)
+
+  local blocks = {}
+  for _, p in ipairs(svg_paths) do
+    blocks[#blocks+1] = build_image_block(p, cb)
+  end
+  return blocks
 end
 
 return {
