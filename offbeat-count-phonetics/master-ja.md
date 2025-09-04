@@ -1217,8 +1217,6 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 一般的な表記方法では単純に１拍に１単語を割り当てます。英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この表記方法からグルーヴするリズムとしての解釈を抽出することができます。
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1289,8 +1287,6 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1377,8 +1373,6 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1466,9 +1460,6 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 #### グレースノートを使った譜
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
-
 gone = { \stemDown \acciaccatura do16           \stemUp do8] }
 gtwo = { \stemDown \acciaccatura { do16  do16 } \stemUp do8] }
 
@@ -1539,9 +1530,6 @@ gtwo = { \stemDown \acciaccatura { do16  do16 } \stemUp do8] }
 
 ##### １段
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
-
 gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
 gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
 gthr = { \tuplet 3/2 { do16   do16 do16] }  }
@@ -1618,9 +1606,6 @@ gthr = { \tuplet 3/2 { do16   do16 do16] }  }
 ####  ２段
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
-
 gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
 gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
 gthr = { \tuplet 3/2 { do16   do16 do16] }  }
@@ -1697,9 +1682,6 @@ gthr = { \tuplet 3/2 { do16   do16 do16] }  }
 ### ３段
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
-
 gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
 gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
 gthr = { \tuplet 3/2 { do16   do16 do16] }  }
@@ -1866,8 +1848,6 @@ gthr = { \tuplet 3/2 { do16   do16 do16] }  }
 <!--
 ### 付録
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
 \score {
   <<
     \new Voice = "v"
@@ -1901,8 +1881,6 @@ flowchart LR
 ```
 
 ```{.lilypond}
-\include "filters/chromatic-solfege.ly"
-\language "chromatic-solfege"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<

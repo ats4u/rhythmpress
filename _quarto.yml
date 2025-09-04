@@ -64,7 +64,7 @@ website:
 # execute:
 #  freeze: auto            # optional: avoids re-execution unless sources change
 metadata:
-  lilypond-preamble: "filters/lilypond-preamble.ly"
+  lilypond-preamble: "rhythmpedia-ly/lilypond-preamble.ly"
 format:
   html:
     theme:
@@ -75,7 +75,7 @@ format:
     filters:
       - filters/meta-dates.lua
       - filters/include-files.lua
-      - lilypond.lua
+      - filters/lilypond.lua
 #      - filters/expand-vars.lua
 #      - filters/obsidian-image-dimensions.lua
     css: assets/styles.css
