@@ -1173,7 +1173,7 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 ## オフビートカウントでの正しい発音の為の基礎
 
-### オフビートカウントに必要な全ての単語とその単語
+### オフビートカウントで必要になる全単語について
 
 オフビートカウントは、数字と簡単な単語と記号を使って数えるだけの作業です。必要な単語を最小限にとどめることでストレス拍リズム・シラブル拍リズムのリズム構造を集中して練習することが可能になります。
 
@@ -1185,7 +1185,7 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
     * E (イー) 
     * A (アー)
 
-#### ０から１０までのIPA表記
+#### オフビートカウントに必要になる全単語のIPA表記
 
 |   数 | 英語表記 | IPA                                                  |
 | ---: | :------: | :--------------------------------------------------- |
@@ -1210,6 +1210,170 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 |    - |   *a*    | <span class="ipa">/eɪ/</span  > ※ 非アクセント時 <span class="ipa">/ə/</span >(シュワ), <span class="ipa">/əː/</span> 又は <span class="ipa">/ʌ/</span> |
 :  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping .tbl-spacy tbl-colwidths=[8,8,40] }
 
+#### カウントの発音表記について
+
+##### 一般的な表記方法
+
+一般的な表記方法では単純に１拍に１単語を割り当てます。英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この表記方法からグルーヴするリズムとしての解釈を抽出することができます。
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "v" {
+        \voiceOne
+        \time 3/4
+        do4 do4 do4
+        do4 do4 do4
+        do4 do4 do4
+        do4 s2
+      }
+    >>
+
+    \new Lyrics \lyricsto "v" {
+      "1" "2" "3" "4" "5" "6" "7" "8" "9" "1"
+    }
+
+    \new Lyrics \lyricsto "v" {
+        \markup{ | one   }
+        \markup{ | two   }
+        \markup{ | three }
+        \markup{ | four  }
+        \markup{ | five  }
+        \markup{ | six   }
+        \markup{ | seven }
+        \markup{ | eight }
+        \markup{ | nine  }
+        \markup{ | one   }
+    }
+
+    \new Lyrics \lyricsto "v" {
+      \markup { | wʌn   }
+      \markup { | tuː  }
+      \markup { | θɹiː}
+      \markup { | fɔɹ   }
+      \markup { | faɪv  }
+      \markup { | sɪks  }
+      \markup { | sɛvən }
+      \markup { | eɪt   }
+      \markup { | naɪn  }
+      \markup { | tɛn   }
+      \markup { | wʌn   }
+    }
+  >>
+}
+```
+
+#### モーラ拍リズム言語話者の為のストレス拍リズム習得方法
+
+英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この１拍１単語を割り当てる表記方法からグルーヴするリズムとしての解釈を抽出することができます。  何故なら英語の発音の背後にはストレス拍と呼ばれるリズム構造が存在し、このことからグルーヴするリズムを抽出する為に必要なリズム認識型を全て持っている場合が多いからです。
+
+しかし英語を母国語としない人たち ─── 特に日本語を母国語とする人たちは、ここから正しくグルーヴするリズムを抽出することができない場合が多いのです。それは日本語の発音の背後に存在するモーラ拍と呼ばれるリズム構造が存在することから、グルーヴ抽出する作業に必要な全てのリズム認識型を持たない場合が多いからです。
+
+この問題に対処する為には、譜面上で、ネイティブ話者が無意識のうちに行っている拍以下の音価に対しての音符の割り当てまで正確に指定する必要があります。
+
+具体的には、
+
+- {{< var NI>}}
+- {{< var RUBY-POP>}}
+- {{< var RUBY-MPOP>}}
+
+この３つのリズム認識型を考慮した上で譜割りに反映することが必要となります。
+
+
+#### {{< var RUBY-MiOP>}}を考慮に入れた表記法 {#notation-by-minimum-prosodic-onset-principle}
+
+モーラ拍リズムを持つ言語である日本語話者が英語・ドイツ語・ロシア語などのストレス拍リズム言語で書かれた歌詞の歌を歌おうとしたり、スペイン語フランス語ギリシャ語などのシラブル拍リズム言語で書かれた歌詞の歌を歌おうとすると、日本語のモーラ拍リズムのリズム解釈が表出することによって、リズム解釈に間違いが生じます。この間違ったリズム解釈を譜面化したものをまず見てみます。
+
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "v" {
+        \voiceOne
+        \time 9/8
+        % \partial 8
+        %                               do8 |
+        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
+        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
+        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
+        do8 do8 do8
+      }
+      \new NullVoice = "aligner" {
+        \relative do' {
+          \voiceOne
+          % \partial 8
+          % do8
+
+          do4. do4. do4.
+          do4. do4. do4.
+          do4. do4. do4.
+          do4.
+        }
+      }
+    >>
+
+    \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
+       % _
+       \markup { |1  }
+       \markup { |2  }
+       \markup { |3  }
+       \markup { |4  }
+       \markup { |5  }
+       \markup { |6  }
+       \markup { |7  }
+       \markup { |8  }
+       \markup { |9  }
+       \markup { |1  }
+       _
+    }
+
+    \new Lyrics \lyricsto "v" {
+        %                     \markup { -     }
+        \markup { | o       } \markup { -     }  ne
+        \markup { | t       } \markup { -     }  wo
+        \markup { | thr     } \markup { -     }  ee
+        \markup { | f       } \markup { -     }  our
+        \markup { | f       } \markup { -i    }  ve
+        \markup { | s       } \markup { -i    }  x
+        \markup { | se      } \markup { -ve   }  n
+        \markup { | ʔ       } \markup { eigh  }  t
+        \markup { | n       } \markup { -i    }  ne
+        \markup { | o       } \markup { -     }  ne
+        _ _
+    }
+
+    \new Lyrics \lyricsto "v" {
+        \markup { | w   } \markup { ʌ  } n
+        \markup { | t   } \markup { uː} \markup { _ }
+        \markup { | θɹ } \markup { iː} \markup { _ }
+        \markup { | f   } \markup { ɔ  } ɹ
+        \markup { | f   } \markup { aɪ } v
+        \markup { | s   } \markup { ɪ  } ks
+        \markup { | ˈs  } \markup { ɛ  } vən
+        \markup { | ʔ   } \markup { eɪ } t
+        \markup { | n   } \markup { aɪ } n
+        \markup { | w   } \markup { ʌ  } n
+        _ _
+    }
+  >>
+}
+```
+
+この譜面は、モーラ拍リズムの**頭合わせリズム認識型**が発動した状態を模式的に表現しているものです。
+
+日本語などのモーラ拍リズムの言語を話す人は、しばしばこの模式図のように子音を強拍の打点よりも後に発音します。
+
+#### {{< var RUBY-NI >}}を考慮に入れた表記法
+
+モーラ拍リズムを母国語とする人が最初に直面する問題は、{{< var RUBY-NI >}}リズム認識型を持たないことにより、子音の位置を強拍よりも前に発音できないことです。
+
+この問題を解決する為に専用の練習方法が必要です。以下の譜は、シラブル拍リズムの{{< var RUBY-NI >}}リズム認識方が発動した状態を模式的に表しています。
 
 
 ```{.lilypond}
@@ -1228,89 +1392,393 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
         do8 do8 do8 do8 do8 do8 do8 do8 do8 |
         do8 do8 do8
       }
+      \new NullVoice = "aligner" {
+        \relative do' {
+          \voiceOne
+          \partial 8
+          do8
+
+          do4. do4. do4.
+          do4. do4. do4.
+          do4. do4. do4.
+          do4.
+        }
+      }
     >>
 
+    \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
+       _
+       \markup { |1  }
+       \markup { |2  }
+       \markup { |3  }
+       \markup { |4  }
+       \markup { |5  }
+       \markup { |6  }
+       \markup { |7  }
+       \markup { |8  }
+       \markup { |9  }
+       \markup { |1  }
+       _
+    }
+
     \new Lyrics \lyricsto "v" {
-        \markup { | w } ʌ  n
-        \markup { | t } uː\markup { _ }
-        \markup { | θɹ } iː \markup { _ }
-        \markup { | f } ɔ ɹ
-        \markup { | f } aɪ v
-        \markup { | s } ɪ ks
-        \markup { | ˈs } ɛ vən
-        \markup { | ʔ } eɪ t
-        \markup { | n } aɪ n
-        \markup { | w } ʌ  n
+                          \markup { -    }
+        \markup { | o   } \markup { -    }  ne
+        \markup { | t   } \markup { -    }  wo
+        \markup { | thr } \markup { -    }  ee
+        \markup { | f   } \markup { -    }  our
+        \markup { | f   } \markup { -i   }  ve
+        \markup { | s   } \markup { -i   }  x
+        \markup { | se  } \markup { -ve  }  n
+        \markup { | ʔ   } \markup { eigh }  t
+        \markup { | n   } \markup { -i   }  ne
+        \markup { | o   } \markup { -    }  ne
         _ _
     }
+
     \new Lyrics \lyricsto "v" {
-        \markup { | o } - ne
-        \markup { | t } - wo
-        \markup { | thr } - ee
-        \markup { | f } - our
-        \markup { | f } -i ve
-        \markup { | s } -i x
-        \markup { | se } -ve n
-        \markup { | ʔ } -eigh t
-        \markup { | n } -i ne
-        \markup { | o } - ne
+        \markup { w   } \markup { | ʌ  } n
+        \markup { t   } \markup { | uː} \markup { _ }
+        \markup { θɹ } \markup { | iː} \markup { _ }
+        \markup { f   } \markup { | ɔ  } ɹ
+        \markup { f   } \markup { | aɪ } v
+        \markup { s   } \markup { | ɪ  } ks
+        \markup { ˈs  } \markup { | ɛ  } vən
+        \markup { ʔ   } \markup { | eɪ } t
+        \markup { n   } \markup { | aɪ } n
+        \markup { w   } \markup { | ʌ  } n
         _ _
     }
   >>
 }
 ```
 
-#### 27/16
+この様にシラブル拍リズム言語を話す人々は、子音を弱拍位置で発音する習慣を持っています。
 
+
+#### {{< var RUBY-NI >}}及び{{< var RUBY-MOP >}}を考慮した発音表記
+
+シラブル拍リズム言語は更に{{< var RUBY-MOP >}}リズム認識型を持っており、子音を弱拍位置で発音するだけでなく、その直前の末子音を全て可能な限りまとめて発音する習慣を持っています。
+
+次の譜は、シラブル拍リズム言語に於いて、末子音が頭子音にまとめられて発音される様子を模式的に表したものです。
+
+
+#### グレースノートを使った譜
 
 ```{.lilypond}
 \include "filters/chromatic-solfege.ly"
 \language "chromatic-solfege"
+
+gone = { \stemDown \acciaccatura do16           \stemUp do8] }
+gtwo = { \stemDown \acciaccatura { do16  do16 } \stemUp do8] }
+
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "v" {
+      \new Voice = "counting" {
         \voiceOne
-        \time 3/4
-        \partial 3/8
-                                        do8 |
-        \tuplet 3/2 { do8 do8 do8 }  do8 do8 do8   do8 do8 do8 |
-        \tuplet 3/2 { do8 do8 do8 }  do8 do8 do8   do8 do8 do8 |
-        \tuplet 3/2 { do8 do8 do8 }  do8 do8 do8   do8 do8 do8 |
-        \tuplet 3/2 { do8 do8 do8 }
+        \time 3/8
+        \partial 8
+
+         do8]  | do8[  do8   \gone    do8[  do8   \gone  do8[  do8
+         do8]  | do8[  do8   \gone    do8[  do8   \gone  do8[  do8
+        \gtwo  | do8[  do8   \gone    do8[  do8   \gone  do8[  do8
+        \gone  | do8[  do8   \gone
       }
     >>
 
-    \new Lyrics \lyricsto "v" {
-        \markup { | w } ʌ  n
-        \markup { | t } uː\markup { _ }
-        \markup { | θɹ } iː \markup { _ }
-        \markup { | f } ɔ ɹ
-        \markup { | f } aɪ v
-        \markup { | s } ɪ ks
-        \markup { | ˈs } ɛ vən
-        \markup { | ʔ } eɪ t
-        \markup { | n } aɪ n
-        \markup { | w } ʌ  n
-        _ _
+    \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
+        \markup   { "-" } \markup { | 1  } "-"
+        \markup   { "-" } \markup { | 2  } "-"
+        \markup   { "-" } \markup { | 3  } "-"
+        \markup   { "-" } \markup { | 4  } "-"
+        \markup   { "-" } \markup { | 5  } "-"
+        \markup   { "-" } \markup { | 6  } "-"
+        \markup   { "-" } \markup { | 7  } "-"
+        \markup   { "-" } \markup { | 8  } "-"
+        \markup   { "-" } \markup { | 9  } "-"
+        \markup   { "-" } \markup { | 1  } "-"
+        \markup   { "-" }
     }
-    \new Lyrics \lyricsto "v" {
-        \markup { | o } - ne
-        \markup { | t } - wo
-        \markup { | thr } - ee
-        \markup { | f } - our
-        \markup { | f } -i ve
-        \markup { | s } -i x
-        \markup { | se } -ve n
-        \markup { | ʔ } -eigh t
-        \markup { | n } -i ne
-        \markup { | o } - ne
+
+    \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
+        \markup {      o   } \markup { | -     } "-"
+        \markup {  ne  t   } \markup { | wo    } "-"
+        \markup {     thr  } \markup { | ee    } "-"
+        \markup {      f   } \markup { | ou    } "-"
+        \markup {  r   f   } \markup { | -i    } "-"
+        \markup {  ve  s   } \markup { | -i    } "-"
+        \markup {  x   s   } \markup { | e     } \markup{ -ve }
+        \markup {  n       } \markup { | ei    } gh
+        \markup {  t   n   } \markup { | -i    } "-"
+        \markup {  ne  o   } \markup { | -     } "-"
+        \markup {  ne      }
+    }
+
+    \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
+        \markup {     w   }   \markup { | ʌ  } "-"
+        \markup {  n  t   }   \markup { | uː} "-"
+        \markup {     θɹ }   \markup { | iː} "-"
+
+        \markup {     f   }   \markup { | ɔ  } "-"
+        \markup {  ɹ  f   }   \markup { | aɪ } "-"
+        \markup {  v  s   }   \markup { | ɪ  } "-"
+
+        \markup { ks ˈs   }   \markup { | ɛ  } "və"
+        \markup {     n   }   \markup { | eɪ } "-"
+        \markup { t   n   }   \markup { | aɪ } "-"
+
+        \markup { n   w   }   \markup { | ʌ  } n
         _ _
     }
   >>
 }
 ```
 
+####  3連符を使ってより細かく表示した譜
+
+##### １段
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+
+gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
+gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
+gthr = { \tuplet 3/2 { do16   do16 do16] }  }
+
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "counting" {
+        \voiceOne
+        \time 3/8
+        \partial 8
+        \autoLineBreaksOff
+
+                      do8              % 1
+        | do8[  do8 \gone              % 2
+        | do8[  do8 \gthr              % 3
+        | do8[  do8 \gone              % 4
+        | do8[  do8 \gone              % 5
+        | do8[  do8 \gone              % 6
+        | do8[  do8 \gthr              % 7
+        | do8[  do8 \gthr              % 8
+        | do8[  do8 \gone              % 9
+        | do8[  do8 \gone              % 1
+        | do8[  do8 \gone
+      }
+
+      \new NullVoice = "aligner" {
+        \relative do' {
+          \voiceOne
+          \partial 8
+          do8
+
+          do4. do4. do4.
+          do4. do4. do4.
+          do4. do4. do4.
+          do4.
+        }
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
+               _
+               \markup { |1  }
+               \markup { |2  }
+               \markup { |3  }
+               \markup { |4  }
+               \markup { |5  }
+               \markup { |6  }
+               \markup { |7  }
+               \markup { |8  }
+               \markup { |9  }
+               \markup { |1  }
+          _
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
+                                                   \markup {     w   }
+        \markup { | ʌ  } "-"   \markup {  n      } \markup {     t   }
+        \markup { | uː} "-"   \markup {         } \markup {     θ  } \markup {  ɹ }
+        \markup { | iː} "-"   \markup {         } \markup {     f   }
+        \markup { | ɔ  } "-"   \markup {   ɹ     } \markup {     f   }
+        \markup { | aɪ } "-"   \markup {   v     } \markup {     s   }
+        \markup { | ɪ  } "-"   \markup {  k      } \markup {     s   } \markup {     s   }
+        \markup { | ɛ  } "-"   \markup {   v     } \markup {     ə   } \markup {     n   }
+        \markup { | eɪ } "-"   \markup {  t      } \markup {     n   }
+        \markup { | aɪ } "-"   \markup {  n      } \markup {     w   }
+        \markup { | ʌ  } n
+           _ _
+      }
+    >>
+  >>
+}
+```
+
+####  ２段
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+
+gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
+gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
+gthr = { \tuplet 3/2 { do16   do16 do16] }  }
+
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "counting" {
+        \voiceOne
+        \time 3/8
+        \partial 8
+
+                      do8              % 1
+        | do8[  do8 \gone              % 2
+        | do8[  do8 \gthr              % 3
+        | do8[  do8 \gone              % 4
+        | do8[  do8 \gone              % 5
+        | do8[  do8 \gone              % 6
+        | do8[  do8 \gthr              % 7
+        | do8[  do8 \gthr              % 8
+        | do8[  do8 \gone              % 9
+        | do8[  do8 \gone              % 1
+        | do8[  do8 \gone
+      }
+
+      \new NullVoice = "aligner" {
+        \relative do' {
+          \voiceOne
+          \time 3/8
+          \partial 8
+          do8
+
+          do4. do4. do4.
+          do4. do4. do4.
+          do4. do4. do4.
+          do4.
+        }
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
+               _
+               \markup { |1  }
+               \markup { |2  }
+               \markup { |3  }
+               \markup { |4  }
+               \markup { |5  }
+               \markup { |6  }
+               \markup { |7  }
+               \markup { |8  }
+               \markup { |9  }
+               \markup { |1  }
+          _
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
+                                                   \markup {     w   }
+        \markup { | ʌ  } "-"   \markup {  n      } \markup {     t   }
+        \markup { | uː} "-"   \markup {         } \markup {     θ  } \markup {  ɹ }
+        \markup { | iː} "-"   \markup {         } \markup {     f   }
+        \markup { | ɔ  } "-"   \markup {   ɹ     } \markup {     f   }
+        \markup { | aɪ } "-"   \markup {   v     } \markup {     s   }
+        \markup { | ɪ  } "-"   \markup {  k      } \markup {     s   } \markup {     s   }
+        \markup { | ɛ  } "-"   \markup {   v     } \markup {     ə   } \markup {     n   }
+        \markup { | eɪ } "-"   \markup {  t      } \markup {     n   }
+        \markup { | aɪ } "-"   \markup {  n      } \markup {     w   }
+        \markup { | ʌ  } n
+           _ _
+      }
+    >>
+  >>
+}
+```
+
+### ３段
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+
+gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
+gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
+gthr = { \tuplet 3/2 { do16   do16 do16] }  }
+
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \set Score.proportionalNotationDuration = #(ly:make-moment 1/16)
+      \override Score.SpacingSpanner.uniform-stretch = ##t
+      \override Staff.NoteColumn.springs-and-rods = #(cons #f (list 1))
+      \new Voice = "counting" {
+        \voiceOne
+        \time 3/8
+        \autoLineBreaksOff
+
+        | s4.
+        | s4.
+        | s4          do8 \break       % 1
+        | do8[  do8 \gone              % 2
+        | do8[  do8 \gthr              % 3
+        | do8[  do8 \gone  \break      % 4
+        | do8[  do8 \gone              % 5
+        | do8[  do8 \gone              % 6
+        | do8[  do8 \gthr  \break      % 7
+        | do8[  do8 \gthr              % 8
+        | do8[  do8 \gone              % 9
+        | do8[  do8 \gone  \break      % 1
+        | do8[  do8 \gone
+        | s4.
+        | s4.
+      }
+
+      \new NullVoice = "aligner" {
+        \relative do' {
+          \voiceOne
+          \time 3/8
+          | s4.
+          | s4.
+          | s4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4.
+        }
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
+               \markup { |1  }
+               \markup { |2  }
+               \markup { |3  }
+               \markup { |4  }
+               \markup { |5  }
+               \markup { |6  }
+               \markup { |7  }
+               \markup { |8  }
+               \markup { |9  }
+               \markup { |1  }
+          _
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
+                                                   \markup {     w   }
+        \markup { | ʌ  } "-"   \markup {  n      } \markup {     t   }
+        \markup { | uː} "-"   \markup {         } \markup {     θ  } \markup {  ɹ }
+        \markup { | iː} "-"   \markup {         } \markup {     f   }
+        \markup { | ɔ  } "-"   \markup {   ɹ     } \markup {     f   }
+        \markup { | aɪ } "-"   \markup {   v     } \markup {     s   }
+        \markup { | ɪ  } "-"   \markup {  k      } \markup {     s   } \markup {     s   }
+        \markup { | ɛ  } "-"   \markup {   v     } \markup {     ə   } \markup {     n   }
+        \markup { | eɪ } "-"   \markup {  t      } \markup {     n   }
+        \markup { | aɪ } "-"   \markup {  n      } \markup {     w   }
+        \markup { | ʌ  } n
+           _ _
+      }
+    >>
+  >>
+}
+
+```
 
 
 
@@ -1431,4 +1899,58 @@ flowchart LR
   C --> D[Result one]
   C --> E[Result two]
 ```
+
+```{.lilypond}
+\include "filters/chromatic-solfege.ly"
+\language "chromatic-solfege"
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \new Voice = "v" {
+        \voiceOne
+        \time 3/8
+        \partial 4
+                                                                    \tuplet 3/2 { r4 do8 } |
+        \tuplet 3/2 { do8 do8 do8 }  \tuplet 3/2 { do8 do8 do8 }  \tuplet 3/2 { do8 do8 do8 } |
+        \tuplet 3/2 { do8 do8 do8 }  \tuplet 3/2 { do8 do8 do8 }  \tuplet 3/2 { do8 do8 do8 } |
+        \tuplet 3/2 { do8 do8 do8 }  \tuplet 3/2 { do8 do8 do8 }  \tuplet 3/2 { do8 do8 do8 } |
+        \tuplet 3/2 { do8 do8 do8 }
+      }
+    >>
+
+    \new Lyrics \lyricsto "v" {
+        \markup { | w } ʌ  n
+        \markup { | t } uː\markup { _ }
+        \markup { | θɹ } iː \markup { _ }
+        \markup { | f } ɔ ɹ
+        \markup { | f } aɪ v
+        \markup { | s } ɪ ks
+        \markup { | ˈs } ɛ vən
+        \markup { | ʔ } eɪ t
+        \markup { | n } aɪ n
+        \markup { | w } ʌ  n
+        _ _
+    }
+    \new Lyrics \lyricsto "v" {
+        \markup { | o } - ne
+        \markup { | t } - wo
+        \markup { | thr } - ee
+        \markup { | f } - our
+        \markup { | f } -i ve
+        \markup { | s } -i x
+        \markup { | se } -ve n
+        \markup { | ʔ } -eigh t
+        \markup { | n } -i ne
+        \markup { | o } - ne
+        _ _
+    }
+  >>
+}
+```
+
+
+
+
+
 -->
+<!-- vim: set wrap ts=2 sw=2 isk+=- breakat= : -->

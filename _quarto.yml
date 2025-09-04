@@ -76,6 +76,7 @@ format:
       - filters/meta-dates.lua
       - filters/include-files.lua
       - lilypond.lua
+#      - filters/expand-vars.lua
 #      - filters/obsidian-image-dimensions.lua
     css: assets/styles.css
     toc: true
