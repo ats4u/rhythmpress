@@ -1,4 +1,4 @@
-\include "lilypond-book-preamble.ly"
+% \include "lilypond-book-preamble.ly"
 \include "rhythmpedia-ly/chromatic-solfege.ly"
 \language "chromatic-solfege"
 \paper {

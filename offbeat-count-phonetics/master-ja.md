@@ -99,7 +99,7 @@ tags:
 
 次のビデオは２０１０年ごろに米国ヒップホップシーンで流行したヒット曲 Swag Surfin' です。この曲はアフリカ系アメリカ人発音≒米国南部方言を色濃く反映した音楽です。 この曲をモーラ拍リズム言語話者が聴くと、全ての音節をひとつずれた形で認識してしまい正しい英語の発音として聴き取れないという現象がおこります。
 
-この曲ではシラブル拍の{{< var MOP >}}、及びストレス拍リズムの{{< var MPOP >}}によって、全ての単語のリズム配置が弱拍が先になるように配置されています。 しかし{{< var MiOP>}}をもつモーラ拍言語話者は、この弱拍先行が理解できずに強拍先行として認識する為、全ての音節を半分ずれて解釈してしまうという現象が起こります。
+この曲ではシラブル拍の{{< var RUBY-MOP >}}、及びストレス拍リズムの{{< var RUBY-MPOP >}}によって、全ての単語のリズム配置が弱拍が先になるように配置されています。 しかし{{< var RUBY-MiOP>}}をもつモーラ拍言語話者は、この弱拍先行が理解できずに強拍先行として認識する為、全ての音節を半分ずれて解釈してしまうという現象が起こります。
 
 
 <iframe class="rhythmpedia-iframe" src="https://www.youtube.com/embed/7iTsbnr8e_8?si=uR5wPuBM63tA8ldU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -1210,6 +1210,18 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 |    - |   *a*    | <span class="ipa">/eɪ/</span  > ※ 非アクセント時 <span class="ipa">/ə/</span >(シュワ), <span class="ipa">/əː/</span> 又は <span class="ipa">/ʌ/</span> |
 :  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping .tbl-spacy tbl-colwidths=[8,8,40] }
 
+#### 声門閉鎖音(ʔ)について
+
+声門閉鎖音は標準日本語が持たない発音のひとつですが、日本語以外では子音として使われることが多い発音でもあります。
+
+声門閉鎖音は標準的な英語ではしばしば使われますが、さほど多くはありません。英語の方言では多用されます。
+
+特にジャズのスキャットやラップなど、音楽の上で発音される英語では特に多用され、リズムを表現する為の重要な発音のひとつといえます。
+
+
+
+
+
 #### カウントの発音表記について
 
 ##### 一般的な表記方法
@@ -1217,6 +1229,7 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 一般的な表記方法では単純に１拍に１単語を割り当てます。英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この表記方法からグルーヴするリズムとしての解釈を抽出することができます。
 
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1233,7 +1246,6 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
     \new Lyrics \lyricsto "v" {
       "1" "2" "3" "4" "5" "6" "7" "8" "9" "1"
     }
-
     \new Lyrics \lyricsto "v" {
         \markup{ | one   }
         \markup{ | two   }
@@ -1274,12 +1286,11 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 具体的には、
 
-- {{< var NI>}}
-- {{< var RUBY-POP>}}
+- {{< var RUBY-NI>}}
+- {{< var RUBY-MOP>}}
 - {{< var RUBY-MPOP>}}
 
 この３つのリズム認識型を考慮した上で譜割りに反映することが必要となります。
-
 
 #### {{< var RUBY-MiOP>}}を考慮に入れた表記法 {#notation-by-minimum-prosodic-onset-principle}
 
@@ -1287,6 +1298,7 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1373,6 +1385,7 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 \score {
   <<
     \new RhythmicStaff = "rhythm"  <<
@@ -1457,9 +1470,10 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 次の譜は、シラブル拍リズム言語に於いて、末子音が頭子音にまとめられて発音される様子を模式的に表したものです。
 
 
-#### グレースノートを使った譜
+##### グレースノートを使った譜
 
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 gone = { \stemDown \acciaccatura do16           \stemUp do8] }
 gtwo = { \stemDown \acciaccatura { do16  do16 } \stemUp do8] }
 
@@ -1526,10 +1540,12 @@ gtwo = { \stemDown \acciaccatura { do16  do16 } \stemUp do8] }
 }
 ```
 
-####  3連符を使ってより細かく表示した譜
+#####  3連符を使ってより細かく表示した譜
 
-##### １段
+###### １段
+
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
 gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
 gthr = { \tuplet 3/2 { do16   do16 do16] }  }
@@ -1603,9 +1619,10 @@ gthr = { \tuplet 3/2 { do16   do16 do16] }  }
 }
 ```
 
-####  ２段
+###### ２段
 
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
 gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
 gthr = { \tuplet 3/2 { do16   do16 do16] }  }
@@ -1679,9 +1696,11 @@ gthr = { \tuplet 3/2 { do16   do16 do16] }  }
 }
 ```
 
-### ３段
+###### ３段
+
 
 ```{.lilypond}
+\include "lilypond-book-preamble.ly"
 gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
 gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
 gthr = { \tuplet 3/2 { do16   do16 do16] }  }
@@ -1763,8 +1782,170 @@ gthr = { \tuplet 3/2 { do16   do16 do16] }  }
 ```
 
 
+#### {{< var RUBY-NI >}}、{{< var RUBY-MOP >}} 及び {{< var RUBY-MPOP >}}を全て考慮した発音表記
+
+##### １段
+
+```{.lilypond}
+\include "lilypond-book-preamble.ly"
+\include "rhythmpedia-ly/shared/rhythmp-001.ly"
+% 2025/09/06 04:17:04
+```
 
 
+##### ３段
+
+```{.lilypond}
+\include "lilypond-book-preamble.ly"
+gone = { \tuplet 3/2 {  do16   do16_~ do16] }  }
+gtwo = { \tuplet 3/2 {  do16_~ do16   do16] }  }
+gthr = { \tuplet 3/2 {  do16[  do16   do16] }  }
+gdot = { \tuplet 3/2 {  do8[          do16] }  }
+gura = { \tuplet 3/2 {   r8[          do16] }  }
+
+gnin = {
+  | do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             % 1
+    do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             %
+    do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             %
+}
+
+\score {
+  <<
+    \new RhythmicStaff = "rhythm"  <<
+      \set Score.proportionalNotationDuration = #(ly:make-moment 1/16)
+      \override Score.SpacingSpanner.uniform-stretch = ##t
+      \override Staff.NoteColumn.springs-and-rods = #(cons #f (list 1))
+
+      \new NullVoice = "aligner0" {
+        \relative do' {
+          \voiceOne
+          \time 9/8
+          | s4.
+          | s4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4. do4. do4.
+          | do4.
+        }
+      }
+
+      \new Voice = "counting" {
+        \voiceOne
+        \time 3/8
+        % \autoLineBreaksOff
+
+        | s4.
+        | s8  \gdot \tuplet 3/2 {  do16   do16   do16] }             %
+        | do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             %
+
+        \gnin \gnin \gnin % 1&a
+        \gnin \gnin \gnin % 2&a
+        \gnin \gnin \gnin % 3&a
+
+
+        | s4.
+        | s4.
+      }
+
+      \new NullVoice = "aligner1" {
+        \voiceOne
+        \time 3/8
+        % \autoLineBreaksOff
+
+        | s4.
+        | s8    \gdot \tuplet 3/2 {  do16   do16   do16] }              % 1
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 2
+
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 3
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 4
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 5
+
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 6
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 7
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 8
+
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 9
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 1
+        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }
+
+        | s4.
+        | s4.
+      }
+
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner0" {
+               \markup { "|1"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|2"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|3"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|4"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|5"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|6"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|7"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|8"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|9"  } \markup { "|&"  } \markup { "|a"  }
+               \markup { "|1"  }
+          _
+      }
+
+      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner1" {
+
+                          \markup { " "  } \markup { "ʔ"  }   \markup {  "w"  } \markup {  " "  } \markup { " "  }
+
+        \markup { | ʌ  }  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  " "  } \markup { "n"  }
+        \markup { | ə  }  \markup { " "  } \markup { " "  }   \markup {  "n"  } \markup {  " "  } \markup { "d(n)"  }
+        \markup { | əː}  \markup { "-"  } \markup { "ʔ"  }   \markup {  " "  } \markup {  " "  } \markup { "t"  }
+
+        \markup { | uː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  " "  } \markup { "(w)"  }
+        \markup { | ə  }  \markup { " "  } \markup { " "  }   \markup {  "n"  } \markup {  " "  } \markup { "d"  }
+        \markup { | əː}  \markup { "-"  } \markup { "ʔ"  }   \markup {  " "  } \markup {  " "  } \markup { "t"  } 
+
+
+        \markup {  " "  }  \markup {  "t"  } \markup { ɹ    }
+        \markup { | uː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "t"  } \markup { ɹ    }
+        \markup { | uː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "θ" } \markup { ɹ    }
+
+        \markup { | iː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "θ" } \markup {      }
+        \markup { | iː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "θ" } \markup {      }
+        \markup { | iː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "f"  } \markup {      }
+
+        \markup { | ɔ  }  \markup { "-"  } \markup { "-"  }   \markup {  "ɹ"  } \markup {  "f"  } \markup {      }
+        \markup { | ɔ  }  \markup { "-"  } \markup { "-"  }   \markup {  "ɹ"  } \markup {  "f"  } \markup {      }
+        \markup { | ɔ  }  \markup { "-"  } \markup { "-"  }   \markup {  "ɹ"  } \markup {  "f"  } \markup {      }
+
+        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "f"  } \markup {      }
+        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "f"  } \markup {      }
+        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "s"  } \markup {      }
+
+        \markup { | ɪ  }  \markup { "-"  } \markup { "-"  }   \markup {  "k"  } \markup {  "s"  } \markup { s    }
+        \markup { | ɪ  }  \markup { "-"  } \markup { "-"  }   \markup {  "k"  } \markup {  "s"  } \markup { s    }
+        \markup { | ɪ  }  \markup { "-"  } \markup { "-"  }   \markup {  "k"  } \markup {  "s"  } \markup { s    }
+
+        \markup { | ɛ  }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "ə"  } \markup { n s  }
+        \markup { | ɛ  }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "ə"  } \markup { n s  }
+        \markup { | ɛ  }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "ə"  } \markup { n    }
+
+        \markup { | eɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "t"  } \markup {  "n"  } \markup {      }
+        \markup { | eɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "t"  } \markup {  "n"  } \markup {      }
+        \markup { | eɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "t"  } \markup {  "n"  } \markup {      }
+
+        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "n"  } \markup {  "w"  } \markup {      }
+        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "n"  } \markup {  "w"  } \markup {      }
+        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "n"  } \markup {  "w"  } \markup {      }
+
+        \markup { | ʌ  }  \markup { "n"  }
+           _ _
+      }
+    >>
+  >>
+}
+
+```
 
 
 
@@ -1931,4 +2112,4 @@ flowchart LR
 
 
 -->
-<!-- vim: set wrap ts=2 sw=2 isk+=- breakat= : -->
+<!-- vim: set wrap ts=2 sw=2 isk+=- breakat= ve=all : -->
