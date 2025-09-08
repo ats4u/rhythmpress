@@ -76,6 +76,7 @@ format:
       - filters/meta-dates.lua
       - filters/include-files.lua
       - filters/lilypond.lua
+      - filters/remove-softbreaks.lua
 #      - filters/expand-vars.lua
 #      - filters/obsidian-image-dimensions.lua
     css: assets/styles.css
