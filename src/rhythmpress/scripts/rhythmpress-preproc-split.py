@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys, pathlib; import argparse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]));
-from lib import rhythmpedia
+from lib import rhythmpress
 
 # CLI
 def main() -> int:
@@ -39,7 +39,7 @@ def main() -> int:
         roots.append(p)
 
     for root in roots:
-        rhythmpedia.qmd_all_masters(rhythmpedia.split_master_qmd, root,toc=toc )  # v3.2: explicit Path dir
+        rhythmpress.qmd_all_masters(rhythmpress.split_master_qmd, root,toc=toc )  # v3.2: explicit Path dir
         print(f"[DONE] Split masters in: {root}")
 
     return 0

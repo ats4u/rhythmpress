@@ -13,11 +13,11 @@ BIN = Path(__file__).resolve().parent
 ROOT = BIN.parent
 sys.path.insert(0, str(ROOT))
 
-from lib import rhythmpedia
+from lib import rhythmpress
 
 def main(argv: list[str]) -> int:
     if not argv or argv[0] in ("-h", "--help"):
-        print("Usage: rhythmpedia-create-page <directory-name> [--lang ja]")
+        print("Usage: rhythmpress-create-page <directory-name> [--lang ja]")
         return 2
 
     target_dir: Path | None = None
@@ -41,7 +41,7 @@ def main(argv: list[str]) -> int:
         return 2
 
     try:
-        created = rhythmpedia.create_page(target_dir, lang=lang)
+        created = rhythmpress.create_page(target_dir, lang=lang)
     except Exception as e:
         print(f"create-page failed: {e}")
         return 1

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-rhythmpedia-build.py
+rhythmpress-build.py
 
 Batch builder for Rhythmpedia projects.
 
 For each directory listed in a definition file:
-  1) rhythmpedia preproc-clean <dir> --apply --force
-  2) rhythmpedia preproc       <dir>
+  1) rhythmpress preproc-clean <dir> --apply --force
+  2) rhythmpress preproc       <dir>
 Finally:
-  3) rhythmpedia render-sidebar <conf>
+  3) rhythmpress render-sidebar <conf>
 
 Definition file format:
   - One directory per line.
@@ -36,11 +36,11 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpedia-build",
+        prog="rhythmpress-build",
         description="Run preproc-clean + preproc over a set of pages, then render sidebar.",
     )
-    p.add_argument("--defs", default="_rhythmpedia.conf",
-                   help="Path to definition file (default: _rhythmpedia.conf). If '-' use stdin.")
+    p.add_argument("--defs", default="_rhythmpress.conf",
+                   help="Path to definition file (default: _rhythmpress.conf). If '-' use stdin.")
     p.add_argument("--sidebar", default="_sidebar-ja.conf",
                    help="Sidebar conf to render at the end (default: _sidebar-ja.conf).")
     p.add_argument("--no-sidebar", action="store_true",
@@ -135,7 +135,7 @@ def main(argv: List[str]) -> int:
     # Execute
     for d in existing:
         if not ns.skip_clean:
-            rc = run(["rhythmpedia", "preproc-clean", d, *ns.apply_flags],
+            rc = run(["rhythmpress", "preproc-clean", d, *ns.apply_flags],
                      verbose=ns.verbose, dry_run=ns.dry_run, env=env)
             if rc != 0:
                 print(f"[FAIL] preproc-clean: {d} (exit {rc})", file=sys.stderr)
@@ -144,7 +144,7 @@ def main(argv: List[str]) -> int:
                 else:
                     continue
 
-        rc = run(["rhythmpedia", "preproc", d],
+        rc = run(["rhythmpress", "preproc", d],
                  verbose=ns.verbose, dry_run=ns.dry_run, env=env)
         if rc != 0:
             print(f"[FAIL] preproc: {d} (exit {rc})", file=sys.stderr)
@@ -153,22 +153,22 @@ def main(argv: List[str]) -> int:
 
     if not ns.no_sidebar:
         # 0) First generate aggregated sidebar confs per language
-        rc = run(["rhythmpedia", "sidebar-confs", "--defs", ns.defs],
+        rc = run(["rhythmpress", "sidebar-confs", "--defs", ns.defs],
                  verbose=ns.verbose, dry_run=ns.dry_run, env=env)
         if rc != 0:
             print(f"[FAIL] sidebar-confs (exit {rc})", file=sys.stderr)
             if not ns.keep_going:
                 return rc
 
-        # 1) Ask rhythmpedia for all lang IDs (one per line)
+        # 1) Ask rhythmpress for all lang IDs (one per line)
         if ns.verbose or ns.dry_run:
-            print("[RUN]", "rhythmpedia sidebar-langs --defs", shlex.quote(ns.defs))
+            print("[RUN]", "rhythmpress sidebar-langs --defs", shlex.quote(ns.defs))
 
         if ns.dry_run:
             langs = []
         else:
             proc = subprocess.run(
-                ["rhythmpedia", "sidebar-langs", "--defs", ns.defs],
+                ["rhythmpress", "sidebar-langs", "--defs", ns.defs],
                 env=env,
                 capture_output=True,
                 text=True,
@@ -188,7 +188,7 @@ def main(argv: List[str]) -> int:
                     continue
                 seen.add(lang)
                 out_name = f"_sidebar-{lang}.generated.conf"
-                rc = run(["rhythmpedia", "render-sidebar", out_name],
+                rc = run(["rhythmpress", "render-sidebar", out_name],
                          verbose=ns.verbose, dry_run=ns.dry_run, env=env)
                 if rc != 0:
                     print(f"[FAIL] render-sidebar: {out_name} (exit {rc})", file=sys.stderr)
@@ -196,7 +196,7 @@ def main(argv: List[str]) -> int:
                         return rc
         else:
             # 3) Fallback to the original single call if no langids were found
-            rc = run(["rhythmpedia", "render-sidebar", ns.sidebar],
+            rc = run(["rhythmpress", "render-sidebar", ns.sidebar],
                      verbose=ns.verbose, dry_run=ns.dry_run, env=env)
             if rc != 0 and not ns.keep_going:
                 return rc

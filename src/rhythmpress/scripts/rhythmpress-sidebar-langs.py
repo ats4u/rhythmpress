@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-rhythmpedia-sidebar-langs.py
+rhythmpress-sidebar-langs.py
 
-Scan directories listed in a definition file (default: _rhythmpedia.conf),
+Scan directories listed in a definition file (default: _rhythmpress.conf),
 collect language IDs from files named `_sidebar-<langid>.yml`, de-duplicate
 (preserve first-seen order), and print one <langid> per line.
 
 Usage:
-  ./rhythmpedia-sidebar-langs.py
-  ./rhythmpedia-sidebar-langs.py --defs mylist.txt
-  ./rhythmpedia-sidebar-langs.py --chdir /path/to/project -v
+  ./rhythmpress-sidebar-langs.py
+  ./rhythmpress-sidebar-langs.py --defs mylist.txt
+  ./rhythmpress-sidebar-langs.py --chdir /path/to/project -v
 """
 
 from __future__ import annotations
@@ -28,11 +28,11 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpedia-sidebar-langs",
+        prog="rhythmpress-sidebar-langs",
         description="List unique <langid> from _sidebar-<langid>.yml across project dirs.",
     )
-    p.add_argument("--defs", default="_rhythmpedia.conf",
-                   help="Definition file with one directory per line (default: _rhythmpedia.conf). Use '-' to read from stdin.")
+    p.add_argument("--defs", default="_rhythmpress.conf",
+                   help="Definition file with one directory per line (default: _rhythmpress.conf). Use '-' to read from stdin.")
     p.add_argument("--chdir", default=".",
                    help="Change working directory before scanning (default: .).")
     p.add_argument("-v", "--verbose", action="store_true",

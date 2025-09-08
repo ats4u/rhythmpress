@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-rhythmpedia-preproc.py
+rhythmpress-preproc.py
 
-Dispatcher for:  rhythmpedia preproc [DIR]
+Dispatcher for:  rhythmpress preproc [DIR]
 
 - Reads ./[DIR]/master-[langid].qmd (langid from $LANG_ID or auto)
 - Front matter keys:
-    - 'rhythmpedia-preproc'       → handler name (default: 'copy')
-    - 'rhythmpedia-preproc-args'  → list of strings (extra args)
-- Delegates to:  rhythmpedia preproc-<PREPROC> [fm-args] [dirname] [extra CLI args]
+    - 'rhythmpress-preproc'       → handler name (default: 'copy')
+    - 'rhythmpress-preproc-args'  → list of strings (extra args)
+- Delegates to:  rhythmpress preproc-<PREPROC> [fm-args] [dirname] [extra CLI args]
 """
 
 from __future__ import annotations
@@ -27,8 +27,8 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
     p = argparse.ArgumentParser(
-        prog="rhythmpedia preproc",
-        description="Dispatch to rhythmpedia preproc-* based on front matter.",
+        prog="rhythmpress preproc",
+        description="Dispatch to rhythmpress preproc-* based on front matter.",
         add_help=True,
     )
     p.add_argument(
@@ -127,11 +127,11 @@ def parse_front_matter(block: str) -> tuple[str, List[str]]:
         i += 1
         if not line or line.startswith("#"):
             continue
-        if line.startswith("rhythmpedia-preproc:"):
+        if line.startswith("rhythmpress-preproc:"):
             val = line.split(":", 1)[1].strip().strip("'\"")
             if val: preproc = val
             continue
-        if line.startswith("rhythmpedia-preproc-args:"):
+        if line.startswith("rhythmpress-preproc-args:"):
             after = line.split(":", 1)[1].strip()
             if after.startswith("[") and after.endswith("]"):
                 inner = after[1:-1].strip()
@@ -161,11 +161,11 @@ def extract_preproc_and_args(qmd_path: Path) -> tuple[str, List[str]]:
     return parse_front_matter(m.group(1))
 
 
-def resolve_rhythmpedia_exe(this_file: Path) -> Optional[str]:
-    exe = which("rhythmpedia")
+def resolve_rhythmpress_exe(this_file: Path) -> Optional[str]:
+    exe = which("rhythmpress")
     if exe: return exe
     here = Path(__file__).resolve()
-    for cand in [here.parent / "rhythmpedia", here.parent.parent / "bin" / "rhythmpedia"]:
+    for cand in [here.parent / "rhythmpress", here.parent.parent / "bin" / "rhythmpress"]:
         if cand.exists() and os.access(cand, os.X_OK):
             return str(cand)
     return None
@@ -179,9 +179,9 @@ def main(argv: list[str]) -> int:
     lang, master_qmd = find_langid(dirpath)
     preproc, fm_args = extract_preproc_and_args(master_qmd)
 
-    exe = resolve_rhythmpedia_exe(Path(__file__))
+    exe = resolve_rhythmpress_exe(Path(__file__))
     if not exe:
-        die(3, "Cannot find 'rhythmpedia' executable.")
+        die(3, "Cannot find 'rhythmpress' executable.")
 
     env = os.environ.copy()
     env.setdefault("LANG_ID", lang)

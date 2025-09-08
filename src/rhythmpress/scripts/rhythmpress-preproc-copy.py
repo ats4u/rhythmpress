@@ -5,7 +5,7 @@ from pathlib import Path
 import sys, pathlib
 import argparse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from lib import rhythmpedia  # noqa: E402
+from lib import rhythmpress  # noqa: E402
 
 def main() -> int:
     ap = argparse.ArgumentParser(
@@ -40,8 +40,8 @@ def main() -> int:
         roots.append(p)
 
     for root in roots:
-        rhythmpedia.qmd_all_masters(
-            rhythmpedia.copy_lang_qmd,
+        rhythmpress.qmd_all_masters(
+            rhythmpress.copy_lang_qmd,
             root,  # v3.2: explicit Path dir
             toc=toc,
         )

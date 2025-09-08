@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-rhythmpedia-build-sidebars.py
+rhythmpress-build-sidebars.py
 
-Reads a definition file (default: _rhythmpedia.conf), scans each listed
+Reads a definition file (default: _rhythmpress.conf), scans each listed
 directory for files named `_sidebar-<langid>.yml`, groups them by <langid>,
 and generates root-level sidebars:
 
@@ -36,11 +36,11 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpedia-build-sidebars",
+        prog="rhythmpress-build-sidebars",
         description="Generate root _sidebar-<lang>.generated.conf files by aggregating per-dir sidebars.",
     )
-    p.add_argument("--defs", default="_rhythmpedia.conf",
-                   help="Definition file listing directories (default: _rhythmpedia.conf). Use '-' to read from stdin.")
+    p.add_argument("--defs", default="_rhythmpress.conf",
+                   help="Definition file listing directories (default: _rhythmpress.conf). Use '-' to read from stdin.")
     p.add_argument("--chdir", default=".",
                    help="Change working directory before running (default: .).")
     p.add_argument("-v", "--verbose", action="store_true",

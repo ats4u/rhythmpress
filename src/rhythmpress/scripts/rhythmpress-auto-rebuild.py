@@ -9,7 +9,7 @@ SUFFIXES = {".qmd", ".md"}  # what we care about
 
 def build():
     print("[watch] master changed → rebuilding…")
-    return subprocess.call(["rhythmpedia-build.py", "--skip-clean"])
+    return subprocess.call(["rhythmpress-build.py", "--skip-clean"])
 
 def watch_filter(change, path: str) -> bool:
     p = Path(path)

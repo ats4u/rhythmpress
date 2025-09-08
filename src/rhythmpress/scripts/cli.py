@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# rhythmpedia dispatcher (v3.2) — pass-through; no chdir. Local bin only. Includes `list`.
+# rhythmpress dispatcher (v3.2) — pass-through; no chdir. Local bin only. Includes `list`.
 import os
 import sys
 from pathlib import Path
@@ -9,15 +9,15 @@ from pathlib import Path
 def list_local(bin_dir: Path) -> list[str]:
     """List local subcommands in bin/ as command names."""
     names = set()
-    for p in bin_dir.glob("rhythmpedia-*"):
+    for p in bin_dir.glob("rhythmpress-*"):
         if p.is_file():
             base = p.name.split(".", 1)[0]  # drop extension
-            names.add(base.replace("rhythmpedia-", ""))
+            names.add(base.replace("rhythmpress-", ""))
     return sorted(names)
 
 def resolve_target(bin_dir: Path, cmd: str) -> Path | None:
     """Pick target script in local bin: no/ext/.py/.sh (no PATH fallback)."""
-    base = f"rhythmpedia-{cmd}"
+    base = f"rhythmpress-{cmd}"
     candidates = [bin_dir / base, bin_dir / (base + ".py"), bin_dir / (base + ".sh")]
     for c in candidates:
         if c.exists():

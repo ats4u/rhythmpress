@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-rhythmpedia-render-nav
+rhythmpress-render-nav
 
 Render a language-specific global navigation by calling
-lib.rhythmpedia.create_global_navigation(), then write it to
+lib.rhythmpress.create_global_navigation(), then write it to
 '_sidebar-<lang>.generated.md' next to the defs file (or stdout).
 
 Usage:
-  bin/rhythmpedia-render-nav --lang ja
-  bin/rhythmpedia-render-nav --lang en --defs /path/to/_rhythmpedia.conf
-  bin/rhythmpedia-render-nav --lang ja --out ./_sidebar-ja.generated.md
-  bin/rhythmpedia-render-nav --lang ja --stdout
-  bin/rhythmpedia-render-nav --lang ja --no-strict -v
+  bin/rhythmpress-render-nav --lang ja
+  bin/rhythmpress-render-nav --lang en --defs /path/to/_rhythmpress.conf
+  bin/rhythmpress-render-nav --lang ja --out ./_sidebar-ja.generated.md
+  bin/rhythmpress-render-nav --lang ja --stdout
+  bin/rhythmpress-render-nav --lang ja --no-strict -v
 
 Exit codes:
   0 success
@@ -32,7 +32,7 @@ ROOT = BIN.parent
 sys.path.insert(0, str(ROOT))
 
 # Import library
-from lib import rhythmpedia as rp  # type: ignore
+from lib import rhythmpress as rp  # type: ignore
 
 
 def die(code: int, msg: str) -> "NoReturn":
@@ -42,7 +42,7 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpedia-render-nav",
+        prog="rhythmpress-render-nav",
         description="Render global navigation Markdown from directories listed in a defs file.",
     )
     p.add_argument(
@@ -52,7 +52,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     )
     p.add_argument(
         "--defs",
-        default="_rhythmpedia.conf",
+        default="_rhythmpress.conf",
         help="Path to the definitions file listing article directories (default: %(default)s).",
     )
     p.add_argument(

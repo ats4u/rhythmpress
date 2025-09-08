@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 import sys, argparse, pathlib, os, shutil
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from lib import rhythmpedia  # noqa: E402
+from lib import rhythmpress  # noqa: E402
 
 SENTINEL_DEFAULT = ".article_dir"  # create this empty file in dirs you allow to clean
 
@@ -145,7 +145,7 @@ def main(argv: list[str]) -> int:
 
     # Perform operations
     for p in safe_targets:
-        rhythmpedia.clean_directories_except_attachments_qmd(p)
+        rhythmpress.clean_directories_except_attachments_qmd(p)
         if args.purge_sidebars:
             _purge_sidebars(p, lang=args.lang, apply=True)
         print(f"[DONE] Cleaned: {p}")
