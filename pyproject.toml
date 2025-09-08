@@ -26,5 +26,5 @@ rhythmpress = [
 ]
 
 [project.scripts]
-rhythmpress = "rhythmpress.rhythmpress:main"
+rhythmpress = "rhythmpress.scripts.cli:main"
 
