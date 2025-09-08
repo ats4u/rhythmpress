@@ -1173,9 +1173,12 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 ## オフビートカウントでの正しい発音の為の基礎
 
+
 ### オフビートカウントで必要になる全単語について
 
-オフビートカウントは、数字と簡単な単語と記号を使って数えるだけの作業です。必要な単語を最小限にとどめることでストレス拍リズム・シラブル拍リズムのリズム構造を集中して練習することが可能になります。
+オフビートカウントは、数字と簡単な単語と記号を使って数えるだけの作業です。必要
+な単語を最小限にとどめることでストレス拍リズム・シラブル拍リズムのリズム構造を
+集中して練習することが可能になります。
 
 * 数字
     * 1,2,3,4,5,6,7,8,9
@@ -1203,10 +1206,10 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 :  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping .tbl-spacy tbl-colwidths=[8,8,40] }
 
 
-|   数 | 英語表記 | IPA                                                                                                                                                    |
-| ---: | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-|    - |  *and*   | <span class="ipa">/ænd/</span> ※ 非アクセント時 <span class="ipa">/ən/</span> 又は     <span class="ipa">/n̩/</span>                                      |
-|    - |   *e*    | <span class="ipa">/iː/</span > ※ 非アクセント時 <span class="ipa">/i/</span > )                                                                        |
+|   数 | 英語表記 | IPA                                                                                                                                                       |
+| ---: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    - |  *and*   | <span class="ipa">/ænd/</span> ※ 非アクセント時 <span class="ipa">/ən/</span> 又は     <span class="ipa">/n̩/</span>                                     |
+|    - |   *e*    | <span class="ipa">/iː/</span > ※ 非アクセント時 <span class="ipa">/i/</span > )                                                                         |
 |    - |   *a*    | <span class="ipa">/eɪ/</span  > ※ 非アクセント時 <span class="ipa">/ə/</span >(シュワ), <span class="ipa">/əː/</span> 又は <span class="ipa">/ʌ/</span> |
 :  {.tbl-pron2 .tbl-header-center .tbl-third-column-wrapping .tbl-spacy tbl-colwidths=[8,8,40] }
 
@@ -1220,733 +1223,140 @@ SPE表記法は音韻学の研究が立ち遅れている我が国日本では�
 
 
 
+#### カウントの発音表記法について
 
-
-#### カウントの発音表記について
-
-##### 一般的な表記方法
-
-一般的な表記方法では単純に１拍に１単語を割り当てます。英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この表記方法からグルーヴするリズムとしての解釈を抽出することができます。
+一般的な表記方法ではしばしば単純に１拍に１単語を割り当てます。英語を母国語とす
+る人たちは、特別な訓練をしない状態でもある程度は、この表記方法からグルーヴする
+リズムとしての解釈を抽出することができます。
 
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "v" {
-        \voiceOne
-        \time 3/4
-        do4 do4 do4
-        do4 do4 do4
-        do4 do4 do4
-        do4 s2
-      }
-    >>
-
-    \new Lyrics \lyricsto "v" {
-      "1" "2" "3" "4" "5" "6" "7" "8" "9" "1"
-    }
-    \new Lyrics \lyricsto "v" {
-        \markup{ | one   }
-        \markup{ | two   }
-        \markup{ | three }
-        \markup{ | four  }
-        \markup{ | five  }
-        \markup{ | six   }
-        \markup{ | seven }
-        \markup{ | eight }
-        \markup{ | nine  }
-        \markup{ | one   }
-    }
-
-    \new Lyrics \lyricsto "v" {
-      \markup { | wʌn   }
-      \markup { | tuː  }
-      \markup { | θɹiː}
-      \markup { | fɔɹ   }
-      \markup { | faɪv  }
-      \markup { | sɪks  }
-      \markup { | sɛvən }
-      \markup { | eɪt   }
-      \markup { | naɪn  }
-      \markup { | tɛn   }
-      \markup { | wʌn   }
-    }
-  >>
-}
+\include "rhythmpedia-ly/shared/rhythmp-000.ly"
 ```
 
-#### モーラ拍リズム言語話者の為のストレス拍リズム習得方法
+英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この１拍１単
+語を割り当てる表記方法からグルーヴするリズムとしての解釈を抽出することができま
+す。何故なら英語の発音の背後にはストレス拍と呼ばれるリズム構造が存在し、このこ
+とからグルーヴするリズムを抽出する為に必要なリズム認識型を全て持っている場合が
+多いからです。
 
-英語を母国語とする人たちは、特別な訓練をしない状態でもある程度は、この１拍１単語を割り当てる表記方法からグルーヴするリズムとしての解釈を抽出することができます。  何故なら英語の発音の背後にはストレス拍と呼ばれるリズム構造が存在し、このことからグルーヴするリズムを抽出する為に必要なリズム認識型を全て持っている場合が多いからです。
+しかし英語を母国語としない人たち ─── 特に日本語を母国語とする人たちは、ここ
+から正しくグルーヴするリズムを抽出することができません。それは日本語の発音の背
+後に存在するモーラ拍と呼ばれるリズム構造が存在することから、グルーヴ抽出する作
+業に必要な全てのリズム認識型を持たない場合が多いからです。
 
-しかし英語を母国語としない人たち ─── 特に日本語を母国語とする人たちは、ここから正しくグルーヴするリズムを抽出することができない場合が多いのです。それは日本語の発音の背後に存在するモーラ拍と呼ばれるリズム構造が存在することから、グルーヴ抽出する作業に必要な全てのリズム認識型を持たない場合が多いからです。
+この問題に対処する為に、ここでは譜面上でネイティブ話者が無意識のうちに行ってい
+る拍以下の音価に対しての音符の割り当てまで厳密に指定するという手法を利用します。
 
-この問題に対処する為には、譜面上で、ネイティブ話者が無意識のうちに行っている拍以下の音価に対しての音符の割り当てまで正確に指定する必要があります。
+この手法をここでは**音韻厳密化**と呼びます。
 
-具体的には、
+ここでは音韻厳密化の深度を４つのリズム認識型を元に４つのレベルに分けて考えます。
 
-- {{< var RUBY-NI>}}
-- {{< var RUBY-MOP>}}
-- {{< var RUBY-MPOP>}}
+- 表記法音韻厳密化レベル
+  - レベル０: {{< var RUBY-MiOP>}}
+  - レベル１: {{< var RUBY-NI>}}
+  - レベル２: {{< var RUBY-NI>}}と{{< var RUBY-MOP>}}
+  - レベル３: {{< var RUBY-NI>}}と{{< var RUBY-MOP>}}と{{< var RUBY-MPOP>}}
 
-この３つのリズム認識型を考慮した上で譜割りに反映することが必要となります。
+この４つのリズム認識型を考慮した上で譜割りに反映します。
 
-#### {{< var RUBY-MiOP>}}を考慮に入れた表記法 {#notation-by-minimum-prosodic-onset-principle}
 
-モーラ拍リズムを持つ言語である日本語話者が英語・ドイツ語・ロシア語などのストレス拍リズム言語で書かれた歌詞の歌を歌おうとしたり、スペイン語フランス語ギリシャ語などのシラブル拍リズム言語で書かれた歌詞の歌を歌おうとすると、日本語のモーラ拍リズムのリズム解釈が表出することによって、リズム解釈に間違いが生じます。この間違ったリズム解釈を譜面化したものをまず見てみます。
+#### レベル０ {{< var RUBY-MiOP>}} 表記法音韻厳密化 {#notation-by-minimum-prosodic-onset-principle}
 
+単純に先頭から音韻を順番に割り当てたものです。これは抽象的な表記法音韻厳密化で
+あり、厳密化は行われません。見方を変えると {{< var RUBY-MiOP>}} に対して厳密化
+を行ったものと見ることもできます。
+
+モーラ拍リズムを持つ言語である日本語話者が英語・ドイツ語・ロシア語などのストレ
+ス拍リズム言語で書かれた歌詞の歌を歌おうとしたり、スペイン語フランス語ギリシャ
+語などのシラブル拍リズム言語で書かれた歌詞の歌を歌おうとすると、日本語のモーラ
+拍リズムのリズム解釈が表出することによって、リズム解釈に間違いが生じます。この
+間違ったリズム解釈を譜面化したものといえます。
 
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "v" {
-        \voiceOne
-        \time 9/8
-        % \partial 8
-        %                               do8 |
-        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
-        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
-        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
-        do8 do8 do8
-      }
-      \new NullVoice = "aligner" {
-        \relative do' {
-          \voiceOne
-          % \partial 8
-          % do8
-
-          do4. do4. do4.
-          do4. do4. do4.
-          do4. do4. do4.
-          do4.
-        }
-      }
-    >>
-
-    \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
-       % _
-       \markup { |1  }
-       \markup { |2  }
-       \markup { |3  }
-       \markup { |4  }
-       \markup { |5  }
-       \markup { |6  }
-       \markup { |7  }
-       \markup { |8  }
-       \markup { |9  }
-       \markup { |1  }
-       _
-    }
-
-    \new Lyrics \lyricsto "v" {
-        %                     \markup { -     }
-        \markup { | o       } \markup { -     }  ne
-        \markup { | t       } \markup { -     }  wo
-        \markup { | thr     } \markup { -     }  ee
-        \markup { | f       } \markup { -     }  our
-        \markup { | f       } \markup { -i    }  ve
-        \markup { | s       } \markup { -i    }  x
-        \markup { | se      } \markup { -ve   }  n
-        \markup { | ʔ       } \markup { eigh  }  t
-        \markup { | n       } \markup { -i    }  ne
-        \markup { | o       } \markup { -     }  ne
-        _ _
-    }
-
-    \new Lyrics \lyricsto "v" {
-        \markup { | w   } \markup { ʌ  } n
-        \markup { | t   } \markup { uː} \markup { _ }
-        \markup { | θɹ } \markup { iː} \markup { _ }
-        \markup { | f   } \markup { ɔ  } ɹ
-        \markup { | f   } \markup { aɪ } v
-        \markup { | s   } \markup { ɪ  } ks
-        \markup { | ˈs  } \markup { ɛ  } vən
-        \markup { | ʔ   } \markup { eɪ } t
-        \markup { | n   } \markup { aɪ } n
-        \markup { | w   } \markup { ʌ  } n
-        _ _
-    }
-  >>
-}
+\include "rhythmpedia-ly/shared/rhythmp-000-lv0.ly"
 ```
 
 この譜面は、モーラ拍リズムの**頭合わせリズム認識型**が発動した状態を模式的に表現しているものです。
 
 日本語などのモーラ拍リズムの言語を話す人は、しばしばこの模式図のように子音を強拍の打点よりも後に発音します。
 
-#### {{< var RUBY-NI >}}を考慮に入れた表記法
+#### レベル１ {{< var RUBY-NI >}} 表記法音韻厳密化
 
 モーラ拍リズムを母国語とする人が最初に直面する問題は、{{< var RUBY-NI >}}リズム認識型を持たないことにより、子音の位置を強拍よりも前に発音できないことです。
 
 この問題を解決する為に専用の練習方法が必要です。以下の譜は、シラブル拍リズムの{{< var RUBY-NI >}}リズム認識方が発動した状態を模式的に表しています。
 
-
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "v" {
-        \voiceOne
-        \time 9/8
-        \partial 8
-                                        do8 |
-        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
-        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
-        do8 do8 do8 do8 do8 do8 do8 do8 do8 |
-        do8 do8 do8
-      }
-      \new NullVoice = "aligner" {
-        \relative do' {
-          \voiceOne
-          \partial 8
-          do8
-
-          do4. do4. do4.
-          do4. do4. do4.
-          do4. do4. do4.
-          do4.
-        }
-      }
-    >>
-
-    \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
-       _
-       \markup { |1  }
-       \markup { |2  }
-       \markup { |3  }
-       \markup { |4  }
-       \markup { |5  }
-       \markup { |6  }
-       \markup { |7  }
-       \markup { |8  }
-       \markup { |9  }
-       \markup { |1  }
-       _
-    }
-
-    \new Lyrics \lyricsto "v" {
-                          \markup { -    }
-        \markup { | o   } \markup { -    }  ne
-        \markup { | t   } \markup { -    }  wo
-        \markup { | thr } \markup { -    }  ee
-        \markup { | f   } \markup { -    }  our
-        \markup { | f   } \markup { -i   }  ve
-        \markup { | s   } \markup { -i   }  x
-        \markup { | se  } \markup { -ve  }  n
-        \markup { | ʔ   } \markup { eigh }  t
-        \markup { | n   } \markup { -i   }  ne
-        \markup { | o   } \markup { -    }  ne
-        _ _
-    }
-
-    \new Lyrics \lyricsto "v" {
-        \markup { w   } \markup { | ʌ  } n
-        \markup { t   } \markup { | uː} \markup { _ }
-        \markup { θɹ } \markup { | iː} \markup { _ }
-        \markup { f   } \markup { | ɔ  } ɹ
-        \markup { f   } \markup { | aɪ } v
-        \markup { s   } \markup { | ɪ  } ks
-        \markup { ˈs  } \markup { | ɛ  } vən
-        \markup { ʔ   } \markup { | eɪ } t
-        \markup { n   } \markup { | aɪ } n
-        \markup { w   } \markup { | ʌ  } n
-        _ _
-    }
-  >>
-}
+\include "rhythmpedia-ly/shared/rhythmp-000-lv1.ly"
 ```
 
 この様にシラブル拍リズム言語を話す人々は、子音を弱拍位置で発音する習慣を持っています。
 
 
-#### {{< var RUBY-NI >}}及び{{< var RUBY-MOP >}}を考慮した発音表記
+#### レベル２ {{< var RUBY-NI >}}及び{{< var RUBY-MOP >}} 表記法音韻厳密化
 
 シラブル拍リズム言語は更に{{< var RUBY-MOP >}}リズム認識型を持っており、子音を弱拍位置で発音するだけでなく、その直前の末子音を全て可能な限りまとめて発音する習慣を持っています。
 
 次の譜は、シラブル拍リズム言語に於いて、末子音が頭子音にまとめられて発音される様子を模式的に表したものです。
 
-
-##### グレースノートを使った譜
-
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-gone = { \stemDown \acciaccatura do16           \stemUp do8] }
-gtwo = { \stemDown \acciaccatura { do16  do16 } \stemUp do8] }
-
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "counting" {
-        \voiceOne
-        \time 3/8
-        \partial 8
-
-         do8]  | do8[  do8   \gone    do8[  do8   \gone  do8[  do8
-         do8]  | do8[  do8   \gone    do8[  do8   \gone  do8[  do8
-        \gtwo  | do8[  do8   \gone    do8[  do8   \gone  do8[  do8
-        \gone  | do8[  do8   \gone
-      }
-    >>
-
-    \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
-        \markup   { "-" } \markup { | 1  } "-"
-        \markup   { "-" } \markup { | 2  } "-"
-        \markup   { "-" } \markup { | 3  } "-"
-        \markup   { "-" } \markup { | 4  } "-"
-        \markup   { "-" } \markup { | 5  } "-"
-        \markup   { "-" } \markup { | 6  } "-"
-        \markup   { "-" } \markup { | 7  } "-"
-        \markup   { "-" } \markup { | 8  } "-"
-        \markup   { "-" } \markup { | 9  } "-"
-        \markup   { "-" } \markup { | 1  } "-"
-        \markup   { "-" }
-    }
-
-    \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
-        \markup {      o   } \markup { | -     } "-"
-        \markup {  ne  t   } \markup { | wo    } "-"
-        \markup {     thr  } \markup { | ee    } "-"
-        \markup {      f   } \markup { | ou    } "-"
-        \markup {  r   f   } \markup { | -i    } "-"
-        \markup {  ve  s   } \markup { | -i    } "-"
-        \markup {  x   s   } \markup { | e     } \markup{ -ve }
-        \markup {  n       } \markup { | ei    } gh
-        \markup {  t   n   } \markup { | -i    } "-"
-        \markup {  ne  o   } \markup { | -     } "-"
-        \markup {  ne      }
-    }
-
-    \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
-        \markup {     w   }   \markup { | ʌ  } "-"
-        \markup {  n  t   }   \markup { | uː} "-"
-        \markup {     θɹ }   \markup { | iː} "-"
-
-        \markup {     f   }   \markup { | ɔ  } "-"
-        \markup {  ɹ  f   }   \markup { | aɪ } "-"
-        \markup {  v  s   }   \markup { | ɪ  } "-"
-
-        \markup { ks ˈs   }   \markup { | ɛ  } "və"
-        \markup {     n   }   \markup { | eɪ } "-"
-        \markup { t   n   }   \markup { | aɪ } "-"
-
-        \markup { n   w   }   \markup { | ʌ  } n
-        _ _
-    }
-  >>
-}
+\include "rhythmpedia-ly/shared/rhythmp-000-lv2-tuplets-1.ly"
 ```
 
-#####  3連符を使ってより細かく表示した譜
-
-###### １段
+##### 拡大表示
 
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
-gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
-gthr = { \tuplet 3/2 { do16   do16 do16] }  }
-
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "counting" {
-        \voiceOne
-        \time 3/8
-        \partial 8
-        \autoLineBreaksOff
-
-                      do8              % 1
-        | do8[  do8 \gone              % 2
-        | do8[  do8 \gthr              % 3
-        | do8[  do8 \gone              % 4
-        | do8[  do8 \gone              % 5
-        | do8[  do8 \gone              % 6
-        | do8[  do8 \gthr              % 7
-        | do8[  do8 \gthr              % 8
-        | do8[  do8 \gone              % 9
-        | do8[  do8 \gone              % 1
-        | do8[  do8 \gone
-      }
-
-      \new NullVoice = "aligner" {
-        \relative do' {
-          \voiceOne
-          \partial 8
-          do8
-
-          do4. do4. do4.
-          do4. do4. do4.
-          do4. do4. do4.
-          do4.
-        }
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
-               _
-               \markup { |1  }
-               \markup { |2  }
-               \markup { |3  }
-               \markup { |4  }
-               \markup { |5  }
-               \markup { |6  }
-               \markup { |7  }
-               \markup { |8  }
-               \markup { |9  }
-               \markup { |1  }
-          _
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
-                                                   \markup {     w   }
-        \markup { | ʌ  } "-"   \markup {  n      } \markup {     t   }
-        \markup { | uː} "-"   \markup {         } \markup {     θ  } \markup {  ɹ }
-        \markup { | iː} "-"   \markup {         } \markup {     f   }
-        \markup { | ɔ  } "-"   \markup {   ɹ     } \markup {     f   }
-        \markup { | aɪ } "-"   \markup {   v     } \markup {     s   }
-        \markup { | ɪ  } "-"   \markup {  k      } \markup {     s   } \markup {     s   }
-        \markup { | ɛ  } "-"   \markup {   v     } \markup {     ə   } \markup {     n   }
-        \markup { | eɪ } "-"   \markup {  t      } \markup {     n   }
-        \markup { | aɪ } "-"   \markup {  n      } \markup {     w   }
-        \markup { | ʌ  } n
-           _ _
-      }
-    >>
-  >>
-}
+\include "rhythmpedia-ly/shared/rhythmp-000-lv2-tuplets-2.ly"
 ```
 
-###### ２段
+#### レベル３ {{< var RUBY-NI >}}、{{< var RUBY-MOP >}} 及び {{< var RUBY-MPOP >}} 表記法音韻厳密化
+
+##### 0
 
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
-gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
-gthr = { \tuplet 3/2 { do16   do16 do16] }  }
-
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \new Voice = "counting" {
-        \voiceOne
-        \time 3/8
-        \partial 8
-
-                      do8              % 1
-        | do8[  do8 \gone              % 2
-        | do8[  do8 \gthr              % 3
-        | do8[  do8 \gone              % 4
-        | do8[  do8 \gone              % 5
-        | do8[  do8 \gone              % 6
-        | do8[  do8 \gthr              % 7
-        | do8[  do8 \gthr              % 8
-        | do8[  do8 \gone              % 9
-        | do8[  do8 \gone              % 1
-        | do8[  do8 \gone
-      }
-
-      \new NullVoice = "aligner" {
-        \relative do' {
-          \voiceOne
-          \time 3/8
-          \partial 8
-          do8
-
-          do4. do4. do4.
-          do4. do4. do4.
-          do4. do4. do4.
-          do4.
-        }
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
-               _
-               \markup { |1  }
-               \markup { |2  }
-               \markup { |3  }
-               \markup { |4  }
-               \markup { |5  }
-               \markup { |6  }
-               \markup { |7  }
-               \markup { |8  }
-               \markup { |9  }
-               \markup { |1  }
-          _
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
-                                                   \markup {     w   }
-        \markup { | ʌ  } "-"   \markup {  n      } \markup {     t   }
-        \markup { | uː} "-"   \markup {         } \markup {     θ  } \markup {  ɹ }
-        \markup { | iː} "-"   \markup {         } \markup {     f   }
-        \markup { | ɔ  } "-"   \markup {   ɹ     } \markup {     f   }
-        \markup { | aɪ } "-"   \markup {   v     } \markup {     s   }
-        \markup { | ɪ  } "-"   \markup {  k      } \markup {     s   } \markup {     s   }
-        \markup { | ɛ  } "-"   \markup {   v     } \markup {     ə   } \markup {     n   }
-        \markup { | eɪ } "-"   \markup {  t      } \markup {     n   }
-        \markup { | aɪ } "-"   \markup {  n      } \markup {     w   }
-        \markup { | ʌ  } n
-           _ _
-      }
-    >>
-  >>
-}
-```
-
-###### ３段
-
-
-```{.lilypond}
-\include "lilypond-book-preamble.ly"
-gone = { \tuplet 3/2 { do16   do16_~ do16] }  }
-gtwo = { \tuplet 3/2 { do16_~ do16 do16] }  }
-gthr = { \tuplet 3/2 { do16   do16 do16] }  }
-
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \set Score.proportionalNotationDuration = #(ly:make-moment 1/16)
-      \override Score.SpacingSpanner.uniform-stretch = ##t
-      \override Staff.NoteColumn.springs-and-rods = #(cons #f (list 1))
-      \new Voice = "counting" {
-        \voiceOne
-        \time 3/8
-        \autoLineBreaksOff
-
-        | s4.
-        | s4.
-        | s4          do8 \break       % 1
-        | do8[  do8 \gone              % 2
-        | do8[  do8 \gthr              % 3
-        | do8[  do8 \gone  \break      % 4
-        | do8[  do8 \gone              % 5
-        | do8[  do8 \gone              % 6
-        | do8[  do8 \gthr  \break      % 7
-        | do8[  do8 \gthr              % 8
-        | do8[  do8 \gone              % 9
-        | do8[  do8 \gone  \break      % 1
-        | do8[  do8 \gone
-        | s4.
-        | s4.
-      }
-
-      \new NullVoice = "aligner" {
-        \relative do' {
-          \voiceOne
-          \time 3/8
-          | s4.
-          | s4.
-          | s4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4.
-        }
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner" {
-               \markup { |1  }
-               \markup { |2  }
-               \markup { |3  }
-               \markup { |4  }
-               \markup { |5  }
-               \markup { |6  }
-               \markup { |7  }
-               \markup { |8  }
-               \markup { |9  }
-               \markup { |1  }
-          _
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "counting" {
-                                                   \markup {     w   }
-        \markup { | ʌ  } "-"   \markup {  n      } \markup {     t   }
-        \markup { | uː} "-"   \markup {         } \markup {     θ  } \markup {  ɹ }
-        \markup { | iː} "-"   \markup {         } \markup {     f   }
-        \markup { | ɔ  } "-"   \markup {   ɹ     } \markup {     f   }
-        \markup { | aɪ } "-"   \markup {   v     } \markup {     s   }
-        \markup { | ɪ  } "-"   \markup {  k      } \markup {     s   } \markup {     s   }
-        \markup { | ɛ  } "-"   \markup {   v     } \markup {     ə   } \markup {     n   }
-        \markup { | eɪ } "-"   \markup {  t      } \markup {     n   }
-        \markup { | aɪ } "-"   \markup {  n      } \markup {     w   }
-        \markup { | ʌ  } n
-           _ _
-      }
-    >>
-  >>
-}
-
-```
-
-
-#### {{< var RUBY-NI >}}、{{< var RUBY-MOP >}} 及び {{< var RUBY-MPOP >}}を全て考慮した発音表記
-
-##### １段
-
-```{.lilypond}
-\include "lilypond-book-preamble.ly"
-\include "rhythmpedia-ly/shared/rhythmp-001.ly"
+\include "rhythmpedia-ly/shared/rhythmp-001-lv0.ly"
 % 2025/09/06 04:17:04
 ```
 
-
-##### ３段
+##### 1
 
 ```{.lilypond}
 \include "lilypond-book-preamble.ly"
-gone = { \tuplet 3/2 {  do16   do16_~ do16] }  }
-gtwo = { \tuplet 3/2 {  do16_~ do16   do16] }  }
-gthr = { \tuplet 3/2 {  do16[  do16   do16] }  }
-gdot = { \tuplet 3/2 {  do8[          do16] }  }
-gura = { \tuplet 3/2 {   r8[          do16] }  }
-
-gnin = {
-  | do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             % 1
-    do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             %
-    do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             %
-}
-
-\score {
-  <<
-    \new RhythmicStaff = "rhythm"  <<
-      \set Score.proportionalNotationDuration = #(ly:make-moment 1/16)
-      \override Score.SpacingSpanner.uniform-stretch = ##t
-      \override Staff.NoteColumn.springs-and-rods = #(cons #f (list 1))
-
-      \new NullVoice = "aligner0" {
-        \relative do' {
-          \voiceOne
-          \time 9/8
-          | s4.
-          | s4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4. do4. do4.
-          | do4.
-        }
-      }
-
-      \new Voice = "counting" {
-        \voiceOne
-        \time 3/8
-        % \autoLineBreaksOff
-
-        | s4.
-        | s8  \gdot \tuplet 3/2 {  do16   do16   do16] }             %
-        | do8 \gdot \tuplet 3/2 {  do16   do16   do16] }             %
-
-        \gnin \gnin \gnin % 1&a
-        \gnin \gnin \gnin % 2&a
-        \gnin \gnin \gnin % 3&a
-
-
-        | s4.
-        | s4.
-      }
-
-      \new NullVoice = "aligner1" {
-        \voiceOne
-        \time 3/8
-        % \autoLineBreaksOff
-
-        | s4.
-        | s8    \gdot \tuplet 3/2 {  do16   do16   do16] }              % 1
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 2
-
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 3
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 4
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 5
-
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 6
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 7
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 8
-
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 9
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }              % 1
-        | do8[  \gdot \tuplet 3/2 {  do16   do16   do16] }
-
-        | s4.
-        | s4.
-      }
-
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner0" {
-               \markup { "|1"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|2"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|3"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|4"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|5"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|6"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|7"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|8"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|9"  } \markup { "|&"  } \markup { "|a"  }
-               \markup { "|1"  }
-          _
-      }
-
-      \new Lyrics \with { instrumentName = "" } \lyricsto "aligner1" {
-
-                          \markup { " "  } \markup { "ʔ"  }   \markup {  "w"  } \markup {  " "  } \markup { " "  }
-
-        \markup { | ʌ  }  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  " "  } \markup { "n"  }
-        \markup { | ə  }  \markup { " "  } \markup { " "  }   \markup {  "n"  } \markup {  " "  } \markup { "d(n)"  }
-        \markup { | əː}  \markup { "-"  } \markup { "ʔ"  }   \markup {  " "  } \markup {  " "  } \markup { "t"  }
-
-        \markup { | uː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  " "  } \markup { "(w)"  }
-        \markup { | ə  }  \markup { " "  } \markup { " "  }   \markup {  "n"  } \markup {  " "  } \markup { "d"  }
-        \markup { | əː}  \markup { "-"  } \markup { "ʔ"  }   \markup {  " "  } \markup {  " "  } \markup { "t"  } 
-
-
-        \markup {  " "  }  \markup {  "t"  } \markup { ɹ    }
-        \markup { | uː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "t"  } \markup { ɹ    }
-        \markup { | uː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "θ" } \markup { ɹ    }
-
-        \markup { | iː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "θ" } \markup {      }
-        \markup { | iː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "θ" } \markup {      }
-        \markup { | iː}  \markup { "-"  } \markup { "-"  }   \markup {  " "  } \markup {  "f"  } \markup {      }
-
-        \markup { | ɔ  }  \markup { "-"  } \markup { "-"  }   \markup {  "ɹ"  } \markup {  "f"  } \markup {      }
-        \markup { | ɔ  }  \markup { "-"  } \markup { "-"  }   \markup {  "ɹ"  } \markup {  "f"  } \markup {      }
-        \markup { | ɔ  }  \markup { "-"  } \markup { "-"  }   \markup {  "ɹ"  } \markup {  "f"  } \markup {      }
-
-        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "f"  } \markup {      }
-        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "f"  } \markup {      }
-        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "s"  } \markup {      }
-
-        \markup { | ɪ  }  \markup { "-"  } \markup { "-"  }   \markup {  "k"  } \markup {  "s"  } \markup { s    }
-        \markup { | ɪ  }  \markup { "-"  } \markup { "-"  }   \markup {  "k"  } \markup {  "s"  } \markup { s    }
-        \markup { | ɪ  }  \markup { "-"  } \markup { "-"  }   \markup {  "k"  } \markup {  "s"  } \markup { s    }
-
-        \markup { | ɛ  }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "ə"  } \markup { n s  }
-        \markup { | ɛ  }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "ə"  } \markup { n s  }
-        \markup { | ɛ  }  \markup { "-"  } \markup { "-"  }   \markup {  "v"  } \markup {  "ə"  } \markup { n    }
-
-        \markup { | eɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "t"  } \markup {  "n"  } \markup {      }
-        \markup { | eɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "t"  } \markup {  "n"  } \markup {      }
-        \markup { | eɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "t"  } \markup {  "n"  } \markup {      }
-
-        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "n"  } \markup {  "w"  } \markup {      }
-        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "n"  } \markup {  "w"  } \markup {      }
-        \markup { | aɪ }  \markup { "-"  } \markup { "-"  }   \markup {  "n"  } \markup {  "w"  } \markup {      }
-
-        \markup { | ʌ  }  \markup { "n"  }
-           _ _
-      }
-    >>
-  >>
-}
-
+\include "rhythmpedia-ly/shared/rhythmp-001-lv1.ly"
+% 2025/09/06 04:17:04
 ```
 
+##### 2
+
+```{.lilypond}
+\include "lilypond-book-preamble.ly"
+\include "rhythmpedia-ly/shared/rhythmp-001-lv2.ly"
+%  Sat, 06 Sep 2025 14:27:20 +0900
+```
+
+##### 3
+```{.lilypond}
+\include "lilypond-book-preamble.ly"
+\include "rhythmpedia-ly/shared/rhythmp-001-lv3.ly"
+\layout {
+  \context {
+    \Score
+    proportionalNotationDuration = #(ly:make-moment 1/32) % tighter
+    % try 1/4 for looser, 1/8 default-ish
+  }
+}
+% Sun, 07 Sep 2025 00:47:17 +0900
+```
+
+
+
+#### レベル３ {{< var RUBY-NI >}}、{{< var RUBY-MOP >}} 及び {{< var RUBY-MPOP >}} 表記法音韻厳密化
 
 
 ## 三連符オフビートカウントの発音

@@ -36,8 +36,6 @@ sp = "-"
         | \gsco  \gdot \gthr              % &
         | \gsco  \gdot \gone              % a
 
-        \break
-
         | \gsco  \gdot \gthr              % 4
         | \gsco  \gdot \gthr              % &
         | \gsco  \gdot \gone              % a

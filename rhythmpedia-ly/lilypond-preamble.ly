@@ -8,6 +8,7 @@
   bottom-margin = 10\mm
   indent = 0
   tagline = ##f
+  page-color = #(x11-color 'white)
 }
 \layout {
   \context {
