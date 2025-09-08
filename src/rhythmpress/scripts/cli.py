@@ -37,11 +37,11 @@ def exec_target(target: Path, args: list[str], env: dict) -> "NoReturn":
 
 def main() -> None:
     if len(sys.argv) < 2:
-        print("Usage: rhythmpedia <command> [args...]\n       rhythmpedia list")
+        print("Usage: rhythmpress <command> [args...]\n       rhythmpress list")
         sys.exit(1)
     cmd, *rest = sys.argv[1:]
 
-    bin_dir = Path(__file__).resolve().parent            # .../rhythmpedia/bin
+    bin_dir = Path(__file__).resolve().parent            # .../rhythmpress/bin
     root = bin_dir.parent                                # project root
 
     # Prepare child env: keep venv/bin first, then bin/ (subcommands may need venv tools)
@@ -63,8 +63,8 @@ def main() -> None:
     # resolve & run target (no chdir; pass args as-is)
     target = resolve_target(bin_dir, cmd)
     if not target:
-        print(f"rhythmpedia: unknown command: {cmd}")
-        print("Try:  rhythmpedia list")
+        print(f"rhythmpress: unknown command: {cmd}")
+        print("Try:  rhythmpress list")
         sys.exit(1)
 
     exec_target(target, rest, env)
