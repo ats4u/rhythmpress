@@ -344,23 +344,26 @@ local function handle_codeblock(cb)
     end
   end
 
-  local ok, err = compile_svg(base_h)
-  if not ok then
-    local cmd_disp = ("lilypond --svg -o %s %s"):format(base_h, ly_path)
-    local err_head = (err or "unknown error"):gsub("%s+$","")
-    -- show only the first ~20 lines of error text
-    local lines, shown, limit = {}, 0, 20
-    for line in (err_head .. "\n"):gmatch("([^\n]*)\n") do
-      shown = shown + 1
-      if shown > limit then
-        table.insert(lines, "… (truncated) …")
-        break
+  local must_compile = need_write or (#(collect_svgs(base_h)) == 0)
+  if must_compile then
+    local ok, err = compile_svg(base_h)
+    if not ok then
+      local cmd_disp = ("lilypond --svg -o %s %s"):format(base_h, ly_path)
+      local err_head = (err or "unknown error"):gsub("%s+$","")
+      -- show only the first ~20 lines of error text
+      local lines, shown, limit = {}, 0, 20
+      for line in (err_head .. "\n"):gmatch("([^\n]*)\n") do
+        shown = shown + 1
+        if shown > limit then
+          table.insert(lines, "… (truncated) …")
+          break
+        end
+        table.insert(lines, line)
       end
-      table.insert(lines, line)
+      local msg = ("# lilypond compile failed\n$ %s\n%s"):format(cmd_disp, table.concat(lines, "\n"))
+      io.stderr:write("[lilypond.lua] compile error: " .. err_head .. "\n")
+      return pandoc.CodeBlock(msg, pandoc.Attr("", {"lilypond-error"}, {}))
     end
-    local msg = ("# lilypond compile failed\n$ %s\n%s"):format(cmd_disp, table.concat(lines, "\n"))
-    io.stderr:write("[lilypond.lua] compile error: " .. err_head .. "\n")
-    return pandoc.CodeBlock(msg, pandoc.Attr("", {"lilypond-error"}, {}))
   end
 
   local svg_paths = collect_svgs(base_h)
@@ -369,11 +372,13 @@ local function handle_codeblock(cb)
     return pandoc.CodeBlock("# lilypond: no SVG produced", pandoc.Attr("", {"lilypond-error"}, {}))
   end
 
-  local blocks = {}
-  for _, p in ipairs(svg_paths) do
-    blocks[#blocks+1] = build_image_block(p, cb)
+  if #svg_paths > 0 then
+    local blocks = {}
+    for _, p in ipairs(svg_paths) do
+      blocks[#blocks+1] = build_image_block(p, cb)
+    end
+    return blocks
   end
-  return blocks
 end
 
 return {
