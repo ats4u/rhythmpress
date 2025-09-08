@@ -1,9 +1,0 @@
-# Project-local ignores
-.DS_Store
-.quarto/
-.site/
-*/
-!attachments*/
-_quarto.index*
-_sidebar.index*
-
