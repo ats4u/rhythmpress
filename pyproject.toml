@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rhythmpress"
+version = "0.1.0"
+description = "Quarto-based CMS tools for rhythmpedia.com"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{ name = "Atsushi Oka" }]
+
+[project.urls]
+Homepage = "https://rhythmpedia.com"
+Repository = "https://github.com/ats4u/rhythmpress"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+rhythmpress = [
+  "templates/*",
+  "doc/*",
+  "scripts/*"
+]
+
+[project.scripts]
+rhythmpress = "rhythmpress.rhythmpress:main"
+
