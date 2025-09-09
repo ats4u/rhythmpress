@@ -34,7 +34,7 @@ BASE="$(basename "$CONF_ABS")"
 
 # --- Language id -------------------------------------------------------------
 LANG_ID=ja
-if [[ "$BASE" =~ ^_sidebar\.([^.]+)\.conf$ ]]; then
+if [[ "$BASE" =~ ^_sidebar-([^.]+)\. ]]; then
   LANG_ID="${BASH_REMATCH[1]}"
 fi
 
@@ -49,6 +49,8 @@ if [ -n "$FILES" ]; then
 else
   echo '{}' > "_sidebar-$LANG_ID.generated.yml"
 fi
+
+printf "LANGID=$LANG_ID BASE=$BASE\n"
 
 # --- Markdown header ---------------------------------------------------------
 printf '**目次**\n\n' > "_sidebar-$LANG_ID.generated.md"

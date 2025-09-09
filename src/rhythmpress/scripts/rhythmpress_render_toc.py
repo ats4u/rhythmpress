@@ -9,10 +9,11 @@ Sidebar → Markdown TOC Generator (Spec v2.1 Final)
 - Leaf titles come from the target QMD/MD file: front-matter `title` (string) → first ATX H1 → path fallback → "untitled"
 - Object-form leaves {href,text}: `text` is used only if the file can't supply a title
 - Hrefs are normalized to directory-style: leading + trailing slash, dot-segments resolved, duplicate slashes collapsed
-- Paths in conf and YAML are resolved relative to project root (parent of this script’s directory) UNLESS:
-    * --root is given, which has highest priority
-    * $RHYTHMPRESS_ROOT is set, which overrides script-relative fallback
-    * Absolute paths in YAML/conf are preserved as absolute on the filesystem
+-- Paths in conf and YAML are resolved relative to the **project root**.
+   Root must be supplied via:
+    * --root (highest priority), or
+    * $RHYTHMPRESS_ROOT (required when --root is omitted).
+   Absolute paths in YAML/conf are preserved as absolute on the filesystem.
 
 Warnings are written to stderr. Line numbers are included when ruamel.yaml is available.
 """
@@ -85,7 +86,7 @@ def extract_title_from_text(text: str) -> Optional[str]:
       else None (caller decides fallbacks)
     """
     # 1) front-matter
-    m = _FM_RE.match(text)
+    m = _FM_RE.match(text or "")
     if m:
         fm_block = m.group(1)
         if _HAVE_RUAMEL:
@@ -136,9 +137,12 @@ class TitleCache:
 
     def save(self) -> None:
         try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
             self.path.write_text(json.dumps(self._data, ensure_ascii=False, indent=2), encoding="utf-8")
         except Exception:
             pass
+
+
 
     def get(self, abspath: Path) -> Optional[str]:
         self.load()
@@ -404,9 +408,7 @@ def _extract_leaf_path_and_text(obj: Dict[str, Any]) -> Tuple[Optional[str], Opt
         v = obj.get(k)
         if isinstance(v, str) and v.strip():
             return v.strip(), obj.get("text") if isinstance(obj.get("text"), str) else None
-    for v in obj.values():
-        if isinstance(v, str) and v.strip():
-            return v.strip(), obj.get("text") if isinstance(obj.get("text"), str) else None
+    # Do NOT treat arbitrary first string value as a path; require explicit key.
     return None, obj.get("text") if isinstance(obj.get("text"), str) else None
 
 
@@ -431,6 +433,7 @@ class Renderer:
         self.strict = strict
         self.prune_empty = prune_empty
         self.warnings = 0
+        self.missing_file_warnings = 0
 
     def warn(self, msg: str) -> None:
         self.warnings += 1
@@ -468,6 +471,7 @@ class Renderer:
                     if line_no is not None:
                         where += f":{line_no}"
                     self.warn(f"Missing file for leaf '{raw}' (emitting link anyway). Source: {where}")
+                    self.missing_file_warnings += 1
                 out.append(("  " * depth) + f"- [{title}]({href})")
                 continue
 
@@ -491,6 +495,7 @@ class Renderer:
                     if line_no is not None:
                         where += f":{line_no}"
                     self.warn(f"Missing file for leaf '{raw}' (emitting link anyway). Source: {where}")
+                    self.missing_file_warnings += 1
                 out.append(("  " * depth) + f"- [{title}]({href})")
                 continue
 
@@ -610,7 +615,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if not conf_path.is_absolute():
         conf_path = (root / conf_path).resolve()
 
-    language_tails = tuple([s for s in (args.langs or "").split(",") if s.strip()]) or DEFAULT_LANGUAGE_TAILS
+    language_tails = tuple([s.strip() for s in (args.langs or "").split(",") if s.strip()]) or DEFAULT_LANGUAGE_TAILS
 
     cache: Optional[TitleCache]
     if args.cache and args.cache != "-":
@@ -651,7 +656,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         cache.save()
 
     # Strict mode: missing files → non-zero exit
-    if args.strict and renderer.warnings > 0:
+    if args.strict and renderer.missing_file_warnings > 0:
         return 1
     return 0
 
