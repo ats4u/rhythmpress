@@ -557,8 +557,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     ap.add_argument("conf", help="Path to _sidebar.conf (relative to project root or absolute).")
     ap.add_argument(
         "--root",
-        help="Override project root. If not given, $RHYTHMPRESS_ROOT is used; "
-             "if unset, defaults to parent of this script directory.",
+        help="Override project root. If omitted, $RHYTHMPRESS_ROOT must be set.",
         default=None,
     )
     ap.add_argument(
@@ -593,15 +592,19 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parse_args(argv)
 
-    # Root resolution precedence: --root > $RHYTHMPRESS_ROOT > script-relative fallback
+    # Root resolution precedence: --root > $RHYTHMPRESS_ROOT (required)
     if args.root:
         root = Path(args.root).resolve()
     else:
         env_root = os.environ.get("RHYTHMPRESS_ROOT")
-        if env_root:
-            root = Path(env_root).resolve()
-        else:
-            root = PROJECT_ROOT_FALLBACK
+        if not env_root:
+            sys.stderr.write(
+                "ERROR: RHYTHMPRESS_ROOT is not set."
+                'Hint: activate the project environment, e.g.'
+                '  eval "$(rhythmpress env)"'
+            )
+            return 2
+        root = Path(env_root).resolve()
 
     conf_path = Path(args.conf)
     if not conf_path.is_absolute():
