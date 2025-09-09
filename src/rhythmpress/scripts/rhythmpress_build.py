@@ -44,7 +44,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     p.add_argument("--sidebar", default="_sidebar-ja.conf",
                    help="Sidebar conf to render at the end (default: _sidebar-ja.conf).")
     p.add_argument("--no-sidebar", action="store_true",
-                   help="Skip render-sidebar step.")
+                   help="Skip render_sidebar step.")
     p.add_argument("--apply-flags", nargs="*", default=["--apply", "--force"],
                    help="Flags passed to `preproc_clean` (default: --apply --force).")
     p.add_argument("--skip-clean", action="store_true",
@@ -191,7 +191,7 @@ def main(argv: List[str]) -> int:
                 rc = run(["rhythmpress", "render_sidebar", out_name],
                          verbose=ns.verbose, dry_run=ns.dry_run, env=env)
                 if rc != 0:
-                    print(f"[FAIL] render-sidebar: {out_name} (exit {rc})", file=sys.stderr)
+                    print(f"[FAIL] render_sidebar: {out_name} (exit {rc})", file=sys.stderr)
                     if not ns.keep_going:
                         return rc
         else:
