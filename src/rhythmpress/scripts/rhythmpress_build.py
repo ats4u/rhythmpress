@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-rhythmpress-build.py
+rhythmpress_build.py
 
 Batch builder for Rhythmpedia projects.
 
 For each directory listed in a definition file:
-  1) rhythmpress preproc-clean <dir> --apply --force
+  1) rhythmpress preproc_clean <dir> --apply --force
   2) rhythmpress preproc       <dir>
 Finally:
-  3) rhythmpress render-sidebar <conf>
+  3) rhythmpress render_sidebar <conf>
 
 Definition file format:
   - One directory per line.
@@ -36,8 +36,8 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpress-build",
-        description="Run preproc-clean + preproc over a set of pages, then render sidebar.",
+        prog="rhythmpress_build",
+        description="Run preproc_clean + preproc over a set of pages, then render sidebar.",
     )
     p.add_argument("--defs", default="_rhythmpress.conf",
                    help="Path to definition file (default: _rhythmpress.conf). If '-' use stdin.")
@@ -46,9 +46,9 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     p.add_argument("--no-sidebar", action="store_true",
                    help="Skip render-sidebar step.")
     p.add_argument("--apply-flags", nargs="*", default=["--apply", "--force"],
-                   help="Flags passed to `preproc-clean` (default: --apply --force).")
+                   help="Flags passed to `preproc_clean` (default: --apply --force).")
     p.add_argument("--skip-clean", action="store_true",
-                   help="Skip the preproc-clean step.")
+                   help="Skip the preproc_clean step.")
     p.add_argument("--keep-going", "-k", action="store_true",
                    help="Continue after errors (default: stop at first error).")
     p.add_argument("--chdir", default=".",
@@ -135,10 +135,10 @@ def main(argv: List[str]) -> int:
     # Execute
     for d in existing:
         if not ns.skip_clean:
-            rc = run(["rhythmpress", "preproc-clean", d, *ns.apply_flags],
+            rc = run(["rhythmpress", "preproc_clean", d, *ns.apply_flags],
                      verbose=ns.verbose, dry_run=ns.dry_run, env=env)
             if rc != 0:
-                print(f"[FAIL] preproc-clean: {d} (exit {rc})", file=sys.stderr)
+                print(f"[FAIL] preproc_clean: {d} (exit {rc})", file=sys.stderr)
                 if not ns.keep_going:
                     return rc
                 else:
@@ -153,22 +153,22 @@ def main(argv: List[str]) -> int:
 
     if not ns.no_sidebar:
         # 0) First generate aggregated sidebar confs per language
-        rc = run(["rhythmpress", "sidebar-confs", "--defs", ns.defs],
+        rc = run(["rhythmpress", "sidebar_confs", "--defs", ns.defs],
                  verbose=ns.verbose, dry_run=ns.dry_run, env=env)
         if rc != 0:
-            print(f"[FAIL] sidebar-confs (exit {rc})", file=sys.stderr)
+            print(f"[FAIL] sidebar_confs (exit {rc})", file=sys.stderr)
             if not ns.keep_going:
                 return rc
 
         # 1) Ask rhythmpress for all lang IDs (one per line)
         if ns.verbose or ns.dry_run:
-            print("[RUN]", "rhythmpress sidebar-langs --defs", shlex.quote(ns.defs))
+            print("[RUN]", "rhythmpress sidebar_langs --defs", shlex.quote(ns.defs))
 
         if ns.dry_run:
             langs = []
         else:
             proc = subprocess.run(
-                ["rhythmpress", "sidebar-langs", "--defs", ns.defs],
+                ["rhythmpress", "sidebar_langs", "--defs", ns.defs],
                 env=env,
                 capture_output=True,
                 text=True,
@@ -188,7 +188,7 @@ def main(argv: List[str]) -> int:
                     continue
                 seen.add(lang)
                 out_name = f"_sidebar-{lang}.generated.conf"
-                rc = run(["rhythmpress", "render-sidebar", out_name],
+                rc = run(["rhythmpress", "render_sidebar", out_name],
                          verbose=ns.verbose, dry_run=ns.dry_run, env=env)
                 if rc != 0:
                     print(f"[FAIL] render-sidebar: {out_name} (exit {rc})", file=sys.stderr)
@@ -196,7 +196,7 @@ def main(argv: List[str]) -> int:
                         return rc
         else:
             # 3) Fallback to the original single call if no langids were found
-            rc = run(["rhythmpress", "render-sidebar", ns.sidebar],
+            rc = run(["rhythmpress", "render_sidebar", ns.sidebar],
                      verbose=ns.verbose, dry_run=ns.dry_run, env=env)
             if rc != 0 and not ns.keep_going:
                 return rc

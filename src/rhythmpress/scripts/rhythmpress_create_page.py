@@ -13,11 +13,11 @@ BIN = Path(__file__).resolve().parent
 ROOT = BIN.parent
 sys.path.insert(0, str(ROOT))
 
-import rhythmpress
+from .. import rhythmpress
 
 def main(argv: list[str]) -> int:
     if not argv or argv[0] in ("-h", "--help"):
-        print("Usage: rhythmpress-create-page <directory-name> [--lang ja]")
+        print("Usage: rhythmpress_create_page <directory-name> [--lang ja]")
         return 2
 
     target_dir: Path | None = None

@@ -7,11 +7,11 @@ lib.rhythmpress.create_global_navigation(), then write it to
 '_sidebar-<lang>.generated.md' next to the defs file (or stdout).
 
 Usage:
-  bin/rhythmpress-render-nav --lang ja
-  bin/rhythmpress-render-nav --lang en --defs /path/to/_rhythmpress.conf
-  bin/rhythmpress-render-nav --lang ja --out ./_sidebar-ja.generated.md
-  bin/rhythmpress-render-nav --lang ja --stdout
-  bin/rhythmpress-render-nav --lang ja --no-strict -v
+  bin/rhythmpress_render_nav --lang ja
+  bin/rhythmpress_render_nav --lang en --defs /path/to/_rhythmpress.conf
+  bin/rhythmpress_render_nav --lang ja --out ./_sidebar-ja.generated.md
+  bin/rhythmpress_render_nav --lang ja --stdout
+  bin/rhythmpress_render_nav --lang ja --no-strict -v
 
 Exit codes:
   0 success
@@ -32,7 +32,7 @@ ROOT = BIN.parent
 sys.path.insert(0, str(ROOT))
 
 # Import library
-import rhythmpress as rp  # type: ignore
+from .. import rhythmpress as rp  # type: ignore
 
 
 def die(code: int, msg: str) -> "NoReturn":
@@ -42,7 +42,7 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpress-render-nav",
+        prog="rhythmpress_render_nav",
         description="Render global navigation Markdown from directories listed in a defs file.",
     )
     p.add_argument(

@@ -9,7 +9,10 @@ Sidebar → Markdown TOC Generator (Spec v2.1 Final)
 - Leaf titles come from the target QMD/MD file: front-matter `title` (string) → first ATX H1 → path fallback → "untitled"
 - Object-form leaves {href,text}: `text` is used only if the file can't supply a title
 - Hrefs are normalized to directory-style: leading + trailing slash, dot-segments resolved, duplicate slashes collapsed
-- Paths in conf and YAML are resolved relative to project root (parent of this script’s directory)
+- Paths in conf and YAML are resolved relative to project root (parent of this script’s directory) UNLESS:
+    * --root is given, which has highest priority
+    * $RHYTHMPRESS_ROOT is set, which overrides script-relative fallback
+    * Absolute paths in YAML/conf are preserved as absolute on the filesystem
 
 Warnings are written to stderr. Line numbers are included when ruamel.yaml is available.
 """
@@ -23,17 +26,16 @@ import os
 import re
 import sys
 from pathlib import Path, PurePosixPath
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 # ----------------------------
 # Root & defaults
 # ----------------------------
 
 SCRIPT_PATH = Path(__file__).resolve()
-PROJECT_ROOT = SCRIPT_PATH.parent.parent  # bin/.. → project root
+PROJECT_ROOT_FALLBACK = SCRIPT_PATH.parent.parent  # bin/.. → project root (fallback if no flags/env)
 
 DEFAULT_LANGUAGE_TAILS = ("ja", "en")
-# DEFAULT_CACHE_NAME = ".toc_title_cache.json"
 DEFAULT_CACHE_NAME = "-"
 
 # ----------------------------
@@ -198,65 +200,48 @@ def normalize_href(path_like: str) -> str:
 
 
 # ----------------------------
-# Path helpers
+# Filesystem resolution (new)
 # ----------------------------
 
+def yaml_path_for_fs(p: str) -> str:
+    """YAML path → POSIX-ish string for FILESYSTEM resolution (preserve absolute)."""
+    return (p or "").strip().replace("\\", "/")
+
+def resolve_fs_path(root: Path, yaml_path: str) -> Path:
+    """Resolve a YAML-provided path against root, preserving absolutes."""
+    s = yaml_path_for_fs(yaml_path)
+    p = Path(s)
+    return p if p.is_absolute() else (root / s)
+
 def is_directory_item(raw_path: str, root: Path) -> bool:
-    raw = raw_path.strip().replace("\\", "/")
-    if raw.endswith("/"):
+    """Heuristic: treat trailing '/' as directory; else check filesystem."""
+    s = yaml_path_for_fs(raw_path)
+    if s.endswith("/"):
         return True
-    # Also treat as directory if it exists
-    return (root / raw).is_dir()
+    return resolve_fs_path(root, s).is_dir()
+
+def pick_dir_index_fs(fs_dir: Path) -> Optional[Path]:
+    """Prefer index.qmd over index.md within a concrete filesystem directory."""
+    cand_qmd = fs_dir / "index.qmd"
+    cand_md = fs_dir / "index.md"
+    if cand_qmd.is_file():
+        return cand_qmd
+    if cand_md.is_file():
+        return cand_md
+    return None
 
 
-def ensure_rel_path_from_yaml(p: str) -> str:
-    """Return a YAML-provided path as a POSIX-ish relative path (strip any leading '/')."""
-    s = p.strip().replace("\\", "/")
-    return s[1:] if s.startswith("/") else s
+# ----------------------------
+# Path → href helpers (unchanged)
+# ----------------------------
 
-
-# def file_href_for(p_rel: str) -> str:
-#     """Convert 'foo/bar.qmd' to '/foo/bar/' (directory-style)."""
-#     p_rel = p_rel.strip().replace("\\", "/")
-#     posix = PurePosixPath(p_rel)
-#     stem = posix.stem
-#     parent = str(posix.parent).strip("/")
-#     if parent:
-#         return normalize_href(f"{parent}/{stem}/")
-#     return normalize_href(f"{stem}/")
-
-# def file_href_for(p_rel: str) -> str:
-#     """Convert a file path ('foo/bar.qmd' or '.md') to a directory-style href.
-#     Rules:
-#       - '.../index.qmd' or '.../index.md' → '/.../'
-#       - otherwise 'foo/bar.qmd' → '/foo/bar/'
-#       - normalization: leading '/', trailing '/', collapse //, resolve '.' and '..'
-#     """
-#     # POSIX-ify and make relative
-#     s = (p_rel or "").strip().replace("\\", "/")
-#     if s.startswith("/"):
-#         s = s[1:]
-# 
-#     posix = PurePosixPath(s)
-#     name_lower = posix.name.lower()
-#     parent = str(posix.parent).strip("/")
-# 
-#     # Treat index.* (qmd/md) as the directory itself
-#     if name_lower in ("index.qmd", "index.md"):
-#         return normalize_href(f"{parent}/" if parent else "/")
-# 
-#     # Default: use the file's stem as the directory segment
-#     stem = posix.stem
-#     return normalize_href(f"{parent}/{stem}/" if parent else f"{stem}/")
-
-
-def file_href_for(p_rel: str) -> str:
+def file_href_for(p_rel_or_abs: str) -> str:
     """Convert a file path ('.qmd' / '.md') to a directory-style href.
     - '.../index.qmd' or '.../index.md' → '/.../'
     - otherwise 'foo/bar.qmd' → '/foo/bar/'
     - normalization: leading '/', trailing '/', collapse //, resolve '.' and '..'
     """
-    s = (p_rel or "").strip().replace("\\", "/")
+    s = (p_rel_or_abs or "").strip().replace("\\", "/")
     if s.startswith("/"):
         s = s[1:]
 
@@ -265,33 +250,18 @@ def file_href_for(p_rel: str) -> str:
 
     stem_lower = posix.stem.lower()
     ext_lower  = posix.suffix.lower()
-
-    # Treat index.* only when extension is .qmd or .md
-
     name_lower = posix.name.lower()
+
     if ext_lower in (".qmd", ".md") and (stem_lower == "index" or name_lower.startswith("index.")):
         return normalize_href(f"{parent}/" if parent else "/")
 
-    # Default: map file stem to a directory segment
     return normalize_href(f"{parent}/{posix.stem}/" if parent else f"{posix.stem}/")
 
 
-def dir_href_for(p_rel_dir: str) -> str:
+def dir_href_for(p_rel_or_abs_dir: str) -> str:
     """Convert 'foo/ja/' to '/foo/ja/' (normalized)."""
-    s = p_rel_dir.strip().replace("\\", "/")
+    s = (p_rel_or_abs_dir or "").strip().replace("\\", "/")
     return normalize_href(s)
-
-
-def pick_dir_index(root: Path, rel_dir: str) -> Optional[Path]:
-    """Prefer index.qmd over index.md when both available."""
-    d = (root / rel_dir)
-    cand_qmd = d / "index.qmd"
-    cand_md = d / "index.md"
-    if cand_qmd.is_file():
-        return cand_qmd
-    if cand_md.is_file():
-        return cand_md
-    return None
 
 
 # ----------------------------
@@ -304,23 +274,19 @@ def humanize_segment(seg: str) -> str:
     seg = seg.replace("-", " ").replace("_", " ").strip()
     if not seg:
         return "untitled"
-    # If contains ASCII letters, title-case lightly. Otherwise (e.g., Japanese) leave as-is.
     if _ASCII_LETTER_RE.search(seg):
         return " ".join(w.capitalize() if w else w for w in seg.split())
     return seg
 
 
-def fallback_title_for_path(path_rel: str, is_dir: bool, language_tails: Sequence[str]) -> str:
-    s = path_rel.strip().replace("\\", "/").strip("/")
+def fallback_title_for_path(path_like: str, is_dir: bool, language_tails: Sequence[str]) -> str:
+    s = (path_like or "").strip().replace("\\", "/").strip("/")
     if not s:
-        # e.g., 'index.qmd' at root → still use 'index'
         return "untitled"
     if not is_dir and (s.endswith(".qmd") or s.endswith(".md")):
-        # file → use its stem
         stem = PurePosixPath(s).stem
         return humanize_segment(stem)
 
-    # directory: use last (unless last is language tail → use parent)
     parts = s.split("/")
     last = parts[-1] if parts else ""
     if last in language_tails and len(parts) >= 2:
@@ -330,14 +296,13 @@ def fallback_title_for_path(path_rel: str, is_dir: bool, language_tails: Sequenc
 
 
 # ----------------------------
-# Title resolver (with cache)
+# Title resolver (uses FS resolver)
 # ----------------------------
 
 def read_text_safe(p: Path) -> Optional[str]:
     try:
         return p.read_text(encoding="utf-8")
     except Exception:
-        # Try binary with best-effort utf-8 decode
         try:
             return p.read_bytes().decode("utf-8", errors="replace")
         except Exception:
@@ -346,8 +311,8 @@ def read_text_safe(p: Path) -> Optional[str]:
 
 def resolve_title_for(
     root: Path,
-    path_rel: str,
-    is_dir_item: bool,
+    path_like: str,
+    is_dir_item_flag: bool,
     prefer_title_mode: str,
     object_text: Optional[str],
     cache: Optional[TitleCache],
@@ -358,21 +323,23 @@ def resolve_title_for(
     - prefer_title_mode: 'qmd' (default) or 'yaml'
       * 'yaml' forces object_text to win (when provided), regardless of file presence
     - object_text: possible 'text' from object-form leaves
+    - path_like: raw YAML string (absolute or relative)
     """
-    # 'yaml' mode: object text takes precedence for object-form leaves (if provided)
     if prefer_title_mode == "yaml" and object_text and object_text.strip():
         return (object_text.strip(), None, False)
 
-    src_path: Optional[Path] = None
-    if is_dir_item:
-        src_path = pick_dir_index(root, path_rel)
-    else:
-        src_path = (root / path_rel)
-        if not (src_path.name.endswith(".qmd") or src_path.name.endswith(".md")):
-            # If someone pointed to a non-md/qmd file, ignore and force fallback
-            src_path = None
+    fs_path = resolve_fs_path(root, path_like)
 
-    # Try cache → file
+    # Decide the source file (index.* for dirs, or the file itself)
+    src_path: Optional[Path] = None
+    if is_dir_item_flag:
+        src_path = pick_dir_index_fs(fs_path)
+    else:
+        # Only consider .qmd/.md as content files
+        if fs_path.suffix.lower() in (".qmd", ".md"):
+            src_path = fs_path
+
+    # Try cache → file content
     if src_path and src_path.is_file():
         if cache:
             cached = cache.get(src_path)
@@ -389,13 +356,13 @@ def resolve_title_for(
 
     # file missing or no title → object_text if provided
     if object_text and object_text.strip():
-        return (object_text.strip(), src_path, bool(src_path and src_path.exists()))
+        return (object_text.strip(), src_path, bool(src_path and src_path.exists() if src_path else False))
 
     # final: path fallback → 'untitled'
     return (
-        fallback_title_for_path(path_rel, is_dir_item, language_tails) or "untitled",
+        fallback_title_for_path(path_like, is_dir_item_flag, language_tails) or "untitled",
         src_path,
-        bool(src_path and src_path.exists()),
+        bool(src_path and src_path.exists() if src_path else False),
     )
 
 
@@ -407,11 +374,9 @@ def _node_line(obj: Any) -> Optional[int]:
     if not _HAVE_RUAMEL:
         return None
     try:
-        # For CommentedMap/Seq, .lc holds position info; .lc.line for collection itself is start line
         if hasattr(obj, "lc") and hasattr(obj.lc, "line"):
             line = obj.lc.line
-            # ruamel lines are 0-based; make them 1-based for humans
-            return int(line) + 1
+            return int(line) + 1  # ruamel is 0-based
     except Exception:
         pass
     return None
@@ -439,7 +404,6 @@ def _extract_leaf_path_and_text(obj: Dict[str, Any]) -> Tuple[Optional[str], Opt
         v = obj.get(k)
         if isinstance(v, str) and v.strip():
             return v.strip(), obj.get("text") if isinstance(obj.get("text"), str) else None
-    # else: find first string value in object
     for v in obj.values():
         if isinstance(v, str) and v.strip():
             return v.strip(), obj.get("text") if isinstance(obj.get("text"), str) else None
@@ -489,10 +453,11 @@ class Renderer:
                 out.extend(child_lines)
                 continue
 
-            # leaf: string path or object-form
             line_no = _node_line(it)
+
+            # leaf: string path
             if _is_string_path(it):
-                raw = ensure_rel_path_from_yaml(it)
+                raw = it  # keep as-is (absolute or relative)
                 is_dir = is_directory_item(raw, self.root)
                 href = dir_href_for(raw) if is_dir else file_href_for(raw)
                 title, src, exists = resolve_title_for(
@@ -506,6 +471,7 @@ class Renderer:
                 out.append(("  " * depth) + f"- [{title}]({href})")
                 continue
 
+            # leaf: object form
             if isinstance(it, dict):
                 p, txt = _extract_leaf_path_and_text(it)
                 if not p:
@@ -514,7 +480,7 @@ class Renderer:
                         where += f":{line_no}"
                     self.warn(f"Unresolvable leaf object (no path-like key). Skipping. Source: {where}")
                     continue
-                raw = ensure_rel_path_from_yaml(p)
+                raw = p  # absolute or relative
                 is_dir = is_directory_item(raw, self.root)
                 href = dir_href_for(raw) if is_dir else file_href_for(raw)
                 title, src, exists = resolve_title_for(
@@ -555,8 +521,8 @@ def read_conf_lines(conf_path: Path) -> List[str]:
     return out
 
 
-def read_sidebar_yaml(root: Path, rel_path: str) -> Optional[Tuple[Path, Sequence[Any]]]:
-    ypath = root / rel_path
+def read_sidebar_yaml(root: Path, yaml_path_str: str) -> Optional[Tuple[Path, Sequence[Any]]]:
+    ypath = resolve_fs_path(root, yaml_path_str)
     if not ypath.is_file():
         sys.stderr.write(f"WARNING: sidebar YAML missing: {ypath}\n")
         return None
@@ -591,7 +557,8 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     ap.add_argument("conf", help="Path to _sidebar.conf (relative to project root or absolute).")
     ap.add_argument(
         "--root",
-        help="Override project root (default: parent of this script directory).",
+        help="Override project root. If not given, $RHYTHMPRESS_ROOT is used; "
+             "if unset, defaults to parent of this script directory.",
         default=None,
     )
     ap.add_argument(
@@ -626,7 +593,16 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parse_args(argv)
 
-    root = Path(args.root).resolve() if args.root else PROJECT_ROOT
+    # Root resolution precedence: --root > $RHYTHMPRESS_ROOT > script-relative fallback
+    if args.root:
+        root = Path(args.root).resolve()
+    else:
+        env_root = os.environ.get("RHYTHMPRESS_ROOT")
+        if env_root:
+            root = Path(env_root).resolve()
+        else:
+            root = PROJECT_ROOT_FALLBACK
+
     conf_path = Path(args.conf)
     if not conf_path.is_absolute():
         conf_path = (root / conf_path).resolve()
@@ -643,11 +619,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     # Gather root-level items by concatenating website.sidebar.contents arrays
     conf_lines = read_conf_lines(conf_path)
     root_items: List[Tuple[Path, Sequence[Any]]] = []
-    for rel in conf_lines:
-        rel_norm = ensure_rel_path_from_yaml(rel)
-        res = read_sidebar_yaml(root, rel_norm)
+    for yaml_line in conf_lines:
+        # Accept absolute or relative (relative resolved against root)
+        res = read_sidebar_yaml(root, yaml_line)
         if res is None:
-            # missing or no contents → handled per spec
             continue
         root_items.append(res)
 

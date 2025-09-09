@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-rhythmpress-sidebar-langs.py
+rhythmpress_sidebar_langs.py
 
 Scan directories listed in a definition file (default: _rhythmpress.conf),
 collect language IDs from files named `_sidebar-<langid>.yml`, de-duplicate
 (preserve first-seen order), and print one <langid> per line.
 
 Usage:
-  ./rhythmpress-sidebar-langs.py
-  ./rhythmpress-sidebar-langs.py --defs mylist.txt
-  ./rhythmpress-sidebar-langs.py --chdir /path/to/project -v
+  ./rhythmpress_sidebar_langs.py
+  ./rhythmpress_sidebar_langs.py --defs mylist.txt
+  ./rhythmpress_sidebar_langs.py --chdir /path/to/project -v
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpress-sidebar-langs",
+        prog="rhythmpress_sidebar_langs",
         description="List unique <langid> from _sidebar-<langid>.yml across project dirs.",
     )
     p.add_argument("--defs", default="_rhythmpress.conf",

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rhythmpress-build-sidebars.py
+rhythmpress_build_sidebars.py
 
 Reads a definition file (default: _rhythmpress.conf), scans each listed
 directory for files named `_sidebar-<langid>.yml`, groups them by <langid>,
@@ -36,7 +36,7 @@ def die(code: int, msg: str) -> "NoReturn":
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="rhythmpress-build-sidebars",
+        prog="rhythmpress_build_sidebars",
         description="Generate root _sidebar-<lang>.generated.conf files by aggregating per-dir sidebars.",
     )
     p.add_argument("--defs", default="_rhythmpress.conf",

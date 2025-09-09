@@ -5,7 +5,7 @@ from pathlib import Path
 import sys, pathlib
 import argparse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-import rhythmpress  # noqa: E402
+from .. import rhythmpress  # noqa: E402
 
 def main() -> int:
     ap = argparse.ArgumentParser(

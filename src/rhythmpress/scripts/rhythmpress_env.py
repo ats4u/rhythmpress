@@ -1,7 +1,7 @@
 import os, sys, shlex
 import yaml
 
-USAGE = """usage: rhythmpress-env [-s|-c] [-k] [-f]
+USAGE = """usage: rhythmpress_env [-s|-c] [-k] [-f]
   -s   output Bourne/POSIX shell code (default)
   -c   output csh/tcsh code
   -k   output deactivation code (instead of activation)
@@ -43,16 +43,16 @@ def _emit_sh_activate(root, title, *, force=False):
     lines = []
     # idempotency guard: skip only if already active for this same root (unless -f)
     if not force:
-        lines.append(f'if [ -n "$RHYTHMPEDIA_ROOT" ] && [ "$RHYTHMPEDIA_ROOT" = {qroot} ]; then :; else')
+        lines.append(f'if [ -n "$RHYTHMPRESS_ROOT" ] && [ "$RHYTHMPRESS_ROOT" = {qroot} ]; then :; else')
 
-    lines.append(f'export RHYTHMPEDIA_ROOT={qroot}')
+    lines.append(f'export RHYTHMPRESS_ROOT={qroot}')
     if title:
         lines.append(f'export RHYTHMPRESS_TITLE={shlex.quote(title)}')
 
     # PATH prepend once
     lines.append(
-        'case ":$PATH:" in *":$RHYTHMPEDIA_ROOT/bin:"*) : ;; '
-        '*) PATH="$RHYTHMPEDIA_ROOT/bin${PATH:+:$PATH}"; export PATH ;; esac'
+        'case ":$PATH:" in *":$RHYTHMPRESS_ROOT/bin:"*) : ;; '
+        '*) PATH="$RHYTHMPRESS_ROOT/bin${PATH:+:$PATH}"; export PATH ;; esac'
     )
 
     # Prompt: backup once (original venv prompt), strip any "(.venv ...)" from backup, then add our prefix
@@ -74,8 +74,8 @@ esac'''.strip("\n"))
     # Define project-only deactivate function
     lines.append(r'''
 rhythmpress_deactivate() {
-  if [ -n "$RHYTHMPEDIA_ROOT" ]; then
-    PATH=$(printf '%s' "$PATH" | sed "s#:$RHYTHMPEDIA_ROOT/bin##; s#^$RHYTHMPEDIA_ROOT/bin:##")
+  if [ -n "$RHYTHMPRESS_ROOT" ]; then
+    PATH=$(printf '%s' "$PATH" | sed "s#:$RHYTHMPRESS_ROOT/bin##; s#^$RHYTHMPRESS_ROOT/bin:##")
     export PATH
   fi
   case $- in *i*)
@@ -84,7 +84,7 @@ rhythmpress_deactivate() {
       unset _RHYTHMPRESS_OLD_PS1
     fi
   esac
-  unset RHYTHMPEDIA_ROOT RHYTHMPRESS_TITLE
+  unset RHYTHMPRESS_ROOT RHYTHMPRESS_TITLE
   unset -f rhythmpress_deactivate 2>/dev/null || :
 }
 '''.strip("\n"))
@@ -95,8 +95,8 @@ rhythmpress_deactivate() {
 
 def _emit_sh_deactivate():
     return r'''\
-if [ -n "$RHYTHMPEDIA_ROOT" ]; then
-  PATH=$(printf '%s' "$PATH" | sed "s#:$RHYTHMPEDIA_ROOT/bin##; s#^$RHYTHMPEDIA_ROOT/bin:##")
+if [ -n "$RHYTHMPRESS_ROOT" ]; then
+  PATH=$(printf '%s' "$PATH" | sed "s#:$RHYTHMPRESS_ROOT/bin##; s#^$RHYTHMPRESS_ROOT/bin:##")
   export PATH
 fi
 case $- in *i*)
@@ -105,7 +105,7 @@ case $- in *i*)
     unset _RHYTHMPRESS_OLD_PS1
   fi
 esac
-unset RHYTHMPEDIA_ROOT RHYTHMPRESS_TITLE
+unset RHYTHMPRESS_ROOT RHYTHMPRESS_TITLE
 unset -f rhythmpress_deactivate 2>/dev/null || :
 ''' + "\n"
 
@@ -115,16 +115,16 @@ def _emit_csh_activate(root, title, *, force=False):
     titleq = title.replace('"', r'\"')
     lines = []
     if not force:
-        lines.append(f'if ( $?RHYTHMPEDIA_ROOT && "$RHYTHMPEDIA_ROOT" == "{rootq}" ) then')
+        lines.append(f'if ( $?RHYTHMPRESS_ROOT && "$RHYTHMPRESS_ROOT" == "{rootq}" ) then')
         lines.append('  :')
         lines.append('else')
-    lines.append(f'  setenv RHYTHMPEDIA_ROOT "{rootq}"')
+    lines.append(f'  setenv RHYTHMPRESS_ROOT "{rootq}"')
     if title:
         lines.append(f'  setenv RHYTHMPRESS_TITLE "{titleq}"')
 
     # PATH prepend once (string test)
-    lines.append('  if ( ":$PATH:" !~ *":$RHYTHMPEDIA_ROOT/bin:"* ) then')
-    lines.append('    setenv PATH "$RHYTHMPEDIA_ROOT/bin:$PATH"')
+    lines.append('  if ( ":$PATH:" !~ *":$RHYTHMPRESS_ROOT/bin:"* ) then')
+    lines.append('    setenv PATH "$RHYTHMPRESS_ROOT/bin:$PATH"')
     lines.append('  endif')
 
     # prompt backup & set; base from backup; strip leading "(.venv ...)" once
@@ -143,14 +143,14 @@ def _emit_csh_activate(root, title, *, force=False):
 
 def _emit_csh_deactivate():
     return r'''\
-if ( $?RHYTHMPEDIA_ROOT ) then
-  setenv PATH "`echo "$PATH" | sed "s#:$RHYTHMPEDIA_ROOT/bin##; s#^$RHYTHMPEDIA_ROOT/bin:##"`"
+if ( $?RHYTHMPRESS_ROOT ) then
+  setenv PATH "`echo "$PATH" | sed "s#:$RHYTHMPRESS_ROOT/bin##; s#^$RHYTHMPRESS_ROOT/bin:##"`"
 endif
 if ( $?_RHYTHMPRESS_OLD_PROMPT ) then
   set prompt="$_RHYTHMPRESS_OLD_PROMPT"
   unset _RHYTHMPRESS_OLD_PROMPT
 endif
-unsetenv RHYTHMPEDIA_ROOT
+unsetenv RHYTHMPRESS_ROOT
 unsetenv RHYTHMPRESS_TITLE
 ''' + "\n"
 

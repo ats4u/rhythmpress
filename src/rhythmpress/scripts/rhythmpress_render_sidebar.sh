@@ -40,5 +40,5 @@ fi
 printf '**目次**\n\n' > _sidebar-$LANG_ID.generated.md
 
 # 3) Append generated TOC
-"$REPO_ROOT/bin/rhythmpedia-render-toc.py" "$CONF" >> _sidebar-$LANG_ID.generated.md
+"rhythmpress" "render_toc" "$CONF" >> _sidebar-$LANG_ID.generated.md
 

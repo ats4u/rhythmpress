@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys, pathlib; import argparse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]));
-import rhythmpress
+from .. import rhythmpress
 
 # CLI
 def main() -> int:
