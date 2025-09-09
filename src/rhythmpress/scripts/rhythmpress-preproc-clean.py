@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 import sys, argparse, pathlib, os, shutil
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from lib import rhythmpress  # noqa: E402
+from .. import rhythmpress  # noqa: E402
 
 SENTINEL_DEFAULT = ".article_dir"  # create this empty file in dirs you allow to clean
 

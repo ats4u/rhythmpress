@@ -32,7 +32,7 @@ ROOT = BIN.parent
 sys.path.insert(0, str(ROOT))
 
 # Import library
-from lib import rhythmpress as rp  # type: ignore
+import rhythmpress as rp  # type: ignore
 
 
 def die(code: int, msg: str) -> "NoReturn":

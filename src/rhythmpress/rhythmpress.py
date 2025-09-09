@@ -138,7 +138,7 @@ import re
 from pathlib import Path
 
 def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
-    # v3.2: input_md must be a Path to an existing file; template fixed at ./lib/templates/toc
+    # v3.2: input_md must be a Path to an existing file; template fixed at ./rhythmpress/templates/toc
     if not isinstance(input_md, Path):
         raise ValueError("input_md must be a pathlib.Path")
     if not input_md.is_file():
@@ -164,7 +164,7 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
     h0s   = [it for it in items if int(it["level"]) == 0] # ADDED BY ATS Wed, 20 Aug 2025 19:06:14 +0900
     preamble = h0s[0] if 0 < len(h0s) else None # ADDED BY ATS Wed, 20 Aug 2025 19:06:26 +0900
 
-    # resolve template path relative to this module (./lib/templates/toc)
+    # resolve template path relative to this module (./rhythmpress/templates/toc)
     module_dir = Path(__file__).resolve().parent
     template = module_dir / "templates" / "toc.markdown"
     if not template.exists():
@@ -599,7 +599,7 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
 
 #######################
 
-from lib.strip_header_comments import strip_header_comments
+from .strip_header_comments import strip_header_comments
 def call_create_toc( create_toc, input_qmd, **kwargs ):
     p = Path(input_qmd)
     basedir = str( p.parent.name ) # directory path as string
@@ -750,8 +750,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]));
 sys.path.append(os.path.dirname(__file__))
 
 import sys, pathlib;
-from lib.strip_header_comments import strip_header_comments
-from lib.git_dates import get_git_dates, GitDatesError  # add near other imports
+from .strip_header_comments import strip_header_comments
+from .git_dates import get_git_dates, GitDatesError  # add near other imports
 
 def _hdr_start(text: str, it) -> int:
     # start of the header line (prev '\n' before section_start_char; -1→0)
@@ -894,8 +894,8 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
 from pathlib import Path
 import shutil
-from lib.strip_header_comments import strip_header_comments
-from lib.git_dates import get_git_dates, GitDatesError  # add near other imports
+from .strip_header_comments import strip_header_comments
+from .git_dates import get_git_dates, GitDatesError  # add near other imports
 
 def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     """

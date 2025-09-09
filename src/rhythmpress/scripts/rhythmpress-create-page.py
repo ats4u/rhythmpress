@@ -13,7 +13,7 @@ BIN = Path(__file__).resolve().parent
 ROOT = BIN.parent
 sys.path.insert(0, str(ROOT))
 
-from lib import rhythmpress
+import rhythmpress
 
 def main(argv: list[str]) -> int:
     if not argv or argv[0] in ("-h", "--help"):
