@@ -1,44 +1,58 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# <<< ADDED Wed, 20 Aug 2025 06:18:07 +0900
-# Allow override: first arg = path to _sidebar.conf, default to local file
-CONF="${1:-_sidebar.conf}"
+# rhythmpress_render_sidebar.sh
+# Generate sidebar YAML + Markdown TOC from a _sidebar.conf
 
-# Extract filename part only (strip directory)
-BASE="$(basename "$CONF")"
+# --- Require RHYTHMPRESS_ROOT -------------------------------------------------
+if [ -z "${RHYTHMPRESS_ROOT:-}" ]; then
+  printf '%s\n' \
+    "RHYTHMPRESS_ROOT is not set." \
+    "Please activate the project, e.g.:" \
+    "  eval \"\$(rhythmpress env)\"" \
+    "" >&2
+  exit 1
+fi
 
-# Default
+# --- Locate the conf file ----------------------------------------------------
+RAW_CONF="${1:-_sidebar.conf}"
+case "$RAW_CONF" in
+  /*) CONF_ABS="$RAW_CONF" ;;
+  *)  CONF_ABS="$RHYTHMPRESS_ROOT/$RAW_CONF" ;;
+esac
+
+if [ ! -f "$CONF_ABS" ]; then
+  printf 'Not found: %s\n' "$CONF_ABS" >&2
+  exit 1
+fi
+
+# Work in the directory that contains the conf (so relative YAMLs inside it work)
+CONF_DIR="$(cd "$(dirname "$CONF_ABS")" && pwd)"
+cd "$CONF_DIR"
+
+BASE="$(basename "$CONF_ABS")"
+
+# --- Language id -------------------------------------------------------------
 LANG_ID=ja
-
-# If it matches the pattern _sidebar.<langid>.conf → extract it
 if [[ "$BASE" =~ ^_sidebar\.([^.]+)\.conf$ ]]; then
-    LANG_ID="${BASH_REMATCH[1]}"
+  LANG_ID="${BASH_REMATCH[1]}"
 fi
-# >>> ADDED Wed, 20 Aug 2025 06:18:07 +0900
 
+# --- Collect YAML file list --------------------------------------------------
+FILES="$(sed 's/#.*//' "$BASE" | grep -v '^[[:space:]]*$' || true)"
 
-# Resolve repo root from this script’s location: .../bin -> repo root
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-
-# # 1) Merge YAMLs listed in _sidebar.conf
-# #    (expects one path per line; adjust if your list uses a different delimiter)
-# xargs <"$CONF" yq ea '. as $i ireduce ({}; . *+ $i)' > _sidebar-$LANG_ID.generated.yml
-
-# collect file list (strip inline/full-line # comments, drop blanks)
-FILES="$(sed 's/#.*//' "$CONF" | grep -v '^[[:space:]]*$' || true)"
-
-# 1) Merge YAMLs (empty -> {})
+# --- Merge YAMLs -------------------------------------------------------------
 if [ -n "$FILES" ]; then
-  printf '%s\n' "$FILES" | xargs yq ea '. as $i ireduce ({}; . *+ $i)' > _sidebar-$LANG_ID.generated.yml
+  printf '%s\n' "$FILES" \
+    | xargs yq ea '. as $i ireduce ({}; . *+ $i)' \
+    > "_sidebar-$LANG_ID.generated.yml"
 else
-  echo '{}' > _sidebar-$LANG_ID.generated.yml
+  echo '{}' > "_sidebar-$LANG_ID.generated.yml"
 fi
 
-# 2) Write header with proper newlines (printf is more portable than echo -e)
-printf '**目次**\n\n' > _sidebar-$LANG_ID.generated.md
+# --- Markdown header ---------------------------------------------------------
+printf '**目次**\n\n' > "_sidebar-$LANG_ID.generated.md"
 
-# 3) Append generated TOC
-"rhythmpress" "render_toc" "$CONF" >> _sidebar-$LANG_ID.generated.md
+# --- Append generated TOC ----------------------------------------------------
+rhythmpress render_toc "$BASE" >> "_sidebar-$LANG_ID.generated.md"
 
