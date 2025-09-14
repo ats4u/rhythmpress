@@ -8,17 +8,30 @@ from typing import NoReturn
 # ---- helpers ---------------------------------------------------------------
 
 def list_local(bin_dir: Path) -> list[str]:
-    """List local subcommands in scripts/ as command names (rhythmpress_<cmd>*)."""
+    """
+    List local subcommands in scripts/ as *display* names.
+    Filenames are snake_case; we display kebab-case.
+    """
     names = set()
     for p in bin_dir.glob("rhythmpress_*"):
         if p.is_file():
             base = p.name.split(".", 1)[0]  # drop extension
-            names.add(base.replace("rhythmpress_", ""))
+            snake = base.replace("rhythmpress_", "")
+            names.add(snake.replace("_", "-"))
     return sorted(names)
+
+def _canonicalize(cmd: str) -> str:
+    """Normalize a user-entered command to a snake_case module key."""
+    # Accept kebab-, snake-, and accidental spaces; collapse multiples.
+    x = cmd.strip().lower().replace("-", "_").replace(" ", "_")
+    while "__" in x:
+        x = x.replace("__", "_")
+    return x
 
 def resolve_target(bin_dir: Path, cmd: str) -> Path | None:
     """Pick target script in local scripts/: no/ext/.py/.sh (no PATH fallback)."""
-    base = f"rhythmpress_{cmd}"
+    snake = _canonicalize(cmd)
+    base = f"rhythmpress_{snake}"
     candidates = [bin_dir / base, bin_dir / (base + ".py"), bin_dir / (base + ".sh")]
     for c in candidates:
         if c.exists():
@@ -36,8 +49,9 @@ def to_module_name(target: Path, scripts_dir: Path) -> str | None:
             return None
         # Ensure target is under scripts_dir
         target.relative_to(scripts_dir)
-        name = target.stem  # e.g. 'rhythmpress-preproc-clean'
-        mod = name.replace("-", "_")
+        name = target.stem  # e.g. 'rhythmpress_preproc_clean'
+        mod = name.replace("-", "_")  # tolerant if a legacy dash sneaks in
+
         return f"rhythmpress.scripts.{mod}"
     except Exception:
         return None
@@ -93,7 +107,10 @@ def main() -> None:
 
     target = resolve_target(scripts_dir, cmd)
     if not target:
+        # Suggest the kebab-case that the user likely intended
+        suggestion = _canonicalize(cmd).replace("_", "-")
         print(f"rhythmpress: unknown command: {cmd}")
+        print(f"(did you mean: {suggestion} ?)")
         print("Try:  rhythmpress list")
         sys.exit(1)
 
