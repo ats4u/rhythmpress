@@ -10,6 +10,9 @@ For each directory listed in a definition file:
 Finally:
   3) rhythmpress render_sidebar <conf>
 
+You can also run ONLY step (1) across all targets with --clean-only.
+This skips preproc and sidebar generation entirely.
+
 Definition file format:
   - One directory per line.
   - Lines starting with '#' are comments.
@@ -37,7 +40,7 @@ def die(code: int, msg: str) -> "NoReturn":
 def parse_args(argv: List[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(
         prog="rhythmpress_build",
-        description="Run preproc_clean + preproc over a set of pages, then render sidebar.",
+        description="Run preproc_clean + preproc over a set of pages, then render sidebar. Use --clean-only to run only preproc_clean.",
     )
     p.add_argument("--defs", default="_rhythmpress.conf",
                    help="Path to definition file (default: _rhythmpress.conf). If '-' use stdin.")
@@ -49,6 +52,8 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
                    help="Flags passed to `preproc_clean` (default: --apply --force).")
     p.add_argument("--skip-clean", action="store_true",
                    help="Skip the preproc_clean step.")
+    p.add_argument("--clean-only", action="store_true",
+                   help="Run ONLY `preproc_clean` for each target, then stop (no preproc, no sidebar).")
     p.add_argument("--keep-going", "-k", action="store_true",
                    help="Continue after errors (default: stop at first error).")
     p.add_argument("--chdir", default=".",
@@ -119,6 +124,12 @@ def main(argv: List[str]) -> int:
     # Explicit environment (easy place to inject vars later if needed)
     env = os.environ.copy()
 
+    # Sanity checks for flag combinations
+    if ns.clean_only and ns.skip_clean:
+        die(2, "Flags conflict: --clean-only cannot be combined with --skip-clean.")
+    # Note: --no-sidebar is ignored in --clean-only mode, but harmless.
+    # Note: --sidebar path is ignored in --clean-only mode.
+
     targets = load_def_dirs(ns.defs)
 
     # Verify dirs exist (fail fast unless keep-going)
@@ -134,7 +145,8 @@ def main(argv: List[str]) -> int:
 
     # Execute
     for d in existing:
-        if not ns.skip_clean:
+        # Always run preproc_clean in clean-only mode; otherwise honor --skip-clean
+        if ns.clean_only or (not ns.skip_clean):
             rc = run(["rhythmpress", "preproc_clean", d, *ns.apply_flags],
                      verbose=ns.verbose, dry_run=ns.dry_run, env=env)
             if rc != 0:
@@ -142,14 +154,29 @@ def main(argv: List[str]) -> int:
                 if not ns.keep_going:
                     return rc
                 else:
-                    continue
+                    # On failure with keep-going, skip the rest for this dir (which
+                    # in clean-only mode means just proceed to next; in normal mode
+                    # we'll also skip preproc for this dir).
+                    if not ns.clean_only:
+                        continue
 
+        # In clean-only mode, do not run further steps
+        if ns.clean_only:
+            continue
+
+        # Normal build path: run preproc
         rc = run(["rhythmpress", "preproc", d],
                  verbose=ns.verbose, dry_run=ns.dry_run, env=env)
         if rc != 0:
             print(f"[FAIL] preproc: {d} (exit {rc})", file=sys.stderr)
             if not ns.keep_going:
                 return rc
+
+
+    # If we only cleaned, we are done (no sidebar generation)
+    if ns.clean_only:
+        print("[DONE] Clean completed.")
+        return 0
 
     if not ns.no_sidebar:
         # 0) First generate aggregated sidebar confs per language
