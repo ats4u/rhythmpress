@@ -871,7 +871,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
         href      = f"{base_name}/{slug}/{lang}/index.qmd"
         yml_lang_lines.append(f"          - {href}")
 
-    sidebar = as_bool( frontmatter.get("rhythmpedia-preproc-sidebar", None), default=True )
+    sidebar = as_bool( frontmatter.get("rhythmpress-preproc-sidebar", None), default=True )
     print(f"[DEBUG] {yml_lang_path} sidebar = {sidebar}")
 
     if sidebar:
@@ -914,7 +914,7 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     frontmatter = parse_frontmatter(src_text)
 
     # Follow front matter flag (default True, explicit false suppresses YAML)
-    sidebar = as_bool( frontmatter.get("rhythmpedia-preproc-sidebar", None), default=True )
+    sidebar = as_bool( frontmatter.get("rhythmpress-preproc-sidebar", None), default=True )
     print(f"[DEBUG] {dst} sidebar = {sidebar}")
 
     # Resolve dates from Git (single source of truth)
@@ -1156,7 +1156,7 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
 
     For each directory:
       - Pick master-{lang_id}.qmd (preferred) or master-{lang_id}.md.
-      - Read front matter key `rhythmpedia-preproc`:
+      - Read front matter key `rhythmpress-preproc`:
           "split" -> use create_toc_v5 (split layout)
           "copy"  -> use create_toc_v1 (copy-as-is layout)
         If the key is absent, default to "copy".
@@ -1249,13 +1249,13 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
         fm = parse_frontmatter(text) if text else {}
 
         # Respect per-article sidebar opt-out
-        # If front matter has: rhythmpedia-preproc-sidebar: false → skip this directory
-        sidebar_opt = fm.get("rhythmpedia-preproc-sidebar", None)
+        # If front matter has: rhythmpress-preproc-sidebar: false → skip this directory
+        sidebar_opt = fm.get("rhythmpress-preproc-sidebar", None)
         if sidebar_opt is False:
             _log("info", f"[{d.name}] {master.name} → sidebar=false (skipped)")
             continue
 
-        raw_mode = fm.get("rhythmpedia-preproc", None)
+        raw_mode = fm.get("rhythmpress-preproc", None)
         if isinstance(raw_mode, bool):
             mode = "split" if raw_mode else "copy"
         elif isinstance(raw_mode, str):
@@ -1264,7 +1264,7 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
             mode = "copy"
 
         if mode not in {"copy", "split"}:
-            msg = f"{d.name}: unknown rhythmpedia-preproc='{raw_mode}'; falling back to 'copy'"
+            msg = f"{d.name}: unknown rhythmpress-preproc='{raw_mode}'; falling back to 'copy'"
             if strict:
                 raise ValueError(msg)
             _log("warning", msg)
