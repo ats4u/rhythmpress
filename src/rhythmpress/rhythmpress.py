@@ -204,16 +204,32 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
         if line.strip() != ''
     )
 
+#    output = shifted
+#    if preamble is not None:
+#        link        : str = preamble["link"]
+#        description : str = preamble["description"].rstrip()
+#        title       : str = preamble["header_title"]
+#
+#        if link is not None:
+#            output = f"### {title}\n- [**{title}**]({link})\n{description}\n\n" + output
+#        else:
+#            output = f"### {title}\n- [**{title}**](#)\n{description}\n\n" + output
+
+    # Always emit the file header, even if there is no preamble text.
     output = shifted
     if preamble is not None:
-        link        : str = preamble["link"]
-        description : str = preamble["description"].rstrip()
-        title       : str = preamble["header_title"]
+        link        : str = preamble.get("link") or f"{basedir}/{lang}/"
+        description : str = preamble.get("description", "").rstrip()
+        title       : str = preamble.get("header_title") or section_title
+    else:
+        link        : str = f"{basedir}/{lang}/"
+        description : str = ""
+        title       : str = section_title
 
-        if link is not None:
-            output = f"### {title}\n- [**{title}**]({link})\n{description}\n\n" + output
-        else:
-            output = f"### {title}\n- [**{title}**](#)\n{description}\n\n" + output
+    header_block = f"### {title}\n- [**{title}**]({link})"
+    if description:
+        header_block += f"\n{description}"
+    output = header_block + "\n\n" + output
 
     return output
 
@@ -1285,7 +1301,7 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
         if block:
             out_parts.append(block)
 
-    return "\n\n".join(out_parts) + ("\n" if out_parts else "")
+    return "\n\n<!-- -->\n\n".join(out_parts) + ("\n" if out_parts else "")
 
 
 
