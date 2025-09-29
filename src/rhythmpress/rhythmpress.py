@@ -562,7 +562,14 @@ def _slug_for_item(title_raw: str, explicit: Optional[str]) -> str:
     rb = _ruby_base_or_none(title_raw)
     return _slugify_unicode(rb if rb else title_raw)
 
-def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
+def proc_qmd_teasers(
+    items,
+    basedir: str | Path,
+    lang: str,
+    link_prefix: str = "/",
+    *,
+    interpolate_vars: bool = True,
+):
     """
     Decorate parsed heading items with file/link metadata.
 
@@ -577,7 +584,48 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
       - This function only annotates; callers may choose to write H2 only (current spec).
       - Links use the directory name (Path(basedir).name) to avoid absolute paths.
       - No de-duplication: ensure slugs are globally unique if you keep the flat layout.
+
+    If `interpolate_vars` is True (default), titles from ATL headers are first
+    interpolated using Quarto-style variables (e.g. `${project.title}`,
+    `${site_url}`, `${env:FOO}`) loaded via `rhythmpress.quarto_vars.get_variables`.
+    Interpolation happens *before* slugging and link building, so sidebars and
+    front-matter titles won’t leak raw placeholders.
     """
+    # --- variable interpolation (title fields) -------------------------------
+    # We do this once per call, then apply to every item prior to slugging.
+    var_ctx = None
+    if interpolate_vars:
+        try:
+            # Lazy import to avoid hard dependency in non-Quarto contexts
+            from . import quarto_vars as _qv
+            var_ctx = _qv.get_variables(cwd=str(basedir), lang=lang)
+        except Exception:
+            # If anything goes wrong loading variables, fail soft: just skip
+            var_ctx = None
+
+    # local, dependency-free interpolation that understands ${dot.paths} and ${env:FOO}
+    import re, os
+    VAR_SC = re.compile(r"\{\{<\s*var\s+([A-Za-z0-9_.:-]+)\s*>\}\}")
+
+    def _deep_get(d, dotted: str):
+        cur = d
+        for part in dotted.split("."):
+            if not isinstance(cur, dict) or part not in cur:
+                return None
+            cur = cur[part]
+        return cur
+
+    def _interp(s: str) -> str:
+        if not (interpolate_vars and var_ctx and isinstance(s, str)):
+            return s
+        def repl(m):
+            key = m.group(1)
+            if key.startswith("env:"):
+                return os.environ.get(key[4:], "")
+            val = _deep_get(var_ctx, key) if isinstance(var_ctx, dict) else None
+            return "" if val is None else str(val)
+        return VAR_SC.sub(repl, s)
+
     base      = Path(basedir)
     base_name = base.name  # safe for links
     if base_name in ("", ".", "/"):
@@ -593,7 +641,12 @@ def proc_qmd_teasers(items, basedir: str | Path, lang: str, link_prefix= "/" ):
 
     for it in items:
         lvl: int = int(it["level"])
-        title_raw: str = it["title_raw"]
+        # interpolate title fields first so slug/link reflect final text
+        title_raw: str = _interp(it.get("title_raw", ""))
+        if "title_raw" in it:
+            it["title_raw"] = title_raw
+        if "header_title" in it and isinstance(it["header_title"], str):
+            it["header_title"] = _interp(it["header_title"])
         explicit: Optional[str] = it["header_slug"]
 
         slug = _slug_for_item(title_raw, explicit)
