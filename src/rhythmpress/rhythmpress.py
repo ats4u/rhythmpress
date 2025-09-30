@@ -759,7 +759,7 @@ def _create_toc_v5(input_qmd: Path, text: str, basedir: str, lang: str, *, link_
         if link is not None:
             if lvl == 0:
                 lines_out.append("")
-                lines_out.append( f"### {title}" )
+                lines_out.append( f"## {title}" )
                 if description:
                     lines_out.append( "" )
                     lines_out.append( f"{indent_level}- [**{title}**]({link})" )
@@ -774,7 +774,7 @@ def _create_toc_v5(input_qmd: Path, text: str, basedir: str, lang: str, *, link_
                 # description = dedent(description).strip()
                 # description = indent(description, indent_level)
                 lines_out.append("")
-                lines_out.append( f"#### {title}" )
+                lines_out.append( f"### {title}" )
                 if description:
                     lines_out.append( "" )
                     lines_out.append( "<!-- -->" )
