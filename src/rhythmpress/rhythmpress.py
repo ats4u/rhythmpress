@@ -893,11 +893,11 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     # Language index via create_toc_v5 (absolute links)
     idx: Path = h2s[0]["lang_index_path"]
     toc_md = create_toc_v5(str(master_path), link_prefix="/")
-    idx_lines: List[str] = []
-    if preamble and preamble["description"].strip():
-        idx_lines += [preamble["description"].rstrip(), ""]
 
-    idx_lines += [ toc_md ]
+    # Only use the TOC output. It already includes the master teaser (level==0)
+    # with the headline, so we avoid duplicating the teaser here.
+    idx_lines: List[str] = [toc_md]
+
     idx_text = "\n".join(idx_lines).rstrip() + "\n"
     if not idx.exists() or idx.read_text(encoding="utf-8") != idx_text:
         idx.parent.mkdir(parents=True, exist_ok=True)
