@@ -896,9 +896,18 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
     # Only use the TOC output. It already includes the master teaser (level==0)
     # with the headline, so we avoid duplicating the teaser here.
-    idx_lines: List[str] = [toc_md]
+    # idx_lines: List[str] = [toc_md]
+    # idx_text = "\n".join(idx_lines).rstrip() + "\n"
 
-    idx_text = "\n".join(idx_lines).rstrip() + "\n"
+    # Provide a page title so the banner shows text.
+    page_title = (
+        (preamble.get("title") if isinstance(preamble, dict) else None)
+        or h2s[0].get("title")
+        or Path(master_path).parent.name
+    )
+    fm = f"---\ntitle: {page_title}\n---\n\n"
+    idx_text = fm + (toc_md if toc_md.endswith("\n") else toc_md + "\n")
+
     if not idx.exists() or idx.read_text(encoding="utf-8") != idx_text:
         idx.parent.mkdir(parents=True, exist_ok=True)
         idx.write_text(idx_text, encoding="utf-8")
