@@ -936,13 +936,32 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
     section_title = frontmatter.get("title") or "Untitled"
     yml_lang_path = master_path.parent / f"_sidebar-{lang}.yml"
+
+    # yml_lang_lines = [
+    #     "website:",
+    #     "  sidebar:",
+    #     "    contents:",
+    #     f"      - section: \"{section_title}\"",
+    #     "        contents:",
+    # ]
+
+
+    # Build a per-language sidebar section. Previously the section node had no
+    # `href`, which made the section title non-clickable in Quarto's sidebar UI
+    # even when it represented a real directory with its own index page.
+    # We now point the section itself to the directory index:
+    #   <dir>/<lang>/index.qmd
+    base_name = master_path.parent.name
+    section_href = f"{base_name}/{lang}/index.qmd"
     yml_lang_lines = [
         "website:",
         "  sidebar:",
         "    contents:",
         f"      - section: \"{section_title}\"",
+        f"        href: {section_href}",
         "        contents:",
     ]
+
     for it in h2s:
         base_name = it["base_name"]
         slug      = it["slug"]
