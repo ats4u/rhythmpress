@@ -1,6 +1,44 @@
 def greet(name):
     return f"Hello, {name}! This is mymodule speaking."
 
+
+
+# ===============================================================
+# extract_junks_from_attr_block
+# ADDED Thu, 23 Oct 2025 21:07:24 +0900
+# ===============================================================
+import re
+
+# Matches: #id  (id = [Unicode word chars] + [- . ~] + %HH escapes)
+_ID_TOKEN_RE = re.compile(
+    r'#(?:\w|%[0-9A-Fa-f]{2})(?:[\w.\-~]|%[0-9A-Fa-f]{2})*',
+    re.UNICODE
+)
+
+def extract_junks_from_attr_block(attr_block: str) -> list[str]:
+    """
+    Given a Quarto property block body like:
+      '#foo .bar key=val #タイトル'
+    return only the ID tokens (without '#'):
+      ['foo', 'タイトル']
+    """
+    return [m.group(0)[1:] for m in _ID_TOKEN_RE.finditer(attr_block or "")]
+
+# If you currently parse headers line-by-line, this convenience helps:
+_HDR_ATTRS_RE = re.compile(r'^\s{0,3}#{1,6}\s.*?\{([^}]*)\}\s*$', re.UNICODE)
+
+def extract_junks_from_header_line(line: str) -> list[str]:
+    """
+    From a full header line like:
+      '## Title {#foo .x key=1 #タイトル}'
+    return ['foo', 'タイトル'].
+    """
+    m = _HDR_ATTRS_RE.match(line)
+    if not m:
+        return []
+    return extract_junks_from_attr_block(m.group(1))
+
+
 # ===============================================================
 # compact front matter + wrapper 
 # ===============================================================
@@ -243,7 +281,7 @@ import re
 import html
 from typing import List, Dict, Optional
 
-HEADER_RE = re.compile(r'^(#{2,6})\s+(.*?)\s*(?:\{#([^\}]+)\})?\s*$')
+HEADER_RE = re.compile(r'^(#{2,6})\s+(.*?)\s*(?:\{([^\}]+)\})?\s*$')
 # FENCE_OPEN_RE = re.compile(r'^[ \t]{0,3}([`~]{3,})(.*)$')  # backticks or tildes
 # FENCE_CLOSE_RE = lambda ch, n: re.compile(r'^[ \t]{0,3}' + re.escape(ch * n) + r'\s*$')
 FENCE_OPEN_RE  = re.compile(r'^[ \t]*([`~]{3,})(.*)$')
@@ -377,8 +415,13 @@ def parse_qmd_teasers(
             if hm:
                 level = len(hm.group(1))
                 if min_level <= level <= max_level:
+                    # raw_title = hm.group(2).strip()
+                    # slug = hm.group(3)
                     raw_title = hm.group(2).strip()
-                    slug = hm.group(3)
+                    attr_block = hm.group(3)  # full contents inside {...} or None
+                    ids = extract_junks_from_attr_block(attr_block or "")
+                    slug = ids[0] if ids else None
+
                     title_norm = _normalize_title(raw_title, strip_html_in_title)
                     headers.append({
                         "index": i,
