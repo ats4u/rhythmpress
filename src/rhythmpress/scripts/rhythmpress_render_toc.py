@@ -26,8 +26,6 @@ import json
 import os
 import re
 import sys
-from rhythmpress import quarto_vars
-from rhythmpress.rhythmpress import _interp_sidebar_title, _guess_base_and_lang
 from pathlib import Path, PurePosixPath
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
@@ -68,9 +66,6 @@ def _yaml_load_text(text: str) -> Optional[dict]:
     if pyyaml is None:
         return None
     return pyyaml.safe_load(text)
-
-
-
 
 
 # ----------------------------
@@ -375,30 +370,6 @@ def resolve_title_for(
     )
 
 
-def resolve_title_for_bak(
-    root: Path,
-    path_like: str,
-    is_dir_item_flag: bool,
-    prefer_title_mode: str,
-    object_text: Optional[str],
-    cache: Optional[TitleCache],
-    language_tails: Sequence[str],
-) -> Tuple[str, Optional[Path], bool]:
-
-    title, src_path, exists_flag = resolve_title_for_impl(
-        root,
-        path_like,
-        is_dir_item_flag,
-        prefer_title_mode,
-        object_text,
-        cache,
-        language_tails,
-    )
-
-    # base, lang_guess = _guess_base_and_lang(path_like, language_tails)
-    # title = _interp_sidebar_title(title, root, base, lang_guess)
-    return (title, src_path, exists_flag)
-
 # ----------------------------
 # YAML item utilities (line numbers with ruamel)
 # ----------------------------
@@ -477,29 +448,11 @@ class Renderer:
         out: List[str] = []
         for it in items:
             if _is_section_object(it):
-                # Render section objects. If they carry an href, treat them like a linkable node
-                # and resolve the title from the target (front matter/H1), falling back to the section label.
+                title = str(it["section"])
                 child_lines = self._render_items(it["contents"], depth + 1, origin_yaml)
                 if self.prune_empty and not child_lines:
                     continue
-
-                raw_href = it.get("href") if isinstance(it, dict) else None
-                if isinstance(raw_href, str) and raw_href.strip():
-                    raw = raw_href.strip()  # keep as-is (do NOT normalize path per current design)
-                    is_dir = is_directory_item(raw, self.root)
-                    section_label = str(it.get("section", "")).strip()
-                    title, src, exists = resolve_title_for(
-                        self.root, raw, is_dir, self.prefer_title_mode, section_label, self.cache, self.language_tails
-                    )
-                    # <<<
-                    # href = raw  # emit the href exactly as provided
-                    href = dir_href_for(raw) if is_directory_item(raw, self.root) else file_href_for(raw)
-                    # >>>
-                    out.append(("  " * depth) + f"- [{title}]({href})")
-                else:
-                    title = str(it.get("section", ""))
-                    out.append(("  " * depth) + f"- {title}")
-
+                out.append(("  " * depth) + f"- {title}")
                 out.extend(child_lines)
                 continue
 

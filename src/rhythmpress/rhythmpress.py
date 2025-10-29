@@ -3,93 +3,6 @@ def greet(name):
 
 
 
-# <<< ADDED Thu, 30 Oct 2025 00:01:54 +0900
-# --- BEGIN sidebar title interpolation additions ---
-import os
-import re
-from pathlib import Path, PurePosixPath
-from . import quarto_vars as _qv
-
-# same pattern we already use in proc_qmd_teasers()
-_VAR_SC = re.compile(r"\{\{<\s*var\s+([A-Za-z0-9_.:-]+)\s*>\}\}")
-
-def yaml_path_for_fs(p: str) -> str:
-    """YAML path → POSIX-ish string for FILESYSTEM resolution (preserve absolute)."""
-    return (p or "").strip().replace("\\", "/")
-
-def _guess_base_and_lang(path_like, language_tails):
-    """
-    Infer (base_dir, lang_id) from something like
-    'hypergroove/ja/index.qmd' or 'hypergroove/ja/'.
-    Returns (base, lang) or (None, None) if we can't guess.
-    """
-    parts = list(PurePosixPath(yaml_path_for_fs(path_like)).parts)
-    if not parts:
-        return (None, None)
-
-    base = parts[0]
-    lang = None
-    for seg in parts[1:]:
-        if seg in language_tails:
-            lang = seg
-            break
-
-    return (base, lang)
-
-
-def _interp_sidebar_title(raw_title, project_root, base, lang):
-    """
-    Apply the same {{< var ... >}} expansion logic used in proc_qmd_teasers()
-    so that sidebar captions match page headers.
-    """
-    if not isinstance(raw_title, str):
-        return raw_title
-    if base is None or lang is None:
-        return raw_title
-
-    try:
-        var_ctx = quarto_vars.get_variables(cwd=str(project_root / base), lang=lang)
-    except Exception:
-        var_ctx = {}
-
-    if not isinstance(var_ctx, dict):
-        var_ctx = {}
-
-    def _deep_get(d, dotted):
-        cur = d
-        for part in dotted.split("."):
-            if not isinstance(cur, dict) or part not in cur:
-                return None
-            cur = cur[part]
-        return cur
-
-    def _replace(m):
-        key = m.group(1)
-        if key.startswith("env:"):
-            return os.environ.get(key[4:], "")
-        val = _deep_get(var_ctx, key)
-        if val is None:
-            return ""
-        return str(val)
-
-    return _VAR_SC.sub(_replace, raw_title)
-
-# --- END sidebar title interpolation additions ---
-# >>> ADDED Thu, 30 Oct 2025 00:01:54 +0900
-
-
-def _get_project_root_from_env(fallback: Path) -> Path:
-    """
-    Return the project root from RHYTHMPRESS_ROOT (official convention).
-    Fall back only to `fallback` if the variable is not set.
-    """
-    env_root = os.environ.get("RHYTHMPRESS_ROOT")
-    return Path(env_root).expanduser().resolve() if env_root else fallback.resolve()
-
-
-
-
-
 # ===============================================================
 # extract_junks_from_attr_block
 # ADDED Thu, 23 Oct 2025 21:07:24 +0900
@@ -1064,17 +977,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
 
     # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
-    # section_title = frontmatter.get("title") or "Untitled"
-    # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
-    # Make the sidebar section title match the generated index page banner title.
-    # Use the already-computed `page_title` (front matter `title` → first H1/preamble → dirname),
-    # falling back to front matter (if dict) and finally "Untitled".
-    section_title = (
-        (page_title if 'page_title' in locals() else None)
-        or (frontmatter.get("title") if isinstance(frontmatter, dict) else None)
-        or "Untitled"
-    )
-
+    section_title = frontmatter.get("title") or "Untitled"
     yml_lang_path = master_path.parent / f"_sidebar-{lang}.yml"
 
     # yml_lang_lines = [
@@ -1093,25 +996,11 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     #   <dir>/<lang>/index.qmd
     base_name = master_path.parent.name
     section_href = f"{base_name}/{lang}/index.qmd"
-    # Minimal escaping for double quotes inside YAML scalar
-    # safe_section_title = section_title.replace('"', r'\"')
-
-    project_root = _get_project_root_from_env(master_path.parent)
-    base_name    = master_path.parent.name
-    safe_section_title = section_title
-
-    # safe_section_title = _interp_sidebar_title(
-    #     section_title,
-    #     project_root=project_root,
-    #     base=base_name,
-    #     lang=lang,
-    # )
-
     yml_lang_lines = [
         "website:",
         "  sidebar:",
         "    contents:",
-        f"      - section: \"{safe_section_title}\"",
+        f"      - section: \"{section_title}\"",
         f"        href: {section_href}",
         "        contents:",
     ]
