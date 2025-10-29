@@ -977,7 +977,17 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
 
     # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
-    section_title = frontmatter.get("title") or "Untitled"
+    # section_title = frontmatter.get("title") or "Untitled"
+    # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
+    # Make the sidebar section title match the generated index page banner title.
+    # Use the already-computed `page_title` (front matter `title` → first H1/preamble → dirname),
+    # falling back to front matter (if dict) and finally "Untitled".
+    section_title = (
+        (page_title if 'page_title' in locals() else None)
+        or (frontmatter.get("title") if isinstance(frontmatter, dict) else None)
+        or "Untitled"
+    )
+
     yml_lang_path = master_path.parent / f"_sidebar-{lang}.yml"
 
     # yml_lang_lines = [
@@ -996,11 +1006,13 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     #   <dir>/<lang>/index.qmd
     base_name = master_path.parent.name
     section_href = f"{base_name}/{lang}/index.qmd"
+    # Minimal escaping for double quotes inside YAML scalar
+    safe_section_title = section_title.replace('"', r'\"')
     yml_lang_lines = [
         "website:",
         "  sidebar:",
         "    contents:",
-        f"      - section: \"{section_title}\"",
+        f"      - section: \"{safe_section_title}\"",
         f"        href: {section_href}",
         "        contents:",
     ]
