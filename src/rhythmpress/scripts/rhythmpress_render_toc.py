@@ -27,6 +27,7 @@ import os
 import re
 import sys
 from rhythmpress import quarto_vars
+from rhythmpress.rhythmpress import _interp_sidebar_title, _guess_base_and_lang
 from pathlib import Path, PurePosixPath
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
@@ -70,73 +71,6 @@ def _yaml_load_text(text: str) -> Optional[dict]:
 
 
 
-
-
-# <<< ADDED Thu, 30 Oct 2025 00:01:54 +0900
-# --- BEGIN sidebar title interpolation additions ---
-
-# same pattern we already use in proc_qmd_teasers()
-_VAR_SC = re.compile(r"\{\{<\s*var\s+([A-Za-z0-9_.:-]+)\s*>\}\}")
-
-def _guess_base_and_lang(path_like, language_tails):
-    """
-    Infer (base_dir, lang_id) from something like
-    'hypergroove/ja/index.qmd' or 'hypergroove/ja/'.
-    Returns (base, lang) or (None, None) if we can't guess.
-    """
-    parts = list(PurePosixPath(yaml_path_for_fs(path_like)).parts)
-    if not parts:
-        return (None, None)
-
-    base = parts[0]
-    lang = None
-    for seg in parts[1:]:
-        if seg in language_tails:
-            lang = seg
-            break
-
-    return (base, lang)
-
-
-def _interp_sidebar_title(raw_title, project_root, base, lang):
-    """
-    Apply the same {{< var ... >}} expansion logic used in proc_qmd_teasers()
-    so that sidebar captions match page headers.
-    """
-    if not isinstance(raw_title, str):
-        return raw_title
-    if base is None or lang is None:
-        return raw_title
-
-    try:
-        var_ctx = quarto_vars.get_variables(cwd=str(project_root / base), lang=lang)
-    except Exception:
-        var_ctx = {}
-
-    if not isinstance(var_ctx, dict):
-        var_ctx = {}
-
-    def _deep_get(d, dotted):
-        cur = d
-        for part in dotted.split("."):
-            if not isinstance(cur, dict) or part not in cur:
-                return None
-            cur = cur[part]
-        return cur
-
-    def _replace(m):
-        key = m.group(1)
-        if key.startswith("env:"):
-            return os.environ.get(key[4:], "")
-        val = _deep_get(var_ctx, key)
-        if val is None:
-            return ""
-        return str(val)
-
-    return _VAR_SC.sub(_replace, raw_title)
-
-# --- END sidebar title interpolation additions ---
-# >>> ADDED Thu, 30 Oct 2025 00:01:54 +0900
 
 
 # ----------------------------
@@ -384,7 +318,7 @@ def read_text_safe(p: Path) -> Optional[str]:
             return None
 
 
-def resolve_title_for_impl(
+def resolve_title_for(
     root: Path,
     path_like: str,
     is_dir_item_flag: bool,
@@ -441,7 +375,7 @@ def resolve_title_for_impl(
     )
 
 
-def resolve_title_for(
+def resolve_title_for_bak(
     root: Path,
     path_like: str,
     is_dir_item_flag: bool,
@@ -461,8 +395,8 @@ def resolve_title_for(
         language_tails,
     )
 
-    base, lang_guess = _guess_base_and_lang(path_like, language_tails)
-    title = _interp_sidebar_title(title, root, base, lang_guess)
+    # base, lang_guess = _guess_base_and_lang(path_like, language_tails)
+    # title = _interp_sidebar_title(title, root, base, lang_guess)
     return (title, src_path, exists_flag)
 
 # ----------------------------
