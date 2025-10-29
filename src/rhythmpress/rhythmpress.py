@@ -946,6 +946,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     page_title = (
         (preamble.get("title") if isinstance(preamble, dict) else None)
         or h2s[0].get("title")
+        or h2s[0].get("header_title")
         or Path(master_path).parent.name
     )
     fm = f"---\ntitle: {page_title}\n---\n\n"
