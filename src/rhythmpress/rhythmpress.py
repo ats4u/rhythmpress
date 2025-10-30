@@ -944,7 +944,7 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
     # Provide a page title so the banner shows text.
     page_title = (
-        (preamble.get("title") if isinstance(preamble, dict) else None)
+        (preamble.get("header_title") if isinstance(preamble, dict) else None)
         or h2s[0].get("title")
         or h2s[0].get("header_title")
         or Path(master_path).parent.name
