@@ -264,7 +264,7 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
         description : str = ""
         title       : str = section_title
 
-    header_block = f"### {title}\n- [**{title}**]({link})"
+    header_block = f"## {title}\n- [**{title}**]({link})"
     if description:
         header_block += f"\n{description}"
     output = header_block + "\n\n" + output
