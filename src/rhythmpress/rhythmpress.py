@@ -208,7 +208,14 @@ def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
 
     if not isinstance(text, str):
         return text
-    return VAR_SC.sub(repl, text)
+    text = VAR_SC.sub(repl, text)
+
+    # Also: convert trailing HTML-commented header attributes into real Pandoc attributes.
+    # e.g., "## Title <!-- {#id .class} -->"  ->  "## Title {#id .class}"
+    import re as _re
+    _HDR_ATTR = _re.compile(r"^(#{1,6}[^\n]*?)\s*<!--\s*\{([^}]+)\}\s*-->\s*$", _re.MULTILINE)
+    text = _HDR_ATTR.sub(r"\1 {\2}", text)
+    return text
 
 def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
     # Interpolate {{<var ...>}} placeholders before handing text to pandoc,
@@ -271,6 +278,7 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
             "--toc",
             "--toc-depth=6",
             "--to=markdown",  # ← output pure Markdown TOC
+            "--from=markdown+header_attributes",  # be explicit about header attr support
             f"--template={str(template)}"  # avoid front/back matter
         ],
         capture_output=True,
