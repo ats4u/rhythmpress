@@ -175,7 +175,57 @@ import subprocess
 import re 
 from pathlib import Path
 
+def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
+    """Interpolate Quarto-style variables like {{<var foo.bar>}} and {{<var env:FOO>}}
+    in a plain text blob. Mirrors the light-weight logic used in `proc_qmd_teasers`.
+    Fails soft (returns the original text) if variables cannot be loaded.
+    """
+    try:
+        from . import quarto_vars as _qv
+        var_ctx = _qv.get_variables(cwd=str(basedir), lang=lang)
+    except Exception:
+        var_ctx = None
+
+    import re, os
+    VAR_SC = re.compile(r"\{\{<\s*var\s+([A-Za-z0-9_.:-]+)\s*>\}\}")
+
+    def _deep_get(d, dotted):
+        cur = d
+        for p in dotted.split("."):
+            if not isinstance(cur, dict) or p not in cur:
+                return None
+            cur = cur[p]
+        return cur
+
+    def repl(m):
+        key = m.group(1)
+        if key.startswith("env:"):
+            return os.environ.get(key[4:], "")
+        if isinstance(var_ctx, dict):
+            val = _deep_get(var_ctx, key)
+            return "" if val is None else str(val)
+        return ""
+
+    if not isinstance(text, str):
+        return text
+    return VAR_SC.sub(repl, text)
+
 def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
+    # Interpolate {{<var ...>}} placeholders before handing text to pandoc,
+    # so TOC titles reflect the final rendered strings (matches _create_toc_v5 behavior).
+    from pathlib import Path as _P
+    import tempfile as _tempfile, os as _os
+    interpolated_text = _interpolate_quarto_vars_in_text(text, basedir, lang)
+    # Write a temporary file in the same directory to keep relative refs stable.
+    tmp_dir = _P(basedir)
+    with _tempfile.NamedTemporaryFile('w', suffix=input_md.suffix or '.qmd',
+                                      prefix='._toc_v1_', dir=str(tmp_dir),
+                                      delete=False, encoding='utf-8') as _tf:
+        _tf.write(interpolated_text)
+        tmp_input = _tf.name
+
+    # Run pandoc to get TOC as Markdown (use absolute paths)
+
     # v3.2: input_md must be a Path to an existing file; template fixed at ./rhythmpress/templates/toc
     if not isinstance(input_md, Path):
         raise ValueError("input_md must be a pathlib.Path")
@@ -217,7 +267,7 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
     proc = subprocess.run(
         [
             "pandoc",
-            str(input_md),
+            str(tmp_input),
             "--toc",
             "--toc-depth=6",
             "--to=markdown",  # ← output pure Markdown TOC
@@ -227,9 +277,19 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
         text=True
     )
     if proc.returncode != 0:
+        # ensure temp file is cleaned up even on failure
+        try:
+            _os.unlink(tmp_input)
+        except Exception:
+            pass
         raise RuntimeError(f"pandoc failed ({proc.returncode}): {proc.stderr.strip()}")
 
     toc_md = proc.stdout
+    # cleanup temp file after successful run
+    try:
+        _os.unlink(tmp_input)
+    except Exception:
+        pass
 
     # Patch all links to include the HTML filename prefix
     # [Title](#section-id) → [Title](tatenori-theory/index.html#section-id)
