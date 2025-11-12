@@ -1,7 +1,7 @@
 import os, sys, shlex
 import yaml
 
-USAGE = """usage: rhythmpress_env [-s|-c] [-k] [-f]
+USAGE = """usage: rhythmpress_eval [-s|-c] [-k] [-f]
   -s   output Bourne/POSIX shell code (default)
   -c   output csh/tcsh code
   -k   output deactivation code (instead of activation)
