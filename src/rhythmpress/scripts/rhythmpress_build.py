@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import os
 import shlex
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -100,6 +101,59 @@ def load_def_dirs(defs_path: str) -> List[str]:
     return ordered
 
 
+_MASTER_RE = re.compile(r"^master-([A-Za-z0-9_.-]+)$")
+
+def _langs_from_dir(dir_path: Path) -> List[str]:
+    """
+    Return sorted unique lang IDs detected from master-<lang>.qmd / master-<lang>.md
+    in the given directory.
+    """
+    langs = set()
+    for pat in ("master-*.qmd", "master-*.md"):
+        for p in dir_path.glob(pat):
+            m = _MASTER_RE.match(p.stem)  # stem: "master-en"
+            if not m:
+                continue
+            lang = m.group(1).strip()
+            if lang:
+                langs.add(lang)
+    return sorted(langs)
+
+def _pick_langs_for_dir(dir_path: Path, *, env: dict, verbose: bool) -> List[str]:
+    """
+    Policy:
+      - If LANG_ID is set: build only that lang (and validate it exists if masters exist)
+      - Else if multiple masters exist: build all langs
+      - Else if exactly one master exists: build that lang (by setting LANG_ID implicitly)
+      - Else: build with no LANG_ID (legacy behavior)
+    """
+    found = _langs_from_dir(dir_path)
+    forced = (env.get("LANG_ID") or "").strip()
+
+    if forced:
+        if found and forced not in found:
+            die(2, f"{dir_path}: LANG_ID={forced!r} but masters are {sorted(found)}")
+        if verbose:
+            print(f"[INFO] {dir_path}: LANG_ID={forced} (forced)")
+        return [forced]
+
+    if len(found) >= 2:
+        if verbose:
+            print(f"[INFO] {dir_path}: multiple masters {found}; LANG_ID not set → building all")
+        return found
+
+    if len(found) == 1:
+        if verbose:
+            print(f"[INFO] {dir_path}: detected master-{found[0]}.* → building with LANG_ID={found[0]}")
+        return found
+
+    if verbose:
+        print(f"[INFO] {dir_path}: no master-<lang>.* found → building with LANG_ID unset (legacy)")
+    return [""]
+
+
+
+
 def run(cmd: List[str], *, verbose: bool, dry_run: bool, env: dict | None = None) -> int:
     if verbose or dry_run:
         print("[RUN]", " ".join(shlex.quote(x) for x in cmd))
@@ -164,14 +218,32 @@ def main(argv: List[str]) -> int:
         if ns.clean_only:
             continue
 
-        # Normal build path: run preproc
-        rc = run(["rhythmpress", "preproc", d],
-                 verbose=ns.verbose, dry_run=ns.dry_run, env=env)
-        if rc != 0:
-            print(f"[FAIL] preproc: {d} (exit {rc})", file=sys.stderr)
-            if not ns.keep_going:
-                return rc
+        # # Normal build path: run preproc
+        # rc = run(["rhythmpress", "preproc", d],
+        #          verbose=ns.verbose, dry_run=ns.dry_run, env=env)
+        # if rc != 0:
+        #     print(f"[FAIL] preproc: {d} (exit {rc})", file=sys.stderr)
+        #     if not ns.keep_going:
+        #         return rc
+        # Normal build path: run preproc.
+        # If multiple master-<lang>.* exist, we MUST set LANG_ID per run.
+        dir_path = Path(d)
+        langs_to_build = _pick_langs_for_dir(dir_path, env=env, verbose=ns.verbose)
 
+        for lang in langs_to_build:
+            env2 = env.copy()
+            if lang:
+                env2["LANG_ID"] = lang
+            else:
+                env2.pop("LANG_ID", None)
+
+            rc = run(["rhythmpress", "preproc", d],
+                     verbose=ns.verbose, dry_run=ns.dry_run, env=env2)
+            if rc != 0:
+                label = f"{d} (LANG_ID={lang})" if lang else d
+                print(f"[FAIL] preproc: {label} (exit {rc})", file=sys.stderr)
+                if not ns.keep_going:
+                    return rc
 
     # If we only cleaned, we are done (no sidebar generation)
     if ns.clean_only:
@@ -206,6 +278,14 @@ def main(argv: List[str]) -> int:
                 langs = []
             else:
                 langs = [ln.strip() for ln in proc.stdout.splitlines() if ln.strip()]
+
+        # Optional: respect LANG_ID if caller forced it
+        forced = (env.get("LANG_ID") or "").strip()
+        if forced:
+            # If sidebar_langs succeeded, validate; else just force.
+            if langs and forced not in langs:
+                die(2, f"LANG_ID={forced!r} but sidebar_langs returned {langs}")
+            langs = [forced]
 
         # 2) If we received lang IDs, render each _sidebar-<lang>.yml
         if langs:
