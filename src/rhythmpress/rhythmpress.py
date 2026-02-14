@@ -1219,12 +1219,37 @@ def qmd_all_masters( qmd_splitter, root: Path, *args, **kwargs) -> None:
     if root.is_file() or not root.is_dir():
         raise ValueError(f"root must be a directory: {root}")
 
-    # Include both Quarto and Markdown masters; prefer .qmd if both exist.
-    masters = {}
-    for pat in ("master-*.qmd", "master-*.md"):
-        for pth in root.glob(pat):
-            key = (pth.parent, pth.stem)  # e.g., (dir, "master-ja")
-            masters.setdefault(key, pth)  # .qmd wins because it’s added first
+    # # Include both Quarto and Markdown masters; prefer .qmd if both exist.
+    # masters = {}
+    # for pat in ("master-*.qmd", "master-*.md"):
+    #     for pth in root.glob(pat):
+    #         key = (pth.parent, pth.stem)  # e.g., (dir, "master-ja")
+    #         masters.setdefault(key, pth)  # .qmd wins because it’s added first
+
+    # v3.3: If LANG_ID is set, process only that language’s master file.
+    # This prevents duplicate work when the outer build loop iterates per-language.
+    forced_lang = (os.environ.get("LANG_ID") or "").strip()
+    if forced_lang:
+        preferred = [
+            root / f"master-{forced_lang}.qmd",
+            root / f"master-{forced_lang}.md",
+        ]
+        chosen = next((p for p in preferred if p.exists()), None)
+        if not chosen:
+            existing = sorted([*root.glob("master-*.qmd"), *root.glob("master-*.md")])
+            names = ", ".join(p.name for p in existing) or "none"
+            raise ValueError(
+                f"LANG_ID={forced_lang!r} but no master-{forced_lang}.qmd/md under {root}. Existing: {names}"
+            )
+        masters = {(chosen.parent, chosen.stem): chosen}
+    else:
+        # Include both Quarto and Markdown masters; prefer .qmd if both exist.
+        masters = {}
+        for pat in ("master-*.qmd", "master-*.md"):
+            for pth in root.glob(pat):
+                key = (pth.parent, pth.stem)  # e.g., (dir, "master-ja")
+                masters.setdefault(key, pth)  # .qmd wins because it’s added first
+
     for p in sorted(masters.values()):
         try:
             qmd_splitter(p, *args, **kwargs)

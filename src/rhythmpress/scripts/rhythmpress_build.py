@@ -138,8 +138,9 @@ def _pick_langs_for_dir(dir_path: Path, *, env: dict, verbose: bool) -> List[str
         return [forced]
 
     if len(found) >= 2:
-        if verbose:
-            print(f"[INFO] {dir_path}: multiple masters {found}; LANG_ID not set → building all")
+        # Always announce this decision (even without --verbose), because it's the
+        # key branch that prevents ambiguity regressions when adding languages.
+        print(f"[INFO] {dir_path}: multiple masters {found}; LANG_ID not set → building all")
         return found
 
     if len(found) == 1:
@@ -237,6 +238,7 @@ def main(argv: List[str]) -> int:
             else:
                 env2.pop("LANG_ID", None)
 
+            print(f"[INFO] preproc: dir={d} LANG_ID={env2.get('LANG_ID','')}")
             rc = run(["rhythmpress", "preproc", d],
                      verbose=ns.verbose, dry_run=ns.dry_run, env=env2)
             if rc != 0:
