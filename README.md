@@ -9,6 +9,8 @@
 - [docs/configuration.md](docs/configuration.md) — Configuration reference (`_rhythmpress.conf`, sidebar confs, front matter keys, env vars, hooks).
 - [docs/troubleshooting.md](docs/troubleshooting.md) — Common failures and fixes (masters ambiguity, `RHYTHMPRESS_ROOT`, `yq`, git dates, CWD issues).
 - [docs/development.md](docs/development.md) — Development notes (packaging, dependency pinning, release hygiene, macOS `._*` artifacts).
+- [docs/tutorial-publish-github-cloudflare.md](docs/tutorial-publish-github-cloudflare.md) — Publish a Rhythmpress-built Quarto site on GitHub Pages, fronted by Cloudflare Proxy (DNS + CDN + SSL).
+
 
 ## 1. Introduction
 
