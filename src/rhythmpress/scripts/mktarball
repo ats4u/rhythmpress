@@ -1,0 +1,6 @@
+#!/bin/bash
+
+tar --exclude='.DS_Store' --exclude='._*' \
+    --exclude='.git' --exclude='__pycache__' --exclude='*.pyc' \
+    --exclude='.venv' --exclude='node_modules' \
+    -czf rhythmpress.tar.gz .
