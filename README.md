@@ -16,6 +16,10 @@
 
 Rhythmpress is an opinionated set of command-line tools that sits *on top of Quarto* to run a “directory-per-article” CMS workflow. Instead of writing every publishable page as a standalone `.qmd`, you write a single **master** file per article (optionally per language, e.g. `master-en.qmd`, `master-ja.qmd`), and Rhythmpress generates the Quarto-ready page tree, navigation artifacts, and supporting files that Quarto then renders.
 
+<p align="center">
+  <img src="./docs/rhythmdo-com.png" alt="Example Site - Rhythmdo.com" width="360">
+</p>
+
 This project was built for large, documentation-like sites where consistency matters: predictable URLs, repeatable builds, multilingual variants, and navigation that can be assembled from many article directories without hand-editing everything.
 
 What Rhythmpress provides (in practical terms):
