@@ -565,12 +565,15 @@ Convenience wrappers around `quarto preview`.
 
 * `start`: activates `.venv` then runs `quarto preview`
 * `clean-start`: also removes `./.site` and `./.quarto` before running preview
+* any extra arguments are passed through to `quarto preview` (e.g. `--profile`)
 
 Usage:
 
 ```bash
 rhythmpress start
 rhythmpress clean-start
+rhythmpress start --profile dev
+rhythmpress clean-start --profile dev
 ```
 
 (They are shell scripts; they assume `.venv/bin/activate` exists.)
@@ -994,17 +997,20 @@ These are convenience wrappers that:
 
 * `. .venv/bin/activate`
 * run `QUARTO_PROJECT_DIR="$(pwd)" quarto preview`
+* pass additional args through to `quarto preview` (for example `--profile dev`)
 
 Use them if you want a “just do it” shortcut:
 
 ```bash
 rhythmpress start
+rhythmpress start --profile dev
 ```
 
 Reset Quarto caches first:
 
 ```bash
 rhythmpress clean-start
+rhythmpress clean-start --profile dev
 ```
 
 (They assume `.venv/` exists in the project root.)
@@ -1051,7 +1057,6 @@ rhythmpress build
 # 5) language-specific build when debugging
 LANG_ID=en rhythmpress build
 ```
-
 
 
 

@@ -322,12 +322,15 @@ Or use the provided wrapper:
 
 ```bash
 rhythmpress start
+# pass flags directly to quarto preview
+rhythmpress start --profile dev
 ```
 
 If you want a clean Quarto preview state (removes `./.site` and `./.quarto` first):
 
 ```bash
 rhythmpress clean-start
+rhythmpress clean-start --profile dev
 ```
 
 ### 6.6 Auto rebuild on master edits (two-terminal dev loop)
