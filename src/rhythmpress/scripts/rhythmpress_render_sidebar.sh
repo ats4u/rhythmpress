@@ -90,6 +90,11 @@ if [ -f "$HOOK_FILE" ]; then
   python3 "$HOOK_FILE" "$YAML_FILE" "$LANG_ID" "$BASE" || true
 fi
 
+# --- Generate language-specific Quarto profile YAML --------------------------
+# Deterministically merge:
+#   _metadata-<lang>.yml + _sidebar-<lang>.generated.yml -> _quarto-<lang>.yml
+rhythmpress quarto-profile --lang "$LANG_ID"
+
 printf "LANGID=$LANG_ID BASE=$BASE\n"
 
 # --- Markdown header ---------------------------------------------------------
@@ -97,4 +102,3 @@ printf '**目次**\n\n' > "_sidebar-$LANG_ID.generated.md"
 
 # --- Append generated TOC ----------------------------------------------------
 rhythmpress render_toc "$BASE" >> "_sidebar-$LANG_ID.generated.md"
-

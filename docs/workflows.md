@@ -205,7 +205,8 @@ rhythmpress auto-rebuild
 
 What the watcher does:
 
-* It only reacts to changes to `master-*.qmd` / `master-*.md`
+* It reacts to changes to `master-*.qmd` / `master-*.md`
+* It also reacts to `_quarto.yml`, `_quarto-*.yml`, `_metadata-*.yml`, `_sidebar-*.conf` (except generated `_sidebar-*.generated.conf`)
 * It ignores `.git/`, `.venv/`, `_site/`, `.quarto/`, etc.
 * When triggered, it runs:
 
@@ -346,5 +347,3 @@ For concrete error → fix mappings, see `docs/troubleshooting.md`.
 ```
 ::contentReference[oaicite:0]{index=0}
 ```
-
-

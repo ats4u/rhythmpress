@@ -335,7 +335,7 @@ rhythmpress clean-start --profile dev
 
 ### 6.6 Auto rebuild on master edits (two-terminal dev loop)
 
-Terminal A (watches `master-*.qmd/md` edits and runs `build --skip-clean`):
+Terminal A (watches masters plus Quarto/metadata/sidebar-conf updates and runs `build --skip-clean`):
 
 ```bash
 rhythmpress auto-rebuild
