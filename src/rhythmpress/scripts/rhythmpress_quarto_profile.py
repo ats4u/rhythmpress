@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate a language-specific Quarto profile YAML by merging:
+  - _quarto.yml
   - _metadata-<lang>.yml
   - _sidebar-<lang>.generated.yml
 
@@ -42,6 +43,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         description="Generate _quarto-<lang>.yml from metadata + generated sidebar.",
     )
     p.add_argument("--lang", required=True, help="Language id (e.g. ja, en).")
+    p.add_argument("--base", default="_quarto.yml", help="Path to base Quarto YAML (default: _quarto.yml).")
     p.add_argument("--metadata", default=None, help="Path to metadata YAML (default: _metadata-<lang>.yml).")
     p.add_argument("--sidebar", default=None, help="Path to generated sidebar YAML (default: _sidebar-<lang>.generated.yml).")
     p.add_argument("--out", default=None, help="Path to output YAML (default: _quarto-<lang>.yml).")
@@ -70,6 +72,22 @@ def ensure_mapping(parent: Dict[str, Any], key: str) -> Dict[str, Any]:
     nxt: Dict[str, Any] = {}
     parent[key] = nxt
     return nxt
+
+
+def deep_merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Recursively merge two mappings.
+    - Dict values: merged recursively.
+    - Non-dict values (including lists/scalars): override wins.
+    """
+    out: Dict[str, Any] = dict(base)
+    for k, v in override.items():
+        cur = out.get(k)
+        if isinstance(cur, dict) and isinstance(v, dict):
+            out[k] = deep_merge(cur, v)
+        else:
+            out[k] = v
+    return out
 
 
 def extract_sidebar(sidebar_doc: Dict[str, Any], src: Path) -> Dict[str, Any]:
@@ -117,21 +135,25 @@ def main(argv: List[str]) -> int:
     if not lang:
         die(2, "--lang must not be empty.")
 
+    base_path = Path(ns.base)
     metadata_path = Path(ns.metadata or f"_metadata-{lang}.yml")
     sidebar_path = Path(ns.sidebar or f"_sidebar-{lang}.generated.yml")
     out_path = Path(ns.out or f"_quarto-{lang}.yml")
 
+    base = read_yaml_mapping(base_path, "base Quarto YAML")
     meta = read_yaml_mapping(metadata_path, "metadata YAML")
     sidebar_doc = read_yaml_mapping(sidebar_path, "sidebar YAML")
 
     sidebar = extract_sidebar(sidebar_doc, sidebar_path)
+    merged = deep_merge(base, meta)
 
-    website = ensure_mapping(meta, "website")
-    project = ensure_mapping(meta, "project")
-    website["sidebar"] = sidebar
+    website = ensure_mapping(merged, "website")
+    project = ensure_mapping(merged, "project")
+    current_sidebar = ensure_mapping(website, "sidebar")
+    website["sidebar"] = deep_merge(current_sidebar, sidebar)
 
     # Profile-only overrides
-    meta["lang"] = lang
+    merged["lang"] = lang
     project["output-dir"] = f".site-{lang}"
     project["render"] = [
         f"**/{lang}/**/*.qmd",
@@ -140,7 +162,7 @@ def main(argv: List[str]) -> int:
         "!drafts/*",
     ]
 
-    out_text = serialize_yaml(meta)
+    out_text = serialize_yaml(merged)
     changed = write_if_changed(out_path, out_text)
     if not ns.quiet:
         if changed:
