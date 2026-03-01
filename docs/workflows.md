@@ -117,7 +117,7 @@ These helpers activate the venv and start preview:
 rhythmpress start
 ```
 
-If you want to wipe `.site/` and `.quarto/` before preview:
+If you want to wipe `.site/`, `.site-*/`, and `.quarto/` before preview:
 
 ```sh
 rhythmpress clean-start

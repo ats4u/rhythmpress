@@ -574,7 +574,7 @@ quarto preview
 Convenience wrappers around `quarto preview`.
 
 * `start`: activates `.venv` then runs `quarto preview`
-* `clean-start`: also removes `./.site` and `./.quarto` before running preview
+* `clean-start`: also removes `./.site`, `./.site-*`, and `./.quarto` before running preview
 * any extra arguments are passed through to `quarto preview` (e.g. `--profile`)
 
 Usage:
@@ -1067,6 +1067,5 @@ rhythmpress build
 # 5) language-specific build when debugging
 LANG_ID=en rhythmpress build
 ```
-
 
 
