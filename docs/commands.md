@@ -577,11 +577,13 @@ quarto preview
 
 ---
 
-## `rhythmpress preview`, `rhythmpress start`, and `rhythmpress clean-start`
+## `rhythmpress preview`, `rhythmpress preview-all`, `rhythmpress start`, and `rhythmpress clean-start`
 
 Convenience wrappers around `quarto preview`.
 
 * `preview`: thin wrapper for `quarto preview` with `QUARTO_PROJECT_DIR` set to current directory
+* `preview-all`: preview merged output (`.site-merged`) with defaults:
+  `quarto preview --output-dir .site-merged --no-render` (extra args still pass through)
 * `start`: activates `.venv` then runs `quarto preview`
 * `clean-start`: also removes `./.site`, `./.site-*`, and `./.quarto` before running preview
 * any extra arguments are passed through to `quarto preview` (e.g. `--profile`)
@@ -592,6 +594,8 @@ Usage:
 rhythmpress start
 rhythmpress clean-start
 rhythmpress preview --profile en
+rhythmpress preview-all
+rhythmpress preview-all --port 5150
 rhythmpress start --profile dev
 rhythmpress clean-start --profile dev
 ```
