@@ -74,6 +74,25 @@ def ensure_mapping(parent: Dict[str, Any], key: str) -> Dict[str, Any]:
     return nxt
 
 
+def sanitize_post_render(project: Dict[str, Any]) -> None:
+    """
+    Remove stale legacy sitemap gating entry that can produce shell errors in
+    generated _quarto-<lang>.yml files.
+    """
+    post_render = project.get("post-render")
+    if not isinstance(post_render, list):
+        return
+    project["post-render"] = [
+        cmd
+        for cmd in post_render
+        if not (
+            isinstance(cmd, str)
+            and "QUARTO_PROFILE" in cmd
+            and "rhythmpress sitemap" in cmd
+        )
+    ]
+
+
 def deep_merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]:
     """
     Recursively merge two mappings.
@@ -159,8 +178,9 @@ def main(argv: List[str]) -> int:
         f"**/{lang}/**/*.qmd",
         "!**/master*.md",
         "!**/master*.qmd",
-        "!drafts/*",
+        "!drafts/**",
     ]
+    sanitize_post_render(project)
 
     out_text = serialize_yaml(merged)
     changed = write_if_changed(out_path, out_text)
