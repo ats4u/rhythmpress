@@ -577,10 +577,11 @@ quarto preview
 
 ---
 
-## `rhythmpress start` and `rhythmpress clean-start`
+## `rhythmpress preview`, `rhythmpress start`, and `rhythmpress clean-start`
 
 Convenience wrappers around `quarto preview`.
 
+* `preview`: thin wrapper for `quarto preview` with `QUARTO_PROJECT_DIR` set to current directory
 * `start`: activates `.venv` then runs `quarto preview`
 * `clean-start`: also removes `./.site`, `./.site-*`, and `./.quarto` before running preview
 * any extra arguments are passed through to `quarto preview` (e.g. `--profile`)
@@ -590,6 +591,7 @@ Usage:
 ```bash
 rhythmpress start
 rhythmpress clean-start
+rhythmpress preview --profile en
 rhythmpress start --profile dev
 rhythmpress clean-start --profile dev
 ```
