@@ -14,5 +14,5 @@ for f in "${profiles[@]}"; do
   p="${f#_quarto-}"
   p="${p%.yml}"
   echo "[render-all] profile=$p file=$f"
-  rhythmpress render --profile "$p" "$@"
+  rhythmpress render --clean --profile "$p" "$@"
 done

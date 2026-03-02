@@ -611,11 +611,14 @@ Thin wrapper around `quarto render`.
 * forwards all arguments to `quarto render`
 * sets `QUARTO_PROJECT_DIR` to the current working directory
 * safety guard: exits with an error when called with no arguments
+* `--clean`: removes resolved output directory before render
+  * resolution order: `--output-dir`, then `--profile` -> `.site-<profile>`, then `_quarto-<lang>.yml` from `--config`
 
 Usage:
 
 ```bash
 rhythmpress render --profile en
+rhythmpress render --clean --profile en
 rhythmpress render --config _quarto-en.yml
 ```
 
@@ -626,7 +629,7 @@ rhythmpress render --config _quarto-en.yml
 Render all detected profiles by scanning `_quarto-*.yml` in the current directory.
 
 * derives profile id from each filename (`_quarto-en.yml` -> `en`)
-* runs `rhythmpress render --profile <id>` for each profile
+* runs `rhythmpress render --clean --profile <id>` for each profile
 * forwards any extra args to each render invocation
 
 Usage:
