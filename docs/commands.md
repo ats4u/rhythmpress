@@ -1110,22 +1110,26 @@ SITE_URL="https://rhythmdo.com" QUARTO_PROJECT_OUTPUT_DIR="_site" rhythmpress si
 
 ### Practical “most-used” cheat sheet (your workflow)
 
-If you only remember five things:
+If you only remember this pipeline:
 
 ```bash
 # 1) activate
 cd /path/to/project
 rhythmpress_activate
 
-# 2) dev loop (terminal A)
-quarto preview
-
-# 3) dev loop (terminal B)
-rhythmpress auto-rebuild
-
-# 4) full rebuild when needed
+# 2) rebuild generated sources and profile configs
 rhythmpress build
 
-# 5) language-specific build when debugging
-LANG_ID=en rhythmpress build
+# 3) render all profiles
+rhythmpress render-all
+
+# 4) merge rendered outputs into one deploy tree + sitemap
+rhythmpress assemble
+```
+
+For a single-language run:
+
+```bash
+rhythmpress build
+rhythmpress render --profile en
 ```

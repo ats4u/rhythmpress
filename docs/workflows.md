@@ -347,3 +347,71 @@ For concrete error → fix mappings, see `docs/troubleshooting.md`.
 ```
 ::contentReference[oaicite:0]{index=0}
 ```
+
+## 11) Compile pipeline: rebuild -> render -> assemble
+
+Use this when you want deterministic multilingual deploy output.
+
+### A) Rebuild stage (Rhythmpress preprocessing)
+
+Purpose:
+
+* regenerate split/copied QMD trees from `master-<lang>.*`
+* regenerate sidebar artifacts and per-language Quarto profile YAML files
+
+Commands:
+
+```sh
+# one-shot rebuild
+rhythmpress build
+
+# or during development, keep rebuilding on edits
+rhythmpress auto-rebuild
+```
+
+### B) Render stage (Quarto HTML output)
+
+Purpose:
+
+* transform generated QMD trees into rendered site directories (`.site-<lang>`)
+
+Commands:
+
+```sh
+# explicit single profile render
+rhythmpress render --profile en
+rhythmpress render --profile ja
+
+# or render all detected profiles from _quarto-*.yml
+rhythmpress render-all
+```
+
+### C) Assemble stage (merge deploy tree)
+
+Purpose:
+
+* merge profile outputs into one final site tree
+* generate one sitemap for the merged output
+
+Command:
+
+```sh
+rhythmpress assemble
+```
+
+### D) Recommended end-to-end examples
+
+Render all profiles, then assemble:
+
+```sh
+rhythmpress build
+rhythmpress render-all
+rhythmpress assemble
+```
+
+Single-profile debug run:
+
+```sh
+rhythmpress build
+rhythmpress render --profile en
+```
