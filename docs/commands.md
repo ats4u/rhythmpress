@@ -586,8 +586,8 @@ Convenience wrappers around `quarto preview`.
 * `preview`: thin wrapper for `quarto preview` with `QUARTO_PROJECT_DIR` set to current directory
   * when called with no arguments, it fails fast and asks for explicit options
   * override for intentional bare preview: `--allow-empty-preview` (alias: `--no-warn`)
-* `preview-all`: preview merged output (`.site-merged`) with defaults:
-  `quarto preview --output-dir .site-merged --no-render` (extra args still pass through)
+* `preview-all`: preview assembled output (`.site`) with defaults:
+  `quarto preview --output-dir .site --no-render` (extra args still pass through)
 * `start`: tmux process manager (two panes):
   * pane 1: `rhythmpress auto-rebuild`
   * pane 2: `rhythmpress preview [args]`

@@ -25,15 +25,15 @@ done
 
 cmd=(quarto preview)
 if [ "$seen_output_dir" -eq 0 ]; then
-  cmd+=(--output-dir .site-merged)
+  cmd+=(--output-dir .site)
 fi
 if [ "$seen_no_render" -eq 0 ]; then
   cmd+=(--no-render)
 fi
 cmd+=("$@")
 
-if [ "$seen_output_dir" -eq 0 ] && [ ! -d ".site-merged" ]; then
-  echo "[preview-all] .site-merged not found." >&2
+if [ "$seen_output_dir" -eq 0 ] && [ ! -d ".site" ]; then
+  echo "[preview-all] .site not found." >&2
   echo "[preview-all] run: rhythmpress assemble" >&2
   exit 1
 fi
