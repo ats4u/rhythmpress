@@ -598,6 +598,40 @@ rhythmpress clean-start --profile dev
 
 ---
 
+## `rhythmpress render`
+
+Thin wrapper around `quarto render`.
+
+* forwards all arguments to `quarto render`
+* sets `QUARTO_PROJECT_DIR` to the current working directory
+* safety guard: exits with an error when called with no arguments
+
+Usage:
+
+```bash
+rhythmpress render --profile en
+rhythmpress render --config _quarto-en.yml
+```
+
+---
+
+## `rhythmpress render-all`
+
+Render all detected profiles by scanning `_quarto-*.yml` in the current directory.
+
+* derives profile id from each filename (`_quarto-en.yml` -> `en`)
+* runs `rhythmpress render --profile <id>` for each profile
+* forwards any extra args to each render invocation
+
+Usage:
+
+```bash
+rhythmpress render-all
+rhythmpress render-all --no-execute
+```
+
+---
+
 ## `rhythmpress sitemap`
 
 Generate `sitemap.xml` inside the Quarto output directory by scanning rendered HTML.
