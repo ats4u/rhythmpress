@@ -415,3 +415,29 @@ Single-profile debug run:
 rhythmpress build
 rhythmpress render --profile en
 ```
+
+### E) Root index redirect pattern (recommended)
+
+For multilingual sites, keep real top pages in language paths:
+
+* `en/index.qmd`
+* `ja/index.qmd`
+* `fr/index.qmd`
+
+Then use root `index.qmd` only as a redirect page (for `/` -> preferred language path).
+This avoids cross-profile collisions and keeps profile renders deterministic.
+
+Example root `index.qmd` redirect:
+
+```qmd
+---
+title: Redirect
+format: html
+---
+
+```{=html}
+<meta http-equiv="refresh" content="0; url=/en/">
+<script>location.replace('/en/');</script>
+<p><a href="/en/">Continue to English</a></p>
+```
+```

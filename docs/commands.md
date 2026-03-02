@@ -429,8 +429,10 @@ Behavior:
   * `project.render` is language-scoped:
     `**/<lang>/**/*.qmd`, `!**/master*.md`, `!**/master*.qmd`, `!drafts/**`
   * this keeps each profile build restricted to its own language tree so deploy merge is a plain tree copy
+  * root `index.qmd` is intentionally outside this scope; keep it as a simple redirect page if needed
   * `project.post-render` is preserved from the base project config for every profile (single-language builds still emit their own sitemap)
   * for merged multi-profile deploys, run `rhythmpress sitemap` once on the merged output so final `sitemap.xml` includes all languages
+  * if you need the full static asset tree in every profile/merged output, include `assets/**` in base `_quarto.yml` `project.resources`
 * Optional post-merge hook:
 
   * If present, runs:
@@ -586,9 +588,19 @@ Convenience wrappers around `quarto preview`.
   * override for intentional bare preview: `--allow-empty-preview` (alias: `--no-warn`)
 * `preview-all`: preview merged output (`.site-merged`) with defaults:
   `quarto preview --output-dir .site-merged --no-render` (extra args still pass through)
-* `start`: activates `.venv` then runs `quarto preview`
-* `clean-start`: also removes `./.site`, `./.site-*`, and `./.quarto` before running preview
-* any extra arguments are passed through to `quarto preview` (e.g. `--profile`)
+* `start`: tmux process manager (two panes):
+  * pane 1: `rhythmpress auto-rebuild`
+  * pane 2: `rhythmpress preview [args]`
+  * outside tmux: creates/attaches a managed tmux session
+  * inside tmux: splits the current window and starts both panes there
+  * panes are configured with `remain-on-exit` so output stays visible after process exit
+  * requires explicit preview args (for example `--profile en`)
+* `clean-start`: removes `./.site`, `./.site-*`, and `./.quarto`, then delegates to `start`
+* `start` options:
+  * `--session NAME` (default: `rhythmpress-dev`)
+  * `--detach` (start session without attaching)
+  * `--kill-existing` (replace existing session of same name)
+* extra args are passed to `rhythmpress preview` in the preview pane (for example `--profile en`)
 
 Usage:
 
@@ -599,11 +611,12 @@ rhythmpress preview --profile en
 rhythmpress preview --allow-empty-preview
 rhythmpress preview-all
 rhythmpress preview-all --port 5150
-rhythmpress start --profile dev
-rhythmpress clean-start --profile dev
+rhythmpress start --profile en
+rhythmpress start --session rp-en --detach --kill-existing --profile en
+rhythmpress clean-start --profile en
 ```
 
-(They are shell scripts; they assume `.venv/bin/activate` exists.)
+(For `start`/`clean-start`, tmux is required.)
 
 ---
 
