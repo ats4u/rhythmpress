@@ -175,6 +175,8 @@ def main(argv: List[str]) -> int:
     merged["lang"] = lang
     project["output-dir"] = f".site-{lang}"
     project["render"] = [
+        "index.md",
+        "index.qmd",
         f"**/{lang}/**/*.qmd",
         "!**/master*.md",
         "!**/master*.qmd",

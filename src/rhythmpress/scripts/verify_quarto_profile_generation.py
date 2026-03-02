@@ -34,6 +34,8 @@ def _assert_profile(tmp: Path, lang: str) -> None:
     project = doc.get("project", {})
     render = project.get("render")
     expected_render: List[str] = [
+        "index.md",
+        "index.qmd",
         f"**/{lang}/**/*.qmd",
         "!**/master*.md",
         "!**/master*.qmd",

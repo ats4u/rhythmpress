@@ -427,9 +427,9 @@ Behavior:
 
   * `project.output-dir` is `.site-<lang>` (for example `.site-en`, `.site-ja`)
   * `project.render` is language-scoped:
-    `**/<lang>/**/*.qmd`, `!**/master*.md`, `!**/master*.qmd`, `!drafts/**`
+    `index.md`, `index.qmd`, `**/<lang>/**/*.qmd`, `!**/master*.md`, `!**/master*.qmd`, `!drafts/**`
   * this keeps each profile build restricted to its own language tree so deploy merge is a plain tree copy
-  * root `index.qmd` is intentionally outside this scope; keep it as a simple redirect page if needed
+  * root `index.md` and `index.qmd` are forcibly rendered in every profile; use either as a simple redirect page if needed
   * `project.post-render` is preserved from the base project config for every profile (single-language builds still emit their own sitemap)
   * for merged multi-profile deploys, run `rhythmpress sitemap` once on the merged output so final `sitemap.xml` includes all languages
   * if you need the full static asset tree in every profile/merged output, include `assets/**` in base `_quarto.yml` `project.resources`
