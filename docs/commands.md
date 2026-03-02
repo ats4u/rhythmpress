@@ -632,6 +632,26 @@ rhythmpress render-all --no-execute
 
 ---
 
+## `rhythmpress assemble`
+
+Merge rendered profile output directories into a single deploy tree.
+
+* default source directories: auto-detected `.site-*`
+* default output directory: `.site`
+* merges with `rsync` in source order
+* runs `rhythmpress sitemap` once on the merged output (unless `--no-sitemap`)
+
+Usage:
+
+```bash
+rhythmpress assemble
+rhythmpress assemble --out .site-merged
+rhythmpress assemble .site-en .site-ja
+rhythmpress assemble --no-sitemap
+```
+
+---
+
 ## `rhythmpress sitemap`
 
 Generate `sitemap.xml` inside the Quarto output directory by scanning rendered HTML.
