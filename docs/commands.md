@@ -581,13 +581,14 @@ quarto preview
 
 ## `rhythmpress preview`, `rhythmpress preview-all`, `rhythmpress start`, and `rhythmpress clean-start`
 
-Convenience wrappers around `quarto preview`.
-
 * `preview`: thin wrapper for `quarto preview` with `QUARTO_PROJECT_DIR` set to current directory
   * when called with no arguments, it fails fast and asks for explicit options
   * override for intentional bare preview: `--allow-empty-preview` (alias: `--no-warn`)
-* `preview-all`: preview assembled output (`.site`) with defaults:
-  `quarto preview --output-dir .site --no-render` (extra args still pass through)
+* `preview-all`: serves assembled output (`.site`) as static files:
+  `python3 -m http.server 5150 --directory .site`
+  * supports `--output-dir <dir>` to change served directory
+  * supports `--port <n>` to change port
+  * extra args are passed through to `python3 -m http.server` (for example `--bind 127.0.0.1`)
 * `start`: tmux process manager (two panes):
   * pane 1: `rhythmpress auto-rebuild`
   * pane 2: `rhythmpress preview [args]`

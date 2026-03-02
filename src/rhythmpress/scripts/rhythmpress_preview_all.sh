@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-seen_output_dir=0
-seen_no_render=0
+preview_dir=""
+port="5150"
+pass_args=()
 
 args=( "$@" )
 i=0
@@ -10,38 +11,53 @@ while [ "$i" -lt "${#args[@]}" ]; do
   arg="${args[$i]}"
   case "$arg" in
     --output-dir)
-      seen_output_dir=1
+      if [ $((i + 1)) -ge "${#args[@]}" ]; then
+        echo "[preview-all] --output-dir requires a value" >&2
+        exit 2
+      fi
+      preview_dir="${args[$((i + 1))]}"
       i=$((i + 1))
       ;;
     --output-dir=*)
-      seen_output_dir=1
+      preview_dir="${arg#--output-dir=}"
       ;;
-    --no-render)
-      seen_no_render=1
+    --port)
+      if [ $((i + 1)) -ge "${#args[@]}" ]; then
+        echo "[preview-all] --port requires a value" >&2
+        exit 2
+      fi
+      port="${args[$((i + 1))]}"
+      i=$((i + 1))
+      ;;
+    --port=*)
+      port="${arg#--port=}"
+      ;;
+    *)
+      pass_args+=("$arg")
       ;;
   esac
   i=$((i + 1))
 done
 
-cmd=(quarto preview)
-if [ "$seen_output_dir" -eq 0 ]; then
-  cmd+=(--output-dir .site)
+if [ -z "$preview_dir" ]; then
+  preview_dir=".site"
 fi
-if [ "$seen_no_render" -eq 0 ]; then
-  cmd+=(--no-render)
-fi
-cmd+=("$@")
 
-if [ "$seen_output_dir" -eq 0 ] && [ ! -d ".site" ]; then
-  echo "[preview-all] .site not found." >&2
+cmd=(python3 -m http.server "$port" --directory "$preview_dir")
+if [ "${#pass_args[@]}" -gt 0 ]; then
+  cmd+=("${pass_args[@]}")
+fi
+
+if [ ! -d "$preview_dir" ]; then
+  echo "[preview-all] $preview_dir not found." >&2
   echo "[preview-all] run: rhythmpress assemble" >&2
   exit 1
 fi
 
-printf '[preview-all] exec: QUARTO_PROJECT_DIR=%q' "$(pwd)"
+printf '[preview-all] exec:'
 for arg in "${cmd[@]}"; do
   printf ' %q' "$arg"
 done
 printf '\n'
 
-QUARTO_PROJECT_DIR="$(pwd)" "${cmd[@]}"
+"${cmd[@]}"
