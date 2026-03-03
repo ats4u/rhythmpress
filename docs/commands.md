@@ -658,6 +658,22 @@ rhythmpress render-all --no-execute
 
 ---
 
+## `rhythmpress lang-ids`
+
+Detect language IDs from profile/metadata files in the current directory and print one ID per line.
+
+* scans `_quarto-*.yml` / `_quarto-*.yaml`
+* scans `_metadata-*.yml` / `_metadata-*.yaml`
+* prints unique IDs in sorted order
+
+Usage:
+
+```bash
+rhythmpress lang-ids
+```
+
+---
+
 ## `rhythmpress assemble`
 
 Merge rendered profile output directories into a single deploy tree.
