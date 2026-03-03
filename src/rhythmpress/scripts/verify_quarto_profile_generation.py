@@ -50,6 +50,10 @@ def _assert_profile(tmp: Path, lang: str) -> None:
     if project.get("post-render") != expected_post_render:
         raise AssertionError(f"unexpected post-render for {lang}: {project.get('post-render')!r}")
 
+    expected_bcp47 = {"en": "en-US", "ja": "ja-JP"}
+    if doc.get("lang") != expected_bcp47[lang]:
+        raise AssertionError(f"unexpected lang tag for {lang}: {doc.get('lang')!r}")
+
 
 def main() -> int:
     with tempfile.TemporaryDirectory(prefix="rhythmpress-quarto-profile-") as td:
