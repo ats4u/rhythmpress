@@ -1578,42 +1578,51 @@ def _parse_runtime_router_conf(conf_path: Path) -> tuple[str | None, dict[str, s
     return default_lang, lang_paths
 
 
-def create_runtime_language_router(
-    input_conf: str,
-    current_lang: str,
-    *,
-    strict: bool = False,
-) -> str:
-    """
-    Return asis-ready HTML/JS for root-entry language routing.
-    """
-    import json
-
-    from .lang_ids import detect_language_ids
-
+def _resolve_runtime_conf_path(input_conf: str, current_lang: str) -> Path:
     conf_path = Path(input_conf).expanduser()
     if not conf_path.is_absolute():
-        candidates = [(Path.cwd() / conf_path).resolve()]
-        qpd = os.environ.get("QUARTO_PROJECT_DIR", "").strip()
-        if qpd:
-            project_dir = Path(qpd).expanduser()
-            candidates.append((project_dir / conf_path).resolve())
+        candidates: list[Path] = []
+        project_roots: list[Path] = []
+
+        for env_key in ("QUARTO_PROJECT_DIR", "RHYTHMPRESS_ROOT"):
+            raw = os.environ.get(env_key, "").strip()
+            if not raw:
+                continue
+            root = Path(raw).expanduser()
+            if root not in project_roots:
+                project_roots.append(root)
+
+        for root in project_roots:
+            candidates.append((root / conf_path).resolve())
             if current_lang:
-                candidates.append((project_dir / current_lang / conf_path).resolve())
+                candidates.append((root / current_lang / conf_path).resolve())
+
+        candidates.append((Path.cwd() / conf_path).resolve())
 
         existing = next((p for p in candidates if p.exists()), None)
         conf_path = existing if existing is not None else candidates[0]
+    return conf_path
 
+
+def _load_runtime_language_context(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool,
+) -> tuple[list[str], str, dict[str, str]]:
+    from .lang_ids import detect_language_ids
+
+    conf_path = _resolve_runtime_conf_path(input_conf, current_lang)
     if not conf_path.exists():
         msg = f"conf not found: {conf_path}"
         if strict:
             raise FileNotFoundError(msg)
-        return _router_noop_output(msg)
+        raise ValueError(msg)
     if not conf_path.is_file():
         msg = f"conf is not a file: {conf_path}"
         if strict:
             raise ValueError(msg)
-        return _router_noop_output(msg)
+        raise ValueError(msg)
 
     project_root = conf_path.parent
     lang_ids = detect_language_ids(project_root)
@@ -1622,7 +1631,7 @@ def create_runtime_language_router(
         msg = f"no language ids found near {project_root}"
         if strict:
             raise ValueError(msg)
-        return _router_noop_output(msg)
+        raise ValueError(msg)
 
     bcp47 = re.compile(r"^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$")
     valid_lang_ids = [x for x in lang_ids if bcp47.match(x)]
@@ -1630,7 +1639,7 @@ def create_runtime_language_router(
         msg = "all detected language ids are invalid (not IETF-like tags)"
         if strict:
             raise ValueError(msg)
-        return _router_noop_output(msg)
+        raise ValueError(msg)
 
     dropped = sorted(set(lang_ids) - set(valid_lang_ids))
     if dropped and strict:
@@ -1648,6 +1657,29 @@ def create_runtime_language_router(
     route_map: dict[str, str] = {}
     for lang in valid_lang_ids:
         route_map[lang] = _normalize_route_path(conf_paths.get(lang), lang)
+
+    return valid_lang_ids, default_lang, route_map
+
+
+def create_runtime_language_router(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return asis-ready HTML/JS for root-entry language routing.
+    """
+    import json
+
+    try:
+        valid_lang_ids, default_lang, route_map = _load_runtime_language_context(
+            input_conf, current_lang, strict=strict
+        )
+    except Exception as e:
+        if strict:
+            raise
+        return _router_noop_output(str(e))
 
     lang_ids_json = json.dumps(valid_lang_ids, ensure_ascii=False)
     route_map_json = json.dumps(route_map, ensure_ascii=False, sort_keys=True)
@@ -1703,3 +1735,254 @@ def create_runtime_language_router(
         "})();\n"
         "</script>\n"
     )
+
+
+def create_runtime_language_switcher(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return asis-ready HTML/JS for a current-page language switcher.
+    """
+    import json
+
+    try:
+        valid_lang_ids, default_lang, route_map = _load_runtime_language_context(
+            input_conf, current_lang, strict=strict
+        )
+    except Exception as e:
+        if strict:
+            raise
+        return _router_noop_output(str(e))
+
+    canonical_current = current_lang if current_lang in valid_lang_ids else default_lang
+    options_html = "".join(
+        [
+            f'<option value="{lang}"{" selected" if lang == canonical_current else ""}>{lang}</option>'
+            for lang in valid_lang_ids
+        ]
+    )
+
+    route_map_json = json.dumps(route_map, ensure_ascii=False, sort_keys=True)
+    current_json = json.dumps(canonical_current, ensure_ascii=False)
+
+    return (
+        '<label for="rhythmpress-lang-switcher">Language</label>\n'
+        '<select id="rhythmpress-lang-switcher">'
+        f"{options_html}"
+        "</select>\n"
+        "<script>\n"
+        "(function () {\n"
+        f"  const ROUTES = {route_map_json};\n"
+        f"  const CURRENT_LANG = {current_json};\n"
+        "  const el = document.getElementById('rhythmpress-lang-switcher');\n"
+        "  if (!el) return;\n"
+        "  function writeChoice(lang) {\n"
+        "    try { localStorage.setItem('rhythmpress_lang', lang); } catch (_) {}\n"
+        "    document.cookie = 'rhythmpress_lang=' + encodeURIComponent(lang) + '; path=/; max-age=31536000; SameSite=Lax';\n"
+        "  }\n"
+        "  function persistCurrentSelection() {\n"
+        "    const selected = String(el.value || '').trim();\n"
+        "    if (!selected || !ROUTES[selected]) return;\n"
+        "    writeChoice(selected);\n"
+        "  }\n"
+        "  function replaceCurrentLangPath(path, fromLang, toLang) {\n"
+        "    const token = '/' + fromLang + '/';\n"
+        "    const idx = path.lastIndexOf(token);\n"
+        "    if (idx >= 0) return path.slice(0, idx) + '/' + toLang + '/' + path.slice(idx + token.length);\n"
+        "    if (path === '/' + fromLang || path === '/' + fromLang + '/' || path === '/' + fromLang + '/index.html') {\n"
+        "      return ROUTES[toLang] || path;\n"
+        "    }\n"
+        "    return ROUTES[toLang] || path;\n"
+        "  }\n"
+        "  el.addEventListener('change', function () {\n"
+        "    const targetLang = String(el.value || '').trim();\n"
+        "    if (!targetLang || !ROUTES[targetLang]) return;\n"
+        "    writeChoice(targetLang);\n"
+        "    const p = window.location.pathname || '/';\n"
+        "    const targetPath = replaceCurrentLangPath(p, CURRENT_LANG, targetLang);\n"
+        "    const targetUrl = targetPath + (window.location.search || '') + (window.location.hash || '');\n"
+        "    if (targetUrl === window.location.pathname + window.location.search + window.location.hash) return;\n"
+        "    window.location.assign(targetUrl);\n"
+        "  });\n"
+        "  el.addEventListener('click', function () { setTimeout(persistCurrentSelection, 0); });\n"
+        "  const initialLang = String(CURRENT_LANG || '').trim();\n"
+        "  if (initialLang && ROUTES[initialLang]) writeChoice(initialLang);\n"
+        "})();\n"
+        "</script>\n"
+    )
+
+
+def create_runtime_language_switcher_data_js(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return JS source that sets global runtime language-switcher data.
+    """
+    import json
+
+    try:
+        valid_lang_ids, default_lang, route_map = _load_runtime_language_context(
+            input_conf, current_lang, strict=strict
+        )
+    except Exception as e:
+        if strict:
+            raise
+        msg = json.dumps(str(e), ensure_ascii=False)
+        return (
+            "/* rhythmpress router warning: generated no-op switcher */\n"
+            f"console.warn({msg});\n"
+        )
+
+    canonical_current = current_lang if current_lang in valid_lang_ids else default_lang
+    lang_ids_json = json.dumps(valid_lang_ids, ensure_ascii=False)
+    route_map_json = json.dumps(route_map, ensure_ascii=False, sort_keys=True)
+    current_json = json.dumps(canonical_current, ensure_ascii=False)
+    default_json = json.dumps(default_lang, ensure_ascii=False)
+
+    return (
+        "(function () {\n"
+        "  globalThis.RHYTHMPRESS_LANG_SWITCHER = {\n"
+        f"    available: {lang_ids_json},\n"
+        f"    routes: {route_map_json},\n"
+        f"    currentHint: {current_json},\n"
+        f"    defaultLang: {default_json}\n"
+        "  };\n"
+        "})();\n"
+    )
+
+
+def create_runtime_language_switcher_ui_js() -> str:
+    """
+    Return JS source that renders toolbar switcher from RHYTHMPRESS_LANG_SWITCHER.
+    """
+    return (
+        "(function () {\n"
+        "  const DATA = globalThis.RHYTHMPRESS_LANG_SWITCHER;\n"
+        "  if (!DATA || !Array.isArray(DATA.available) || !DATA.routes) return;\n"
+        "  const AVAILABLE = DATA.available;\n"
+        "  const ROUTES = DATA.routes;\n"
+        "  const CURRENT_HINT = DATA.currentHint;\n"
+        "  const DEFAULT_LANG = DATA.defaultLang;\n"
+        "\n"
+        "  function canonicalize(candidate) {\n"
+        "    if (!candidate) return null;\n"
+        "    const c = String(candidate).trim().toLowerCase();\n"
+        "    if (!c) return null;\n"
+        "    for (const x of AVAILABLE) {\n"
+        "      const lx = String(x).toLowerCase();\n"
+        "      if (c === lx || c.split('-')[0] === lx.split('-')[0]) return x;\n"
+        "    }\n"
+        "    return null;\n"
+        "  }\n"
+        "\n"
+        "  function detectCurrentLang(pathname) {\n"
+        "    const p = pathname || '/';\n"
+        "    for (const lang of AVAILABLE) {\n"
+        "      const token = '/' + lang + '/';\n"
+        "      if (p.includes(token) || p === '/' + lang || p === '/' + lang + '/index.html') return lang;\n"
+        "    }\n"
+        "    return canonicalize(CURRENT_HINT) || canonicalize(DEFAULT_LANG) || AVAILABLE[0] || null;\n"
+        "  }\n"
+        "\n"
+        "  function writeChoice(lang) {\n"
+        "    try { localStorage.setItem('rhythmpress_lang', lang); } catch (_) {}\n"
+        "    document.cookie = 'rhythmpress_lang=' + encodeURIComponent(lang) + '; path=/; max-age=31536000; SameSite=Lax';\n"
+        "  }\n"
+        "  function persistCurrentSelection(select) {\n"
+        "    const targetLang = canonicalize(select.value);\n"
+        "    if (!targetLang || !ROUTES[targetLang]) return;\n"
+        "    writeChoice(targetLang);\n"
+        "  }\n"
+        "\n"
+        "  function replaceCurrentLangPath(path, fromLang, toLang) {\n"
+        "    if (!fromLang) return ROUTES[toLang] || path;\n"
+        "    const token = '/' + fromLang + '/';\n"
+        "    const idx = path.lastIndexOf(token);\n"
+        "    if (idx >= 0) return path.slice(0, idx) + '/' + toLang + '/' + path.slice(idx + token.length);\n"
+        "    if (path === '/' + fromLang || path === '/' + fromLang + '/' || path === '/' + fromLang + '/index.html') {\n"
+        "      return ROUTES[toLang] || path;\n"
+        "    }\n"
+        "    return ROUTES[toLang] || path;\n"
+        "  }\n"
+        "\n"
+        "  function mount() {\n"
+        "    const existing = document.getElementById('rhythmpress-lang-switcher');\n"
+        "    if (existing) return;\n"
+        "    const host =\n"
+        "      document.querySelector('.navbar .navbar-nav.ms-auto') ||\n"
+        "      document.querySelector('.navbar .navbar-nav') ||\n"
+        "      document.querySelector('.navbar .navbar-collapse');\n"
+        "    if (!host) return;\n"
+        "\n"
+        "    const currentLang = detectCurrentLang(window.location.pathname || '/');\n"
+        "\n"
+        "    const box = document.createElement('div');\n"
+        "    box.className = 'rp-lang-switcher-toolbar d-flex align-items-center';\n"
+        "    box.style.marginLeft = '0.75rem';\n"
+        "\n"
+        "    const label = document.createElement('label');\n"
+        "    label.setAttribute('for', 'rhythmpress-lang-switcher');\n"
+        "    label.textContent = 'Language';\n"
+        "    label.style.marginRight = '0.4rem';\n"
+        "\n"
+        "    const select = document.createElement('select');\n"
+        "    select.id = 'rhythmpress-lang-switcher';\n"
+        "    for (const lang of AVAILABLE) {\n"
+        "      const opt = document.createElement('option');\n"
+        "      opt.value = lang;\n"
+        "      opt.textContent = lang;\n"
+        "      if (lang === currentLang) opt.selected = true;\n"
+        "      select.appendChild(opt);\n"
+        "    }\n"
+        "\n"
+        "    select.addEventListener('change', function () {\n"
+        "      const targetLang = canonicalize(select.value);\n"
+        "      if (!targetLang || !ROUTES[targetLang]) return;\n"
+        "      writeChoice(targetLang);\n"
+        "      const p = window.location.pathname || '/';\n"
+        "      const nextPath = replaceCurrentLangPath(p, currentLang, targetLang);\n"
+        "      const targetUrl = nextPath + (window.location.search || '') + (window.location.hash || '');\n"
+        "      if (targetUrl === window.location.pathname + window.location.search + window.location.hash) return;\n"
+        "      window.location.assign(targetUrl);\n"
+        "    });\n"
+        "    select.addEventListener('click', function () { setTimeout(function () { persistCurrentSelection(select); }, 0); });\n"
+        "    if (currentLang && ROUTES[currentLang]) writeChoice(currentLang);\n"
+        "\n"
+        "    box.appendChild(label);\n"
+        "    box.appendChild(select);\n"
+        "    host.appendChild(box);\n"
+        "  }\n"
+        "\n"
+        "  if (document.readyState === 'loading') {\n"
+        "    document.addEventListener('DOMContentLoaded', mount);\n"
+        "  } else {\n"
+        "    mount();\n"
+        "  }\n"
+        "})();\n"
+    )
+
+
+def create_runtime_language_switcher_js(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Backward-compatible combined JS (data bootstrap + UI mount).
+    """
+    data_js = create_runtime_language_switcher_data_js(
+        input_conf=input_conf,
+        current_lang=current_lang,
+        strict=strict,
+    )
+    ui_js = create_runtime_language_switcher_ui_js()
+    if data_js.endswith("\n"):
+        return data_js + ui_js
+    return data_js + "\n" + ui_js
