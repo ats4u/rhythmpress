@@ -1522,4 +1522,184 @@ def create_global_navigation(input_conf, lang_id: str, *, strict: bool = True, l
     return "\n\n<!-- -->\n\n".join(out_parts) + ("\n" if out_parts else "")
 
 
+def _router_noop_output(msg: str) -> str:
+    return (
+        f"<!-- rhythmpress router warning: {msg} -->\n"
+        "<script>(function(){})();</script>\n"
+    )
 
+
+def _normalize_route_path(raw: str | None, lang: str) -> str:
+    path = (raw or "").strip()
+    if not path:
+        path = f"/{lang}/"
+    if not path.startswith("/"):
+        path = "/" + path
+    if not path.endswith("/"):
+        path += "/"
+    return path
+
+
+def _parse_runtime_router_conf(conf_path: Path) -> tuple[str | None, dict[str, str]]:
+    """
+    Parse optional router settings from _rhythmpress.conf.
+
+    Supported keys:
+      - default_lang=ja
+      - default-language=ja
+      - lang_path.ja=/ja/
+      - route.en=/en/
+    """
+    default_lang: str | None = None
+    lang_paths: dict[str, str] = {}
+
+    for raw in conf_path.read_text(encoding="utf-8").splitlines():
+        line = re.sub(r"#.*$", "", raw).strip()
+        if not line or "=" not in line:
+            continue
+        key, val = line.split("=", 1)
+        key = key.strip()
+        val = val.strip()
+        if not key:
+            continue
+
+        key_norm = key.lower().replace("-", "_")
+        if key_norm in {"default_lang", "default_language", "default"}:
+            default_lang = val
+            continue
+
+        for prefix in ("lang_path.", "langpath.", "route."):
+            if key_norm.startswith(prefix):
+                lang = key[len(prefix):].strip()
+                if lang:
+                    lang_paths[lang] = val
+                break
+
+    return default_lang, lang_paths
+
+
+def create_runtime_language_router(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return asis-ready HTML/JS for root-entry language routing.
+    """
+    import json
+
+    from .lang_ids import detect_language_ids
+
+    conf_path = Path(input_conf).expanduser()
+    if not conf_path.is_absolute():
+        candidates = [(Path.cwd() / conf_path).resolve()]
+        qpd = os.environ.get("QUARTO_PROJECT_DIR", "").strip()
+        if qpd:
+            project_dir = Path(qpd).expanduser()
+            candidates.append((project_dir / conf_path).resolve())
+            if current_lang:
+                candidates.append((project_dir / current_lang / conf_path).resolve())
+
+        existing = next((p for p in candidates if p.exists()), None)
+        conf_path = existing if existing is not None else candidates[0]
+
+    if not conf_path.exists():
+        msg = f"conf not found: {conf_path}"
+        if strict:
+            raise FileNotFoundError(msg)
+        return _router_noop_output(msg)
+    if not conf_path.is_file():
+        msg = f"conf is not a file: {conf_path}"
+        if strict:
+            raise ValueError(msg)
+        return _router_noop_output(msg)
+
+    project_root = conf_path.parent
+    lang_ids = detect_language_ids(project_root)
+
+    if not lang_ids:
+        msg = f"no language ids found near {project_root}"
+        if strict:
+            raise ValueError(msg)
+        return _router_noop_output(msg)
+
+    bcp47 = re.compile(r"^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$")
+    valid_lang_ids = [x for x in lang_ids if bcp47.match(x)]
+    if not valid_lang_ids:
+        msg = "all detected language ids are invalid (not IETF-like tags)"
+        if strict:
+            raise ValueError(msg)
+        return _router_noop_output(msg)
+
+    dropped = sorted(set(lang_ids) - set(valid_lang_ids))
+    if dropped and strict:
+        raise ValueError(f"invalid language ids: {', '.join(dropped)}")
+
+    detected_default, conf_paths = _parse_runtime_router_conf(conf_path)
+    default_lang = (detected_default or current_lang or "").strip()
+    if default_lang not in valid_lang_ids:
+        if strict:
+            raise ValueError(
+                f"default language '{default_lang}' is not in detected languages {valid_lang_ids}"
+            )
+        default_lang = valid_lang_ids[0]
+
+    route_map: dict[str, str] = {}
+    for lang in valid_lang_ids:
+        route_map[lang] = _normalize_route_path(conf_paths.get(lang), lang)
+
+    lang_ids_json = json.dumps(valid_lang_ids, ensure_ascii=False)
+    route_map_json = json.dumps(route_map, ensure_ascii=False, sort_keys=True)
+    default_json = json.dumps(default_lang, ensure_ascii=False)
+
+    return (
+        "<script>\n"
+        "(function () {\n"
+        f"  const AVAILABLE = {lang_ids_json};\n"
+        f"  const ROUTES = {route_map_json};\n"
+        f"  const DEFAULT_LANG = {default_json};\n"
+        "  const PATH = window.location.pathname || \"/\";\n"
+        "  const isRootEntry = PATH === \"/\" || PATH === \"/index.html\";\n"
+        "  if (!isRootEntry) return;\n"
+        "\n"
+        "  const lowerToCanonical = Object.create(null);\n"
+        "  for (const x of AVAILABLE) lowerToCanonical[String(x).toLowerCase()] = x;\n"
+        "\n"
+        "  function canonicalize(candidate) {\n"
+        "    if (!candidate) return null;\n"
+        "    const c = String(candidate).trim().toLowerCase();\n"
+        "    if (!c) return null;\n"
+        "    if (lowerToCanonical[c]) return lowerToCanonical[c];\n"
+        "    const base = c.split('-')[0];\n"
+        "    if (lowerToCanonical[base]) return lowerToCanonical[base];\n"
+        "    return null;\n"
+        "  }\n"
+        "\n"
+        "  function readCookie(name) {\n"
+        "    const m = document.cookie.match(new RegExp('(?:^|;\\\\s*)' + name + '=([^;]+)'));\n"
+        "    return m ? decodeURIComponent(m[1]) : null;\n"
+        "  }\n"
+        "\n"
+        "  let preferred = null;\n"
+        "  try { preferred = canonicalize(localStorage.getItem('rhythmpress_lang')); } catch (_) {}\n"
+        "  if (!preferred) preferred = canonicalize(readCookie('rhythmpress_lang'));\n"
+        "  if (!preferred) preferred = canonicalize(readCookie('lang'));\n"
+        "  if (!preferred) {\n"
+        "    const nav = navigator.languages || [];\n"
+        "    for (const n of nav) {\n"
+        "      preferred = canonicalize(n);\n"
+        "      if (preferred) break;\n"
+        "    }\n"
+        "  }\n"
+        "  if (!preferred) preferred = DEFAULT_LANG;\n"
+        "\n"
+        "  const target = ROUTES[preferred] || ROUTES[DEFAULT_LANG];\n"
+        "  if (!target) return;\n"
+        "\n"
+        "  const normalizedPath = PATH.endsWith('/') ? PATH : (PATH + '/');\n"
+        "  if (normalizedPath === target) return;\n"
+        "  window.location.replace(target);\n"
+        "})();\n"
+        "</script>\n"
+    )
