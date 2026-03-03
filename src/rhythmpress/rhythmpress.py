@@ -1529,6 +1529,31 @@ def _router_noop_output(msg: str) -> str:
     )
 
 
+_LANG_LABEL_META: dict[str, tuple[str, str]] = {
+    "en": ("English", "🇺🇸"),
+    "ja": ("日本語", "🇯🇵"),
+    "fr": ("Français", "🇫🇷"),
+    "de": ("Deutsch", "🇩🇪"),
+    "es": ("Español", "🇪🇸"),
+    "it": ("Italiano", "🇮🇹"),
+    "pt": ("Português", "🇵🇹"),
+    "ko": ("한국어", "🇰🇷"),
+    "zh": ("中文", "🇨🇳"),
+    "zh-cn": ("简体中文", "🇨🇳"),
+    "zh-tw": ("繁體中文", "🇹🇼"),
+}
+
+
+def _format_language_label(lang: str) -> str:
+    key = lang.strip().lower()
+    base = key.split("-", 1)[0]
+    meta = _LANG_LABEL_META.get(key) or _LANG_LABEL_META.get(base)
+    if not meta:
+        return lang
+    name, flag = meta
+    return f"{flag} {name} ({lang})"
+
+
 def _normalize_route_path(raw: str | None, lang: str) -> str:
     path = (raw or "").strip()
     if not path:
@@ -1760,7 +1785,7 @@ def create_runtime_language_switcher(
     canonical_current = current_lang if current_lang in valid_lang_ids else default_lang
     options_html = "".join(
         [
-            f'<option value="{lang}"{" selected" if lang == canonical_current else ""}>{lang}</option>'
+            f'<option value="{lang}"{" selected" if lang == canonical_current else ""}>{_format_language_label(lang)}</option>'
             for lang in valid_lang_ids
         ]
     )
@@ -1844,12 +1869,18 @@ def create_runtime_language_switcher_data_js(
     route_map_json = json.dumps(route_map, ensure_ascii=False, sort_keys=True)
     current_json = json.dumps(canonical_current, ensure_ascii=False)
     default_json = json.dumps(default_lang, ensure_ascii=False)
+    labels_json = json.dumps(
+        {lang: _format_language_label(lang) for lang in valid_lang_ids},
+        ensure_ascii=False,
+        sort_keys=True,
+    )
 
     return (
         "(function () {\n"
         "  globalThis.RHYTHMPRESS_LANG_SWITCHER = {\n"
         f"    available: {lang_ids_json},\n"
         f"    routes: {route_map_json},\n"
+        f"    labels: {labels_json},\n"
         f"    currentHint: {current_json},\n"
         f"    defaultLang: {default_json}\n"
         "  };\n"
@@ -1867,6 +1898,7 @@ def create_runtime_language_switcher_ui_js() -> str:
         "  if (!DATA || !Array.isArray(DATA.available) || !DATA.routes) return;\n"
         "  const AVAILABLE = DATA.available;\n"
         "  const ROUTES = DATA.routes;\n"
+        "  const LABELS = DATA.labels || {};\n"
         "  const CURRENT_HINT = DATA.currentHint;\n"
         "  const DEFAULT_LANG = DATA.defaultLang;\n"
         "\n"
@@ -1936,7 +1968,7 @@ def create_runtime_language_switcher_ui_js() -> str:
         "    for (const lang of AVAILABLE) {\n"
         "      const opt = document.createElement('option');\n"
         "      opt.value = lang;\n"
-        "      opt.textContent = lang;\n"
+        "      opt.textContent = LABELS[lang] || String(lang);\n"
         "      if (lang === currentLang) opt.selected = true;\n"
         "      select.appendChild(opt);\n"
         "    }\n"
