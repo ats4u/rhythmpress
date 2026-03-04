@@ -1816,6 +1816,61 @@ def create_runtime_language_switcher(
     )
 
 
+def create_runtime_language_switcher_links(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return asis-ready HTML/JS for a link-based language switcher.
+
+    This variant renders one clickable language link per line.
+    """
+    try:
+        valid_lang_ids, default_lang, route_map = _load_runtime_language_context(
+            input_conf, current_lang, strict=strict
+        )
+    except Exception as e:
+        if strict:
+            raise
+        return _router_noop_output(str(e))
+
+    canonical_current = current_lang if current_lang in valid_lang_ids else default_lang
+    links: list[str] = []
+    for lang in valid_lang_ids:
+        href = route_map.get(lang) or "/"
+        label = format_language_label(lang)
+        aria = ' aria-current="page"' if lang == canonical_current else ""
+        text = f"<strong>{label}</strong>" if lang == canonical_current else label
+        links.append(
+            f'<a href="{href}" class="rhythmpress-lang-anchor" data-lang="{lang}"{aria}>{text}</a>'
+        )
+    links_html = "<br>\n".join(links)
+
+    return (
+        '<nav class="rhythmpress-lang-switcher-links" aria-label="Language switcher">\n'
+        f"{links_html}\n"
+        "</nav>\n"
+        "<script>\n"
+        "(function () {\n"
+        "  function writeChoice(lang) {\n"
+        "    try { localStorage.setItem('rhythmpress_lang', lang); } catch (_) {}\n"
+        "    document.cookie = 'rhythmpress_lang=' + encodeURIComponent(lang) + '; path=/; max-age=31536000; SameSite=Lax';\n"
+        "  }\n"
+        "  const nodes = document.querySelectorAll('a.rhythmpress-lang-anchor[data-lang]');\n"
+        "  for (const node of nodes) {\n"
+        "    node.addEventListener('click', function () {\n"
+        "      const lang = String(node.getAttribute('data-lang') || '').trim();\n"
+        "      if (!lang) return;\n"
+        "      writeChoice(lang);\n"
+        "    });\n"
+        "  }\n"
+        "})();\n"
+        "</script>\n"
+    )
+
+
 def create_runtime_language_switcher_data_js(
     input_conf: str,
     current_lang: str,
@@ -2006,13 +2061,13 @@ def create_runtime_root_entry(
     Return ASIS content for root entry pages.
 
     Behavior:
-      - If `RHYTHMPRESS_PREVIEW` is set (truthy), return language switcher UI.
+      - If `RHYTHMPRESS_PREVIEW` is set (truthy), return line-break anchored language links.
       - Otherwise, return root redirect router script.
     """
     raw = os.environ.get("RHYTHMPRESS_PREVIEW", "").strip().lower()
     is_preview = raw not in {"", "0", "false", "no", "off"}
     if is_preview:
-        return create_runtime_language_switcher(
+        return create_runtime_language_switcher_links(
             input_conf=input_conf,
             current_lang=current_lang,
             strict=strict,

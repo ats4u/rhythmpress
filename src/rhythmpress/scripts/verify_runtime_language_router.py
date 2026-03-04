@@ -37,6 +37,9 @@ def main() -> int:
             os.environ["QUARTO_PROJECT_DIR"] = str(root)
             out = rp.create_runtime_language_router("../_rhythmpress.conf", "en", strict=True)
             switcher = rp.create_runtime_language_switcher("../_rhythmpress.conf", "en", strict=True)
+            switcher_links = rp.create_runtime_language_switcher_links(
+                "../_rhythmpress.conf", "en", strict=True
+            )
             switcher_data_js = rp.create_runtime_language_switcher_data_js(
                 "../_rhythmpress.conf", "en", strict=True
             )
@@ -63,6 +66,12 @@ def main() -> int:
             raise AssertionError("missing choice persistence in switcher output")
         if "window.location.assign(targetUrl);" not in switcher:
             raise AssertionError("missing current-page redirect in switcher output")
+        if 'class="rhythmpress-lang-anchor"' not in switcher_links:
+            raise AssertionError("missing anchor links in link switcher output")
+        if "<br>" not in switcher_links:
+            raise AssertionError("link switcher should use line breaks between entries")
+        if "localStorage.setItem('rhythmpress_lang'" not in switcher_links:
+            raise AssertionError("missing choice persistence in link switcher output")
         if "function mount()" not in switcher_js:
             raise AssertionError("missing toolbar mount function in switcher JS output")
         if "rhythmpress-lang-switcher" not in switcher_js:
@@ -73,8 +82,8 @@ def main() -> int:
             raise AssertionError("missing global data read in switcher UI JS output")
         if "window.location.replace(target);" not in root_default:
             raise AssertionError("default root entry should emit router redirect")
-        if 'id="rhythmpress-lang-switcher"' not in root_preview:
-            raise AssertionError("preview root entry should emit language switcher")
+        if 'class="rhythmpress-lang-anchor"' not in root_preview:
+            raise AssertionError("preview root entry should emit anchor link switcher")
 
         try:
             rp.create_runtime_language_router("./_does_not_exist.conf", "en", strict=True)
@@ -88,6 +97,11 @@ def main() -> int:
         soft_switcher = rp.create_runtime_language_switcher("./_does_not_exist.conf", "en", strict=False)
         if "router warning" not in soft_switcher:
             raise AssertionError("switcher non-strict mode should emit warning comment")
+        soft_switcher_links = rp.create_runtime_language_switcher_links(
+            "./_does_not_exist.conf", "en", strict=False
+        )
+        if "router warning" not in soft_switcher_links:
+            raise AssertionError("link switcher non-strict mode should emit warning comment")
         soft_switcher_js = rp.create_runtime_language_switcher_js("./_does_not_exist.conf", "en", strict=False)
         if "generated no-op switcher" not in soft_switcher_js:
             raise AssertionError("switcher JS non-strict mode should emit no-op warning")
