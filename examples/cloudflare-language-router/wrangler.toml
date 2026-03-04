@@ -1,0 +1,19 @@
+name = "rhythmpress-language-router"
+main = "worker.mjs"
+compatibility_date = "2026-03-04"
+
+# Fill this with your zone domain in Cloudflare dashboard after creating a Worker route.
+# Example:
+# routes = [{ pattern = "rhythmdo.com/*", zone_name = "rhythmdo.com" }]
+
+[vars]
+# Comma-separated language IDs supported by your site.
+LANG_IDS = "en,ja"
+
+# Default language when cookie/header has no match.
+DEFAULT_LANG = "en"
+
+# Optional JSON map for custom routes.
+# If omitted, fallback route is "/<lang>/".
+# LANG_ROUTE_MAP = "{\"en\":\"/en/\",\"ja\":\"/ja/\"}"
+

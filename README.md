@@ -10,6 +10,7 @@
 - [docs/troubleshooting.md](docs/troubleshooting.md) — Common failures and fixes (masters ambiguity, `RHYTHMPRESS_ROOT`, `yq`, git dates, CWD issues).
 - [docs/development.md](docs/development.md) — Development notes (packaging, dependency pinning, release hygiene, macOS `._*` artifacts).
 - [docs/tutorial-publish-github-cloudflare.md](docs/tutorial-publish-github-cloudflare.md) — Publish a Rhythmpress-built Quarto site on GitHub Pages, fronted by Cloudflare Proxy (DNS + CDN + SSL).
+- [docs/cloudflare-worker-router.md](docs/cloudflare-worker-router.md) — Edge language router example (Cloudflare Worker) for `/` → `/<lang>/`.
 
 
 ## 1. Introduction
