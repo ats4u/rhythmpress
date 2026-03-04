@@ -590,6 +590,7 @@ quarto preview
 * `preview`: thin wrapper for `quarto preview` with `QUARTO_PROJECT_DIR` set to current directory
   * when called with no arguments, it fails fast and asks for explicit options
   * override for intentional bare preview: `--allow-empty-preview` (alias: `--no-warn`)
+  * exports `RHYTHMPRESS_PREVIEW=1` during preview command execution
 * `preview-all`: serves assembled output (`.site`) as static files:
   `python3 -m http.server 5150 --directory .site`
   * supports `--output-dir <dir>` to change served directory

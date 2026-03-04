@@ -42,7 +42,11 @@ def main() -> int:
             )
             switcher_ui_js = rp.create_runtime_language_switcher_ui_js()
             switcher_js = rp.create_runtime_language_switcher_js("../_rhythmpress.conf", "en", strict=True)
+            root_default = rp.create_runtime_root_entry("../_rhythmpress.conf", "en", strict=True)
+            os.environ["RHYTHMPRESS_PREVIEW"] = "1"
+            root_preview = rp.create_runtime_root_entry("../_rhythmpress.conf", "en", strict=True)
         finally:
+            os.environ.pop("RHYTHMPRESS_PREVIEW", None)
             os.environ.pop("QUARTO_PROJECT_DIR", None)
             os.chdir(cwd)
 
@@ -67,6 +71,10 @@ def main() -> int:
             raise AssertionError("missing global data object in switcher data JS output")
         if "const DATA = globalThis.RHYTHMPRESS_LANG_SWITCHER;" not in switcher_ui_js:
             raise AssertionError("missing global data read in switcher UI JS output")
+        if "window.location.replace(target);" not in root_default:
+            raise AssertionError("default root entry should emit router redirect")
+        if 'id="rhythmpress-lang-switcher"' not in root_preview:
+            raise AssertionError("preview root entry should emit language switcher")
 
         try:
             rp.create_runtime_language_router("./_does_not_exist.conf", "en", strict=True)

@@ -434,7 +434,10 @@ For multilingual sites, keep real top pages in language paths:
 Then use root `index.qmd` only as a redirect page (for `/` -> preferred language path).
 This avoids cross-profile collisions and keeps profile renders deterministic.
 
-Example root `index.qmd` (runtime router from rhythmpress):
+Example root `index.qmd` (auto-switches by mode):
+
+* normal render: emits root redirect router
+* `rhythmpress preview ...`: emits language switcher (`RHYTHMPRESS_PREVIEW=1`)
 
 ```qmd
 ---
@@ -445,8 +448,8 @@ format: html
 ```{python}
 #| output: asis
 from rhythmpress import rhythmpress
-out = rhythmpress.create_runtime_language_router(
-    input_conf="../_rhythmpress.conf",
+out = rhythmpress.create_runtime_root_entry(
+    input_conf="./_rhythmpress.conf",
     current_lang="en",
     strict=False,
 )

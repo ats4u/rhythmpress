@@ -1994,3 +1994,31 @@ def create_runtime_language_switcher_js(
     if data_js.endswith("\n"):
         return data_js + ui_js
     return data_js + "\n" + ui_js
+
+
+def create_runtime_root_entry(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return ASIS content for root entry pages.
+
+    Behavior:
+      - If `RHYTHMPRESS_PREVIEW` is set (truthy), return language switcher UI.
+      - Otherwise, return root redirect router script.
+    """
+    raw = os.environ.get("RHYTHMPRESS_PREVIEW", "").strip().lower()
+    is_preview = raw not in {"", "0", "false", "no", "off"}
+    if is_preview:
+        return create_runtime_language_switcher(
+            input_conf=input_conf,
+            current_lang=current_lang,
+            strict=strict,
+        )
+    return create_runtime_language_router(
+        input_conf=input_conf,
+        current_lang=current_lang,
+        strict=strict,
+    )
