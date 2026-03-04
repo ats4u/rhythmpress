@@ -102,6 +102,40 @@ def sanitize_post_render(project: Dict[str, Any]) -> None:
     ]
 
 
+def ensure_profile_post_render(project: Dict[str, Any], lang: str) -> None:
+    """
+    Ensure generated profile YAML has the canonical post-render pipeline:
+      1) rhythmpress post-render-patch --output-dir .site-<lang> --lang-id <lang>
+      2) rhythmpress sitemap
+
+    Keeps non-Rhythmpress custom commands while removing stale/duplicate
+    Rhythmpress-managed entries.
+    """
+    post_render = project.get("post-render")
+    existing = post_render if isinstance(post_render, list) else []
+    kept: list[str] = []
+    for cmd in existing:
+        if not isinstance(cmd, str):
+            continue
+        c = cmd.strip()
+        if not c:
+            continue
+        # Replace legacy or previous rhythmpress-managed entries with canonical ones below.
+        if c.startswith("rhythmpress post-render-patch"):
+            continue
+        if c.startswith("rhythmpress sitemap"):
+            continue
+        if "QUARTO_PROFILE" in c and "rhythmpress sitemap" in c:
+            continue
+        kept.append(c)
+
+    kept.append(
+        f"rhythmpress post-render-patch --output-dir .site-{lang} --lang-id {lang}"
+    )
+    kept.append("rhythmpress sitemap")
+    project["post-render"] = kept
+
+
 def deep_merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]:
     """
     Recursively merge two mappings.
@@ -192,6 +226,7 @@ def main(argv: List[str]) -> int:
         "!drafts/**",
     ]
     sanitize_post_render(project)
+    ensure_profile_post_render(project, lang)
 
     out_text = serialize_yaml(merged)
     changed = write_if_changed(out_path, out_text)
