@@ -193,7 +193,9 @@ Terminal A (preview):
 
 ```sh
 rhythmpress_activate
-quarto preview
+rhythmpress preview --profile en
+# or
+rhythmpress preview --profile ja
 ```
 
 Terminal B (watch masters and rebuild):
@@ -238,6 +240,11 @@ LANG_ID=ja rhythmpress preproc my-topic
 ```
 
 If you forget, `preproc` will error with “Ambiguous… Set $LANG_ID.”
+
+Notes:
+
+* Hyphenated language IDs are valid in master filenames (for example `master-zh-cn.qmd`).
+* `preproc` still treats multiple master files as ambiguous unless `LANG_ID` is set.
 
 ### C) Project-wide build across languages (recommended)
 
@@ -439,6 +446,21 @@ format: html
 #| output: asis
 from rhythmpress import rhythmpress
 out = rhythmpress.create_runtime_language_router(
+    input_conf="../_rhythmpress.conf",
+    current_lang="en",
+    strict=False,
+)
+print(out)
+```
+```
+
+Example page-level language switcher (current-page switch):
+
+```qmd
+```{python}
+#| output: asis
+from rhythmpress import rhythmpress
+out = rhythmpress.create_runtime_language_switcher(
     input_conf="../_rhythmpress.conf",
     current_lang="en",
     strict=False,

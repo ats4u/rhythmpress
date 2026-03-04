@@ -78,6 +78,7 @@ def as_bool(v, default=True):
 
 from typing import Any, Mapping
 from pathlib import Path
+from .lang_registry import format_language_label
 from datetime import date, datetime
 
 #------------------------------------------------
@@ -1529,31 +1530,6 @@ def _router_noop_output(msg: str) -> str:
     )
 
 
-_LANG_LABEL_META: dict[str, tuple[str, str]] = {
-    "en": ("English", "🇺🇸"),
-    "ja": ("日本語", "🇯🇵"),
-    "fr": ("Français", "🇫🇷"),
-    "de": ("Deutsch", "🇩🇪"),
-    "es": ("Español", "🇪🇸"),
-    "it": ("Italiano", "🇮🇹"),
-    "pt": ("Português", "🇵🇹"),
-    "ko": ("한국어", "🇰🇷"),
-    "zh": ("中文", "🇨🇳"),
-    "zh-cn": ("简体中文", "🇨🇳"),
-    "zh-tw": ("繁體中文", "🇹🇼"),
-}
-
-
-def _format_language_label(lang: str) -> str:
-    key = lang.strip().lower()
-    base = key.split("-", 1)[0]
-    meta = _LANG_LABEL_META.get(key) or _LANG_LABEL_META.get(base)
-    if not meta:
-        return lang
-    name, flag = meta
-    return f"{flag} {name} ({lang})"
-
-
 def _normalize_route_path(raw: str | None, lang: str) -> str:
     path = (raw or "").strip()
     if not path:
@@ -1785,7 +1761,7 @@ def create_runtime_language_switcher(
     canonical_current = current_lang if current_lang in valid_lang_ids else default_lang
     options_html = "".join(
         [
-            f'<option value="{lang}"{" selected" if lang == canonical_current else ""}>{_format_language_label(lang)}</option>'
+            f'<option value="{lang}"{" selected" if lang == canonical_current else ""}>{format_language_label(lang)}</option>'
             for lang in valid_lang_ids
         ]
     )
@@ -1870,7 +1846,7 @@ def create_runtime_language_switcher_data_js(
     current_json = json.dumps(canonical_current, ensure_ascii=False)
     default_json = json.dumps(default_lang, ensure_ascii=False)
     labels_json = json.dumps(
-        {lang: _format_language_label(lang) for lang in valid_lang_ids},
+        {lang: format_language_label(lang) for lang in valid_lang_ids},
         ensure_ascii=False,
         sort_keys=True,
     )

@@ -12,12 +12,12 @@ Output:
 from __future__ import annotations
 
 import argparse
-import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, NoReturn
 
 import yaml
+from rhythmpress.lang_registry import to_bcp47_lang_tag
 
 
 class _LiteralBlockDumper(yaml.SafeDumper):
@@ -147,44 +147,6 @@ def write_if_changed(path: Path, text: str) -> bool:
     tmp.write_text(text, encoding="utf-8")
     tmp.replace(path)
     return True
-
-
-def to_bcp47_lang_tag(lang: str) -> str:
-    """
-    Convert a language id to a stable BCP47-like tag for Quarto `lang:`.
-
-    Quarto currently rewrites short tags like `en`/`ja` into relative paths in
-    generated html lang/xml:lang attributes under website builds. Using regioned
-    tags (e.g. en-US, ja-JP) avoids that behavior.
-    """
-    value = (lang or "").strip()
-    if not value:
-        return value
-
-    # Already a reasonable BCP47 tag.
-    if re.fullmatch(r"[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})+", value):
-        return value
-
-    base = value.lower()
-    defaults = {
-        "en": "en-US",
-        "ja": "ja-JP",
-        "fr": "fr-FR",
-        "de": "de-DE",
-        "es": "es-ES",
-        "it": "it-IT",
-        "pt": "pt-PT",
-        "ko": "ko-KR",
-        "zh": "zh-CN",
-    }
-    if base in defaults:
-        return defaults[base]
-
-    # Generic fallback for 2-letter ids: xx-XX
-    if re.fullmatch(r"[A-Za-z]{2}", value):
-        return f"{base}-{base.upper()}"
-
-    return value
 
 
 def main(argv: List[str]) -> int:

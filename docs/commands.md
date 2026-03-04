@@ -126,6 +126,11 @@ It will read a master file under the target directory:
 
   * If more than one exists, it fails with **Ambiguous** and tells you to set `LANG_ID`.
 
+Language id notes:
+
+* Hyphenated IDs in filenames are supported (for example `master-zh-cn.qmd`).
+* If a directory has both `master-en.qmd` and `master-zh-cn.qmd`, this is still ambiguous for `preproc` without `LANG_ID`.
+
 It reads these front matter keys (from the chosen master file):
 
 * `rhythmpress-preproc` (default: `copy`)
@@ -433,6 +438,7 @@ Behavior:
   * `project.post-render` is preserved from the base project config for every profile (single-language builds still emit their own sitemap)
   * for merged multi-profile deploys, run `rhythmpress sitemap` once on the merged output so final `sitemap.xml` includes all languages
   * if you need the full static asset tree in every profile/merged output, include `assets/**` in base `_quarto.yml` `project.resources`
+  * generated top-level `lang` is normalized to BCP47-style tags (for example `en-US`, `ja-JP`) to avoid malformed html `lang`/`xml:lang` values in Quarto website output
 * Optional post-merge hook:
 
   * If present, runs:
@@ -609,6 +615,7 @@ Usage:
 rhythmpress start
 rhythmpress clean-start
 rhythmpress preview --profile en
+rhythmpress preview --profile ja
 rhythmpress preview --allow-empty-preview
 rhythmpress preview-all
 rhythmpress preview-all --port 5150
@@ -670,6 +677,45 @@ Usage:
 
 ```bash
 rhythmpress lang-ids
+```
+
+---
+
+## `rhythmpress render-lang-switcher-js`
+
+Generate a standalone runtime language-switcher JavaScript file.
+
+* default output: `./lang-switcher.generated.mjs`
+* writes only when content changed (idempotent)
+* supports strict/non-strict runtime config handling
+* supports `--mode`:
+  * `all`: combined data bootstrap + UI mount (default)
+  * `data`: global JSON bootstrap only (`globalThis.RHYTHMPRESS_LANG_SWITCHER`)
+  * `ui`: UI mount only (reads `globalThis.RHYTHMPRESS_LANG_SWITCHER`)
+* display labels (flag/name/code) and profile `lang` normalization both use the same internal language registry so mappings stay consistent across commands
+
+Usage:
+
+```bash
+rhythmpress render-lang-switcher-js
+rhythmpress render-lang-switcher-js --conf _rhythmpress.conf --current-lang en
+rhythmpress render-lang-switcher-js --out lang-switcher.generated.mjs
+rhythmpress render-lang-switcher-js --strict
+rhythmpress render-lang-switcher-js --mode data --out lang-switcher-data.generated.mjs
+rhythmpress render-lang-switcher-js --mode ui --out lang-switcher-ui.generated.mjs
+```
+
+Then include it from your pages/template:
+
+```html
+<script type="module" src="/lang-switcher.generated.mjs"></script>
+```
+
+When split (`--mode data` + `--mode ui`), include data first:
+
+```html
+<script type="module" src="/lang-switcher-data.generated.mjs"></script>
+<script type="module" src="/lang-switcher-ui.generated.mjs"></script>
 ```
 
 ---

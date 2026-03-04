@@ -14,6 +14,7 @@ from typing import Any, Dict, List
 
 import yaml
 
+from rhythmpress.lang_registry import to_bcp47_lang_tag
 from rhythmpress.scripts import rhythmpress_quarto_profile
 
 
@@ -50,8 +51,7 @@ def _assert_profile(tmp: Path, lang: str) -> None:
     if project.get("post-render") != expected_post_render:
         raise AssertionError(f"unexpected post-render for {lang}: {project.get('post-render')!r}")
 
-    expected_bcp47 = {"en": "en-US", "ja": "ja-JP"}
-    if doc.get("lang") != expected_bcp47[lang]:
+    if doc.get("lang") != to_bcp47_lang_tag(lang):
         raise AssertionError(f"unexpected lang tag for {lang}: {doc.get('lang')!r}")
 
 

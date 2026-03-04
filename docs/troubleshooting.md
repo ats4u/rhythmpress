@@ -81,6 +81,8 @@ Typical symptom:
 Why:
 
 * `preproc` needs to know which language to pick when multiple masters exist.
+* This is true even when language IDs contain hyphens (for example `master-en.qmd` + `master-zh-cn.qmd`).
+* Hyphenated IDs themselves are supported; the failure is from ambiguity, not filename parsing.
 
 Fix:
 
@@ -326,5 +328,4 @@ See also:
 * `docs/commands.md` (exact command behavior)
 * `docs/configuration.md` (vars, hooks, config formats)
 * `docs/concepts.md` (mental model + artifacts)
-
 
