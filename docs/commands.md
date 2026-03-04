@@ -721,6 +721,37 @@ When split (`--mode data` + `--mode ui`), include data first:
 
 ---
 
+## `rhythmpress render-worker-router`
+
+Generate Cloudflare Worker router files from project language metadata.
+
+* generates worker script:
+  * default: `./cloudflare-language-router.generated.mjs`
+* generates wrangler vars/config template:
+  * default: `./wrangler.language-router.generated.toml`
+* language IDs:
+  * default: auto-detected from `_quarto-*` / `_metadata-*`
+  * override: `--lang-ids en,ja,fr`
+* default language:
+  * default: `_rhythmpress.conf` `default_lang` if present, else first detected language
+  * override: `--default-lang <id>`
+* route mapping:
+  * reads optional `lang_path.<lang>=...` from `_rhythmpress.conf`
+  * emits `LANG_ROUTE_MAP` in wrangler template when available
+* writes only when content changed (idempotent)
+
+Usage:
+
+```bash
+rhythmpress render-worker-router
+rhythmpress render-worker-router --conf _rhythmpress.conf
+rhythmpress render-worker-router --lang-ids en,ja --default-lang en
+rhythmpress render-worker-router --worker-out worker.mjs --wrangler-out wrangler.toml
+rhythmpress render-worker-router --no-wrangler
+```
+
+---
+
 ## `rhythmpress assemble`
 
 Merge rendered profile output directories into a single deploy tree.
