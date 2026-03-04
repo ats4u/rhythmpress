@@ -416,6 +416,12 @@ rhythmpress render-all
 rhythmpress assemble
 ```
 
+Equivalent one-liner:
+
+```sh
+rhythmpress run-all
+```
+
 Single-profile debug run:
 
 ```sh

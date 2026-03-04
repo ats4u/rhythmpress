@@ -666,6 +666,35 @@ rhythmpress render-all --no-execute
 
 ---
 
+## `rhythmpress run-all`
+
+Run the standard multilingual compile pipeline in one command:
+
+1. `rhythmpress build`
+2. `rhythmpress render-all`
+3. `rhythmpress assemble`
+
+By default, it stops at the first failing step.
+
+Usage:
+
+```bash
+rhythmpress run-all
+rhythmpress run-all --skip-build
+rhythmpress run-all --skip-render
+rhythmpress run-all --skip-assemble
+```
+
+Per-step argument passthrough:
+
+```bash
+rhythmpress run-all --build-arg --skip-clean
+rhythmpress run-all --render-arg --no-execute
+rhythmpress run-all --assemble-arg --out --assemble-arg .site-merged
+```
+
+---
+
 ## `rhythmpress lang-ids`
 
 Detect language IDs from profile/metadata files in the current directory and print one ID per line.
@@ -1237,14 +1266,8 @@ If you only remember this pipeline:
 cd /path/to/project
 rhythmpress_activate
 
-# 2) rebuild generated sources and profile configs
-rhythmpress build
-
-# 3) render all profiles
-rhythmpress render-all
-
-# 4) merge rendered outputs into one deploy tree + sitemap
-rhythmpress assemble
+# 2) run full compile pipeline (build -> render-all -> assemble)
+rhythmpress run-all
 ```
 
 For a single-language run:
