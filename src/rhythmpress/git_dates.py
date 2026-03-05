@@ -21,6 +21,13 @@ def _to_repo_rel(path: str) -> tuple[str, str]:
     rel = os.path.relpath(str(p), root).replace(os.sep, "/")
     return root, rel
 
+def _is_tracked(root: str, rel: str) -> bool:
+    try:
+        _run_git(["ls-files", "--error-unmatch", "--", rel], cwd=root)
+        return True
+    except GitDatesError:
+        return False
+
 def _iso_to_utc_z(iso: str) -> str:
     # %cI is ISO 8601 with offset; normalize to Z
     dt = datetime.datetime.fromisoformat(iso.replace("Z", "+00:00"))
@@ -28,19 +35,45 @@ def _iso_to_utc_z(iso: str) -> str:
 
 def git_last_commit_iso(path: str) -> str:
     root, rel = _to_repo_rel(path)
+    if not pathlib.Path(path).exists():
+        raise GitDatesError(f"Master file not found: {path}")
+    if not _is_tracked(root, rel):
+        raise GitDatesError(
+            f"Git dates unavailable: '{rel}' is not tracked yet.\n"
+            "Rhythmpress requires commit history to set cdate/mdate.\n"
+            "Fix:\n"
+            f"  git add -- '{rel}'\n"
+            "  git commit -m 'Add new master file'"
+        )
     # rename-aware last change
     iso = _run_git(["log", "-1", "--follow", "--format=%cI", "--", rel], cwd=root)
     if not iso:
-        raise GitDatesError(f"No commits found for {rel}")
+        raise GitDatesError(
+            f"Git dates unavailable: '{rel}' has no commits yet.\n"
+            "Fix: commit the file at least once so cdate/mdate can be derived."
+        )
     return _iso_to_utc_z(iso)
 
 def git_first_commit_date(path: str) -> str:
     root, rel = _to_repo_rel(path)
+    if not pathlib.Path(path).exists():
+        raise GitDatesError(f"Master file not found: {path}")
+    if not _is_tracked(root, rel):
+        raise GitDatesError(
+            f"Git dates unavailable: '{rel}' is not tracked yet.\n"
+            "Rhythmpress requires commit history to set cdate/mdate.\n"
+            "Fix:\n"
+            f"  git add -- '{rel}'\n"
+            "  git commit -m 'Add new master file'"
+        )
     # robust “file birth”: take the OLDEST commit touching the path (with --follow)
     # We avoid relying solely on --diff-filter=A because it can be tricky with renames.
     log = _run_git(["log", "--follow", "--format=%cI", "--", rel], cwd=root)
     if not log:
-        raise GitDatesError(f"No commits found for {rel}")
+        raise GitDatesError(
+            f"Git dates unavailable: '{rel}' has no commits yet.\n"
+            "Fix: commit the file at least once so cdate/mdate can be derived."
+        )
     oldest = log.splitlines()[-1]              # last line == oldest commit
     # Return as YYYY-MM-DD (date-only, stable)
     dt = datetime.datetime.fromisoformat(oldest.replace("Z", "+00:00")).astimezone(datetime.timezone.utc)
@@ -52,4 +85,3 @@ def get_git_dates(path: str) -> tuple[str, str]:
     cdate = git_first_commit_date(path)
     mdate = git_last_commit_iso(path)
     return cdate, mdate
-

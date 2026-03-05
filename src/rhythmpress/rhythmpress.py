@@ -965,7 +965,9 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
     try:
         _cdate, _mdate = get_git_dates(str(master_path))
     except GitDatesError as e:
-        raise  # strict; if you prefer permissive, replace with a WARN + fallback
+        raise GitDatesError(
+            f"Failed to resolve git dates for master file: {master_path}\n{e}"
+        ) from e
 
     # 3-liner per section: slice → mkdir → write (H2 only per spec)
     for it in h2s:
@@ -1131,7 +1133,9 @@ def copy_lang_qmd(master_path: Path, *, toc: bool = True ) -> None:
     try:
         _cdate, _mdate = get_git_dates(str(master_path))
     except GitDatesError as e:
-        raise  # strict; switch to permissive with fallback if desired
+        raise GitDatesError(
+            f"Failed to resolve git dates for master file: {master_path}\n{e}"
+        ) from e
 
     # Parse and update/insert YAML front matter
     m = _FM_RE.match(src_text)
