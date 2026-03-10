@@ -362,6 +362,26 @@ Or for a single directory:
 LANG_ID=en rhythmpress preproc my-article
 ```
 
+Multilingual metadata recommendation
+
+For multilingual projects, Rhythmpress users SHOULD prefer Quarto metadata over `_variables.yml` for reusable language-specific text.
+
+Recommended pattern:
+
+* put global reusable values in `_quarto.yml`
+* put language-specific reusable values in `_metadata-<lang>.yml`
+* reference them with `{{< meta ... >}}`
+
+Rhythmpress still supports variable interpolation, but `_variables.yml` and `_variables-<lang>.yml` SHOULD NOT be treated as the canonical source of truth for multilingual content.
+
+Why:
+
+* `_metadata-<lang>.yml` follows the same language/profile topology as the Quarto build
+* it maps cleanly to generated `_quarto-<lang>.yml` profiles
+* it avoids maintaining a second parallel system for localized reusable text
+
+In short: for multilingual writing, prefer `{{< meta ... >}}` and `_metadata-<lang>.yml`; treat `_variables*.yml` as legacy or compatibility-only.
+
 
 
 ## 7. Core conventions
@@ -672,12 +692,18 @@ Author-managed
 * `_rhythmpress.conf`
   Directory list used by `rhythmpress build` (one article directory per line).
 
+* `_metadata-<lang>.yml`
+  Author-managed language-specific Quarto metadata. For multilingual projects, this is the preferred place for reusable localized text referenced via `{{< meta ... >}}`.
+
 * `_sidebar-<lang>.before.yml`, `_sidebar-<lang>.after.yml`
   Optional “bookends” included in the aggregated sidebar config. These are referenced by generated `.conf` files.
 
 * Optional hook script:
   `_rhythmpress.hook-after._sidebar-<lang>.generated.yml.py`
   If present, it runs after `_sidebar-<lang>.generated.yml` is written (failures are ignored).
+
+* `_variables.yml`, `_variables-<lang>.yml`
+  Optional Rhythmpress variable sources. These remain supported, but for multilingual projects they are discouraged as the canonical store for localized reusable text.
 
 Generated (by the build pipeline)
 
