@@ -36,6 +36,13 @@ def main() -> int:
             os.chdir(root / "en")
             os.environ["QUARTO_PROJECT_DIR"] = str(root)
             out = rp.create_runtime_language_router("../_rhythmpress.conf", "en", strict=True)
+            entry_404 = rp.create_runtime_language_entry_router(
+                "../_rhythmpress.conf",
+                "en",
+                target_relpath="404.html",
+                entry_paths=["/404.html"],
+                strict=True,
+            )
             switcher = rp.create_runtime_language_switcher("../_rhythmpress.conf", "en", strict=True)
             switcher_links = rp.create_runtime_language_switcher_links(
                 "../_rhythmpress.conf", "en", strict=True
@@ -46,8 +53,10 @@ def main() -> int:
             switcher_ui_js = rp.create_runtime_language_switcher_ui_js()
             switcher_js = rp.create_runtime_language_switcher_js("../_rhythmpress.conf", "en", strict=True)
             root_default = rp.create_runtime_root_entry("../_rhythmpress.conf", "en", strict=True)
+            not_found_default = rp.create_runtime_404_entry("../_rhythmpress.conf", "en", strict=True)
             os.environ["RHYTHMPRESS_PREVIEW"] = "1"
             root_preview = rp.create_runtime_root_entry("../_rhythmpress.conf", "en", strict=True)
+            not_found_preview = rp.create_runtime_404_entry("../_rhythmpress.conf", "en", strict=True)
         finally:
             os.environ.pop("RHYTHMPRESS_PREVIEW", None)
             os.environ.pop("QUARTO_PROJECT_DIR", None)
@@ -59,6 +68,10 @@ def main() -> int:
             raise AssertionError("missing expected default language in script output")
         if "window.location.replace(target);" not in out:
             raise AssertionError("missing redirect call in script output")
+        if 'const ENTRY_PATHS = new Set(["/404.html"]);' not in entry_404:
+            raise AssertionError("generic entry router should target /404.html only")
+        if '"/en/404.html"' not in entry_404 or '"/ja/404.html"' not in entry_404:
+            raise AssertionError("generic entry router should emit localized 404 targets")
 
         if 'id="rhythmpress-lang-switcher"' not in switcher:
             raise AssertionError("missing language switcher select element")
@@ -84,6 +97,12 @@ def main() -> int:
             raise AssertionError("default root entry should emit router redirect")
         if 'class="rhythmpress-lang-anchor"' not in root_preview:
             raise AssertionError("preview root entry should emit anchor link switcher")
+        if '"/en/404.html"' not in not_found_default or '"/ja/404.html"' not in not_found_default:
+            raise AssertionError("404 entry should emit localized 404 redirect targets")
+        if "window.location.replace(target);" not in not_found_default:
+            raise AssertionError("404 entry should emit router redirect")
+        if 'href="/en/404.html"' not in not_found_preview or 'href="/ja/404.html"' not in not_found_preview:
+            raise AssertionError("404 preview entry should emit localized 404 links")
 
         try:
             rp.create_runtime_language_router("./_does_not_exist.conf", "en", strict=True)

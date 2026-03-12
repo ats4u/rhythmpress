@@ -1666,14 +1666,67 @@ def _load_runtime_language_context(
     return valid_lang_ids, default_lang, route_map
 
 
-def create_runtime_language_router(
+def _normalize_runtime_target_relpath(target_relpath: str | None) -> str | None:
+    if target_relpath is None:
+        return None
+    relpath = target_relpath.strip().replace("\\", "/")
+    while relpath.startswith("./"):
+        relpath = relpath[2:]
+    relpath = relpath.lstrip("/")
+    parts = [part for part in relpath.split("/") if part not in {"", "."}]
+    if any(part == ".." for part in parts):
+        raise ValueError("target_relpath must not contain '..'")
+    if not parts:
+        return None
+    return "/".join(parts)
+
+
+def _build_runtime_entry_targets(
+    route_map: dict[str, str],
+    target_relpath: str | None,
+) -> dict[str, str]:
+    relpath = _normalize_runtime_target_relpath(target_relpath)
+    if relpath is None:
+        return dict(route_map)
+    return {lang: route + relpath for lang, route in route_map.items()}
+
+
+def _normalize_runtime_entry_paths(
+    entry_paths: list[str] | tuple[str, ...] | None,
+) -> list[str]:
+    raw_paths = ["/", "/index.html"] if entry_paths is None else list(entry_paths)
+    normalized: list[str] = []
+    seen: set[str] = set()
+    for raw in raw_paths:
+        path = str(raw or "").strip().replace("\\", "/")
+        if not path:
+            continue
+        if not path.startswith("/"):
+            path = "/" + path
+        if path != "/" and path.endswith("/"):
+            path = path.rstrip("/")
+        if path in seen:
+            continue
+        seen.add(path)
+        normalized.append(path)
+    if normalized:
+        return normalized
+    return ["/", "/index.html"]
+
+
+def create_runtime_language_entry_router(
     input_conf: str,
     current_lang: str,
     *,
+    target_relpath: str | None = None,
+    entry_paths: list[str] | tuple[str, ...] | None = None,
     strict: bool = False,
 ) -> str:
     """
-    Return asis-ready HTML/JS for root-entry language routing.
+    Return asis-ready HTML/JS for redirecting an entry page to a localized target.
+
+    When `target_relpath` is omitted, each language target is that language root.
+    When `target_relpath` is provided, it is appended under each language root.
     """
     import json
 
@@ -1686,19 +1739,23 @@ def create_runtime_language_router(
             raise
         return _router_noop_output(str(e))
 
+    target_map = _build_runtime_entry_targets(route_map, target_relpath)
+    normalized_entry_paths = _normalize_runtime_entry_paths(entry_paths)
+
     lang_ids_json = json.dumps(valid_lang_ids, ensure_ascii=False)
-    route_map_json = json.dumps(route_map, ensure_ascii=False, sort_keys=True)
+    target_map_json = json.dumps(target_map, ensure_ascii=False, sort_keys=True)
     default_json = json.dumps(default_lang, ensure_ascii=False)
+    entry_paths_json = json.dumps(normalized_entry_paths, ensure_ascii=False)
 
     return (
         "<script>\n"
         "(function () {\n"
         f"  const AVAILABLE = {lang_ids_json};\n"
-        f"  const ROUTES = {route_map_json};\n"
+        f"  const TARGETS = {target_map_json};\n"
         f"  const DEFAULT_LANG = {default_json};\n"
+        f"  const ENTRY_PATHS = new Set({entry_paths_json});\n"
         "  const PATH = window.location.pathname || \"/\";\n"
-        "  const isRootEntry = PATH === \"/\" || PATH === \"/index.html\";\n"
-        "  if (!isRootEntry) return;\n"
+        "  if (!ENTRY_PATHS.has(PATH)) return;\n"
         "\n"
         "  const lowerToCanonical = Object.create(null);\n"
         "  for (const x of AVAILABLE) lowerToCanonical[String(x).toLowerCase()] = x;\n"
@@ -1731,14 +1788,30 @@ def create_runtime_language_router(
         "  }\n"
         "  if (!preferred) preferred = DEFAULT_LANG;\n"
         "\n"
-        "  const target = ROUTES[preferred] || ROUTES[DEFAULT_LANG];\n"
+        "  const target = TARGETS[preferred] || TARGETS[DEFAULT_LANG];\n"
         "  if (!target) return;\n"
         "\n"
         "  const normalizedPath = PATH.endsWith('/') ? PATH : (PATH + '/');\n"
-        "  if (normalizedPath === target) return;\n"
+        "  if (PATH === target || normalizedPath === target) return;\n"
         "  window.location.replace(target);\n"
         "})();\n"
         "</script>\n"
+    )
+
+
+def create_runtime_language_router(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return asis-ready HTML/JS for root-entry language routing.
+    """
+    return create_runtime_language_entry_router(
+        input_conf=input_conf,
+        current_lang=current_lang,
+        strict=strict,
     )
 
 
@@ -1824,6 +1897,7 @@ def create_runtime_language_switcher_links(
     input_conf: str,
     current_lang: str,
     *,
+    target_relpath: str | None = None,
     strict: bool = False,
 ) -> str:
     """
@@ -1840,10 +1914,11 @@ def create_runtime_language_switcher_links(
             raise
         return _router_noop_output(str(e))
 
+    target_map = _build_runtime_entry_targets(route_map, target_relpath)
     canonical_current = current_lang if current_lang in valid_lang_ids else default_lang
     links: list[str] = []
     for lang in valid_lang_ids:
-        href = route_map.get(lang) or "/"
+        href = target_map.get(lang) or "/"
         label = format_language_label(lang)
         aria = ' aria-current="page"' if lang == canonical_current else ""
         text = f"<strong>{label}</strong>" if lang == canonical_current else label
@@ -2170,8 +2245,40 @@ def create_runtime_root_entry(
             current_lang=current_lang,
             strict=strict,
         )
-    return create_runtime_language_router(
+    return create_runtime_language_entry_router(
         input_conf=input_conf,
         current_lang=current_lang,
+        strict=strict,
+    )
+
+
+def create_runtime_404_entry(
+    input_conf: str,
+    current_lang: str,
+    *,
+    strict: bool = False,
+) -> str:
+    """
+    Return ASIS content for `/404.html` entry pages.
+
+    Behavior:
+      - If `RHYTHMPRESS_PREVIEW` is set (truthy), return links to localized 404 pages.
+      - Otherwise, return a redirect router for `/404.html` -> `/<lang>/404.html`.
+    """
+    raw = os.environ.get("RHYTHMPRESS_PREVIEW", "").strip().lower()
+    is_preview = raw not in {"", "0", "false", "no", "off"}
+
+    # if is_preview:
+    #     return create_runtime_language_switcher_links(
+    #         input_conf=input_conf,
+    #         current_lang=current_lang,
+    #         target_relpath="404.html",
+    #         strict=strict,
+    #     )
+    return create_runtime_language_entry_router(
+        input_conf=input_conf,
+        current_lang=current_lang,
+        target_relpath="404.html",
+        entry_paths=["/404.html"],
         strict=strict,
     )
