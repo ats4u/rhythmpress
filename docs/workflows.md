@@ -437,10 +437,12 @@ For multilingual sites, keep real top pages in language paths:
 * `ja/index.qmd`
 * `fr/index.qmd`
 
-Then use root `index.qmd` only as a redirect page (for `/` -> preferred language path).
-This avoids cross-profile collisions and keeps profile renders deterministic.
+Then use root `index.md` as the default redirect page for `/` -> preferred language path.
+This matches the generated profile render rules and avoids cross-profile collisions.
 
-Example root `index.qmd` (auto-switches by mode):
+If you want a dynamic root `index.qmd`, add it explicitly to base `_quarto.yml` `project.render`.
+
+Example dynamic root `index.qmd` redirect page (auto-switches by mode):
 
 * normal render: emits root redirect router
 * `rhythmpress preview ...`: emits language switcher (`RHYTHMPRESS_PREVIEW=1`)

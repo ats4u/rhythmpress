@@ -557,8 +557,8 @@ Core workflow
 * `rhythmpress create-page <name> [--lang <lang>]`
   Create a new article directory with `.article_dir`, `.gitignore`, and a starter `master-<lang>.qmd`.
 
-* `rhythmpress preproc <dir> [--lang <lang>]`
-  Preprocess one article directory (copy/split chosen from the master’s front matter).
+* `rhythmpress preproc <dir>`
+  Preprocess one article directory (copy/split chosen from the master’s front matter). Use `LANG_ID=<lang>` when multiple masters exist.
 
 * `rhythmpress build`
   Run the configured multi-directory pipeline (clean → preproc → sidebar generation).
@@ -576,11 +576,11 @@ Preview helpers
 
 Preprocessors (direct calls; usually you don’t need these)
 
-* `rhythmpress preproc-copy <dir> [--lang <lang>]`
-  Force copy mode (master → `<lang>/index.qmd`).
+* `rhythmpress preproc-copy <dir>`
+  Force copy mode (master → `<lang>/index.qmd`). Use `LANG_ID=<lang>` when multiple masters exist.
 
-* `rhythmpress preproc-split <dir> [--lang <lang>]`
-  Force split mode (master → per-section page tree).
+* `rhythmpress preproc-split <dir>`
+  Force split mode (master → per-section page tree). Use `LANG_ID=<lang>` when multiple masters exist.
 
 * `rhythmpress preproc-clean <dir>`
   Destructively remove generated content under the article directory (requires `.article_dir`).
@@ -716,6 +716,9 @@ Generated (by the build pipeline)
 
 * `_sidebar-<lang>.generated.yml`
   Produced by `rhythmpress render-sidebar` (via `yq`). This is the merged Quarto sidebar YAML.
+
+* `_quarto-<lang>.yml`
+  Also produced by `rhythmpress render-sidebar`. It merges `_quarto.yml`, `_metadata-<lang>.yml`, and the merged sidebar into a language-specific Quarto profile.
 
 * `_sidebar-<lang>.generated.md`
   Also produced by `rhythmpress render-sidebar`. It begins with a hard-coded header `**目次**` and appends the TOC rendered from the sidebar YAML.
