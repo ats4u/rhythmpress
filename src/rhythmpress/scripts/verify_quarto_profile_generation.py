@@ -35,8 +35,12 @@ def _assert_profile(tmp: Path, lang: str) -> None:
     project = doc.get("project", {})
     render = project.get("render")
     expected_render: List[str] = [
+        "**/*.qmd",
+        "!**/master*.md",
+        "!**/master*.qmd",
+        "!drafts/*",
         "index.md",
-        "index.qmd",
+        "*.qmd",
         f"**/{lang}/**/*.qmd",
         "!**/master*.md",
         "!**/master*.qmd",
@@ -47,7 +51,10 @@ def _assert_profile(tmp: Path, lang: str) -> None:
     if project.get("output-dir") != f".site-{lang}":
         raise AssertionError(f"unexpected output-dir for {lang}: {project.get('output-dir')!r}")
 
-    expected_post_render = ["rhythmpress sitemap"]
+    expected_post_render = [
+        f"rhythmpress post-render-patch --output-dir .site-{lang} --lang-id {lang}",
+        "rhythmpress sitemap",
+    ]
     if project.get("post-render") != expected_post_render:
         raise AssertionError(f"unexpected post-render for {lang}: {project.get('post-render')!r}")
 

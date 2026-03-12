@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, List, NoReturn
 
 import yaml
+from rhythmpress.config_merge import recursive_merge
 from rhythmpress.lang_registry import to_bcp47_lang_tag
 
 GENERATED_FILE_NOTICE = (
@@ -136,20 +137,15 @@ def ensure_profile_post_render(project: Dict[str, Any], lang: str) -> None:
     project["post-render"] = kept
 
 
-def deep_merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Recursively merge two mappings.
-    - Dict values: merged recursively.
-    - Non-dict values (including lists/scalars): override wins.
-    """
-    out: Dict[str, Any] = dict(base)
-    for k, v in override.items():
-        cur = out.get(k)
-        if isinstance(cur, dict) and isinstance(v, dict):
-            out[k] = deep_merge(cur, v)
-        else:
-            out[k] = v
-    return out
+def profile_render_entries(lang: str) -> list[str]:
+    return [
+        "index.md",
+        "*.qmd",
+        f"**/{lang}/**/*.qmd",
+        "!**/master*.md",
+        "!**/master*.qmd",
+        "!drafts/**",
+    ]
 
 
 def extract_sidebar(sidebar_doc: Dict[str, Any], src: Path) -> Dict[str, Any]:
@@ -207,24 +203,24 @@ def main(argv: List[str]) -> int:
     sidebar_doc = read_yaml_mapping(sidebar_path, "sidebar YAML")
 
     sidebar = extract_sidebar(sidebar_doc, sidebar_path)
-    merged = deep_merge(base, meta)
+    merged = recursive_merge(base, meta)
 
     website = ensure_mapping(merged, "website")
-    project = ensure_mapping(merged, "project")
     current_sidebar = ensure_mapping(website, "sidebar")
-    website["sidebar"] = deep_merge(current_sidebar, sidebar)
+    website["sidebar"] = recursive_merge(current_sidebar, sidebar)
 
     # Profile-only overrides
-    merged["lang"] = to_bcp47_lang_tag(lang)
-    project["output-dir"] = f".site-{lang}"
-    project["render"] = [
-        "index.md",
-        "index.qmd",
-        f"**/{lang}/**/*.qmd",
-        "!**/master*.md",
-        "!**/master*.qmd",
-        "!drafts/**",
-    ]
+    merged = recursive_merge(
+        merged,
+        {
+            "lang": to_bcp47_lang_tag(lang),
+            "project": {
+                "output-dir": f".site-{lang}",
+                "render": profile_render_entries(lang),
+            },
+        },
+    )
+    project = ensure_mapping(merged, "project")
     sanitize_post_render(project)
     ensure_profile_post_render(project, lang)
 

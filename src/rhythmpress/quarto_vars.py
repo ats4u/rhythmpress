@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from functools import lru_cache
 from typing import Any, Dict, Iterable, Mapping, Tuple
+from rhythmpress.config_merge import recursive_merge
 
 try:
     import yaml  # PyYAML (preferred if present)
@@ -16,8 +17,6 @@ except Exception:
 
 # ------------------------- public API ----------------------------------------
 # --- replace the old get_variables + add an internal cached loader -----------
-
-from functools import lru_cache
 
 def get_variables(
     cwd: str | os.PathLike[str] | None = None,
@@ -35,9 +34,7 @@ def get_variables(
         cwd_str, lang, allow_env, project_root_markers
     )
 
-    merged = dict(base_vars)
-    if extra:
-        _deep_merge(merged, dict(extra))
+    merged = recursive_merge(base_vars, dict(extra) if extra else {})
 
     # ctx must reflect the final merged map for ${var} lookups
     ctx = dict(base_ctx)
@@ -86,7 +83,7 @@ def _load_base_variables(
 
     merged: Dict[str, Any] = {}
     for s in sources:
-        _deep_merge(merged, s)
+        merged = recursive_merge(merged, s)
 
     ctx_basics: Dict[str, Any] = {
         "cwd": str(start),
@@ -125,9 +122,9 @@ def _read_quarto_vars(root: Path) -> Dict[str, Any]:
             out: Dict[str, Any] = {}
             if isinstance(data, dict):
                 if isinstance(data.get("variables"), dict):
-                    _deep_merge(out, data["variables"])
+                    out = recursive_merge(out, data["variables"])
                 if isinstance(data.get("metadata"), dict):
-                    _deep_merge(out, data["metadata"])
+                    out = recursive_merge(out, data["metadata"])
             return out
     return {}
 
@@ -144,15 +141,6 @@ def _read_any(path: Path) -> Dict[str, Any]:
     else:
         raise ValueError(f"Unsupported file type: {path}")
     return data if isinstance(data, dict) else {}
-
-
-def _deep_merge(dst: Dict[str, Any], src: Mapping[str, Any]) -> None:
-    for k, v in src.items():
-        if isinstance(v, Mapping) and isinstance(dst.get(k), Mapping):
-            _deep_merge(dst[k], v)  # type: ignore[index]
-        else:
-            dst[k] = v
-
 
 _VAR_PATTERN = re.compile(r"""
     \$\{
@@ -223,4 +211,3 @@ class _EnvProxy(dict):
         return os.environ.get(k, "")
     def get(self, k: str, default: str = "") -> str:
         return os.environ.get(k, default)
-
