@@ -140,7 +140,6 @@ def ensure_profile_post_render(project: Dict[str, Any], lang: str) -> None:
 def profile_render_entries(lang: str) -> list[str]:
     return [
         "index.md",
-        "*.qmd",
         f"**/{lang}/**/*.qmd",
         "!**/master*.md",
         "!**/master*.qmd",

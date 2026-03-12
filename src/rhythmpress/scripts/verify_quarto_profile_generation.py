@@ -40,7 +40,6 @@ def _assert_profile(tmp: Path, lang: str) -> None:
         "!**/master*.qmd",
         "!drafts/*",
         "index.md",
-        "*.qmd",
         f"**/{lang}/**/*.qmd",
         "!**/master*.md",
         "!**/master*.qmd",
