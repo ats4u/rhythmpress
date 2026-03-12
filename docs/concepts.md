@@ -168,6 +168,8 @@ Merging is performed by `yq` (Mike Farah v4). The effective semantics are “dee
 - Let per-article fragments override within their scope
 - Put global appendages in “after”
 
+This section describes the sidebar fragment merge only. Generated `_quarto-<lang>.yml` profiles use a separate recursive config merge policy; see `docs/configuration.md` for the canonical rules.
+
 ### Optional post-merge hook
 
 A project-root hook MAY be executed after the generated sidebar YAML is written. This is intended for “final edits” that are easier in Python than in YAML merge rules (e.g., rewriting labels, injecting additional entries, normalizing paths). Hook failures are typically treated as non-fatal.
@@ -238,4 +240,3 @@ Many commands assume project-root-relative paths. You SHOULD run from the projec
 - For command flags and examples: see `docs/commands.md`.
 - For configuration formats and supported front matter keys: see `docs/configuration.md`.
 - For common failures and fixes: see `docs/troubleshooting.md`.
-

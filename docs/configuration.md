@@ -128,14 +128,33 @@ phonorhythmo/_sidebar-ja.yml
 _sidebar-ja.after.yml
 ```
 
-### 3.3 Merge semantics (yq)
+### 3.3 Merge semantics
 
-`rhythmpress_render_sidebar.sh` merges all listed YAML fragments using `yq` v4 (Mike Farah):
+Rhythmpress has two distinct YAML merge paths. They serve different outputs and do **not** follow the same rules.
 
-* Deep merge
-* “Last wins” when keys overlap
+* Sidebar fragment merge (`_sidebar-<lang>.generated.conf` -> `_sidebar-<lang>.generated.yml`)
 
-This produces `_sidebar-<lang>.generated.yml`.
+  * performed by `rhythmpress_render_sidebar.sh` using `yq` v4 (Mike Farah)
+  * deep merge
+  * “last wins” when keys overlap
+
+* Recursive config merge (used for generated `_quarto-<lang>.yml` profiles and variable loading)
+
+  * performed in Python by the shared recursive merge helper
+  * mappings recurse key-by-key
+  * lists concatenate in order
+  * all other values are replaced by the later value
+
+Generated `_quarto-<lang>.yml` merge order:
+
+1. `_quarto.yml`
+2. `_metadata-<lang>.yml`
+3. `website.sidebar` extracted from `_sidebar-<lang>.generated.yml`
+4. Rhythmpress profile-only overrides such as `lang`, `project.output-dir`, profile render entries, and the normalized post-render pipeline
+
+Practical consequence:
+
+* base list-valued config such as `project.render` is preserved and extended rather than replaced in the generated profile
 
 ### 3.4 Required YAML shape (what Rhythmpress reads)
 
@@ -287,6 +306,12 @@ Resolution sources (merge order):
 
 `env:NAME` reads directly from the process environment (not from the merged variable map).
 
+These sources are combined using the same recursive config merge rules from section 3.3:
+
+* mappings recurse
+* lists concatenate
+* later scalar values replace earlier ones
+
 Operational note (edge case):
 
 * Interpolation is most reliable when you run commands from the project root (or with `RHYTHMPRESS_ROOT` set), because variable loading detects the project root by searching for `_quarto.yml`.
@@ -337,5 +362,4 @@ It also supports sidebar purge behavior:
 * You can limit purge to one language with `--lang <lang>`.
 
 (Full CLI details belong in `docs/commands.md`, but these flags effectively behave like “configuration” for safe operation.)
-
 

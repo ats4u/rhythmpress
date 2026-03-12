@@ -718,7 +718,7 @@ Generated (by the build pipeline)
   Produced by `rhythmpress render-sidebar` (via `yq`). This is the merged Quarto sidebar YAML.
 
 * `_quarto-<lang>.yml`
-  Also produced by `rhythmpress render-sidebar`. It merges `_quarto.yml`, `_metadata-<lang>.yml`, and the merged sidebar into a language-specific Quarto profile.
+  Also produced by `rhythmpress render-sidebar`. It merges `_quarto.yml`, `_metadata-<lang>.yml`, and the merged sidebar into a language-specific Quarto profile. For the canonical merge rules, see `docs/configuration.md`.
 
 * `_sidebar-<lang>.generated.md`
   Also produced by `rhythmpress render-sidebar`. It begins with a hard-coded header `**目次**` and appends the TOC rendered from the sidebar YAML.

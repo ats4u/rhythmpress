@@ -430,10 +430,12 @@ Behavior:
   * `_sidebar-<lang>.generated.md`
 * Generated `_quarto-<lang>.yml` profile behavior:
 
+  * canonical merge rules live in `docs/configuration.md`, section `3.3 Merge semantics`
+  * merge order is: base `_quarto.yml`, language metadata, merged sidebar, then profile-only Rhythmpress overrides
   * `project.output-dir` is `.site-<lang>` (for example `.site-en`, `.site-ja`)
   * Rhythmpress appends these profile render entries:
     `index.md`, `**/<lang>/**/*.qmd`, `!**/master*.md`, `!**/master*.qmd`, `!drafts/**`
-  * list-valued config is merged by concatenation, so existing base `_quarto.yml` `project.render` entries remain in the generated profile
+  * list-valued config is merged by concatenation, so existing base `_quarto.yml` `project.render` entries remain in the generated profile; later scalar values override earlier ones
   * only root `index.md` is force-added by Rhythmpress; root `index.qmd` is not automatically added
   * non-Rhythmpress custom `project.post-render` commands are preserved, while Rhythmpress-managed entries are normalized to:
     `rhythmpress post-render-patch --output-dir .site-<lang> --lang-id <lang>`
