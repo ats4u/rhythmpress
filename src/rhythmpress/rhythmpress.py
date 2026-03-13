@@ -176,40 +176,30 @@ import subprocess
 import re 
 from pathlib import Path
 
-def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
-    """Interpolate Quarto-style variables like {{<var foo.bar>}} and {{<var env:FOO>}}
-    in a plain text blob. Mirrors the light-weight logic used in `proc_qmd_teasers`.
-    Fails soft (returns the original text) if variables cannot be loaded.
-    """
+def _build_title_shortcode_interpolator(basedir: str | Path, lang: str):
     try:
         from . import quarto_vars as _qv
-        var_ctx = _qv.get_variables(cwd=str(basedir), lang=lang)
+        contexts = _qv.get_title_shortcode_contexts(cwd=str(basedir), lang=lang)
     except Exception:
-        var_ctx = None
+        _qv = None
+        contexts = None
 
-    import re, os
-    VAR_SC = re.compile(r"\{\{<\s*var\s+([A-Za-z0-9_.:-]+)\s*>\}\}")
+    def _interp(text):
+        if not (isinstance(text, str) and _qv is not None and contexts):
+            return text
+        return _qv.interpolate_title_shortcodes(text, contexts=contexts)
 
-    def _deep_get(d, dotted):
-        cur = d
-        for p in dotted.split("."):
-            if not isinstance(cur, dict) or p not in cur:
-                return None
-            cur = cur[p]
-        return cur
+    return _interp
 
-    def repl(m):
-        key = m.group(1)
-        if key.startswith("env:"):
-            return os.environ.get(key[4:], "")
-        if isinstance(var_ctx, dict):
-            val = _deep_get(var_ctx, key)
-            return "" if val is None else str(val)
-        return ""
 
+def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
+    """Interpolate title shortcodes like `{{< var foo.bar >}}` and `{{< meta foo.bar >}}`
+    in a plain text blob. Mirrors the light-weight logic used in `proc_qmd_teasers`.
+    Fails soft (returns the original text) if shortcode contexts cannot be loaded.
+    """
     if not isinstance(text, str):
         return text
-    text = VAR_SC.sub(repl, text)
+    text = _build_title_shortcode_interpolator(basedir, lang)(text)
 
     # Also: convert trailing HTML-commented header attributes into real Pandoc attributes.
     # e.g., "## Title <!-- {#id .class} -->"  ->  "## Title {#id .class}"
@@ -219,7 +209,7 @@ def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
     return text
 
 def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
-    # Interpolate {{<var ...>}} placeholders before handing text to pandoc,
+    # Interpolate title shortcodes before handing text to pandoc,
     # so TOC titles reflect the final rendered strings (matches _create_toc_v5 behavior).
     from pathlib import Path as _P
     import tempfile as _tempfile, os as _os
@@ -698,45 +688,14 @@ def proc_qmd_teasers(
       - No de-duplication: ensure slugs are globally unique if you keep the flat layout.
 
     If `interpolate_vars` is True (default), titles from ATL headers are first
-    interpolated using Quarto-style variables (e.g. `${project.title}`,
-    `${site_url}`, `${env:FOO}`) loaded via `rhythmpress.quarto_vars.get_variables`.
+    interpolated using title shortcodes such as `{{< var foo.bar >}}`,
+    `{{< var env:FOO >}}`, and `{{< meta foo.bar >}}`.
     Interpolation happens *before* slugging and link building, so sidebars and
     front-matter titles won’t leak raw placeholders.
     """
-    # --- variable interpolation (title fields) -------------------------------
+    # --- title shortcode interpolation (title fields) -----------------------
     # We do this once per call, then apply to every item prior to slugging.
-    var_ctx = None
-    if interpolate_vars:
-        try:
-            # Lazy import to avoid hard dependency in non-Quarto contexts
-            from . import quarto_vars as _qv
-            var_ctx = _qv.get_variables(cwd=str(basedir), lang=lang)
-        except Exception:
-            # If anything goes wrong loading variables, fail soft: just skip
-            var_ctx = None
-
-    # local, dependency-free interpolation that understands ${dot.paths} and ${env:FOO}
-    import re, os
-    VAR_SC = re.compile(r"\{\{<\s*var\s+([A-Za-z0-9_.:-]+)\s*>\}\}")
-
-    def _deep_get(d, dotted: str):
-        cur = d
-        for part in dotted.split("."):
-            if not isinstance(cur, dict) or part not in cur:
-                return None
-            cur = cur[part]
-        return cur
-
-    def _interp(s: str) -> str:
-        if not (interpolate_vars and var_ctx and isinstance(s, str)):
-            return s
-        def repl(m):
-            key = m.group(1)
-            if key.startswith("env:"):
-                return os.environ.get(key[4:], "")
-            val = _deep_get(var_ctx, key) if isinstance(var_ctx, dict) else None
-            return "" if val is None else str(val)
-        return VAR_SC.sub(repl, s)
+    _interp = _build_title_shortcode_interpolator(basedir, lang) if interpolate_vars else (lambda s: s)
 
     base      = Path(basedir)
     base_name = base.name  # safe for links

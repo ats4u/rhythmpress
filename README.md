@@ -372,6 +372,8 @@ Recommended pattern:
 * put language-specific reusable values in `_metadata-<lang>.yml`
 * reference them with `{{< meta ... >}}`
 
+Title and TOC interpolation resolve `{{< meta ... >}}` from `_quarto.yml` metadata plus `_metadata-<lang>.yml`, while legacy `{{< var ... >}}` stays on `_quarto.yml` variables plus `_variables*.yml`.
+
 Rhythmpress still supports variable interpolation, but `_variables.yml` and `_variables-<lang>.yml` SHOULD NOT be treated as the canonical source of truth for multilingual content.
 
 Why:

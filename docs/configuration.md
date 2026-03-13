@@ -287,16 +287,17 @@ The `rhythmpress preproc` dispatcher uses a lightweight front matter reader spec
 
 ---
 
-## 6) Variable interpolation (`{{< var ... >}}`) used in titles/TOC
+## 6) Title shortcode interpolation (`{{< var ... >}}`, `{{< meta ... >}}`) used in titles/TOC
 
-Rhythmpress interpolates Quarto-style variable placeholders inside certain strings (notably titles used for TOC generation):
+Rhythmpress interpolates Quarto-style title shortcodes inside certain strings (notably titles used for TOC generation):
 
 * `{{< var foo.bar >}}`
 * `{{< var env:HOME >}}`
+* `{{< meta foo.bar >}}`
 
-Resolution sources (merge order):
+`var` resolution sources (merge order):
 
-1. `_quarto.yml` (project/website vars that Rhythmpress extracts)
+1. `_quarto.yml` top-level `variables`
 2. `_variables.yml` / `_variables.yaml` / `_variables.json` (if present)
 3. `_variables-<lang>.yml|yaml|json` (if present and language is known)
 4. Environment variables that start with `RHYTHMPRESS_`
@@ -304,7 +305,12 @@ Resolution sources (merge order):
    * Exposed as lowercase keys without the prefix
      Example: `RHYTHMPRESS_PRODUCT_NAME=Rhythmpress` → `{{< var product_name >}}`
 
-`env:NAME` reads directly from the process environment (not from the merged variable map).
+`meta` resolution sources (merge order):
+
+1. `_quarto.yml` top-level `metadata`
+2. `_metadata-<lang>.yml|yaml` (if present and language is known)
+
+`env:NAME` is supported only for `{{< var ... >}}` and reads directly from the process environment (not from the merged variable map).
 
 These sources are combined using the same recursive config merge rules from section 3.3:
 
@@ -362,4 +368,3 @@ It also supports sidebar purge behavior:
 * You can limit purge to one language with `--lang <lang>`.
 
 (Full CLI details belong in `docs/commands.md`, but these flags effectively behave like “configuration” for safe operation.)
-
