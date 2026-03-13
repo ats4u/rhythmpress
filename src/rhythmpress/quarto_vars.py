@@ -6,7 +6,7 @@ import re
 import json
 from pathlib import Path
 from functools import lru_cache
-from typing import Any, Dict, Iterable, Mapping, Tuple
+from typing import Any, Callable, Dict, Iterable, Mapping, Tuple
 from rhythmpress.config_merge import recursive_merge
 
 try:
@@ -53,7 +53,8 @@ def get_title_shortcode_contexts(
     Load separate contexts for title shortcodes.
 
     `var` stays on the legacy variable path (`variables` + `_variables*` + env),
-    while `meta` resolves from Quarto metadata (`metadata` + `_metadata-<lang>.yml`).
+    while `meta` resolves from the merged Quarto metadata document
+    (`_quarto.yml` + `_metadata-<lang>.yml`).
     """
     cwd_str = str(Path(cwd or os.getcwd()).resolve())
     source_groups, base_ctx = _load_source_groups(
@@ -68,7 +69,7 @@ def get_title_shortcode_contexts(
             source_groups["env"],
         ),
         "meta": _merge_sources(
-            source_groups["quarto_metadata"],
+            source_groups["quarto_meta_document"],
             source_groups["lang_metadata"],
         ),
     }
@@ -138,11 +139,12 @@ def _load_source_groups(
     project_root_markers: Tuple[str, ...],
 ) -> Tuple[Dict[str, Dict[str, Any]], Dict[str, Any]]:
     root, start = _detect_project_root(cwd_str, project_root_markers)
-    quarto_variables, quarto_metadata = _read_quarto_blocks(root)
+    quarto_variables, quarto_metadata, quarto_meta_document = _read_quarto_blocks(root)
 
     source_groups = {
         "quarto_variables": quarto_variables,
         "quarto_metadata": quarto_metadata,
+        "quarto_meta_document": quarto_meta_document,
         "legacy_variables": _read_first_existing(
             root,
             ("_variables.yml", "_variables.yaml", "_variables.json"),
@@ -161,6 +163,7 @@ def _load_source_groups(
                 f"_metadata-{lang}.yml",
                 f"_metadata-{lang}.yaml",
             ),
+            normalize=_normalize_meta_document,
         ) if lang else {},
         "env": _env_map() if allow_env else {},
     }
@@ -190,28 +193,44 @@ def _detect_project_root(cwd: str | os.PathLike[str] | None,
         cur = cur.parent
 
 
-def _read_quarto_blocks(root: Path) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+def _read_quarto_blocks(root: Path) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
     for name in ("_quarto.yml", "_quarto.yaml"):
         p = root / name
         if p.is_file():
             data = _read_any(p)
             variables: Dict[str, Any] = {}
             metadata: Dict[str, Any] = {}
+            meta_document: Dict[str, Any] = {}
             if isinstance(data, dict):
+                meta_document = _normalize_meta_document(data)
                 if isinstance(data.get("variables"), dict):
                     variables = recursive_merge(variables, data["variables"])
                 if isinstance(data.get("metadata"), dict):
                     metadata = recursive_merge(metadata, data["metadata"])
-            return variables, metadata
-    return {}, {}
+            return variables, metadata, meta_document
+    return {}, {}, {}
 
 
-def _read_first_existing(root: Path, names: Iterable[str]) -> Dict[str, Any]:
+def _read_first_existing(
+    root: Path,
+    names: Iterable[str],
+    *,
+    normalize: Callable[[Dict[str, Any]], Dict[str, Any]] | None = None,
+) -> Dict[str, Any]:
     for name in names:
         p = root / name
         if p.is_file():
-            return _read_any(p)
+            data = _read_any(p)
+            return normalize(data) if normalize is not None else data
     return {}
+
+
+def _normalize_meta_document(data: Mapping[str, Any]) -> Dict[str, Any]:
+    normalized = _merge_sources(data)
+    nested_metadata = data.get("metadata")
+    if isinstance(nested_metadata, Mapping):
+        normalized = recursive_merge(normalized, nested_metadata)
+    return normalized
 
 
 def _env_map() -> Dict[str, Any]:

@@ -307,8 +307,9 @@ Rhythmpress interpolates Quarto-style title shortcodes inside certain strings (n
 
 `meta` resolution sources (merge order):
 
-1. `_quarto.yml` top-level `metadata`
-2. `_metadata-<lang>.yml|yaml` (if present and language is known)
+1. The merged Quarto metadata document rooted at `_quarto.yml`
+   This includes top-level custom keys such as `var`, plus nested `metadata:` fields.
+2. `_metadata-<lang>.yml|yaml` (if present and language is known), merged on top
 
 `env:NAME` is supported only for `{{< var ... >}}` and reads directly from the process environment (not from the merged variable map).
 

@@ -6,7 +6,7 @@ It creates a temporary mini project with both legacy variables and Quarto
 metadata, then asserts that:
 
 * `{{< var ... >}}` resolves only from variable sources
-* `{{< meta ... >}}` resolves only from metadata sources
+* `{{< meta ... >}}` resolves from the merged Quarto metadata document
 * both title interpolation paths share the same behavior
 """
 
@@ -48,6 +48,12 @@ def main() -> int:
                 "variables": {
                     "shared": "quarto-var",
                     "var_only_from_quarto": "quarto-only-var",
+                },
+                "var": {
+                    "MORA_SPEAKERS": {
+                        "en": "Mora-Timed Language Speakers",
+                        "ja": "Mora-Timed Language Speakers in Japanese",
+                    }
                 },
                 "metadata": {
                     "shared": "quarto-meta",
@@ -93,6 +99,8 @@ def main() -> int:
                 raise AssertionError("missing _quarto.yml variables in var context")
             if contexts["meta"].get("meta_only_from_quarto") != "quarto-only-meta":
                 raise AssertionError("missing _quarto.yml metadata in meta context")
+            if contexts["meta"].get("var", {}).get("MORA_SPEAKERS", {}).get("en") != "Mora-Timed Language Speakers":
+                raise AssertionError("missing top-level Quarto metadata in meta context")
 
             direct = rhythmpress._interpolate_quarto_vars_in_text(
                 "{{< var shared >}} / {{< meta shared >}} / {{< var env:TITLE_SUFFIX >}}",
@@ -109,6 +117,14 @@ def main() -> int:
             )
             if wrong_scope != "|":
                 raise AssertionError(f"unexpected wrong-scope interpolation: {wrong_scope!r}")
+
+            actual_case = rhythmpress._interpolate_quarto_vars_in_text(
+                "A Letter to {{< meta var.MORA_SPEAKERS.en >}}",
+                str(tmp),
+                "ja",
+            )
+            if actual_case != "A Letter to Mora-Timed Language Speakers":
+                raise AssertionError(f"unexpected actual-case interpolation: {actual_case!r}")
 
             items = [
                 {
