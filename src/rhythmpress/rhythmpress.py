@@ -1008,7 +1008,12 @@ def split_master_qmd(master_path: Path, *, toc: bool = True ) -> None:
 
 
     # --- NEW: per-language YAML include: _sidebar.index.<lang>.yml ---
-    section_title = frontmatter.get("title") or "Untitled"
+    section_title = (
+        _build_title_shortcode_interpolator(master_path.parent, lang)(
+            frontmatter.get("title")
+        )
+        or "Untitled"
+    )
     yml_lang_path = master_path.parent / f"_sidebar-{lang}.yml"
 
     # yml_lang_lines = [
