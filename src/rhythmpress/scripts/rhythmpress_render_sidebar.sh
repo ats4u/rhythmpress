@@ -98,7 +98,8 @@ rhythmpress quarto-profile --lang "$LANG_ID"
 printf "LANGID=$LANG_ID BASE=$BASE\n"
 
 # --- Markdown header ---------------------------------------------------------
-printf '**目次**\n\n' > "_sidebar-$LANG_ID.generated.md"
+TOC_LABEL="$(python3 -c 'import os, sys; from rhythmpress import rhythmpress; print(rhythmpress.resolve_sidebar_toc_label(os.environ.get("RHYTHMPRESS_ROOT") or os.getcwd(), sys.argv[1]))' "$LANG_ID")"
+printf '**%s**\n\n' "$TOC_LABEL" > "_sidebar-$LANG_ID.generated.md"
 
 # --- Append generated TOC ----------------------------------------------------
 rhythmpress render_toc "$BASE" >> "_sidebar-$LANG_ID.generated.md"

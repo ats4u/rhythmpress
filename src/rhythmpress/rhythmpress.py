@@ -78,7 +78,7 @@ def as_bool(v, default=True):
 
 from typing import Any, Mapping
 from pathlib import Path
-from .lang_registry import format_language_label
+from .lang_registry import format_language_label, get_language_entry
 from datetime import date, datetime
 
 #------------------------------------------------
@@ -190,6 +190,51 @@ def _build_title_shortcode_interpolator(basedir: str | Path, lang: str):
         return _qv.interpolate_title_shortcodes(text, contexts=contexts)
 
     return _interp
+
+
+_SIDEBAR_TOC_LABEL_BY_LANG = {
+    "de": "Inhaltsverzeichnis",
+    "en": "Table of contents",
+    "es": "Tabla de contenido",
+    "fr": "Table des matieres",
+    "it": "Indice",
+    "ja": "目次",
+    "ko": "목차",
+    "pt": "Indice",
+    "zh": "目录",
+    "zh-cn": "目录",
+    "zh-tw": "目錄",
+}
+
+
+def resolve_sidebar_toc_label(basedir: str | Path, lang: str) -> str:
+    """Resolve the generated sidebar TOC label for a language.
+
+    Resolution order:
+      1. merged metadata key `rhythmpress.toc-label`
+      2. built-in per-language defaults
+      3. legacy fallback `目次`
+    """
+    legacy_default = "目次"
+    metadata = {}
+    try:
+        from . import quarto_vars as _qv
+        contexts = _qv.get_title_shortcode_contexts(cwd=str(basedir), lang=lang)
+        candidate = contexts.get("meta") if isinstance(contexts, Mapping) else {}
+        if isinstance(candidate, Mapping):
+            metadata = candidate
+    except Exception:
+        metadata = {}
+
+    rhythmpress_meta = metadata.get("rhythmpress")
+    if isinstance(rhythmpress_meta, Mapping):
+        override = rhythmpress_meta.get("toc-label")
+        if isinstance(override, str) and override.strip():
+            return override.strip()
+
+    entry = get_language_entry(lang)
+    key = entry.lang_id if entry is not None else str(lang).strip().replace("_", "-").lower()
+    return _SIDEBAR_TOC_LABEL_BY_LANG.get(key, legacy_default)
 
 
 def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
