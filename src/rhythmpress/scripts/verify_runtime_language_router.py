@@ -89,6 +89,10 @@ def main() -> int:
             raise AssertionError("missing toolbar mount function in switcher JS output")
         if "rhythmpress-lang-switcher" not in switcher_js:
             raise AssertionError("missing switcher element id in generated JS output")
+        if "slot.closest('a.nav-link')" not in switcher_ui_js:
+            raise AssertionError("missing slot wrapper neutralization in switcher UI JS output")
+        if "slotLink.removeAttribute('href');" not in switcher_ui_js:
+            raise AssertionError("missing href removal for switcher slot wrapper")
         if "globalThis.RHYTHMPRESS_LANG_SWITCHER" not in switcher_data_js:
             raise AssertionError("missing global data object in switcher data JS output")
         if "const DATA = globalThis.RHYTHMPRESS_LANG_SWITCHER;" not in switcher_ui_js:
