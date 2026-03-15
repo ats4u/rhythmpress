@@ -167,6 +167,18 @@ def run(cmd: List[str], *, verbose: bool, dry_run: bool, env: dict | None = None
         return 127
 
 
+def _lang_switcher_conf_path(defs_path: str) -> str | None:
+    if defs_path != "-":
+        candidate = Path(defs_path)
+        if candidate.exists():
+            return defs_path
+
+    fallback = Path("_rhythmpress.conf")
+    if fallback.exists():
+        return str(fallback)
+    return None
+
+
 def main(argv: List[str]) -> int:
     ns = parse_args(argv)
 
@@ -310,10 +322,24 @@ def main(argv: List[str]) -> int:
             if rc != 0 and not ns.keep_going:
                 return rc
 
+    switcher_conf = _lang_switcher_conf_path(ns.defs)
+    if switcher_conf is None:
+        print("[WARN] render_lang_switcher_js skipped: no runtime conf file found", file=sys.stderr)
+    else:
+        rc = run(
+            ["rhythmpress", "render_lang_switcher_js", "--conf", switcher_conf],
+            verbose=ns.verbose,
+            dry_run=ns.dry_run,
+            env=env,
+        )
+        if rc != 0:
+            print(f"[FAIL] render_lang_switcher_js (exit {rc})", file=sys.stderr)
+            if not ns.keep_going:
+                return rc
+
     print("[DONE] Build completed.")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main(sys.argv[1:]))
-
