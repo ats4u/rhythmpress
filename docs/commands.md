@@ -451,8 +451,14 @@ Behavior:
   * Hook failures are ignored (non-fatal)
 * TOC generation:
 
-  * writes `**目次**` header
+  * writes `**<resolved label>**` header
+  * resolves the label in this order:
+
+    * merged metadata override at `rhythmpress.toc-label`
+    * built-in default for the target language ID
+    * legacy fallback `目次`
   * appends output of `rhythmpress render_toc <conf-basename>`
+  * affects only `_sidebar-<lang>.generated.md`, not Quarto's own page-TOC UI
 * Quarto profile generation is idempotent:
 
   * `_quarto-<lang>.yml` is overwritten only when merged content actually changes

@@ -296,20 +296,33 @@ QUARTO_PROJECT_OUTPUT_DIR="your-output-dir" rhythmpress sitemap
 
 Typical symptoms:
 
-* The included TOC header is in Japanese (`**目次**`) even on English pages.
+* The included TOC header text is unexpected for the current language.
 * Links appear but labels are odd.
 
 Why:
 
-* `render-sidebar` currently writes a fixed `**目次**` label.
+* `render-sidebar` now resolves the header label in this order:
+
+  1. merged metadata override at `rhythmpress.toc-label`
+  2. built-in default for the target language ID
+  3. legacy fallback `目次`
+
+* If the wrong language-specific file was generated, or an unknown language ID fell through to fallback behavior, the header may still look wrong.
 * TOC label/title resolution depends on file front matter titles / H1 / path fallback.
 
 Fix:
 
-* Treat this as a customization point:
+* Ensure you generated the correct `_sidebar-<lang>.generated.md` for the intended language.
+* If you want to override the built-in label, set it in metadata:
 
-  * Adjust the script behavior, or
-  * Use the post-merge hook to rewrite labels, or
+  ```yaml
+  rhythmpress:
+    toc-label: Table of contents
+  ```
+
+* Prefer `_metadata-<lang>.yml` for language-specific overrides.
+* If you still see stale output, regenerate the sidebar include.
+* Quarto's own page TOC label such as `On this page` is separate from this generated sidebar header.
   * Ensure each generated/target page has a good `title:` in front matter.
 
 ---
@@ -328,4 +341,3 @@ See also:
 * `docs/commands.md` (exact command behavior)
 * `docs/configuration.md` (vars, hooks, config formats)
 * `docs/concepts.md` (mental model + artifacts)
-

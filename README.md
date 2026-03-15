@@ -527,9 +527,12 @@ Then `rhythmpress render_sidebar _sidebar-<lang>.generated.conf` produces:
 * `_sidebar-<lang>.generated.yml` (merged YAML via `yq`, last-wins)
 * `_sidebar-<lang>.generated.md` (Markdown TOC)
 
-Two “hard-coded” behaviors worth knowing:
+Two behavior notes worth knowing:
 
-* The generated Markdown TOC file always begins with `**目次**` (Japanese header).
+* The generated Markdown TOC file begins with `**<label>**`, where `<label>` is resolved by Rhythmpress in this order:
+  1. merged metadata override at `rhythmpress.toc-label`
+  2. built-in default for the target language ID
+  3. legacy fallback `目次`
 * `render_toc` resolves the `.conf` path relative to `RHYTHMPRESS_ROOT`, so sidebar conf files are expected to live at the project root in the default workflow.
 
 ### 7.11 Optional post-merge hook for sidebars
@@ -723,7 +726,7 @@ Generated (by the build pipeline)
   Also produced by `rhythmpress render-sidebar`. It merges `_quarto.yml`, `_metadata-<lang>.yml`, and the merged sidebar into a language-specific Quarto profile. For the canonical merge rules, see `docs/configuration.md`.
 
 * `_sidebar-<lang>.generated.md`
-  Also produced by `rhythmpress render-sidebar`. It begins with a hard-coded header `**目次**` and appends the TOC rendered from the sidebar YAML.
+  Also produced by `rhythmpress render-sidebar`. It begins with a localized header `**<label>**` and appends the TOC rendered from the sidebar YAML.
 
 Optional (only if you run it)
 
@@ -819,12 +822,29 @@ Always use:
 eval "$(rhythmpress eval)"
 ```
 
-Hard-coded Japanese TOC label
-The generated Markdown TOC file starts with a fixed header:
+Localized sidebar TOC label
+The generated Markdown TOC file `_sidebar-<lang>.generated.md` starts with:
 
-* `**目次**`
+* `**<resolved label>**`
 
-If you need an English label (or per-language label), you will want to adjust that behavior in code or apply a post-processing hook.
+The label is resolved in this order:
+
+1. merged metadata override at `rhythmpress.toc-label`
+2. built-in default for the target language ID
+3. legacy fallback `目次`
+
+Recommended override location:
+
+```yaml
+# _metadata-en.yml
+rhythmpress:
+  toc-label: Table of contents
+```
+
+Notes:
+
+* This affects only the generated sidebar Markdown include written by `rhythmpress render-sidebar`.
+* It does not change Quarto's own page-TOC UI such as `On this page`.
 
 If you want, I can turn this into an even more “high-visibility” block by rewriting it into a short “Read this first” section with the 5–6 most failure-prone rules, and push the rest into `docs/troubleshooting.md`.
 
