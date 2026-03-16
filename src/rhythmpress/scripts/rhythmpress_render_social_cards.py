@@ -20,6 +20,7 @@ except Exception:  # pragma: no cover - optional dependency fallback
 
 CARD_WIDTH = 1200
 CARD_HEIGHT = 630
+CARD_INNER_HEIGHT = 630 - 52 - 56
 SOCIAL_MARKER_BEGIN = "<!-- rhythmpress social cards begin -->"
 SOCIAL_MARKER_END = "<!-- rhythmpress social cards end -->"
 DEFAULT_BROWSER_CANDIDATES = (
@@ -101,6 +102,53 @@ _EXTRACT_CARD_PAYLOAD_JS = f"""
     lang,
     description,
     blocks
+  }};
+}}
+"""
+
+_FIT_CARD_JS = f"""
+() => {{
+  const card = document.querySelector(".card");
+  const title = document.querySelector(".title");
+  const excerpt = document.querySelector(".excerpt");
+  if (!card || !title || !excerpt) {{
+    return {{ ok: false, reason: "missing elements" }};
+  }}
+
+  const minTitle = 30;
+  const minBody = 19;
+  let titleSize = parseFloat(getComputedStyle(title).fontSize);
+  let bodySize = parseFloat(getComputedStyle(excerpt).fontSize);
+
+  const fits = () => card.scrollHeight <= {CARD_INNER_HEIGHT};
+
+  let guard = 0;
+  while (!fits() && guard < 24) {{
+    guard += 1;
+    let changed = false;
+
+    if (titleSize > minTitle) {{
+      titleSize = Math.max(minTitle, titleSize - 2);
+      title.style.fontSize = `${{titleSize}}px`;
+      changed = true;
+    }}
+
+    if (!fits() && bodySize > minBody) {{
+      bodySize = Math.max(minBody, bodySize - 1);
+      excerpt.style.fontSize = `${{bodySize}}px`;
+      changed = true;
+    }}
+
+    if (!changed) {{
+      break;
+    }}
+  }}
+
+  return {{
+    ok: true,
+    titleSize,
+    bodySize,
+    scrollHeight: card.scrollHeight
   }};
 }}
 """
@@ -327,6 +375,7 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
       flex-direction: column;
       gap: 22px;
       position: relative;
+      overflow: hidden;
     }}
 
     .card::before {{
@@ -348,8 +397,8 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
 
     .title {{
       margin: 0;
-      font-size: 50px;
-      line-height: 1.02;
+      font-size: 3em;
+      line-height: 1.25;
       font-weight: 700;
       max-width: 1020px;
       display: -webkit-box;
@@ -364,6 +413,8 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
       gap: 12px;
       max-width: 980px;
       overflow: hidden;
+      font-size: 2em;
+      line-height: 1.5;
     }}
 
     .block {{
@@ -373,8 +424,8 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
     }}
 
     .block-heading {{
-      font-size: 24px;
-      line-height: 1.2;
+      font-size: 1em;
+      line-height: 1.18;
       font-weight: 700;
       color: var(--accent);
       -webkit-line-clamp: 2;
@@ -383,8 +434,9 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
     .block-body,
     .block-list,
     .block-quote {{
-      font-size: 28px;
-      line-height: 1.38;
+      font-size: 1.5em;
+      line-height: 1.25;
+      padding:0em;
       -webkit-line-clamp: 3;
     }}
 
@@ -583,6 +635,7 @@ def main(argv: list[str] | None = None) -> int:
                 if not ns.dry_run:
                     image_path.parent.mkdir(parents=True, exist_ok=True)
                     card_page.set_content(card_html, wait_until="load")
+                    card_page.evaluate(_FIT_CARD_JS)
                     card_page.screenshot(path=str(image_path))
                     cards_written += 1
 
