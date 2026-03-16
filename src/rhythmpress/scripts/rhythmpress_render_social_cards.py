@@ -311,6 +311,13 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
     safe_site_label = html.escape(_clean_text(site_label or "Rhythmpress"))
     safe_path = html.escape("/" + rel_html.as_posix())
     safe_lang = html.escape(lang or "en")
+    uses_japanese_font = (lang or "").lower().startswith("ja")
+    font_stack = (
+        '"VL PGothic", "Hiragino Sans", "Yu Gothic", "MS PGothic", sans-serif'
+        if uses_japanese_font
+        else '"Avenir Next", "Hiragino Sans", "Yu Gothic", "Helvetica Neue", sans-serif'
+    )
+    safe_font_stack = html.escape(font_stack)
 
     block_markup: list[str] = []
     for block in blocks:
@@ -364,7 +371,7 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
     }}
 
     body {{
-      font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", "Helvetica Neue", sans-serif;
+      font-family: {safe_font_stack};
     }}
 
     .card {{

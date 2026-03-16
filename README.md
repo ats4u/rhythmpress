@@ -76,7 +76,10 @@ Alongside pages, Rhythmpress may generate helper artifacts (TOCs, navigation fra
 
 3. Build layer (how everything gets executed)
 
-* A build command (e.g. `rhythmpress build`) runs preprocessing for configured targets, then runs sidebar/nav generation steps (if included), and finally you run Quarto rendering (`quarto render` / `quarto preview`) on the prepared project.
+* A build command (e.g. `rhythmpress build`) runs preprocessing for configured targets and sidebar/nav generation steps (if included).
+* Quarto rendering (`quarto render`) turns the generated `.qmd` tree into rendered HTML output.
+* If you build multiple profile-specific outputs, `rhythmpress assemble` merges them into one final site artifact.
+* Final artifact tasks such as sitemap generation and social-card rendering belong to `rhythmpress finalize`, which runs against the final rendered site tree.
 
 Multilingual behavior in one sentence:
 
@@ -161,6 +164,14 @@ Optional (only if you use the sidebar TOC features that benefit from it):
 pip install ruamel.yaml
 ```
 
+Optional (only if you use social-card generation):
+
+```bash
+pip install playwright
+```
+
+`rhythmpress render-social-cards` uses Playwright to drive a real browser engine (typically system Chrome/Chromium) in headless mode. Rhythmpress does not currently install a bundled browser for you. You must have a supported browser binary available locally.
+
 4. Verify the installation:
 
 ```bash
@@ -228,6 +239,20 @@ Rhythmpress’s core loop is:
 1. write or edit `master-<lang>.qmd`
 2. run `rhythmpress preproc …` (or `rhythmpress build`) to generate Quarto-ready `index.qmd` files
 3. run `quarto preview` (or `rhythmpress start`) to view the site
+
+For a full multilingual production build, the intended job flow is now:
+
+1. `rhythmpress build`
+2. `rhythmpress render-all`
+3. `rhythmpress assemble`
+4. `rhythmpress finalize`
+
+Responsibility boundary:
+
+* `build` prepares generated Quarto inputs and navigation artifacts.
+* `render-all` asks Quarto to render profile-specific site outputs.
+* `assemble` merges rendered outputs into one final deploy tree.
+* `finalize` derives final artifacts from that deploy tree (currently sitemap + social cards).
 
 ### 6.1 Create your first page directory
 
@@ -347,6 +372,122 @@ Terminal B (runs Quarto preview):
 ```bash
 quarto preview
 ```
+
+### 6.8 Finalize the deploy artifact
+
+After render and assembly, run:
+
+```bash
+rhythmpress finalize --output-dir .site
+```
+
+This is the canonical final-artifact step. It currently owns:
+
+* `rhythmpress sitemap`
+* `rhythmpress render-social-cards`
+
+Why this command exists:
+
+* `sitemap` and social-card generation both operate on rendered HTML artifacts, not on source `master-*.md` or generated `.qmd`.
+* They therefore belong to the final site-artifact boundary, not to Quarto’s page-render phase and not to the merge-only responsibility of `assemble`.
+
+In other words:
+
+* `render-all` renders
+* `assemble` merges
+* `finalize` derives final deploy artifacts from the merged site
+
+`rhythmpress run-all` follows that same boundary and now runs:
+
+1. `build`
+2. `render-all`
+3. `assemble`
+4. `finalize`
+
+If you need to skip part of finalization:
+
+```bash
+rhythmpress finalize --output-dir .site --skip-social-cards
+rhythmpress finalize --output-dir .site --skip-sitemap
+```
+
+## 6.9 Social-card generation
+
+`rhythmpress render-social-cards` renders social preview images for already-rendered HTML pages and injects the corresponding metadata into each page.
+
+Important lifecycle rule:
+
+* It does **not** run on source content.
+* It does **not** run on generated `.qmd`.
+* It runs on rendered `*.html` files inside an output directory such as `.site`.
+
+What it does, page by page:
+
+1. Scan the output directory recursively for rendered HTML files.
+2. Skip non-content outputs such as `404.html` and `site_libs`.
+3. Open each rendered page in a headless browser.
+4. Extract the opening rendered blocks from the article body (`main#quarto-document-content` / `main.content`).
+5. Re-render that extracted opening content into a fixed `1200x630` social-card template.
+6. Save a PNG under the mirrored social-card path.
+7. Inject or refresh `og:*` and `twitter:*` tags in the page `<head>`.
+
+Output path mapping:
+
+* Page: `.site/contact/en/index.html`
+* Image: `.site/attachments/social/contact/en/index.png`
+
+Another example:
+
+* Page: `.site/offbeat-count/benefits-of-offbeat-count-theory/en/index.html`
+* Image: `.site/attachments/social/offbeat-count/benefits-of-offbeat-count-theory/en/index.png`
+
+Metadata injection:
+
+* `og:title`
+* `og:description`
+* `og:image`
+* `og:url`
+* `og:type`
+* `og:site_name`
+* `twitter:card`
+* `twitter:title`
+* `twitter:description`
+* `twitter:image`
+
+Current rebuild behavior:
+
+* `render-social-cards` is currently a full rebuild over the target output directory.
+* If it finds 74 HTML pages under `.site`, it will regenerate 74 social-card PNGs.
+* It also refreshes the social metadata block in each page head, replacing the existing managed block if present.
+
+Why it renders from HTML instead of Markdown:
+
+* The goal is to capture the opening part of the **rendered** page, after Quarto layout, filters, includes, shortcodes, metadata merging, and HTML generation have already happened.
+* That makes the extracted text source match the final published page rather than an intermediate source representation.
+
+Why it does not reuse the page layout directly:
+
+* Social cards need a controlled fixed-size image, not a screenshot of the entire webpage with nav/sidebar chrome.
+* So the command extracts rendered content from the page, then places that content into a dedicated card template for readability.
+
+Typography behavior:
+
+* The card template has its own styling layer.
+* It does not automatically inherit your site CSS or theme fonts.
+* English/non-Japanese cards use the default Latin-oriented stack in the template.
+* Japanese cards prefer `VL PGothic` first, then fall back to the existing Japanese-capable system fonts.
+* If `VL PGothic` is not installed on the rendering machine, the browser will fall back automatically.
+
+Fit-to-frame behavior:
+
+* The card uses a fixed `1200x630` frame.
+* Rhythmpress now applies a browser-side fit pass before taking the screenshot.
+* If title/excerpt content would overflow vertically, it shrinks title and body typography incrementally until the content fits within the frame.
+
+Operational note:
+
+* Because it launches a real browser in headless mode, `render-social-cards` is heavier than a normal text-only post-processing step.
+* This is one of the reasons it belongs in `finalize`, not inside Quarto `post-render`.
 
 ### 6.7 Multilingual quick tip
 
