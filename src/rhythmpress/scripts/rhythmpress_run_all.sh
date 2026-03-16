@@ -203,7 +203,7 @@ if [ "$skip_finalize" -eq 0 ]; then
       cmd+=(--output-dir "$assemble_out")
     fi
   fi
-  if [ "${#finalize_args[@]:-0}" -gt 0 ]; then
+  if [ "${finalize_args+x}" = "x" ] && [ "${#finalize_args[@]}" -gt 0 ]; then
     cmd+=("${finalize_args[@]}")
   fi
   printf '[run-all] exec:'
