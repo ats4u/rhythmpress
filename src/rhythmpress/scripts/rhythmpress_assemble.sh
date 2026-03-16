@@ -10,12 +10,13 @@ Behavior:
   - If SOURCE_DIR is omitted, sources are auto-detected as .site-* directories.
   - Output directory defaults to .site.
   - Merges sources in order using rsync.
-  - Runs rhythmpress sitemap once on the merged output unless --no-sitemap is set.
+  - Final artifact steps such as sitemap and social-card generation now belong to
+    'rhythmpress finalize'.
 EOF
 }
 
 out_dir=".site"
-run_sitemap=1
+saw_no_sitemap=0
 declare -a sources=()
 
 while [ "$#" -gt 0 ]; do
@@ -26,7 +27,7 @@ while [ "$#" -gt 0 ]; do
       shift 2
       ;;
     --no-sitemap)
-      run_sitemap=0
+      saw_no_sitemap=1
       shift
       ;;
     -h|--help)
@@ -90,7 +91,6 @@ for s in "${sources[@]}"; do
   rsync -a "$s"/ "$out_dir"/
 done
 
-if [ "$run_sitemap" -eq 1 ]; then
-  echo "[assemble] sitemap on $out_dir"
-  QUARTO_PROJECT_OUTPUT_DIR="$out_dir" rhythmpress sitemap
+if [ "$saw_no_sitemap" -eq 1 ]; then
+  echo "[assemble] note: --no-sitemap is now a no-op; use 'rhythmpress finalize' for final artifact steps" >&2
 fi
