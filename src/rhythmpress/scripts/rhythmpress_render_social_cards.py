@@ -22,8 +22,8 @@ CARD_WIDTH = 1200
 CARD_HEIGHT = 630
 CARD_VERTICAL_PADDING = 52 + 56
 CARD_INNER_HEIGHT = CARD_HEIGHT - CARD_VERTICAL_PADDING
-MOBILE_VIEWPORT_WIDTH = 400
-MOBILE_VIEWPORT_HEIGHT = 840
+MOBILE_VIEWPORT_WIDTH = 800
+MOBILE_VIEWPORT_HEIGHT = 600
 PLAYWRIGHT_OPERATION_TIMEOUT_MS = 15_000
 SOCIAL_MARKER_BEGIN = "<!-- rhythmpress social cards begin -->"
 SOCIAL_MARKER_END = "<!-- rhythmpress social cards end -->"
@@ -808,10 +808,10 @@ def screenshot_mobile_page(
     crop_selectors: list[str],
     hide_selectors: list[str],
 ) -> None:
-    viewport_width, _viewport_height = viewport_size
+    viewport_width, viewport_height = viewport_size
     _screenshot_width, screenshot_height = screenshot_size
     device_scale_factor = mobile_device_scale_factor(viewport_size, screenshot_size)
-    target_css_height = screenshot_height / device_scale_factor
+    capture_css_height = max(1, round(screenshot_height / device_scale_factor))
 
     hide_css = build_hide_css(hide_selectors)
     validate_hide_selectors(page, hide_selectors)
@@ -819,15 +819,20 @@ def screenshot_mobile_page(
     inject_hide_css(page, hide_css)
     wait_for_fonts(page)
 
-    crop = page.evaluate(
-        _MOBILE_PAGE_CROP_JS,
-        {
-            "cropSelectors": crop_selectors,
-            "targetHeight": target_css_height,
-            "viewportWidth": viewport_width,
-        },
-    )
-    page.screenshot(path=str(image_path), clip=crop)
+    page.set_viewport_size({"width": viewport_width, "height": capture_css_height})
+    try:
+        crop = page.evaluate(
+            _MOBILE_PAGE_CROP_JS,
+            {
+                "cropSelectors": crop_selectors,
+                "targetHeight": capture_css_height,
+                "viewportWidth": viewport_width,
+            },
+        )
+        page.evaluate("(y) => window.scrollTo(0, y)", crop["y"])
+        page.screenshot(path=str(image_path))
+    finally:
+        page.set_viewport_size({"width": viewport_width, "height": viewport_height})
 
 
 def main(argv: list[str] | None = None) -> int:

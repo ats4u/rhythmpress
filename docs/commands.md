@@ -835,7 +835,7 @@ Render social-card PNGs from already-rendered HTML pages and inject Open Graph /
 
 * default output directory: `QUARTO_PROJECT_OUTPUT_DIR`, else `_quarto.yml` `project.output-dir`, else `_site`
 * default render mode: `mobile-page`
-* default mobile viewport: `400x840`
+* default mobile viewport: `800x600`
 * default output image size: `1200x630`
 * default browser: `RHYTHMPRESS_SOCIAL_BROWSER`, else a known system Chrome/Chromium path
 

@@ -14,14 +14,16 @@ def main() -> int:
     ns = social.parse_args([])
     if ns.render_mode != "mobile-page":
         raise AssertionError("mobile-page should be the default social-card render mode")
+    if ns.viewport != "800x600":
+        raise AssertionError("800x600 should be the default mobile viewport")
     if ns.allow_remote:
         raise AssertionError("remote requests should be blocked by default")
     remote_ns = social.parse_args(["--allow-remote"])
     if not remote_ns.allow_remote:
         raise AssertionError("--allow-remote should opt in to remote requests")
-    if social.parse_size("400x840", label="test") != (400, 840):
+    if social.parse_size("800x600", label="test") != (800, 600):
         raise AssertionError("size parser should accept WIDTHxHEIGHT values")
-    if social.mobile_device_scale_factor((400, 840), (1200, 630)) != 3:
+    if social.mobile_device_scale_factor((800, 600), (1200, 630)) != 1.5:
         raise AssertionError("mobile device scale should derive from output width and viewport width")
 
     default_crop = social.resolve_crop_selectors([])

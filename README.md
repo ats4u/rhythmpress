@@ -484,7 +484,7 @@ Typography behavior:
 Fit-to-frame behavior:
 
 * Default output size is `1200x630`.
-* Default mobile viewport is `400x840`, scaled by the browser to produce the target output width.
+* Default mobile viewport is `800x600`, scaled by the browser to produce the target output width.
 * In `--render-mode template`, Rhythmpress applies the previous browser-side fit pass that shrinks title and body typography until the custom template fits within the frame.
 
 Operational note:
