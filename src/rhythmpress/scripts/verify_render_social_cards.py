@@ -21,6 +21,16 @@ def main() -> int:
     remote_ns = social.parse_args(["--allow-remote"])
     if not remote_ns.allow_remote:
         raise AssertionError("--allow-remote should opt in to remote requests")
+    css_ns = social.parse_args(
+        [
+            "--css",
+            "main { margin-top: 0 !important; }",
+            "--css",
+            "@media screen { body { background: white; } }",
+        ]
+    )
+    if len(css_ns.css) != 2:
+        raise AssertionError("--css should be repeatable")
     if social.parse_size("800x600", label="test") != (800, 600):
         raise AssertionError("size parser should accept WIDTHxHEIGHT values")
     if social.mobile_device_scale_factor((800, 600), (1200, 630)) != 1.5:
@@ -57,6 +67,23 @@ def main() -> int:
     comma_css = social.build_hide_css(comma_selectors)
     if "#id1, #id2, .class1, .class2" not in comma_css:
         raise AssertionError("hide CSS should preserve comma-separated selector lists")
+    css_overrides = social.resolve_css_overrides(
+        [
+            " main { margin-top: 0 !important; } ",
+            "  ",
+            "@media screen { body { color: black; } }",
+        ]
+    )
+    if css_overrides != [
+        "main { margin-top: 0 !important; }",
+        "@media screen { body { color: black; } }",
+    ]:
+        raise AssertionError("CSS overrides should trim blanks and preserve raw CSS blocks")
+    screenshot_css = social.build_screenshot_css([".hidden"], css_overrides)
+    if screenshot_css.index(".hidden") > screenshot_css.index("main { margin-top"):
+        raise AssertionError("CSS overrides should be injected after generated hide rules")
+    if "@media screen" not in screenshot_css:
+        raise AssertionError("CSS overrides should preserve full raw CSS syntax")
     if "rhythmpress-social-card-hide-css" not in social._INJECT_HIDE_CSS_JS:
         raise AssertionError("hide CSS injection should use the managed style element")
     if "querySelectorAll" not in social._VALIDATE_SELECTORS_JS:

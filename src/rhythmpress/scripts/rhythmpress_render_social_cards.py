@@ -278,6 +278,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="Do not hide Rhythmpress/Quarto chrome with the default selector list.",
     )
     p.add_argument(
+        "--css",
+        action="append",
+        default=[],
+        help=(
+            "Raw screenshot-only CSS to inject after generated hide rules. "
+            "May be repeated for multiple override blocks."
+        ),
+    )
+    p.add_argument(
         "--max-pages",
         type=int,
         default=0,
@@ -431,6 +440,10 @@ def resolve_crop_selectors(cli_selectors: list[str]) -> list[str]:
     return resolved
 
 
+def resolve_css_overrides(css_blocks: list[str]) -> list[str]:
+    return [css_block.strip() for css_block in css_blocks if css_block.strip()]
+
+
 def build_hide_css(selectors: list[str]) -> str:
     if not selectors:
         return ""
@@ -446,6 +459,14 @@ body {{
   overflow-x: hidden !important;
 }}
 """
+
+
+def build_screenshot_css(hide_selectors: list[str], css_overrides: list[str]) -> str:
+    sections = [
+        build_hide_css(hide_selectors).strip(),
+        *css_overrides,
+    ]
+    return "\n\n".join(section for section in sections if section)
 
 
 def validate_hide_selectors(page, selectors: list[str]) -> None:
@@ -807,16 +828,17 @@ def screenshot_mobile_page(
     screenshot_size: tuple[int, int],
     crop_selectors: list[str],
     hide_selectors: list[str],
+    css_overrides: list[str],
 ) -> None:
     viewport_width, viewport_height = viewport_size
     _screenshot_width, screenshot_height = screenshot_size
     device_scale_factor = mobile_device_scale_factor(viewport_size, screenshot_size)
     capture_css_height = max(1, round(screenshot_height / device_scale_factor))
 
-    hide_css = build_hide_css(hide_selectors)
+    screenshot_css = build_screenshot_css(hide_selectors, css_overrides)
     validate_hide_selectors(page, hide_selectors)
     validate_crop_selectors(page, crop_selectors)
-    inject_hide_css(page, hide_css)
+    inject_hide_css(page, screenshot_css)
     wait_for_fonts(page)
 
     page.set_viewport_size({"width": viewport_width, "height": capture_css_height})
@@ -854,6 +876,7 @@ def main(argv: list[str] | None = None) -> int:
             ns.hide_selector,
             use_defaults=not ns.no_default_hide_selectors,
         )
+        css_overrides = resolve_css_overrides(ns.css)
     except RuntimeError as exc:
         print(f"[render-social-cards] {exc}", file=sys.stderr)
         return 2
@@ -967,6 +990,7 @@ def main(argv: list[str] | None = None) -> int:
                             screenshot_size=screenshot_size,
                             crop_selectors=crop_selectors,
                             hide_selectors=hide_selectors,
+                            css_overrides=css_overrides,
                         )
                     cards_written += 1
 
