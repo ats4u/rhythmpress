@@ -19,6 +19,10 @@ def main() -> int:
         raise AssertionError("800x600 should be the default mobile viewport")
     if default_options.allow_remote:
         raise AssertionError("remote requests should be blocked by default")
+    if default_options.enable_javascript:
+        raise AssertionError("JavaScript should be disabled by default")
+    if default_options.wait_ms != 0:
+        raise AssertionError("post-load wait should default to zero")
     remote_options = social.resolve_social_card_options(
         social.parse_args(["--allow-remote"]),
         {"rhythmpress": {"social-cards": {"allow-remote": False}}},
@@ -31,6 +35,18 @@ def main() -> int:
     )
     if blocked_options.allow_remote:
         raise AssertionError("--no-allow-remote should override config")
+    javascript_options = social.resolve_social_card_options(
+        social.parse_args(["--enable-javascript"]),
+        {"rhythmpress": {"social-cards": {"enable-javascript": False}}},
+    )
+    if not javascript_options.enable_javascript:
+        raise AssertionError("--enable-javascript should opt in to page JavaScript")
+    no_javascript_options = social.resolve_social_card_options(
+        social.parse_args(["--disable-javascript"]),
+        {"rhythmpress": {"social-cards": {"enable-javascript": True}}},
+    )
+    if no_javascript_options.enable_javascript:
+        raise AssertionError("--disable-javascript should override config")
     css_ns = social.parse_args(
         [
             "--css",
@@ -50,11 +66,13 @@ def main() -> int:
                     "browser-executable": "/tmp/chrome",
                     "css": ["main { margin-top: 0 !important; }"],
                     "default-hide-selectors": False,
+                    "enable-javascript": True,
                     "hide-selector": [".config-hide"],
                     "crop-selector": ["main.content"],
                     "render-mode": "template",
                     "screenshot-size": "1280x630",
                     "viewport": "640x600",
+                    "wait-ms": 1200,
                 }
             }
         },
@@ -67,6 +85,8 @@ def main() -> int:
         raise AssertionError("config should set CSS overrides")
     if config_options.default_hide_selectors:
         raise AssertionError("config should disable default hide selectors")
+    if not config_options.enable_javascript:
+        raise AssertionError("config should enable JavaScript")
     if config_options.hide_selector != [".config-hide"]:
         raise AssertionError("config should set hide selectors")
     if config_options.crop_selector != ["main.content"]:
@@ -77,6 +97,8 @@ def main() -> int:
         raise AssertionError("config should set screenshot size")
     if config_options.viewport != "640x600":
         raise AssertionError("config should set viewport")
+    if config_options.wait_ms != 1200:
+        raise AssertionError("config should set post-load wait")
     override_options = social.resolve_social_card_options(
         social.parse_args(
             [
@@ -93,6 +115,8 @@ def main() -> int:
                 "1200x630",
                 "--viewport",
                 "800x600",
+                "--wait-ms",
+                "250",
             ]
         ),
         {
@@ -105,6 +129,7 @@ def main() -> int:
                     "render-mode": "template",
                     "screenshot-size": "1280x630",
                     "viewport": "640x600",
+                    "wait-ms": 1200,
                 }
             }
         },
@@ -126,6 +151,8 @@ def main() -> int:
         raise AssertionError("CLI should override config screenshot size")
     if override_options.viewport != "800x600":
         raise AssertionError("CLI should override config viewport")
+    if override_options.wait_ms != 250:
+        raise AssertionError("CLI should override config post-load wait")
     if social.parse_size("800x600", label="test") != (800, 600):
         raise AssertionError("size parser should accept WIDTHxHEIGHT values")
     if social.mobile_device_scale_factor((800, 600), (1200, 630)) != 1.5:

@@ -238,6 +238,20 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         action="store_false",
         help="Block remote network requests even if _quarto.yml enables them.",
     )
+    javascript_group = p.add_mutually_exclusive_group()
+    javascript_group.add_argument(
+        "--enable-javascript",
+        dest="enable_javascript",
+        action="store_true",
+        default=None,
+        help="Enable page JavaScript while rendering social-card source pages.",
+    )
+    javascript_group.add_argument(
+        "--disable-javascript",
+        dest="enable_javascript",
+        action="store_false",
+        help="Disable page JavaScript even if _quarto.yml enables it.",
+    )
     p.add_argument(
         "--render-mode",
         choices=("mobile-page", "template"),
@@ -313,6 +327,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="Process at most N pages (debug helper; 0 means all pages).",
     )
     p.add_argument(
+        "--wait-ms",
+        type=int,
+        default=None,
+        help=(
+            "Milliseconds to wait after page load before extracting metadata and "
+            "taking screenshots. Default: 0."
+        ),
+    )
+    p.add_argument(
         "--dry-run",
         action="store_true",
         help="Show planned changes without writing files.",
@@ -365,6 +388,15 @@ def _config_bool(config: dict, key: str, *, label: str) -> bool | None:
     return value
 
 
+def _config_int(config: dict, key: str, *, label: str) -> int | None:
+    if key not in config or config.get(key) is None:
+        return None
+    value = config.get(key)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError(f"{label} in _quarto.yml must be an integer")
+    return value
+
+
 def _config_string_list(config: dict, key: str, *, label: str) -> list[str]:
     if key not in config or config.get(key) is None:
         return []
@@ -408,6 +440,19 @@ def resolve_social_card_options(ns: argparse.Namespace, config: dict) -> argpars
         else False
     )
 
+    config_enable_javascript = _config_bool(
+        social_config,
+        "enable-javascript",
+        label="rhythmpress.social-cards.enable-javascript",
+    )
+    enable_javascript = (
+        ns.enable_javascript
+        if ns.enable_javascript is not None
+        else config_enable_javascript
+        if config_enable_javascript is not None
+        else False
+    )
+
     config_default_hide_selectors = _config_bool(
         social_config,
         "default-hide-selectors",
@@ -447,6 +492,17 @@ def resolve_social_card_options(ns: argparse.Namespace, config: dict) -> argpars
         or f"{CARD_WIDTH}x{CARD_HEIGHT}"
     )
 
+    config_wait_ms = _config_int(
+        social_config,
+        "wait-ms",
+        label="rhythmpress.social-cards.wait-ms",
+    )
+    wait_ms = ns.wait_ms if ns.wait_ms is not None else config_wait_ms
+    if wait_ms is None:
+        wait_ms = 0
+    if wait_ms < 0:
+        raise RuntimeError("wait-ms must be zero or greater")
+
     config_crop_selectors = _config_string_list(
         social_config,
         "crop-selector",
@@ -477,10 +533,12 @@ def resolve_social_card_options(ns: argparse.Namespace, config: dict) -> argpars
         crop_selector=crop_selector,
         css=css,
         default_hide_selectors=default_hide_selectors,
+        enable_javascript=enable_javascript,
         hide_selector=hide_selector,
         render_mode=render_mode,
         screenshot_size=screenshot_size,
         viewport=viewport,
+        wait_ms=wait_ms,
     )
 
 
@@ -1020,6 +1078,11 @@ def wait_for_fonts(page) -> None:
         return
 
 
+def wait_after_load(page, wait_ms: int) -> None:
+    if wait_ms > 0:
+        page.wait_for_timeout(wait_ms)
+
+
 def inject_hide_css(page, hide_css: str) -> None:
     if hide_css:
         page.evaluate(_INJECT_HIDE_CSS_JS, hide_css)
@@ -1115,7 +1178,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             if social_options.render_mode == "mobile-page":
                 source_context = browser.new_context(
-                    java_script_enabled=False,
+                    java_script_enabled=social_options.enable_javascript,
                     viewport={"width": viewport_size[0], "height": viewport_size[1]},
                     locale="en-US",
                     is_mobile=True,
@@ -1127,7 +1190,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
             else:
                 source_context = browser.new_context(
-                    java_script_enabled=False,
+                    java_script_enabled=social_options.enable_javascript,
                     viewport={"width": 1440, "height": 1400},
                     locale="en-US",
                 )
@@ -1165,6 +1228,7 @@ def main(argv: list[str] | None = None) -> int:
                         print(f"[render-social-cards] page={rel_html.as_posix()}")
 
                     source_page.goto(local_url, wait_until="load")
+                    wait_after_load(source_page, social_options.wait_ms)
                     payload = source_page.evaluate(_EXTRACT_CARD_PAYLOAD_JS)
 
                     title = _clean_text(payload.get("title") or "")

@@ -294,6 +294,8 @@ The `rhythmpress preproc` dispatcher uses a lightweight front matter reader spec
 rhythmpress:
   social-cards:
     allow-remote: true
+    enable-javascript: true
+    wait-ms: 3000
     viewport: 640x600
     screenshot-size: 1280x630
     hide-selector:
@@ -312,6 +314,12 @@ Supported keys:
 
 * `allow-remote`
   Boolean. Allows remote network requests while rendering social cards.
+
+* `enable-javascript`
+  Boolean. Enables page JavaScript while rendering social-card source pages.
+
+* `wait-ms`
+  Integer. Milliseconds to wait after page load before extracting metadata and taking screenshots.
 
 * `browser-executable`
   String. Absolute path to a Chrome/Chromium-compatible browser executable.
