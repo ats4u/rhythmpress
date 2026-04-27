@@ -468,7 +468,8 @@ Why it renders from HTML instead of Markdown:
 How the default mobile-page renderer controls page chrome:
 
 * Social cards need a controlled fixed-size image, not a screenshot of the entire webpage with navigation chrome.
-* The command opens the rendered page with a mobile viewport and injects screenshot-only CSS to hide default Quarto/Rhythmpress chrome.
+* The command serves the rendered site from a temporary `127.0.0.1` HTTP server, opens the rendered page with a mobile viewport, and injects screenshot-only CSS to hide default Quarto/Rhythmpress chrome.
+* Local HTTP rendering makes root-absolute assets such as `/attachments/...` resolve like they do on the deployed site.
 * It does not write those screenshot-only removals back to the HTML page.
 * Use repeated `--hide-selector <selector>` flags to hide additional project-specific elements before capture.
 * Each `--hide-selector` value is CSS syntax. Use repeated flags or commas for multiple selectors; do not use spaces as a separator because spaces mean CSS descendant selection.

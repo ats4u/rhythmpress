@@ -349,6 +349,11 @@ No shell command is constructed from this configuration. Values are merged in-pr
 `render-social-cards`, so `rhythmpress finalize` and `rhythmpress run-all` inherit the same
 settings automatically.
 
+In `mobile-page` mode, Rhythmpress serves the rendered output directory from a temporary
+`127.0.0.1` HTTP server while taking screenshots. This keeps root-absolute assets such as
+`/attachments/...`, `/assets/...`, and `/site_libs/...` resolving the same way they do after
+deployment. The temporary local server is allowed even when remote requests are blocked.
+
 * `QUARTO_PROJECT_OUTPUT_DIR`
   Overrides `_quarto.yml` `project.output-dir` when locating the rendered site directory.
 

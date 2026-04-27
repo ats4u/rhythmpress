@@ -845,6 +845,7 @@ Behavior highlights:
 * opens each rendered page in Chrome/Chromium through Playwright
 * extracts rendered title/opening text for social metadata
 * screenshots the real mobile page by default, with screenshot-only CSS hiding Quarto/Rhythmpress chrome
+* serves mobile-page captures from temporary `127.0.0.1` HTTP so root-absolute assets resolve like deployed pages
 * writes images under `attachments/social/...`
 * refreshes a managed metadata block in each page `<head>`
 

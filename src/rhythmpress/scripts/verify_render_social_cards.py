@@ -193,6 +193,22 @@ def main() -> int:
     if social.social_image_rel_path(plain) != PurePosixPath("attachments/social/robots.png"):
         raise AssertionError("plain html file path mapping changed unexpectedly")
 
+    if social.local_http_page_url("http://127.0.0.1:1234/", nested) != (
+        "http://127.0.0.1:1234/contact/en/index.html"
+    ):
+        raise AssertionError("local HTTP page URL mapping changed unexpectedly")
+    spaced = PurePosixPath("folder with space/index.html")
+    if social.local_http_page_url("http://127.0.0.1:1234", spaced) != (
+        "http://127.0.0.1:1234/folder%20with%20space/index.html"
+    ):
+        raise AssertionError("local HTTP page URL should quote unsafe path characters")
+    if not social._is_local_http_url("http://127.0.0.1:1234/index.html"):
+        raise AssertionError("localhost HTTP should be treated as local")
+    if not social._is_local_http_url("http://localhost:1234/index.html"):
+        raise AssertionError("localhost hostname should be treated as local")
+    if social._is_local_http_url("https://example.com/index.html"):
+        raise AssertionError("external HTTP should not be treated as local")
+
     if social.page_url("https://example.com/", root) != "https://example.com/":
         raise AssertionError("root page url mapping changed unexpectedly")
     if social.page_url("https://example.com/", nested) != "https://example.com/contact/en/":

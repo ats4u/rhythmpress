@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 import argparse
+from functools import partial
 import html
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import os
 import re
 import sys
+import threading
 from pathlib import Path, PurePosixPath
 from typing import Iterable
-from urllib.parse import urljoin, urlparse
+from urllib.parse import quote, urljoin, urlparse
 
 from rhythmpress.scripts.rhythmpress_post_render_patch import resolve_output_dir
 
@@ -563,6 +566,39 @@ def image_url(site_url: str, image_rel: PurePosixPath) -> str:
     return urljoin(site_url, image_rel.as_posix())
 
 
+def local_http_page_url(base_url: str, rel_html: PurePosixPath) -> str:
+    return urljoin(base_url.rstrip("/") + "/", quote(rel_html.as_posix(), safe="/"))
+
+
+def _is_local_http_url(raw_url: str) -> bool:
+    parsed = urlparse(raw_url)
+    return parsed.scheme in {"http", "https"} and parsed.hostname in {
+        "127.0.0.1",
+        "localhost",
+        "::1",
+    }
+
+
+class _QuietStaticHandler(SimpleHTTPRequestHandler):
+    def log_message(self, format: str, *args: object) -> None:
+        return
+
+
+def start_static_server(root: Path) -> tuple[ThreadingHTTPServer, threading.Thread, str]:
+    handler = partial(_QuietStaticHandler, directory=str(root))
+    server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    _, port = server.server_address
+    return server, thread, f"http://127.0.0.1:{port}/"
+
+
+def stop_static_server(server: ThreadingHTTPServer, thread: threading.Thread) -> None:
+    server.shutdown()
+    server.server_close()
+    thread.join(timeout=5)
+
+
 def _clean_text(value: str) -> str:
     return _WHITESPACE_RE.sub(" ", (value or "").strip())
 
@@ -959,6 +995,9 @@ def _block_remote(route, request) -> None:
     if parsed.scheme in {"file", "data", "about"}:
         route.continue_()
         return
+    if _is_local_http_url(request.url):
+        route.continue_()
+        return
     route.abort()
 
 
@@ -1061,122 +1100,140 @@ def main(argv: list[str] | None = None) -> int:
     files_changed = 0
     cards_written = 0
 
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(
-            headless=True,
-            executable_path=browser_executable,
-        )
+    static_server = None
+    static_thread = None
+    local_base_url = ""
+
+    try:
         if social_options.render_mode == "mobile-page":
-            source_context = browser.new_context(
-                java_script_enabled=False,
-                viewport={"width": viewport_size[0], "height": viewport_size[1]},
-                locale="en-US",
-                is_mobile=True,
-                has_touch=True,
-                device_scale_factor=mobile_device_scale_factor(
-                    viewport_size,
-                    screenshot_size,
-                ),
+            static_server, static_thread, local_base_url = start_static_server(output_dir)
+
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(
+                headless=True,
+                executable_path=browser_executable,
             )
-        else:
-            source_context = browser.new_context(
-                java_script_enabled=False,
-                viewport={"width": 1440, "height": 1400},
-                locale="en-US",
-            )
-        if not social_options.allow_remote:
-            source_context.route("**/*", _block_remote)
-        card_context = None
-        card_page = None
-        if social_options.render_mode == "template":
-            card_context = browser.new_context(
-                java_script_enabled=False,
-                viewport={"width": screenshot_size[0], "height": screenshot_size[1]},
-                locale="en-US",
-            )
-            card_page = card_context.new_page()
-
-        source_page = source_context.new_page()
-        source_page.set_default_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
-        source_page.set_default_navigation_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
-        if card_page is not None:
-            card_page.set_default_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
-
-        try:
-            for html_path in html_files:
-                rel_html = rel_html_path(output_dir, html_path)
-                local_url = html_path.resolve().as_uri()
-                page_url_value = page_url(site_url_value, rel_html)
-                image_rel = social_image_rel_path(rel_html)
-                image_url_value = image_url(site_url_value, image_rel)
-
-                if not ns.quiet:
-                    print(f"[render-social-cards] page={rel_html.as_posix()}")
-
-                source_page.goto(local_url, wait_until="load")
-                payload = source_page.evaluate(_EXTRACT_CARD_PAYLOAD_JS)
-
-                title = _clean_text(payload.get("title") or "")
-                description = _truncate_text(payload.get("description") or title, DESCRIPTION_LIMIT)
-                lang = _clean_text(payload.get("lang") or "")
-                blocks = payload.get("blocks") or []
-
-                meta_block = build_social_meta_block(
-                    title=title or rel_html.as_posix(),
-                    description=description or title or rel_html.as_posix(),
-                    page_url_value=page_url_value,
-                    image_url_value=image_url_value,
-                    site_name=site_label,
+            if social_options.render_mode == "mobile-page":
+                source_context = browser.new_context(
+                    java_script_enabled=False,
+                    viewport={"width": viewport_size[0], "height": viewport_size[1]},
+                    locale="en-US",
+                    is_mobile=True,
+                    has_touch=True,
+                    device_scale_factor=mobile_device_scale_factor(
+                        viewport_size,
+                        screenshot_size,
+                    ),
                 )
+            else:
+                source_context = browser.new_context(
+                    java_script_enabled=False,
+                    viewport={"width": 1440, "height": 1400},
+                    locale="en-US",
+                )
+            if not social_options.allow_remote:
+                source_context.route("**/*", _block_remote)
+            card_context = None
+            card_page = None
+            if social_options.render_mode == "template":
+                card_context = browser.new_context(
+                    java_script_enabled=False,
+                    viewport={"width": screenshot_size[0], "height": screenshot_size[1]},
+                    locale="en-US",
+                )
+                card_page = card_context.new_page()
 
-                image_path = output_dir / image_rel
-                existing_html = html_path.read_text(encoding="utf-8", errors="ignore")
-                patched_html = upsert_social_meta_block(existing_html, meta_block)
+            source_page = source_context.new_page()
+            source_page.set_default_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
+            source_page.set_default_navigation_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
+            if card_page is not None:
+                card_page.set_default_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
 
-                if not ns.dry_run:
-                    image_path.parent.mkdir(parents=True, exist_ok=True)
-                    if social_options.render_mode == "template":
-                        if card_page is None:
-                            raise RuntimeError("template render mode missing card page")
-                        card_html = build_card_html(
-                            title=title or rel_html.as_posix(),
-                            blocks=blocks,
-                            rel_html=rel_html,
-                            site_label=site_label,
-                            lang=lang,
-                            card_size=screenshot_size,
-                        )
-                        card_page.set_content(card_html, wait_until="load")
-                        card_page.evaluate(
-                            build_fit_card_js(
-                                max(120, screenshot_size[1] - CARD_VERTICAL_PADDING)
+            try:
+                for html_path in html_files:
+                    rel_html = rel_html_path(output_dir, html_path)
+                    local_url = (
+                        local_http_page_url(local_base_url, rel_html)
+                        if local_base_url
+                        else html_path.resolve().as_uri()
+                    )
+                    page_url_value = page_url(site_url_value, rel_html)
+                    image_rel = social_image_rel_path(rel_html)
+                    image_url_value = image_url(site_url_value, image_rel)
+
+                    if not ns.quiet:
+                        print(f"[render-social-cards] page={rel_html.as_posix()}")
+
+                    source_page.goto(local_url, wait_until="load")
+                    payload = source_page.evaluate(_EXTRACT_CARD_PAYLOAD_JS)
+
+                    title = _clean_text(payload.get("title") or "")
+                    description = _truncate_text(
+                        payload.get("description") or title,
+                        DESCRIPTION_LIMIT,
+                    )
+                    lang = _clean_text(payload.get("lang") or "")
+                    blocks = payload.get("blocks") or []
+
+                    meta_block = build_social_meta_block(
+                        title=title or rel_html.as_posix(),
+                        description=description or title or rel_html.as_posix(),
+                        page_url_value=page_url_value,
+                        image_url_value=image_url_value,
+                        site_name=site_label,
+                    )
+
+                    image_path = output_dir / image_rel
+                    existing_html = html_path.read_text(encoding="utf-8", errors="ignore")
+                    patched_html = upsert_social_meta_block(existing_html, meta_block)
+
+                    if not ns.dry_run:
+                        image_path.parent.mkdir(parents=True, exist_ok=True)
+                        if social_options.render_mode == "template":
+                            if card_page is None:
+                                raise RuntimeError("template render mode missing card page")
+                            card_html = build_card_html(
+                                title=title or rel_html.as_posix(),
+                                blocks=blocks,
+                                rel_html=rel_html,
+                                site_label=site_label,
+                                lang=lang,
+                                card_size=screenshot_size,
                             )
-                        )
-                        card_page.screenshot(path=str(image_path))
-                    else:
-                        screenshot_mobile_page(
-                            source_page,
-                            image_path,
-                            viewport_size=viewport_size,
-                            screenshot_size=screenshot_size,
-                            crop_selectors=crop_selectors,
-                            hide_selectors=hide_selectors,
-                            css_overrides=css_overrides,
-                        )
-                    cards_written += 1
+                            card_page.set_content(card_html, wait_until="load")
+                            card_page.evaluate(
+                                build_fit_card_js(
+                                    max(120, screenshot_size[1] - CARD_VERTICAL_PADDING)
+                                )
+                            )
+                            card_page.screenshot(path=str(image_path))
+                        else:
+                            screenshot_mobile_page(
+                                source_page,
+                                image_path,
+                                viewport_size=viewport_size,
+                                screenshot_size=screenshot_size,
+                                crop_selectors=crop_selectors,
+                                hide_selectors=hide_selectors,
+                                css_overrides=css_overrides,
+                            )
+                        cards_written += 1
 
-                    if existing_html != patched_html:
-                        html_path.write_text(patched_html, encoding="utf-8")
-                        files_changed += 1
-                else:
-                    cards_written += 1
-                    if existing_html != patched_html:
-                        files_changed += 1
-        finally:
-            source_context.close()
-            if card_context is not None:
-                card_context.close()
-            browser.close()
+                        if existing_html != patched_html:
+                            html_path.write_text(patched_html, encoding="utf-8")
+                            files_changed += 1
+                    else:
+                        cards_written += 1
+                        if existing_html != patched_html:
+                            files_changed += 1
+            finally:
+                source_context.close()
+                if card_context is not None:
+                    card_context.close()
+                browser.close()
+    finally:
+        if static_server is not None and static_thread is not None:
+            stop_static_server(static_server, static_thread)
 
     if not ns.quiet:
         print(
