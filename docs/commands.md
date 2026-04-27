@@ -597,7 +597,7 @@ quarto preview
 
 ## `rhythmpress preview`, `rhythmpress preview-all`, `rhythmpress start`, and `rhythmpress clean-start`
 
-* `preview`: thin wrapper for `quarto preview` with `QUARTO_PROJECT_DIR` set to current directory
+* `preview`: thin wrapper for `quarto preview` with `RHYTHMPRESS_ROOT` and `QUARTO_PROJECT_DIR` set to current directory
   * when called with no arguments, it fails fast and asks for explicit options
   * override for intentional bare preview: `--allow-empty-preview` (alias: `--no-warn`)
   * exports `RHYTHMPRESS_PREVIEW=1` during preview command execution
@@ -644,7 +644,7 @@ rhythmpress clean-start --profile en
 Thin wrapper around `quarto render`.
 
 * forwards all arguments to `quarto render`
-* sets `QUARTO_PROJECT_DIR` to the current working directory
+* sets `RHYTHMPRESS_ROOT` and `QUARTO_PROJECT_DIR` to the current working directory
 * safety guard: exits with an error when called with no arguments
 * `--clean`: removes resolved output directory before render
   * resolution order: `--output-dir`, then `--profile` -> `.site-<profile>`, then `_quarto-<lang>.yml` from `--config`
@@ -1290,7 +1290,7 @@ rhythmpress render-nav --lang en --strict
 These are convenience wrappers that:
 
 * `. .venv/bin/activate`
-* run `QUARTO_PROJECT_DIR="$(pwd)" quarto preview`
+* run `RHYTHMPRESS_ROOT="$(pwd)" QUARTO_PROJECT_DIR="$(pwd)" quarto preview`
 * pass additional args through to `quarto preview` (for example `--profile dev`)
 
 Use them if you want a “just do it” shortcut:

@@ -90,8 +90,12 @@ if [ "$clean" -eq 1 ]; then
 fi
 
 cmd=(quarto render "${pass_args[@]}")
-printf '[render] exec: QUARTO_PROJECT_DIR=%q' "$(pwd)"
+env_cmd=(RHYTHMPRESS_ROOT="$(pwd)" QUARTO_PROJECT_DIR="$(pwd)")
+printf '[render] exec:'
+for arg in "${env_cmd[@]}"; do
+  printf ' %q' "$arg"
+done
 for a in "${cmd[@]}"; do printf ' %q' "$a"; done
 printf '\n'
 
-QUARTO_PROJECT_DIR="$(pwd)" "${cmd[@]}"
+env "${env_cmd[@]}" "${cmd[@]}"

@@ -27,7 +27,7 @@ cmd=(quarto preview)
 if [ "${#pass_args[@]}" -gt 0 ]; then
   cmd+=("${pass_args[@]}")
 fi
-env_cmd=(RHYTHMPRESS_PREVIEW=1 QUARTO_PROJECT_DIR="$(pwd)")
+env_cmd=(RHYTHMPRESS_PREVIEW=1 RHYTHMPRESS_ROOT="$(pwd)" QUARTO_PROJECT_DIR="$(pwd)")
 printf '[preview] exec:'
 for arg in "${env_cmd[@]}"; do
   printf ' %q' "$arg"
