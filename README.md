@@ -475,6 +475,7 @@ How the default mobile-page renderer controls page chrome:
 * Use repeated `--crop-selector <selector>` flags to choose fallback order for the page region that anchors the screenshot crop.
 * Commas inside one `--crop-selector` value remain normal CSS selector-group syntax; they do not define fallback order.
 * Use repeated `--css <rule>` flags to inject raw screenshot-only CSS overrides after generated hide rules.
+* Persistent defaults may be stored in `_quarto.yml` under `rhythmpress.social-cards`; `finalize` and `run-all` inherit them because `render-social-cards` loads the config directly.
 
 Typography behavior:
 

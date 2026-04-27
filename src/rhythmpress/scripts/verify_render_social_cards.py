@@ -12,15 +12,25 @@ def main() -> int:
     plain = PurePosixPath("robots.html")
 
     ns = social.parse_args([])
-    if ns.render_mode != "mobile-page":
+    default_options = social.resolve_social_card_options(ns, {})
+    if default_options.render_mode != "mobile-page":
         raise AssertionError("mobile-page should be the default social-card render mode")
-    if ns.viewport != "800x600":
+    if default_options.viewport != "800x600":
         raise AssertionError("800x600 should be the default mobile viewport")
-    if ns.allow_remote:
+    if default_options.allow_remote:
         raise AssertionError("remote requests should be blocked by default")
-    remote_ns = social.parse_args(["--allow-remote"])
-    if not remote_ns.allow_remote:
+    remote_options = social.resolve_social_card_options(
+        social.parse_args(["--allow-remote"]),
+        {"rhythmpress": {"social-cards": {"allow-remote": False}}},
+    )
+    if not remote_options.allow_remote:
         raise AssertionError("--allow-remote should opt in to remote requests")
+    blocked_options = social.resolve_social_card_options(
+        social.parse_args(["--no-allow-remote"]),
+        {"rhythmpress": {"social-cards": {"allow-remote": True}}},
+    )
+    if blocked_options.allow_remote:
+        raise AssertionError("--no-allow-remote should override config")
     css_ns = social.parse_args(
         [
             "--css",
@@ -31,6 +41,91 @@ def main() -> int:
     )
     if len(css_ns.css) != 2:
         raise AssertionError("--css should be repeatable")
+    config_options = social.resolve_social_card_options(
+        social.parse_args([]),
+        {
+            "rhythmpress": {
+                "social-cards": {
+                    "allow-remote": True,
+                    "browser-executable": "/tmp/chrome",
+                    "css": ["main { margin-top: 0 !important; }"],
+                    "default-hide-selectors": False,
+                    "hide-selector": [".config-hide"],
+                    "crop-selector": ["main.content"],
+                    "render-mode": "template",
+                    "screenshot-size": "1280x630",
+                    "viewport": "640x600",
+                }
+            }
+        },
+    )
+    if not config_options.allow_remote:
+        raise AssertionError("config should enable remote access")
+    if config_options.browser_executable != "/tmp/chrome":
+        raise AssertionError("config should set browser executable")
+    if config_options.css != ["main { margin-top: 0 !important; }"]:
+        raise AssertionError("config should set CSS overrides")
+    if config_options.default_hide_selectors:
+        raise AssertionError("config should disable default hide selectors")
+    if config_options.hide_selector != [".config-hide"]:
+        raise AssertionError("config should set hide selectors")
+    if config_options.crop_selector != ["main.content"]:
+        raise AssertionError("config should set crop selector fallback order")
+    if config_options.render_mode != "template":
+        raise AssertionError("config should set render mode")
+    if config_options.screenshot_size != "1280x630":
+        raise AssertionError("config should set screenshot size")
+    if config_options.viewport != "640x600":
+        raise AssertionError("config should set viewport")
+    override_options = social.resolve_social_card_options(
+        social.parse_args(
+            [
+                "--css",
+                "body { color: black; }",
+                "--crop-selector",
+                "article",
+                "--default-hide-selectors",
+                "--hide-selector",
+                ".cli-hide",
+                "--render-mode",
+                "mobile-page",
+                "--screenshot-size",
+                "1200x630",
+                "--viewport",
+                "800x600",
+            ]
+        ),
+        {
+            "rhythmpress": {
+                "social-cards": {
+                    "css": ["main { margin-top: 0 !important; }"],
+                    "default-hide-selectors": False,
+                    "hide-selector": [".config-hide"],
+                    "crop-selector": ["main.content"],
+                    "render-mode": "template",
+                    "screenshot-size": "1280x630",
+                    "viewport": "640x600",
+                }
+            }
+        },
+    )
+    if override_options.css != [
+        "main { margin-top: 0 !important; }",
+        "body { color: black; }",
+    ]:
+        raise AssertionError("CLI CSS should be appended after config CSS")
+    if override_options.hide_selector != [".config-hide", ".cli-hide"]:
+        raise AssertionError("CLI hide selectors should be appended after config selectors")
+    if override_options.crop_selector != ["article"]:
+        raise AssertionError("CLI crop selectors should replace config crop selectors")
+    if not override_options.default_hide_selectors:
+        raise AssertionError("CLI should override config default hide selector setting")
+    if override_options.render_mode != "mobile-page":
+        raise AssertionError("CLI should override config render mode")
+    if override_options.screenshot_size != "1200x630":
+        raise AssertionError("CLI should override config screenshot size")
+    if override_options.viewport != "800x600":
+        raise AssertionError("CLI should override config viewport")
     if social.parse_size("800x600", label="test") != (800, 600):
         raise AssertionError("size parser should accept WIDTHxHEIGHT values")
     if social.mobile_device_scale_factor((800, 600), (1200, 630)) != 1.5:

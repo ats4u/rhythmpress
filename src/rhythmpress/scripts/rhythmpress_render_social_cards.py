@@ -221,16 +221,24 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p.add_argument(
         "--allow-remote",
+        dest="allow_remote",
         action="store_true",
+        default=None,
         help=(
             "Allow remote network requests while rendering cards. "
             "Default is to block remote requests for deterministic local rendering."
         ),
     )
     p.add_argument(
+        "--no-allow-remote",
+        dest="allow_remote",
+        action="store_false",
+        help="Block remote network requests even if _quarto.yml enables them.",
+    )
+    p.add_argument(
         "--render-mode",
         choices=("mobile-page", "template"),
-        default=DEFAULT_RENDER_MODE,
+        default=None,
         help=(
             "Rendering strategy. mobile-page screenshots the rendered page in a "
             "mobile viewport; template uses the legacy dedicated card template. "
@@ -239,7 +247,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p.add_argument(
         "--viewport",
-        default=f"{MOBILE_VIEWPORT_WIDTH}x{MOBILE_VIEWPORT_HEIGHT}",
+        default="",
         help=(
             "Mobile CSS viewport for --render-mode mobile-page, formatted WIDTHxHEIGHT. "
             f"Default: {MOBILE_VIEWPORT_WIDTH}x{MOBILE_VIEWPORT_HEIGHT}."
@@ -247,7 +255,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p.add_argument(
         "--screenshot-size",
-        default=f"{CARD_WIDTH}x{CARD_HEIGHT}",
+        default="",
         help=(
             "Output screenshot size, formatted WIDTHxHEIGHT. "
             f"Default: {CARD_WIDTH}x{CARD_HEIGHT}."
@@ -272,9 +280,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "mobile-page screenshots. May be repeated. Whitespace is not a separator."
         ),
     )
-    p.add_argument(
-        "--no-default-hide-selectors",
+    default_hide_group = p.add_mutually_exclusive_group()
+    default_hide_group.add_argument(
+        "--default-hide-selectors",
+        dest="default_hide_selectors",
         action="store_true",
+        default=None,
+        help="Use the built-in Rhythmpress/Quarto chrome hide selectors.",
+    )
+    default_hide_group.add_argument(
+        "--no-default-hide-selectors",
+        dest="default_hide_selectors",
+        action="store_false",
         help="Do not hide Rhythmpress/Quarto chrome with the default selector list.",
     )
     p.add_argument(
@@ -317,14 +334,162 @@ def _load_quarto_config() -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def resolve_site_url(cli_site_url: str) -> str:
+def _social_cards_config(config: dict) -> dict:
+    rhythmpress_config = config.get("rhythmpress") or {}
+    if not isinstance(rhythmpress_config, dict):
+        return {}
+    social_config = rhythmpress_config.get("social-cards") or {}
+    if not isinstance(social_config, dict):
+        raise RuntimeError("rhythmpress.social-cards in _quarto.yml must be a mapping")
+    return social_config
+
+
+def _config_string(config: dict, key: str, *, label: str) -> str:
+    if key not in config or config.get(key) is None:
+        return ""
+    value = config.get(key)
+    if not isinstance(value, str):
+        raise RuntimeError(f"{label} in _quarto.yml must be a string")
+    return value.strip()
+
+
+def _config_bool(config: dict, key: str, *, label: str) -> bool | None:
+    if key not in config or config.get(key) is None:
+        return None
+    value = config.get(key)
+    if not isinstance(value, bool):
+        raise RuntimeError(f"{label} in _quarto.yml must be a boolean")
+    return value
+
+
+def _config_string_list(config: dict, key: str, *, label: str) -> list[str]:
+    if key not in config or config.get(key) is None:
+        return []
+    value = config.get(key)
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, list):
+        values: list[str] = []
+        for item in value:
+            if not isinstance(item, str):
+                raise RuntimeError(f"{label} in _quarto.yml must contain only strings")
+            values.append(item)
+        return values
+    raise RuntimeError(f"{label} in _quarto.yml must be a string or list of strings")
+
+
+def resolve_social_card_options(ns: argparse.Namespace, config: dict) -> argparse.Namespace:
+    social_config = _social_cards_config(config)
+
+    config_render_mode = _config_string(
+        social_config,
+        "render-mode",
+        label="rhythmpress.social-cards.render-mode",
+    )
+    render_mode = ns.render_mode or config_render_mode or DEFAULT_RENDER_MODE
+    if render_mode not in {"mobile-page", "template"}:
+        raise RuntimeError(
+            "rhythmpress.social-cards.render-mode must be one of: mobile-page, template"
+        )
+
+    config_allow_remote = _config_bool(
+        social_config,
+        "allow-remote",
+        label="rhythmpress.social-cards.allow-remote",
+    )
+    allow_remote = (
+        ns.allow_remote
+        if ns.allow_remote is not None
+        else config_allow_remote
+        if config_allow_remote is not None
+        else False
+    )
+
+    config_default_hide_selectors = _config_bool(
+        social_config,
+        "default-hide-selectors",
+        label="rhythmpress.social-cards.default-hide-selectors",
+    )
+    default_hide_selectors = (
+        ns.default_hide_selectors
+        if ns.default_hide_selectors is not None
+        else config_default_hide_selectors
+        if config_default_hide_selectors is not None
+        else True
+    )
+
+    config_browser_executable = _config_string(
+        social_config,
+        "browser-executable",
+        label="rhythmpress.social-cards.browser-executable",
+    )
+    browser_executable = ns.browser_executable.strip() or config_browser_executable
+
+    viewport = (
+        ns.viewport.strip()
+        or _config_string(
+            social_config,
+            "viewport",
+            label="rhythmpress.social-cards.viewport",
+        )
+        or f"{MOBILE_VIEWPORT_WIDTH}x{MOBILE_VIEWPORT_HEIGHT}"
+    )
+    screenshot_size = (
+        ns.screenshot_size.strip()
+        or _config_string(
+            social_config,
+            "screenshot-size",
+            label="rhythmpress.social-cards.screenshot-size",
+        )
+        or f"{CARD_WIDTH}x{CARD_HEIGHT}"
+    )
+
+    config_crop_selectors = _config_string_list(
+        social_config,
+        "crop-selector",
+        label="rhythmpress.social-cards.crop-selector",
+    )
+    crop_selector = ns.crop_selector if ns.crop_selector else config_crop_selectors
+
+    hide_selector = [
+        *_config_string_list(
+            social_config,
+            "hide-selector",
+            label="rhythmpress.social-cards.hide-selector",
+        ),
+        *ns.hide_selector,
+    ]
+    css = [
+        *_config_string_list(
+            social_config,
+            "css",
+            label="rhythmpress.social-cards.css",
+        ),
+        *ns.css,
+    ]
+
+    return argparse.Namespace(
+        allow_remote=allow_remote,
+        browser_executable=browser_executable,
+        crop_selector=crop_selector,
+        css=css,
+        default_hide_selectors=default_hide_selectors,
+        hide_selector=hide_selector,
+        render_mode=render_mode,
+        screenshot_size=screenshot_size,
+        viewport=viewport,
+    )
+
+
+def resolve_site_url(cli_site_url: str, config: dict | None = None) -> str:
     if cli_site_url.strip():
         return _normalize_site_url(cli_site_url.strip())
     env_site_url = os.getenv("RHYTHMPRESS_SITE_URL", "").strip()
     if env_site_url:
         return _normalize_site_url(env_site_url)
 
-    config = _load_quarto_config()
+    if config is None:
+        config = _load_quarto_config()
     site_url = ((config.get("website") or {}).get("site-url") or "").strip()
     if not site_url:
         raise RuntimeError(
@@ -777,8 +942,9 @@ def upsert_social_meta_block(html_text: str, meta_block: str) -> str:
     return html_text[: match.start()] + meta_block + html_text[match.start() :]
 
 
-def _site_label_from_config() -> str:
-    config = _load_quarto_config()
+def _site_label_from_config(config: dict | None = None) -> str:
+    if config is None:
+        config = _load_quarto_config()
     website = config.get("website") or {}
     project = config.get("project") or {}
     return _clean_text(
@@ -866,17 +1032,22 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     try:
-        site_url_value = resolve_site_url(ns.site_url)
-        browser_executable = resolve_browser_executable(ns.browser_executable)
-        site_label = _site_label_from_config()
-        viewport_size = parse_size(ns.viewport, label="--viewport")
-        screenshot_size = parse_size(ns.screenshot_size, label="--screenshot-size")
-        crop_selectors = resolve_crop_selectors(ns.crop_selector)
-        hide_selectors = resolve_hide_selectors(
-            ns.hide_selector,
-            use_defaults=not ns.no_default_hide_selectors,
+        quarto_config = _load_quarto_config()
+        social_options = resolve_social_card_options(ns, quarto_config)
+        site_url_value = resolve_site_url(ns.site_url, config=quarto_config)
+        browser_executable = resolve_browser_executable(social_options.browser_executable)
+        site_label = _site_label_from_config(quarto_config)
+        viewport_size = parse_size(social_options.viewport, label="--viewport")
+        screenshot_size = parse_size(
+            social_options.screenshot_size,
+            label="--screenshot-size",
         )
-        css_overrides = resolve_css_overrides(ns.css)
+        crop_selectors = resolve_crop_selectors(social_options.crop_selector)
+        hide_selectors = resolve_hide_selectors(
+            social_options.hide_selector,
+            use_defaults=social_options.default_hide_selectors,
+        )
+        css_overrides = resolve_css_overrides(social_options.css)
     except RuntimeError as exc:
         print(f"[render-social-cards] {exc}", file=sys.stderr)
         return 2
@@ -895,7 +1066,7 @@ def main(argv: list[str] | None = None) -> int:
             headless=True,
             executable_path=browser_executable,
         )
-        if ns.render_mode == "mobile-page":
+        if social_options.render_mode == "mobile-page":
             source_context = browser.new_context(
                 java_script_enabled=False,
                 viewport={"width": viewport_size[0], "height": viewport_size[1]},
@@ -913,11 +1084,11 @@ def main(argv: list[str] | None = None) -> int:
                 viewport={"width": 1440, "height": 1400},
                 locale="en-US",
             )
-        if not ns.allow_remote:
+        if not social_options.allow_remote:
             source_context.route("**/*", _block_remote)
         card_context = None
         card_page = None
-        if ns.render_mode == "template":
+        if social_options.render_mode == "template":
             card_context = browser.new_context(
                 java_script_enabled=False,
                 viewport={"width": screenshot_size[0], "height": screenshot_size[1]},
@@ -964,7 +1135,7 @@ def main(argv: list[str] | None = None) -> int:
 
                 if not ns.dry_run:
                     image_path.parent.mkdir(parents=True, exist_ok=True)
-                    if ns.render_mode == "template":
+                    if social_options.render_mode == "template":
                         if card_page is None:
                             raise RuntimeError("template render mode missing card page")
                         card_html = build_card_html(

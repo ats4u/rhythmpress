@@ -287,6 +287,68 @@ The `rhythmpress preproc` dispatcher uses a lightweight front matter reader spec
 
 ### 5.3 Social-card variables (used by `rhythmpress render-social-cards`)
 
+`rhythmpress render-social-cards` can read persistent project settings from
+`_quarto.yml` under `rhythmpress.social-cards`:
+
+```yaml
+rhythmpress:
+  social-cards:
+    allow-remote: true
+    viewport: 640x600
+    screenshot-size: 1280x630
+    hide-selector:
+      - ".sidebar, header, .quarto-title, #quarto-margin-sidebar, .quarto-secondary-nav"
+      - 'a[aria-label="Fork me on GitHub"], img[alt="Fork me on GitHub"]'
+    crop-selector:
+      - "main#quarto-document-content"
+    css:
+      - |
+        main#quarto-document-content > section:first-of-type > h3:first-child {
+          margin-top: 0 !important;
+        }
+```
+
+Supported keys:
+
+* `allow-remote`
+  Boolean. Allows remote network requests while rendering social cards.
+
+* `browser-executable`
+  String. Absolute path to a Chrome/Chromium-compatible browser executable.
+
+* `default-hide-selectors`
+  Boolean. Enables or disables Rhythmpress's built-in Quarto chrome hide selectors.
+
+* `render-mode`
+  String. Either `mobile-page` or `template`.
+
+* `viewport`
+  String formatted as `WIDTHxHEIGHT`.
+
+* `screenshot-size`
+  String formatted as `WIDTHxHEIGHT`.
+
+* `hide-selector`
+  String or list of strings. Values are appended after built-in hide selectors.
+
+* `crop-selector`
+  String or list of strings. Values define crop fallback order.
+
+* `css`
+  String or list of strings. Raw screenshot-only CSS injected after generated hide CSS.
+
+Resolution order:
+
+* Built-in defaults are applied first.
+* `_quarto.yml` `rhythmpress.social-cards` overrides built-in scalar defaults.
+* CLI scalar options override `_quarto.yml`.
+* `hide-selector` and `css` are additive: config values are applied before CLI values.
+* `crop-selector` uses CLI values if present, else config values, else built-in fallback order.
+
+No shell command is constructed from this configuration. Values are merged in-process by
+`render-social-cards`, so `rhythmpress finalize` and `rhythmpress run-all` inherit the same
+settings automatically.
+
 * `QUARTO_PROJECT_OUTPUT_DIR`
   Overrides `_quarto.yml` `project.output-dir` when locating the rendered site directory.
 

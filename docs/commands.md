@@ -864,6 +864,11 @@ rhythmpress render-social-cards --output-dir .site --css 'main { margin-top: 0 !
 `--crop-selector` is ordered fallback: repeat the flag to try selectors in order. Commas inside one crop selector remain normal CSS selector-group syntax.
 `--css` injects raw screenshot-only CSS after generated hide rules. Repeat it for multiple override blocks.
 
+Persistent defaults may be stored in `_quarto.yml` under `rhythmpress.social-cards`.
+`render-social-cards`, `finalize`, and `run-all` all use those settings because the generator
+loads them directly. CLI scalar options override config scalars; `hide-selector` and `css`
+append after config values; CLI `crop-selector` values replace config crop selectors.
+
 ---
 
 ## `rhythmpress sitemap`
