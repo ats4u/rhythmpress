@@ -199,7 +199,7 @@ fi
 if [ "$skip_finalize" -eq 0 ]; then
   cmd=(rhythmpress finalize)
   if ! finalize_has_output_dir "${finalize_args[@]-}"; then
-    if assemble_out="$(resolve_assemble_out "${assemble_args[@]}")"; then
+    if [ "${#assemble_args[@]}" -gt 0 ] && assemble_out="$(resolve_assemble_out "${assemble_args[@]}")"; then
       cmd+=(--output-dir "$assemble_out")
     fi
   fi

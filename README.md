@@ -426,9 +426,9 @@ What it does, page by page:
 1. Scan the output directory recursively for rendered HTML files.
 2. Skip non-content outputs such as `404.html` and `site_libs`.
 3. Open each rendered page in a headless browser.
-4. Extract the opening rendered blocks from the article body (`main#quarto-document-content` / `main.content`).
-5. Re-render that extracted opening content into a fixed `1200x630` social-card template.
-6. Save a PNG under the mirrored social-card path.
+4. Extract the page title and opening rendered blocks for metadata.
+5. By default, screenshot the real page in a mobile viewport after hiding site chrome such as nav, sidebars, TOC, page navigation, and footer.
+6. Save a `1200x630` PNG under the mirrored social-card path.
 7. Inject or refresh `og:*` and `twitter:*` tags in the page `<head>`.
 
 Output path mapping:
@@ -462,27 +462,28 @@ Current rebuild behavior:
 
 Why it renders from HTML instead of Markdown:
 
-* The goal is to capture the opening part of the **rendered** page, after Quarto layout, filters, includes, shortcodes, metadata merging, and HTML generation have already happened.
-* That makes the extracted text source match the final published page rather than an intermediate source representation.
+* The goal is to capture the **rendered** page, after Quarto layout, filters, includes, shortcodes, metadata merging, CSS, and HTML generation have already happened.
+* That makes the social-card image and metadata match the final published page rather than an intermediate source representation.
 
-Why it does not reuse the page layout directly:
+How the default mobile-page renderer controls page chrome:
 
-* Social cards need a controlled fixed-size image, not a screenshot of the entire webpage with nav/sidebar chrome.
-* So the command extracts rendered content from the page, then places that content into a dedicated card template for readability.
+* Social cards need a controlled fixed-size image, not a screenshot of the entire webpage with navigation chrome.
+* The command opens the rendered page with a mobile viewport and injects screenshot-only CSS to hide default Quarto/Rhythmpress chrome.
+* It does not write those screenshot-only removals back to the HTML page.
+* Use repeated `--hide-selector <selector>` flags to hide additional project-specific elements before capture.
+* Use `--crop-selector <selector-list>` to choose which page region anchors the screenshot crop.
 
 Typography behavior:
 
-* The card template has its own styling layer.
-* It does not automatically inherit your site CSS or theme fonts.
-* English/non-Japanese cards use the default Latin-oriented stack in the template.
-* Japanese cards prefer `VL PGothic` first, then fall back to the existing Japanese-capable system fonts.
-* If `VL PGothic` is not installed on the rendering machine, the browser will fall back automatically.
+* Default mode reuses the site’s rendered CSS and mobile layout, including whatever fonts the final page can load locally.
+* Remote requests are blocked during rendering, so externally hosted fonts are not fetched by this step.
+* The legacy dedicated card template remains available with `--render-mode template` for comparison or fallback.
 
 Fit-to-frame behavior:
 
-* The card uses a fixed `1200x630` frame.
-* Rhythmpress now applies a browser-side fit pass before taking the screenshot.
-* If title/excerpt content would overflow vertically, it shrinks title and body typography incrementally until the content fits within the frame.
+* Default output size is `1200x630`.
+* Default mobile viewport is `400x840`, scaled by the browser to produce the target output width.
+* In `--render-mode template`, Rhythmpress applies the previous browser-side fit pass that shrinks title and body typography until the custom template fits within the frame.
 
 Operational note:
 

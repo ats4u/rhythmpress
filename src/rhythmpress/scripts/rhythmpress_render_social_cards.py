@@ -20,7 +20,11 @@ except Exception:  # pragma: no cover - optional dependency fallback
 
 CARD_WIDTH = 1200
 CARD_HEIGHT = 630
-CARD_INNER_HEIGHT = 630 - 52 - 56
+CARD_VERTICAL_PADDING = 52 + 56
+CARD_INNER_HEIGHT = CARD_HEIGHT - CARD_VERTICAL_PADDING
+MOBILE_VIEWPORT_WIDTH = 400
+MOBILE_VIEWPORT_HEIGHT = 840
+PLAYWRIGHT_OPERATION_TIMEOUT_MS = 15_000
 SOCIAL_MARKER_BEGIN = "<!-- rhythmpress social cards begin -->"
 SOCIAL_MARKER_END = "<!-- rhythmpress social cards end -->"
 DEFAULT_BROWSER_CANDIDATES = (
@@ -34,6 +38,21 @@ SKIP_FILE_NAMES = {"404.html"}
 BLOCK_LIMIT = 6
 CHAR_BUDGET = 720
 DESCRIPTION_LIMIT = 220
+DEFAULT_RENDER_MODE = "mobile-page"
+DEFAULT_CROP_SELECTOR = "#quarto-content, main.content, main#quarto-document-content, article, body"
+DEFAULT_HIDE_SELECTORS = (
+    "nav",
+    ".navbar",
+    "#quarto-sidebar",
+    ".sidebar",
+    "#TOC",
+    ".toc-actions",
+    ".page-navigation",
+    ".quarto-margin-sidebar",
+    ".quarto-secondary-nav",
+    ".quarto-sidebar-toggle",
+    "footer",
+)
 
 _SOCIAL_BLOCK_RE = re.compile(
     rf"{re.escape(SOCIAL_MARKER_BEGIN)}.*?{re.escape(SOCIAL_MARKER_END)}\n?",
@@ -106,51 +125,45 @@ _EXTRACT_CARD_PAYLOAD_JS = f"""
 }}
 """
 
-_FIT_CARD_JS = f"""
-() => {{
-  const card = document.querySelector(".card");
-  const title = document.querySelector(".title");
-  const excerpt = document.querySelector(".excerpt");
-  if (!card || !title || !excerpt) {{
-    return {{ ok: false, reason: "missing elements" }};
-  }}
+_MOBILE_PAGE_CLIP_JS = """
+({ cropSelector, targetHeight, viewportWidth }) => {
+  const target =
+    document.querySelector(cropSelector) ||
+    document.querySelector("main.content") ||
+    document.querySelector("main#quarto-document-content") ||
+    document.body;
+  const rect = target.getBoundingClientRect();
+  const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  const top = Math.max(0, rect.top + scrollY);
+  const doc = document.documentElement;
+  const body = document.body;
+  const docHeight = Math.max(
+    doc.scrollHeight,
+    body ? body.scrollHeight : 0,
+    top + targetHeight
+  );
+  const y = Math.min(top, Math.max(0, docHeight - targetHeight));
 
-  const minTitle = 30;
-  const minBody = 19;
-  let titleSize = parseFloat(getComputedStyle(title).fontSize);
-  let bodySize = parseFloat(getComputedStyle(excerpt).fontSize);
+  return {
+    x: 0,
+    y,
+    width: viewportWidth,
+    height: targetHeight
+  };
+}
+"""
 
-  const fits = () => card.scrollHeight <= {CARD_INNER_HEIGHT};
-
-  let guard = 0;
-  while (!fits() && guard < 24) {{
-    guard += 1;
-    let changed = false;
-
-    if (titleSize > minTitle) {{
-      titleSize = Math.max(minTitle, titleSize - 2);
-      title.style.fontSize = `${{titleSize}}px`;
-      changed = true;
-    }}
-
-    if (!fits() && bodySize > minBody) {{
-      bodySize = Math.max(minBody, bodySize - 1);
-      excerpt.style.fontSize = `${{bodySize}}px`;
-      changed = true;
-    }}
-
-    if (!changed) {{
-      break;
-    }}
-  }}
-
-  return {{
-    ok: true,
-    titleSize,
-    bodySize,
-    scrollHeight: card.scrollHeight
-  }};
-}}
+_INJECT_HIDE_CSS_JS = """
+(css) => {
+  let style = document.getElementById("rhythmpress-social-card-hide-css");
+  if (!style) {
+    style = document.createElement("style");
+    style.id = "rhythmpress-social-card-hide-css";
+    document.head.appendChild(style);
+  }
+  style.textContent = css;
+  return true;
+}
 """
 
 
@@ -182,6 +195,62 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "Browser executable path. Default: RHYTHMPRESS_SOCIAL_BROWSER env, "
             "else a known system Chrome/Chromium path."
         ),
+    )
+    p.add_argument(
+        "--allow-remote",
+        action="store_true",
+        help=(
+            "Allow remote network requests while rendering cards. "
+            "Default is to block remote requests for deterministic local rendering."
+        ),
+    )
+    p.add_argument(
+        "--render-mode",
+        choices=("mobile-page", "template"),
+        default=DEFAULT_RENDER_MODE,
+        help=(
+            "Rendering strategy. mobile-page screenshots the rendered page in a "
+            "mobile viewport; template uses the legacy dedicated card template. "
+            f"Default: {DEFAULT_RENDER_MODE}."
+        ),
+    )
+    p.add_argument(
+        "--viewport",
+        default=f"{MOBILE_VIEWPORT_WIDTH}x{MOBILE_VIEWPORT_HEIGHT}",
+        help=(
+            "Mobile CSS viewport for --render-mode mobile-page, formatted WIDTHxHEIGHT. "
+            f"Default: {MOBILE_VIEWPORT_WIDTH}x{MOBILE_VIEWPORT_HEIGHT}."
+        ),
+    )
+    p.add_argument(
+        "--screenshot-size",
+        default=f"{CARD_WIDTH}x{CARD_HEIGHT}",
+        help=(
+            "Output screenshot size, formatted WIDTHxHEIGHT. "
+            f"Default: {CARD_WIDTH}x{CARD_HEIGHT}."
+        ),
+    )
+    p.add_argument(
+        "--crop-selector",
+        default=DEFAULT_CROP_SELECTOR,
+        help=(
+            "CSS selector list whose top edge anchors the mobile-page screenshot crop. "
+            f"Default: {DEFAULT_CROP_SELECTOR}"
+        ),
+    )
+    p.add_argument(
+        "--hide-selector",
+        action="append",
+        default=[],
+        help=(
+            "Additional CSS selector to hide before mobile-page screenshots. "
+            "May be repeated."
+        ),
+    )
+    p.add_argument(
+        "--no-default-hide-selectors",
+        action="store_true",
+        help="Do not hide Rhythmpress/Quarto chrome with the default selector list.",
     )
     p.add_argument(
         "--max-pages",
@@ -306,7 +375,114 @@ def _truncate_text(value: str, limit: int) -> str:
     return cleaned[: limit - 1].rstrip() + "…"
 
 
-def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PurePosixPath, site_label: str, lang: str) -> str:
+def parse_size(value: str, *, label: str) -> tuple[int, int]:
+    match = re.fullmatch(r"\s*(\d+)x(\d+)\s*", value or "")
+    if not match:
+        raise RuntimeError(f"{label} must be formatted as WIDTHxHEIGHT: {value!r}")
+    width = int(match.group(1))
+    height = int(match.group(2))
+    if width <= 0 or height <= 0:
+        raise RuntimeError(f"{label} must use positive dimensions: {value!r}")
+    return width, height
+
+
+def resolve_hide_selectors(
+    extra_selectors: list[str],
+    *,
+    use_defaults: bool = True,
+) -> list[str]:
+    selectors: list[str] = []
+    if use_defaults:
+        selectors.extend(DEFAULT_HIDE_SELECTORS)
+    selectors.extend(extra_selectors)
+    return [selector.strip() for selector in selectors if selector.strip()]
+
+
+def build_hide_css(selectors: list[str]) -> str:
+    if not selectors:
+        return ""
+    selector_list = ",\n".join(selectors)
+    return f"""
+{selector_list} {{
+  display: none !important;
+  visibility: hidden !important;
+}}
+
+html,
+body {{
+  overflow-x: hidden !important;
+}}
+"""
+
+
+def mobile_device_scale_factor(
+    viewport_size: tuple[int, int],
+    screenshot_size: tuple[int, int],
+) -> float:
+    viewport_width, _viewport_height = viewport_size
+    screenshot_width, _screenshot_height = screenshot_size
+    return screenshot_width / viewport_width
+
+
+def build_fit_card_js(card_inner_height: int) -> str:
+    return f"""
+() => {{
+  const card = document.querySelector(".card");
+  const title = document.querySelector(".title");
+  const excerpt = document.querySelector(".excerpt");
+  if (!card || !title || !excerpt) {{
+    return {{ ok: false, reason: "missing elements" }};
+  }}
+
+  const minTitle = 30;
+  const minBody = 19;
+  let titleSize = parseFloat(getComputedStyle(title).fontSize);
+  let bodySize = parseFloat(getComputedStyle(excerpt).fontSize);
+
+  const fits = () => card.scrollHeight <= {card_inner_height};
+
+  let guard = 0;
+  while (!fits() && guard < 24) {{
+    guard += 1;
+    let changed = false;
+
+    if (titleSize > minTitle) {{
+      titleSize = Math.max(minTitle, titleSize - 2);
+      title.style.fontSize = `${{titleSize}}px`;
+      changed = true;
+    }}
+
+    if (!fits() && bodySize > minBody) {{
+      bodySize = Math.max(minBody, bodySize - 1);
+      excerpt.style.fontSize = `${{bodySize}}px`;
+      changed = true;
+    }}
+
+    if (!changed) {{
+      break;
+    }}
+  }}
+
+  return {{
+    ok: true,
+    titleSize,
+    bodySize,
+    scrollHeight: card.scrollHeight
+  }};
+}}
+"""
+
+
+def build_card_html(
+    *,
+    title: str,
+    blocks: list[dict[str, str]],
+    rel_html: PurePosixPath,
+    site_label: str,
+    lang: str,
+    card_size: tuple[int, int] = (CARD_WIDTH, CARD_HEIGHT),
+) -> str:
+    card_width, card_height = card_size
     safe_title = html.escape(_truncate_text(title or rel_html.as_posix(), 120))
     safe_site_label = html.escape(_clean_text(site_label or "Rhythmpress"))
     safe_path = html.escape("/" + rel_html.as_posix())
@@ -361,8 +537,8 @@ def build_card_html(*, title: str, blocks: list[dict[str, str]], rel_html: PureP
 
     html, body {{
       margin: 0;
-      width: {CARD_WIDTH}px;
-      height: {CARD_HEIGHT}px;
+      width: {card_width}px;
+      height: {card_height}px;
       overflow: hidden;
       background:
         radial-gradient(circle at top right, rgba(149, 81, 36, 0.16), transparent 36%),
@@ -556,6 +732,49 @@ def _import_playwright():
     return sync_playwright
 
 
+def wait_for_fonts(page) -> None:
+    try:
+        page.evaluate(
+            "() => document.fonts ? document.fonts.ready.then(() => true).catch(() => false) : true"
+        )
+    except Exception:
+        return
+
+
+def inject_hide_css(page, hide_css: str) -> None:
+    if hide_css:
+        page.evaluate(_INJECT_HIDE_CSS_JS, hide_css)
+
+
+def screenshot_mobile_page(
+    page,
+    image_path: Path,
+    *,
+    viewport_size: tuple[int, int],
+    screenshot_size: tuple[int, int],
+    crop_selector: str,
+    hide_selectors: list[str],
+) -> None:
+    viewport_width, _viewport_height = viewport_size
+    _screenshot_width, screenshot_height = screenshot_size
+    device_scale_factor = mobile_device_scale_factor(viewport_size, screenshot_size)
+    target_css_height = screenshot_height / device_scale_factor
+
+    hide_css = build_hide_css(hide_selectors)
+    inject_hide_css(page, hide_css)
+    wait_for_fonts(page)
+
+    clip = page.evaluate(
+        _MOBILE_PAGE_CLIP_JS,
+        {
+            "cropSelector": crop_selector,
+            "targetHeight": target_css_height,
+            "viewportWidth": viewport_width,
+        },
+    )
+    page.screenshot(path=str(image_path), clip=clip)
+
+
 def main(argv: list[str] | None = None) -> int:
     ns = parse_args(sys.argv[1:] if argv is None else argv)
 
@@ -568,6 +787,12 @@ def main(argv: list[str] | None = None) -> int:
         site_url_value = resolve_site_url(ns.site_url)
         browser_executable = resolve_browser_executable(ns.browser_executable)
         site_label = _site_label_from_config()
+        viewport_size = parse_size(ns.viewport, label="--viewport")
+        screenshot_size = parse_size(ns.screenshot_size, label="--screenshot-size")
+        hide_selectors = resolve_hide_selectors(
+            ns.hide_selector,
+            use_defaults=not ns.no_default_hide_selectors,
+        )
     except RuntimeError as exc:
         print(f"[render-social-cards] {exc}", file=sys.stderr)
         return 2
@@ -586,20 +811,41 @@ def main(argv: list[str] | None = None) -> int:
             headless=True,
             executable_path=browser_executable,
         )
-        source_context = browser.new_context(
-            java_script_enabled=False,
-            viewport={"width": 1440, "height": 1400},
-            locale="en-US",
-        )
-        source_context.route("**/*", _block_remote)
-        card_context = browser.new_context(
-            java_script_enabled=False,
-            viewport={"width": CARD_WIDTH, "height": CARD_HEIGHT},
-            locale="en-US",
-        )
+        if ns.render_mode == "mobile-page":
+            source_context = browser.new_context(
+                java_script_enabled=False,
+                viewport={"width": viewport_size[0], "height": viewport_size[1]},
+                locale="en-US",
+                is_mobile=True,
+                has_touch=True,
+                device_scale_factor=mobile_device_scale_factor(
+                    viewport_size,
+                    screenshot_size,
+                ),
+            )
+        else:
+            source_context = browser.new_context(
+                java_script_enabled=False,
+                viewport={"width": 1440, "height": 1400},
+                locale="en-US",
+            )
+        if not ns.allow_remote:
+            source_context.route("**/*", _block_remote)
+        card_context = None
+        card_page = None
+        if ns.render_mode == "template":
+            card_context = browser.new_context(
+                java_script_enabled=False,
+                viewport={"width": screenshot_size[0], "height": screenshot_size[1]},
+                locale="en-US",
+            )
+            card_page = card_context.new_page()
 
         source_page = source_context.new_page()
-        card_page = card_context.new_page()
+        source_page.set_default_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
+        source_page.set_default_navigation_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
+        if card_page is not None:
+            card_page.set_default_timeout(PLAYWRIGHT_OPERATION_TIMEOUT_MS)
 
         try:
             for html_path in html_files:
@@ -620,13 +866,6 @@ def main(argv: list[str] | None = None) -> int:
                 lang = _clean_text(payload.get("lang") or "")
                 blocks = payload.get("blocks") or []
 
-                card_html = build_card_html(
-                    title=title or rel_html.as_posix(),
-                    blocks=blocks,
-                    rel_html=rel_html,
-                    site_label=site_label,
-                    lang=lang,
-                )
                 meta_block = build_social_meta_block(
                     title=title or rel_html.as_posix(),
                     description=description or title or rel_html.as_posix(),
@@ -641,9 +880,33 @@ def main(argv: list[str] | None = None) -> int:
 
                 if not ns.dry_run:
                     image_path.parent.mkdir(parents=True, exist_ok=True)
-                    card_page.set_content(card_html, wait_until="load")
-                    card_page.evaluate(_FIT_CARD_JS)
-                    card_page.screenshot(path=str(image_path))
+                    if ns.render_mode == "template":
+                        if card_page is None:
+                            raise RuntimeError("template render mode missing card page")
+                        card_html = build_card_html(
+                            title=title or rel_html.as_posix(),
+                            blocks=blocks,
+                            rel_html=rel_html,
+                            site_label=site_label,
+                            lang=lang,
+                            card_size=screenshot_size,
+                        )
+                        card_page.set_content(card_html, wait_until="load")
+                        card_page.evaluate(
+                            build_fit_card_js(
+                                max(120, screenshot_size[1] - CARD_VERTICAL_PADDING)
+                            )
+                        )
+                        card_page.screenshot(path=str(image_path))
+                    else:
+                        screenshot_mobile_page(
+                            source_page,
+                            image_path,
+                            viewport_size=viewport_size,
+                            screenshot_size=screenshot_size,
+                            crop_selector=ns.crop_selector,
+                            hide_selectors=hide_selectors,
+                        )
                     cards_written += 1
 
                     if existing_html != patched_html:
@@ -655,7 +918,8 @@ def main(argv: list[str] | None = None) -> int:
                         files_changed += 1
         finally:
             source_context.close()
-            card_context.close()
+            if card_context is not None:
+                card_context.close()
             browser.close()
 
     if not ns.quiet:

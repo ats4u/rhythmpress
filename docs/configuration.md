@@ -285,6 +285,17 @@ The `rhythmpress preproc` dispatcher uses a lightweight front matter reader spec
 * `SITE_URL`
   Overrides `_quarto.yml` `website.site-url` when writing absolute URLs.
 
+### 5.3 Social-card variables (used by `rhythmpress render-social-cards`)
+
+* `QUARTO_PROJECT_OUTPUT_DIR`
+  Overrides `_quarto.yml` `project.output-dir` when locating the rendered site directory.
+
+* `RHYTHMPRESS_SITE_URL`
+  Overrides `_quarto.yml` `website.site-url` when writing `og:url`, `og:image`, and Twitter image URLs. `rhythmpress finalize --site-url ...` sets this for the child command.
+
+* `RHYTHMPRESS_SOCIAL_BROWSER`
+  Absolute path to the Chrome/Chromium-compatible browser executable used by Playwright. If unset, Rhythmpress checks known macOS Chrome/Chromium paths.
+
 ---
 
 ## 6) Title shortcode interpolation (`{{< var ... >}}`, `{{< meta ... >}}`) used in titles/TOC

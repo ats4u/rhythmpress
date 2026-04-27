@@ -11,6 +11,28 @@ def main() -> int:
     nested = PurePosixPath("contact/en/index.html")
     plain = PurePosixPath("robots.html")
 
+    ns = social.parse_args([])
+    if ns.render_mode != "mobile-page":
+        raise AssertionError("mobile-page should be the default social-card render mode")
+    if ns.allow_remote:
+        raise AssertionError("remote requests should be blocked by default")
+    remote_ns = social.parse_args(["--allow-remote"])
+    if not remote_ns.allow_remote:
+        raise AssertionError("--allow-remote should opt in to remote requests")
+    if social.parse_size("400x840", label="test") != (400, 840):
+        raise AssertionError("size parser should accept WIDTHxHEIGHT values")
+    if social.mobile_device_scale_factor((400, 840), (1200, 630)) != 3:
+        raise AssertionError("mobile device scale should derive from output width and viewport width")
+
+    selectors = social.resolve_hide_selectors([".extra"], use_defaults=True)
+    if ".navbar" not in selectors or ".extra" not in selectors:
+        raise AssertionError("hide selector resolution should combine defaults and extras")
+    hide_css = social.build_hide_css(selectors)
+    if ".navbar" not in hide_css or "display: none" not in hide_css:
+        raise AssertionError("hide CSS should hide selected page chrome")
+    if "rhythmpress-social-card-hide-css" not in social._INJECT_HIDE_CSS_JS:
+        raise AssertionError("hide CSS injection should use the managed style element")
+
     if social.social_image_rel_path(root) != PurePosixPath("attachments/social/index.png"):
         raise AssertionError("root social image path mapping changed unexpectedly")
     if social.social_image_rel_path(nested) != PurePosixPath(
@@ -46,7 +68,10 @@ def main() -> int:
     if patched.count(social.SOCIAL_MARKER_BEGIN) != 1:
         raise AssertionError("meta block should be inserted exactly once")
 
-    replaced = social.upsert_social_meta_block(patched, meta_block.replace("Contact", "Contact Updated"))
+    replaced = social.upsert_social_meta_block(
+        patched,
+        meta_block.replace("Contact", "Contact Updated"),
+    )
     if replaced.count(social.SOCIAL_MARKER_BEGIN) != 1:
         raise AssertionError("meta block replacement should remain idempotent")
     if "Contact Updated" not in replaced:
@@ -56,7 +81,10 @@ def main() -> int:
         title="Contact",
         blocks=[
             {"tag": "h2", "text": "Contact"},
-            {"tag": "p", "text": "For questions, comments, or feedback, please use one of the following methods."},
+            {
+                "tag": "p",
+                "text": "For questions, comments, or feedback, please use one of the following methods.",
+            },
         ],
         rel_html=nested,
         site_label="Rhythmdo",

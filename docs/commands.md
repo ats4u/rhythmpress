@@ -440,7 +440,7 @@ Behavior:
   * non-Rhythmpress custom `project.post-render` commands are preserved, while Rhythmpress-managed entries are normalized to:
     `rhythmpress post-render-patch --output-dir .site-<lang> --lang-id <lang>`
     `rhythmpress sitemap`
-  * for merged multi-profile deploys, run `rhythmpress sitemap` once on the merged output so final `sitemap.xml` includes all languages
+  * for merged multi-profile deploys, run `rhythmpress finalize --output-dir .site` after assembly so final artifacts are derived from the merged output
   * if you need the full static asset tree in every profile/merged output, include `assets/**` in base `_quarto.yml` `project.resources`
   * generated top-level `lang` is normalized to BCP47-style tags (for example `en-US`, `ja-JP`) to avoid malformed html `lang`/`xml:lang` values in Quarto website output
 * Optional post-merge hook:
@@ -798,7 +798,7 @@ Merge rendered profile output directories into a single deploy tree.
 * default source directories: auto-detected `.site-*`
 * default output directory: `.site`
 * merges with `rsync` in source order
-* runs `rhythmpress sitemap` once on the merged output (unless `--no-sitemap`)
+* does not run final artifact steps; use `rhythmpress finalize` after assembly
 
 Usage:
 
@@ -806,7 +806,56 @@ Usage:
 rhythmpress assemble
 rhythmpress assemble --out .site-merged
 rhythmpress assemble .site-en .site-ja
-rhythmpress assemble --no-sitemap
+rhythmpress assemble --no-sitemap  # compatibility no-op; final artifacts now belong to finalize
+```
+
+---
+
+## `rhythmpress finalize`
+
+Run final artifact generators against one rendered output directory.
+
+* runs `rhythmpress sitemap` unless `--skip-sitemap` is passed
+* runs `rhythmpress render-social-cards` unless `--skip-social-cards` is passed
+* forwards `--site-url` through to both artifact generators
+
+Usage:
+
+```bash
+rhythmpress finalize --output-dir .site
+rhythmpress finalize --output-dir .site --skip-social-cards
+rhythmpress finalize --output-dir .site --site-url https://example.com/
+```
+
+---
+
+## `rhythmpress render-social-cards`
+
+Render social-card PNGs from already-rendered HTML pages and inject Open Graph / Twitter metadata.
+
+* default output directory: `QUARTO_PROJECT_OUTPUT_DIR`, else `_quarto.yml` `project.output-dir`, else `_site`
+* default render mode: `mobile-page`
+* default mobile viewport: `400x840`
+* default output image size: `1200x630`
+* default browser: `RHYTHMPRESS_SOCIAL_BROWSER`, else a known system Chrome/Chromium path
+
+Behavior highlights:
+
+* scans rendered `*.html` files and skips non-content outputs such as `404.html` and `site_libs`
+* opens each rendered page in Chrome/Chromium through Playwright
+* extracts rendered title/opening text for social metadata
+* screenshots the real mobile page by default, with screenshot-only CSS hiding Quarto/Rhythmpress chrome
+* writes images under `attachments/social/...`
+* refreshes a managed metadata block in each page `<head>`
+
+Useful options:
+
+```bash
+rhythmpress render-social-cards --output-dir .site
+rhythmpress render-social-cards --output-dir .site --max-pages 1
+rhythmpress render-social-cards --output-dir .site --render-mode template
+rhythmpress render-social-cards --output-dir .site --hide-selector '.project-banner'
+rhythmpress render-social-cards --output-dir .site --crop-selector '#title-block-header, main.content, body'
 ```
 
 ---
@@ -1276,7 +1325,7 @@ If you only remember this pipeline:
 cd /path/to/project
 rhythmpress_activate
 
-# 2) run full compile pipeline (build -> render-all -> assemble)
+# 2) run full compile pipeline (build -> render-all -> assemble -> finalize)
 rhythmpress run-all
 ```
 
