@@ -471,7 +471,9 @@ How the default mobile-page renderer controls page chrome:
 * The command opens the rendered page with a mobile viewport and injects screenshot-only CSS to hide default Quarto/Rhythmpress chrome.
 * It does not write those screenshot-only removals back to the HTML page.
 * Use repeated `--hide-selector <selector>` flags to hide additional project-specific elements before capture.
-* Use `--crop-selector <selector-list>` to choose which page region anchors the screenshot crop.
+* Each `--hide-selector` value is CSS syntax. Use repeated flags or commas for multiple selectors; do not use spaces as a separator because spaces mean CSS descendant selection.
+* Use repeated `--crop-selector <selector>` flags to choose fallback order for the page region that anchors the screenshot crop.
+* Commas inside one `--crop-selector` value remain normal CSS selector-group syntax; they do not define fallback order.
 
 Typography behavior:
 

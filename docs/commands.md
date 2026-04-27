@@ -855,8 +855,12 @@ rhythmpress render-social-cards --output-dir .site
 rhythmpress render-social-cards --output-dir .site --max-pages 1
 rhythmpress render-social-cards --output-dir .site --render-mode template
 rhythmpress render-social-cards --output-dir .site --hide-selector '.project-banner'
-rhythmpress render-social-cards --output-dir .site --crop-selector '#title-block-header, main.content, body'
+rhythmpress render-social-cards --output-dir .site --hide-selector '#id1, #id2, .class1, .class2'
+rhythmpress render-social-cards --output-dir .site --crop-selector '#title-block-header' --crop-selector 'main.content'
 ```
+
+`--hide-selector` accepts CSS selectors. Repeat the flag or use commas for multiple selectors. Whitespace is not a separator because it is valid CSS descendant-selector syntax.
+`--crop-selector` is ordered fallback: repeat the flag to try selectors in order. Commas inside one crop selector remain normal CSS selector-group syntax.
 
 ---
 

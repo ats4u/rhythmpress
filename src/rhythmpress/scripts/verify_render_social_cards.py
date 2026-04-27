@@ -24,14 +24,41 @@ def main() -> int:
     if social.mobile_device_scale_factor((400, 840), (1200, 630)) != 3:
         raise AssertionError("mobile device scale should derive from output width and viewport width")
 
+    default_crop = social.resolve_crop_selectors([])
+    if default_crop[0] != "main#quarto-document-content":
+        raise AssertionError("default crop selectors should prefer article content")
+    explicit_crop = social.resolve_crop_selectors([" main.content ", "#fallback"])
+    if explicit_crop != ["main.content", "#fallback"]:
+        raise AssertionError("repeated crop selectors should preserve fallback order")
+    comma_crop = social.resolve_crop_selectors(["main#primary, main.content"])
+    if comma_crop != ["main#primary, main.content"]:
+        raise AssertionError("commas in crop selectors should remain CSS selector-group syntax")
+
     selectors = social.resolve_hide_selectors([".extra"], use_defaults=True)
     if ".navbar" not in selectors or ".extra" not in selectors:
         raise AssertionError("hide selector resolution should combine defaults and extras")
+    comma_selectors = social.resolve_hide_selectors(
+        ["#id1, #id2, .class1, .class2", "  "],
+        use_defaults=False,
+    )
+    if comma_selectors != ["#id1, #id2, .class1, .class2"]:
+        raise AssertionError("comma-separated selector lists should be preserved")
+    descendant_selector = social.resolve_hide_selectors(
+        ["#id1 #id2 .class1 .class2"],
+        use_defaults=False,
+    )
+    if descendant_selector != ["#id1 #id2 .class1 .class2"]:
+        raise AssertionError("whitespace should remain part of CSS selector syntax")
     hide_css = social.build_hide_css(selectors)
     if ".navbar" not in hide_css or "display: none" not in hide_css:
         raise AssertionError("hide CSS should hide selected page chrome")
+    comma_css = social.build_hide_css(comma_selectors)
+    if "#id1, #id2, .class1, .class2" not in comma_css:
+        raise AssertionError("hide CSS should preserve comma-separated selector lists")
     if "rhythmpress-social-card-hide-css" not in social._INJECT_HIDE_CSS_JS:
         raise AssertionError("hide CSS injection should use the managed style element")
+    if "querySelectorAll" not in social._VALIDATE_SELECTORS_JS:
+        raise AssertionError("hide selector validation should use browser CSS parsing")
 
     if social.social_image_rel_path(root) != PurePosixPath("attachments/social/index.png"):
         raise AssertionError("root social image path mapping changed unexpectedly")

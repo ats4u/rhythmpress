@@ -39,7 +39,13 @@ BLOCK_LIMIT = 6
 CHAR_BUDGET = 720
 DESCRIPTION_LIMIT = 220
 DEFAULT_RENDER_MODE = "mobile-page"
-DEFAULT_CROP_SELECTOR = "#quarto-content, main.content, main#quarto-document-content, article, body"
+DEFAULT_CROP_SELECTORS = (
+    "main#quarto-document-content",
+    "main.content",
+    "article",
+    "#quarto-content",
+    "body",
+)
 DEFAULT_HIDE_SELECTORS = (
     "nav",
     ".navbar",
@@ -125,13 +131,16 @@ _EXTRACT_CARD_PAYLOAD_JS = f"""
 }}
 """
 
-_MOBILE_PAGE_CLIP_JS = """
-({ cropSelector, targetHeight, viewportWidth }) => {
-  const target =
-    document.querySelector(cropSelector) ||
-    document.querySelector("main.content") ||
-    document.querySelector("main#quarto-document-content") ||
-    document.body;
+_MOBILE_PAGE_CROP_JS = """
+({ cropSelectors, targetHeight, viewportWidth }) => {
+  let target = null;
+  for (const selector of cropSelectors) {
+    target = document.querySelector(selector);
+    if (target) break;
+  }
+  if (!target) {
+    target = document.body;
+  }
   const rect = target.getBoundingClientRect();
   const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
   const top = Math.max(0, rect.top + scrollY);
@@ -163,6 +172,20 @@ _INJECT_HIDE_CSS_JS = """
   }
   style.textContent = css;
   return true;
+}
+"""
+
+_VALIDATE_SELECTORS_JS = """
+(selectors) => {
+  const invalid = [];
+  for (const selector of selectors) {
+    try {
+      document.querySelectorAll(selector);
+    } catch (error) {
+      invalid.push({ selector, message: String(error && error.message || error) });
+    }
+  }
+  return invalid;
 }
 """
 
@@ -232,10 +255,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     p.add_argument(
         "--crop-selector",
-        default=DEFAULT_CROP_SELECTOR,
+        action="append",
+        default=[],
         help=(
-            "CSS selector list whose top edge anchors the mobile-page screenshot crop. "
-            f"Default: {DEFAULT_CROP_SELECTOR}"
+            "CSS selector whose top edge anchors the mobile-page screenshot crop. "
+            "May be repeated for fallback order. Commas remain normal CSS selector "
+            f"group syntax. Default order: {', '.join(DEFAULT_CROP_SELECTORS)}"
         ),
     )
     p.add_argument(
@@ -243,8 +268,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         action="append",
         default=[],
         help=(
-            "Additional CSS selector to hide before mobile-page screenshots. "
-            "May be repeated."
+            "Additional CSS selector, or comma-separated selector list, to hide before "
+            "mobile-page screenshots. May be repeated. Whitespace is not a separator."
         ),
     )
     p.add_argument(
@@ -398,6 +423,14 @@ def resolve_hide_selectors(
     return [selector.strip() for selector in selectors if selector.strip()]
 
 
+def resolve_crop_selectors(cli_selectors: list[str]) -> list[str]:
+    selectors = cli_selectors if cli_selectors else list(DEFAULT_CROP_SELECTORS)
+    resolved = [selector.strip() for selector in selectors if selector.strip()]
+    if not resolved:
+        raise RuntimeError("at least one crop selector is required")
+    return resolved
+
+
 def build_hide_css(selectors: list[str]) -> str:
     if not selectors:
         return ""
@@ -413,6 +446,26 @@ body {{
   overflow-x: hidden !important;
 }}
 """
+
+
+def validate_hide_selectors(page, selectors: list[str]) -> None:
+    if not selectors:
+        return
+    invalid = page.evaluate(_VALIDATE_SELECTORS_JS, selectors)
+    if invalid:
+        first = invalid[0]
+        selector = first.get("selector", "")
+        message = first.get("message", "")
+        raise RuntimeError(f"invalid --hide-selector {selector!r}: {message}")
+
+
+def validate_crop_selectors(page, selectors: list[str]) -> None:
+    invalid = page.evaluate(_VALIDATE_SELECTORS_JS, selectors)
+    if invalid:
+        first = invalid[0]
+        selector = first.get("selector", "")
+        message = first.get("message", "")
+        raise RuntimeError(f"invalid --crop-selector {selector!r}: {message}")
 
 
 def mobile_device_scale_factor(
@@ -752,7 +805,7 @@ def screenshot_mobile_page(
     *,
     viewport_size: tuple[int, int],
     screenshot_size: tuple[int, int],
-    crop_selector: str,
+    crop_selectors: list[str],
     hide_selectors: list[str],
 ) -> None:
     viewport_width, _viewport_height = viewport_size
@@ -761,18 +814,20 @@ def screenshot_mobile_page(
     target_css_height = screenshot_height / device_scale_factor
 
     hide_css = build_hide_css(hide_selectors)
+    validate_hide_selectors(page, hide_selectors)
+    validate_crop_selectors(page, crop_selectors)
     inject_hide_css(page, hide_css)
     wait_for_fonts(page)
 
-    clip = page.evaluate(
-        _MOBILE_PAGE_CLIP_JS,
+    crop = page.evaluate(
+        _MOBILE_PAGE_CROP_JS,
         {
-            "cropSelector": crop_selector,
+            "cropSelectors": crop_selectors,
             "targetHeight": target_css_height,
             "viewportWidth": viewport_width,
         },
     )
-    page.screenshot(path=str(image_path), clip=clip)
+    page.screenshot(path=str(image_path), clip=crop)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -789,6 +844,7 @@ def main(argv: list[str] | None = None) -> int:
         site_label = _site_label_from_config()
         viewport_size = parse_size(ns.viewport, label="--viewport")
         screenshot_size = parse_size(ns.screenshot_size, label="--screenshot-size")
+        crop_selectors = resolve_crop_selectors(ns.crop_selector)
         hide_selectors = resolve_hide_selectors(
             ns.hide_selector,
             use_defaults=not ns.no_default_hide_selectors,
@@ -904,7 +960,7 @@ def main(argv: list[str] | None = None) -> int:
                             image_path,
                             viewport_size=viewport_size,
                             screenshot_size=screenshot_size,
-                            crop_selector=ns.crop_selector,
+                            crop_selectors=crop_selectors,
                             hide_selectors=hide_selectors,
                         )
                     cards_written += 1
