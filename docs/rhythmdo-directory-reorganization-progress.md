@@ -81,7 +81,7 @@ The important policy is that CSS, JavaScript, filters, and config snippets shoul
 | `.quarto-theme/` | Quarto theme SCSS, formerly `.assets/` | no | renamed and verified |
 | `.project-lib/` | Rhythmdo local Python/tools/templates, formerly `lib/` | no | renamed and verified |
 | `.project-templates/` | Preserved Obsidian authoring templates, formerly `templates/` | no | renamed and verified |
-| `lib-translation/` | Translation working chunks/state | no | planned rename |
+| `.project-translation/` | Translation working chunks/state, formerly `lib-translation/` | no | renamed and verified |
 | `bin/` | Former local helper command wrappers | no | empty after helper move; no dedicated rename planned unless new commands are added |
 | `common-ly/` | LilyPond shared source files | no, but rendered as resources | later high-risk rename |
 | `.quarto/` | Quarto generated state | no | keep ignored |
@@ -170,6 +170,16 @@ Expected updates:
 - skill/workflow documentation if present
 - any hardcoded paths in progress notes
 
+Status: completed and verified at `20260507-050221`.
+
+Verification notes:
+
+- `lib-translation/` was renamed to `.project-translation/`.
+- `.project-lib/offbeat-count-join-en` now points to `.project-translation/`.
+- The stale-reference scan found no remaining `lib-translation` references outside excluded generated/site/Obsidian areas.
+- `bash -n .project-lib/offbeat-count-join-en` passed.
+- `rhythmpress build` completed successfully after the rename.
+
 ### Pass 4: LilyPond Shared Sources
 
 - `common-ly/` -> `.project-common-ly/`
@@ -220,5 +230,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 - `bin/offbeat-count-join-en` was moved into `lib/` in `rhythmdo-com` commit `960c04d`; `bin/` no longer needs its own rename pass unless new helper commands are added.
 - Top-level `templates/` has been confirmed as preserved Obsidian authoring material, not active build/runtime infrastructure.
 - Pass 2, Rhythmdo local library and authoring templates, has been applied and verified.
-- Recommended next action: commit this tracker update, commit the root `rhythmdo-com` Pass 2 rename, and separately decide whether to commit the nested `.obsidian` config changes.
+- Pass 3, translation workspace, has been applied and verified.
+- Recommended next action: commit this tracker update, commit the root `rhythmdo-com` Pass 3 rename, and then continue with the high-risk `common-ly/` pass only after a focused reference review.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.
