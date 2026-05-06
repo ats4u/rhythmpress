@@ -253,6 +253,77 @@ def _interpolate_quarto_vars_in_text(text: str, basedir: str, lang: str) -> str:
     text = _HDR_ATTR.sub(r"\1 {\2}", text)
     return text
 
+
+def _default_toc_template_path() -> Path:
+    return Path(__file__).resolve().parent / "templates" / "toc.markdown"
+
+
+def _find_quarto_config_path(start: Path) -> tuple[Path, Path] | None:
+    current = start if start.is_dir() else start.parent
+    for directory in [current, *current.parents]:
+        for name in ("_quarto.yml", "_quarto.yaml"):
+            config_path = directory / name
+            if config_path.is_file():
+                return directory, config_path
+    return None
+
+
+def _read_yaml_mapping(path: Path) -> Mapping[str, Any]:
+    try:
+        import yaml
+    except ModuleNotFoundError:
+        raise RuntimeError(
+            "PyYAML is required to read _quarto.yml. "
+            "Install it with: python -m pip install pyyaml"
+        )
+
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception as e:
+        raise RuntimeError(f"Error parsing YAML config {path}: {e}")
+
+    if not isinstance(data, Mapping):
+        raise RuntimeError(f"{path} must contain a YAML mapping")
+    return data
+
+
+def _resolve_toc_template_path(input_md: Path) -> Path:
+    config_match = _find_quarto_config_path(input_md.resolve())
+    if config_match is None:
+        return _default_toc_template_path()
+
+    project_root, config_path = config_match
+    config = _read_yaml_mapping(config_path)
+
+    rhythmpress_config = config.get("rhythmpress")
+    if rhythmpress_config is None:
+        return _default_toc_template_path()
+    if not isinstance(rhythmpress_config, Mapping):
+        raise RuntimeError(f"rhythmpress in {config_path} must be a mapping")
+
+    templates_config = rhythmpress_config.get("templates")
+    if templates_config is None:
+        return _default_toc_template_path()
+    if not isinstance(templates_config, Mapping):
+        raise RuntimeError(f"rhythmpress.templates in {config_path} must be a mapping")
+
+    if "toc" not in templates_config:
+        return _default_toc_template_path()
+
+    raw_template = templates_config["toc"]
+    if not isinstance(raw_template, str) or not raw_template.strip():
+        raise RuntimeError(f"rhythmpress.templates.toc in {config_path} must be a non-empty string")
+
+    template = Path(raw_template.strip()).expanduser()
+    if not template.is_absolute():
+        template = project_root / template
+    template = template.resolve()
+
+    if not template.is_file():
+        raise FileNotFoundError(f"configured Pandoc TOC template not found: {template}")
+    return template
+
+
 def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
     # Interpolate title shortcodes before handing text to pandoc,
     # so TOC titles reflect the final rendered strings (matches _create_toc_v5 behavior).
@@ -269,7 +340,7 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
 
     # Run pandoc to get TOC as Markdown (use absolute paths)
 
-    # v3.2: input_md must be a Path to an existing file; template fixed at ./rhythmpress/templates/toc
+    # v3.2: input_md must be a Path to an existing file.
     if not isinstance(input_md, Path):
         raise ValueError("input_md must be a pathlib.Path")
     if not input_md.is_file():
@@ -295,9 +366,7 @@ def _create_toc_v1( input_md: Path, text: str, basedir: str, lang: str ):
     h0s   = [it for it in items if int(it["level"]) == 0] # ADDED BY ATS Wed, 20 Aug 2025 19:06:14 +0900
     preamble = h0s[0] if 0 < len(h0s) else None # ADDED BY ATS Wed, 20 Aug 2025 19:06:26 +0900
 
-    # resolve template path relative to this module (./rhythmpress/templates/toc)
-    module_dir = Path(__file__).resolve().parent
-    template = module_dir / "templates" / "toc.markdown"
+    template = _resolve_toc_template_path(input_md)
     if not template.exists():
         raise FileNotFoundError(f"pandoc template not found: {template}")
 
