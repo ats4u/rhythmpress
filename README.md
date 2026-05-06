@@ -12,6 +12,24 @@
 - [docs/tutorial-publish-github-cloudflare.md](docs/tutorial-publish-github-cloudflare.md) — Publish a Rhythmpress-built Quarto site on GitHub Pages, fronted by Cloudflare Proxy (DNS + CDN + SSL).
 - [docs/cloudflare-worker-router.md](docs/cloudflare-worker-router.md) — Edge language router example (Cloudflare Worker) for `/` → `/<lang>/`.
 
+### Specification Naming
+
+Updated: 20260506-135256
+
+Specifications for the `rhythmpress project *` command family must use the filename prefix `spec-rhythmpress-project-*`. The older `spec-project-*` prefix is retired because it is too easy to confuse with general project notes.
+
+### Project Lifecycle Specifications
+
+Updated: 20260506-182041
+
+The `rhythmpress project *` planning specs are:
+
+- [Project Lifecycle Template Engine](docs/spec-rhythmpress-project-lifecycle-template-engine.md)
+- [Scriptlet Dependency Map](docs/spec-rhythmpress-project-scriptlet-dependency-map.md)
+- [Plugin Feature Packs](docs/spec-rhythmpress-project-plugin-feature-packs.md)
+- [Plugin Package Format](docs/spec-rhythmpress-project-plugin-package-format.md)
+- [Plugin And Scriptlet Audit](docs/spec-rhythmpress-project-plugin-scriptlet-audit.md)
+
 
 ## 1. Introduction
 
