@@ -77,8 +77,8 @@ The important policy is that CSS, JavaScript, filters, and config snippets shoul
 | `assets/` | Public CSS/JS/runtime assets | yes | keep |
 | `attachments/` | Public/content asset files | yes | keep |
 | `attachments-src/` | Source/content-facing assets | partly | keep for now |
-| `filters/` | Quarto Lua filters | no | planned rename |
-| `.assets/` | Quarto theme SCSS | no | planned rename |
+| `.quarto-filters/` | Quarto Lua filters, formerly `filters/` | no | renamed and verified |
+| `.quarto-theme/` | Quarto theme SCSS, formerly `.assets/` | no | renamed and verified |
 | `lib/` | Rhythmdo local Python/tools/templates | no | planned rename |
 | `templates/` | Authoring/Obsidian templates | no | planned rename |
 | `lib-translation/` | Translation working chunks/state | no | planned rename |
@@ -108,6 +108,18 @@ Expected generated updates after `rhythmpress build`:
 
 - `_quarto-en.yml`
 - `_quarto-ja.yml`
+
+Status: completed and verified at `20260507-041101`.
+
+Verification notes:
+
+- `rhythmpress build` completed successfully after the rename.
+- The user ran `rhythmpress run-all` successfully in the normal local shell.
+- `.site/`, `.site-en/`, and `.site-ja/` existed after the full run.
+- Rendered output had no old `.assets/` references.
+- Rendered output had no old bare `filters/` references.
+- `_quarto-en.yml` and `_quarto-ja.yml` resolved the new `.quarto-filters/` and `.quarto-theme/` paths.
+- Git status showed only the expected directory renames and source reference updates.
 
 ### Pass 2: Rhythmdo Local Library And Authoring Templates
 
@@ -188,6 +200,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 ## Current Status
 
 - Worktree was clean before creating this tracker.
-- No directory rename has been applied yet.
-- Recommended next action: Pass 1, Quarto local infrastructure.
+- Pass 1, Quarto local infrastructure, has been applied and verified.
+- Recommended next action: commit the Rhythmpress tracker update, then commit the Rhythmdo Pass 1 rename.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.
