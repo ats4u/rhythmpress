@@ -205,6 +205,12 @@ Verification notes:
 - `bash -n .project-lib/offbeat-count-join-en` passed.
 - `rhythmpress build` completed successfully after the rename.
 
+Follow-up cleanup at `20260507-055109`:
+
+- The LilyPond filter keeps `.project-lilypond/` source dependencies internal to the build/watch metadata.
+- The filter must not emit public preload links to `.project-lilypond/` files.
+- The filter must not use private `.project-lilypond/` source paths as default public image alt/title text.
+
 ## Verification Commands
 
 After each pass:
@@ -244,5 +250,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 - Pass 2, Rhythmdo local library and authoring templates, has been applied and verified.
 - Pass 3, translation workspace, has been applied and verified.
 - Pass 4, LilyPond shared sources, has been applied and verified with `.project-lilypond/`.
+- A follow-up LilyPond filter cleanup prevents private `.project-lilypond/` source paths from leaking into rendered public HTML.
 - Recommended next action: commit the root `rhythmdo-com` Pass 4 rename, then commit this Rhythmpress tracker/spec update.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.
