@@ -284,6 +284,37 @@ lang-switcher.generated.mjs
 <starter-article>/_sidebar-<lang>.yml
 ```
 
+## Directory Ownership Policy
+
+Project skeletons and plugin packages must make directory ownership visible from the path name.
+
+Default directory classes:
+
+| Path pattern | Ownership | Public-facing? | Policy |
+| --- | --- | --- | --- |
+| `assets/` | Public web/runtime assets | yes | Use for browser-loaded CSS, JavaScript, images, and other deployed assets. |
+| `attachments*/` | Content-facing assets | yes or source-facing | Use for article/page media and durable content assets. |
+| `.quarto-*` | Quarto-local infrastructure | no | Use for Quarto-specific source support such as filters, theme source, or Quarto helper inputs. |
+| `.rhythmpress-*` | Rhythmpress-managed local infrastructure | no | Use for Rhythmpress-owned manifests, packages, caches, and implementation state. |
+| `.project-*` | Project-specific local infrastructure | no | Use for site-specific private helpers that are not Rhythmpress core and are not public web paths. |
+| `.site`, `.site-*`, `.quarto` | Generated output/state | output only | Never create as source template content and never package as source. |
+
+`project create` should prefer predictable static prefixes over project-branded hidden prefixes. Use `.project-*`, not `.<project-name>-*`, for project-specific local infrastructure so tools can discover and reason about local-private directories without site-specific naming rules.
+
+Examples:
+
+```text
+.quarto-filters/
+.quarto-theme/
+.rhythmpress-packages/
+.project-lib/
+.project-templates/
+assets/
+attachments/
+```
+
+The directory policy is also a plugin boundary policy. CSS, JavaScript, filters, templates, helper scripts, LilyPond sources, and config snippets must belong to explicit core/plugin packages or to explicit project-local directories. They must not be scattered as anonymous top-level files without ownership.
+
 ## File Responsibilities
 
 `_quarto.yml`:
@@ -346,7 +377,7 @@ rhythmpress:
 
 `.rhythmpress-template.json` remains the internal ownership manifest. It records what the generator wrote and whether managed files can be safely repaired; it should not be the primary user editing surface.
 
-Feature-pack names and migration boundaries are defined in the plugin feature-pack specification. `project create` must install only core files plus selected feature packs. It must not copy `rhythmdo-com` `filters/`, `assets/`, `.assets/`, `common-ly/`, or `templates/` wholesale.
+Feature-pack names and migration boundaries are defined in the plugin feature-pack specification. `project create` must install only core files plus selected feature packs. It must not copy `rhythmdo-com` `filters/`, `assets/`, `.assets/`, `common-ly/`, `lib/`, `lib-translation/`, `bin/`, or `templates/` wholesale.
 
 Feature packs should be materialized from plugin packages. `project create` may materialize built-in core/default packages for a new skeleton. Later plugin lifecycle commands own activation, deactivation, synchronization, and drift checks. `rhythmpress build` must not enable new packages by itself; if build-time plugin sync is introduced, it may only materialize packages already enabled in project desired state and must use the same conflict rules as `project sync-plugins`.
 

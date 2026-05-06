@@ -115,10 +115,12 @@ features:
 files:
   - source: files/assets/rhythmpress-toc.mjs
     target: assets/rhythmpress-toc.mjs
+    target-class: public-asset
     mode: file
     template: false
   - source: files/assets/rhythmpress-toc.css
     target: assets/rhythmpress-toc.css
+    target-class: public-asset
     mode: file
     template: false
 
@@ -160,6 +162,14 @@ Required fields:
 - `compatibility`
 - `files`
 
+Required fields for each `files` entry:
+
+- `source`
+- `target`
+- `target-class`
+- `mode`
+- `template`
+
 Recommended fields:
 
 - `features.provides`
@@ -167,6 +177,35 @@ Recommended fields:
 - `conflicts-with`
 - `generated-exclusions`
 - `verification`
+
+## Target Directory Policy
+
+Package materialization must preserve project directory ownership boundaries.
+
+Default target classes:
+
+| `target-class` | Target path pattern | Ownership | Public-facing? |
+| --- | --- | --- | --- |
+| `public-asset` | `assets/**` | Public web/runtime asset | yes |
+| `content-asset` | `attachments*/**` | Content-facing asset | yes or source-facing |
+| `quarto-local` | `.quarto-*/**` | Quarto-specific local infrastructure | no |
+| `rhythmpress-local` | `.rhythmpress-*/**` | Rhythmpress-managed local infrastructure | no |
+| `project-local` | `.project-*/**` | Project-specific local infrastructure | no |
+
+Package authors must not use project-branded hidden prefixes such as `.<project-name>-*` for materialized project-local files. Use `.project-*` so Rhythmpress can discover, audit, and reason about local-private directories predictably.
+
+Generated outputs are never valid package targets:
+
+```text
+.site/
+.site-*/
+.quarto/
+_quarto-<lang>.yml
+_sidebar-*.generated.*
+lang-switcher.generated.mjs
+```
+
+If a package needs CSS, JavaScript, filters, templates, helper scripts, or config snippets, those files must be listed explicitly with a target class. Related behavior should be grouped into one package or into declared dependent packages rather than copied as scattered anonymous files.
 
 ## Identity And Versioning
 
@@ -252,6 +291,7 @@ Materialization must not write:
 
 - generated artifacts;
 - rendered output;
+- files outside the allowed target directory classes unless the package spec is extended with an explicit new class;
 - files not listed in `plugin.yml`;
 - package docs unless listed as materialized files.
 
@@ -524,10 +564,14 @@ features:
 files:
   - source: files/assets/rhythmpress-toc.mjs
     target: assets/rhythmpress-toc.mjs
+    target-class: public-asset
     mode: file
+    template: false
   - source: files/assets/rhythmpress-toc.css
     target: assets/rhythmpress-toc.css
+    target-class: public-asset
     mode: file
+    template: false
 quarto-patch:
   format:
     html:

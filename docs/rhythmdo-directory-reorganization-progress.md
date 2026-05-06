@@ -31,17 +31,17 @@ This refactoring should help answer these implementation questions for Rhythmpre
 ## Naming Policy
 
 - `.quarto-*`: Quarto-specific local infrastructure.
-- `.rhythmdo-*`: Rhythmdo-specific local/private infrastructure.
+- `.project-*`: project-specific local/private infrastructure.
 - `assets/`: public web assets.
 - `attachments*/`: content-facing assets.
 - plain content directories: rendered or author-facing site content.
 
-Avoid `.rhythmdo-com-*` unless the domain name is itself part of the concept. Prefer `.rhythmdo-*`.
+Avoid project-branded hidden prefixes such as `.rhythmdo-*` or `.rhythmdo-com-*` for future Rhythmpress-generated projects. Prefer the static `.project-*` prefix so tooling and documentation can predict project-local infrastructure paths.
 
 Future Rhythmpress-generated projects should follow the same boundary idea with Rhythmpress-owned names:
 
 - `.rhythmpress-*`: Rhythmpress-managed local infrastructure.
-- `.<project>-*`: project-specific local infrastructure.
+- `.project-*`: project-specific local infrastructure.
 - `assets/`: public plugin/runtime assets.
 
 ## Plugin-System Implications
@@ -111,8 +111,8 @@ Expected generated updates after `rhythmpress build`:
 
 ### Pass 2: Rhythmdo Local Library And Authoring Templates
 
-- `lib/` -> `.rhythmdo-lib/`
-- `templates/` -> `.rhythmdo-templates/`
+- `lib/` -> `.project-lib/`
+- `templates/` -> `.project-templates/`
 
 Expected updates:
 
@@ -128,7 +128,7 @@ Notes:
 
 ### Pass 3: Translation Workspace
 
-- `lib-translation/` -> `.rhythmdo-translation/`
+- `lib-translation/` -> `.project-translation/`
 
 Expected updates:
 
@@ -138,13 +138,13 @@ Expected updates:
 
 ### Pass 4: Optional Helper Command Directory
 
-- `bin/` -> `.rhythmdo-bin/`
+- `bin/` -> `.project-bin/`
 
 This is optional. It should only be done if activation and PATH expectations are updated at the same time.
 
 ### Pass 5: LilyPond Shared Sources
 
-- `common-ly/` -> `.rhythmdo-common-ly/`
+- `common-ly/` -> `.project-common-ly/`
 
 This is high risk because `common-ly/` is heavily referenced from:
 
