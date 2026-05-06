@@ -373,7 +373,58 @@ deployment. The temporary local server is allowed even when remote requests are 
 
 ---
 
-## 6) Title shortcode interpolation (`{{< var ... >}}`, `{{< meta ... >}}`) used in titles/TOC
+## 6) TOC template override
+
+Documented: `20260507-010131`
+
+`create_toc_v1` uses the packaged Pandoc template by default:
+
+```txt
+rhythmpress/templates/toc.markdown
+```
+
+A project can override that template from `_quarto.yml`:
+
+```yaml
+rhythmpress:
+  templates:
+    toc: .rhythmpress/templates/toc.markdown
+```
+
+Supported key:
+
+* `rhythmpress.templates.toc`
+  String. Path to the Pandoc template used for generated Markdown TOCs.
+
+Resolution rules:
+
+* Relative paths are resolved from the project root containing `_quarto.yml` or `_quarto.yaml`.
+* Absolute paths are used as written.
+* If the key is absent, Rhythmpress uses the packaged default template.
+* If the key is present but empty, non-string, or points to a missing file, Rhythmpress fails loudly.
+
+Caption ownership:
+
+* `rhythmpress/templates/toc.markdown` currently contains only `$toc$`.
+* That template controls Pandoc's generated TOC body for `create_toc_v1`.
+* It does not inject `**目次**`, `**Table of contents**`, or Quarto's right-margin `<h2 id="toc-title">...`.
+* Rhythmpress injects the generated sidebar Markdown caption in `_sidebar-<lang>.generated.md` from `rhythmpress render-sidebar`.
+* Quarto injects the right-margin page TOC caption from `format.html.toc-title` or from its locale default.
+
+To override both visible captions for a language, set both keys in `_metadata-<lang>.yml`:
+
+```yaml
+rhythmpress:
+  toc-label: "この記事の内容"
+
+format:
+  html:
+    toc-title: "この記事の内容"
+```
+
+---
+
+## 7) Title shortcode interpolation (`{{< var ... >}}`, `{{< meta ... >}}`) used in titles/TOC
 
 Rhythmpress interpolates Quarto-style title shortcodes inside certain strings (notably titles used for TOC generation):
 
@@ -411,9 +462,9 @@ Operational note (edge case):
 
 ---
 
-## 7) Hooks
+## 8) Hooks
 
-### 7.1 Post-merge sidebar hook
+### 8.1 Post-merge sidebar hook
 
 After `_sidebar-<lang>.generated.yml` is produced, `rhythmpress_render_sidebar.sh` will run an optional Python hook if it exists:
 
@@ -435,11 +486,11 @@ Important behavior:
 
 ---
 
-## 8) Safety-related “configuration” (cleaning)
+## 9) Safety-related “configuration” (cleaning)
 
 Some operations are intentionally guarded.
 
-### 8.1 `.article_dir` sentinel for clean
+### 9.1 `.article_dir` sentinel for clean
 
 `rhythmpress preproc_clean` refuses to delete directories unless a sentinel file exists:
 
