@@ -20,10 +20,11 @@ Specifications for the `rhythmpress project *` command family must use the filen
 
 ### Project Lifecycle Specifications
 
-Updated: 20260506-182041
+Updated: 20260507-065012
 
 The `rhythmpress project *` planning specs are:
 
+- [Project Template Engine Handoff](docs/rhythmpress-project-template-engine-handoff.md)
 - [Project Lifecycle Template Engine](docs/spec-rhythmpress-project-lifecycle-template-engine.md)
 - [Scriptlet Dependency Map](docs/spec-rhythmpress-project-scriptlet-dependency-map.md)
 - [Plugin Feature Packs](docs/spec-rhythmpress-project-plugin-feature-packs.md)
