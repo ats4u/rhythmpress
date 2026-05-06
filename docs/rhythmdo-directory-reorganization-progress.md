@@ -80,7 +80,7 @@ The important policy is that CSS, JavaScript, filters, and config snippets shoul
 | `.quarto-filters/` | Quarto Lua filters, formerly `filters/` | no | renamed and verified |
 | `.quarto-theme/` | Quarto theme SCSS, formerly `.assets/` | no | renamed and verified |
 | `lib/` | Rhythmdo local Python/tools/templates | no | planned rename |
-| `templates/` | Authoring/Obsidian templates | no | planned rename |
+| `templates/` | Preserved Obsidian authoring templates | no | planned rename only to keep old Obsidian references internally consistent |
 | `lib-translation/` | Translation working chunks/state | no | planned rename |
 | `bin/` | Former local helper command wrappers | no | empty after helper move; no dedicated rename planned unless new commands are added |
 | `common-ly/` | LilyPond shared source files | no, but rendered as resources | later high-risk rename |
@@ -131,6 +131,8 @@ Expected updates:
 - `lib/offbeat-count-join-en`
 - `.obsidian/daily-notes.json`
 - `.obsidian/zk-prefixer.json`
+- `.obsidian/plugins/templater-obsidian/data.json`
+- `.obsidian/plugins/periodic-notes/data.json`
 - any remaining references found by `rg`
 
 Notes:
@@ -138,6 +140,9 @@ Notes:
 - `lib/templates/toc.markdown` is retained for now, but the canonical active Rhythmpress package template is `rhythmpress/src/rhythmpress/templates/toc.markdown`.
 - `bin/offbeat-count-join-en` was moved to `lib/offbeat-count-join-en` in `rhythmdo-com` commit `960c04d` at `20260507-041427`.
 - `lib/offbeat-count-join-en` rebuilds `offbeat-count/master-en.md` from `lib-translation/en/` chunks and currently depends on `lib/offbeat-count-translation.py`.
+- Top-level `templates/` was checked at `20260507-042130`. It is preserved Obsidian authoring material, not active Quarto or Rhythmpress runtime infrastructure.
+- Active top-level `templates/` references were found only in Obsidian configuration: `.obsidian/daily-notes.json`, `.obsidian/zk-prefixer.json`, `.obsidian/plugins/templater-obsidian/data.json`, and `.obsidian/plugins/periodic-notes/data.json`.
+- Top-level `templates/` is separate from `lib/templates/toc.markdown`; do not use the Obsidian finding to infer TOC template ownership.
 
 ### Pass 3: Translation Workspace
 
@@ -197,5 +202,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 - Worktree was clean before creating this tracker.
 - Pass 1, Quarto local infrastructure, has been applied and verified.
 - `bin/offbeat-count-join-en` was moved into `lib/` in `rhythmdo-com` commit `960c04d`; `bin/` no longer needs its own rename pass unless new helper commands are added.
+- Top-level `templates/` has been confirmed as preserved Obsidian authoring material, not active build/runtime infrastructure.
 - Recommended next action: commit this tracker update, then continue Pass 2 by renaming `lib/` and `templates/`.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.
