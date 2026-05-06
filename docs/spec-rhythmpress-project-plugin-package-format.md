@@ -1,6 +1,7 @@
 # Rhythmpress Project Plugin Package Format
 
 Created: 20260506-181609
+Updated: 20260507-062236
 
 Status: draft specification.
 
@@ -193,6 +194,8 @@ Default target classes:
 | `project-local` | `.project-*/**` | Project-specific local infrastructure | no |
 
 Package authors must not use project-branded hidden prefixes such as `.<project-name>-*` for materialized project-local files. Use `.project-*` so Rhythmpress can discover, audit, and reason about local-private directories predictably.
+
+Quarto-specific package files should use the `quarto-local` class. Pandoc Lua filters should target `.quarto-filters/**`, and Quarto SCSS/theme source should target `.quarto-theme/**`. Browser-loaded runtime CSS, JavaScript, images, and other public web assets remain `public-asset` targets under `assets/**`.
 
 Generated outputs are never valid package targets:
 
@@ -607,17 +610,19 @@ features:
 external-tools:
   - lilypond
 files:
-  - source: files/filters/lilypond.lua
-    target: filters/lilypond.lua
+  - source: files/.quarto-filters/lilypond.lua
+    target: .quarto-filters/lilypond.lua
+    target-class: quarto-local
   - source: files/.project-lilypond/lilypond-preamble.ly
     target: .project-lilypond/lilypond-preamble.ly
+    target-class: project-local
 quarto-patch:
   metadata:
     lilypond-preamble: .project-lilypond/lilypond-preamble.ly
   format:
     html:
       filters:
-        - filters/lilypond.lua
+        - .quarto-filters/lilypond.lua
   resources:
     - .project-lilypond/*.ly
 gitignore:
@@ -626,7 +631,7 @@ generated-exclusions:
   - lilypond-out/
 verification:
   - type: file-exists
-    path: filters/lilypond.lua
+    path: .quarto-filters/lilypond.lua
   - type: ignore-contains
     path: .gitignore
     value: /lilypond-out/

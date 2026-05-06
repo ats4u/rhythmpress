@@ -1,6 +1,7 @@
 # Project Plugin And Scriptlet Audit Specification
 
 Created: 20260506-133847
+Updated: 20260507-062236
 
 Status: draft audit specification.
 
@@ -32,7 +33,7 @@ A Rhythmpress project plugin is a declarative bundle of source-level project beh
 
 A plugin may provide:
 
-- source files, such as `filters/*.lua`, `assets/*.mjs`, `assets/*.css`, or `.project-lilypond/*`;
+- source files, such as `.quarto-filters/*.lua`, `.quarto-theme/**/*.scss`, `assets/*.mjs`, `assets/*.css`, or `.project-lilypond/*`;
 - `_quarto.yml` patches;
 - `_metadata-<lang>.yml` patches;
 - `.gitignore` and `.quartoignore` patterns;
@@ -71,12 +72,12 @@ external-tools:
   - lilypond
 
 source-files:
-  - filters/lilypond.lua
+  - .quarto-filters/lilypond.lua
   - .project-lilypond/lilypond-preamble.ly
 
 quarto-patch:
   format.html.filters:
-    - filters/lilypond.lua
+    - .quarto-filters/lilypond.lua
   resources:
     - .project-lilypond/*.ly
 
@@ -91,7 +92,7 @@ generated-exclusions:
   - lilypond-out/
 
 verification:
-  - file-exists: filters/lilypond.lua
+  - file-exists: .quarto-filters/lilypond.lua
   - quarto-config-contains: format.html.filters
 ```
 
@@ -174,10 +175,12 @@ Initial audit should inspect:
 ```text
 ~/rhythmdo-com/_quarto.yml
 ~/rhythmdo-com/_metadata-*.yml
-~/rhythmdo-com/filters/
+~/rhythmdo-com/.quarto-filters/
 ~/rhythmdo-com/assets/
+~/rhythmdo-com/.quarto-theme/
 ~/rhythmdo-com/.project-lilypond/
-~/rhythmdo-com/templates/
+~/rhythmdo-com/.project-lib/
+~/rhythmdo-com/.project-templates/
 ~/rhythmdo-com/**/*.qmd
 ~/rhythmdo-com/**/master-*.md
 ~/rhythmdo-com/**/master-*.qmd

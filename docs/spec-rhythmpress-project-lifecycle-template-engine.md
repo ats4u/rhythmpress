@@ -1,6 +1,7 @@
 # Project Lifecycle Template Engine Specification
 
 Created: 20260506-123604
+Updated: 20260507-062236
 
 Status: draft implementation specification.
 
@@ -377,7 +378,7 @@ rhythmpress:
 
 `.rhythmpress-template.json` remains the internal ownership manifest. It records what the generator wrote and whether managed files can be safely repaired; it should not be the primary user editing surface.
 
-Feature-pack names and migration boundaries are defined in the plugin feature-pack specification. `project create` must install only core files plus selected feature packs. It must not copy `rhythmdo-com` `filters/`, `assets/`, `.assets/`, `.project-lilypond/` formerly `common-ly/`, `lib/`, `lib-translation/`, `bin/`, or `templates/` wholesale.
+Feature-pack names and migration boundaries are defined in the plugin feature-pack specification. `project create` must install only core files plus selected feature packs. It must not copy `rhythmdo-com` `.quarto-filters/`, `assets/`, `.quarto-theme/`, `.project-lilypond/`, `.project-lib/`, `.project-translation/`, `.project-templates/`, or helper command directories wholesale.
 
 Feature packs should be materialized from plugin packages. `project create` may materialize built-in core/default packages for a new skeleton. Later plugin lifecycle commands own activation, deactivation, synchronization, and drift checks. `rhythmpress build` must not enable new packages by itself; if build-time plugin sync is introduced, it may only materialize packages already enabled in project desired state and must use the same conflict rules as `project sync-plugins`.
 
