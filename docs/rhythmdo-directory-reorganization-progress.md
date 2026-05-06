@@ -79,8 +79,8 @@ The important policy is that CSS, JavaScript, filters, and config snippets shoul
 | `attachments-src/` | Source/content-facing assets | partly | keep for now |
 | `.quarto-filters/` | Quarto Lua filters, formerly `filters/` | no | renamed and verified |
 | `.quarto-theme/` | Quarto theme SCSS, formerly `.assets/` | no | renamed and verified |
-| `lib/` | Rhythmdo local Python/tools/templates | no | planned rename |
-| `templates/` | Preserved Obsidian authoring templates | no | planned rename only to keep old Obsidian references internally consistent |
+| `.project-lib/` | Rhythmdo local Python/tools/templates, formerly `lib/` | no | renamed and verified |
+| `.project-templates/` | Preserved Obsidian authoring templates, formerly `templates/` | no | renamed and verified |
 | `lib-translation/` | Translation working chunks/state | no | planned rename |
 | `bin/` | Former local helper command wrappers | no | empty after helper move; no dedicated rename planned unless new commands are added |
 | `common-ly/` | LilyPond shared source files | no, but rendered as resources | later high-risk rename |
@@ -128,11 +128,12 @@ Verification notes:
 
 Expected updates:
 
-- `lib/offbeat-count-join-en`
+- `.project-lib/offbeat-count-join-en`
 - `.obsidian/daily-notes.json`
 - `.obsidian/zk-prefixer.json`
 - `.obsidian/plugins/templater-obsidian/data.json`
 - `.obsidian/plugins/periodic-notes/data.json`
+- executable Python chunks importing `lib.groovespace`
 - any remaining references found by `rg`
 
 Notes:
@@ -143,6 +144,21 @@ Notes:
 - Top-level `templates/` was checked at `20260507-042130`. It is preserved Obsidian authoring material, not active Quarto or Rhythmpress runtime infrastructure.
 - Active top-level `templates/` references were found only in Obsidian configuration: `.obsidian/daily-notes.json`, `.obsidian/zk-prefixer.json`, `.obsidian/plugins/templater-obsidian/data.json`, and `.obsidian/plugins/periodic-notes/data.json`.
 - Top-level `templates/` is separate from `lib/templates/toc.markdown`; do not use the Obsidian finding to infer TOC template ownership.
+
+Status: completed and verified at `20260507-043104`.
+
+Verification notes:
+
+- `lib/` was renamed to `.project-lib/`.
+- `templates/` was renamed to `.project-templates/`.
+- `.project-lib/offbeat-count-join-en` now points to `.project-lib/offbeat-count-translation.py`.
+- Obsidian JSON config references were updated to `.project-templates/` for internal consistency.
+- `.obsidian/` is a nested Git repository and is not tracked by the root `rhythmdo-com` repository; its config changes need separate handling if they should be committed.
+- Executable Markdown Python chunks were updated from `from lib.groovespace import *` to import `groovespace` from `.project-lib/`.
+- `bash -n .project-lib/offbeat-count-join-en` passed.
+- Direct Python import verification loaded `.project-lib/groovespace.py`.
+- The stale-reference scan found no remaining old path-style `lib/`, path-style `templates/`, `lib/templates`, or `from lib.groovespace` references outside excluded generated/site/plugin-bundle areas.
+- `rhythmpress build` completed successfully after the rename.
 
 ### Pass 3: Translation Workspace
 
@@ -203,5 +219,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 - Pass 1, Quarto local infrastructure, has been applied and verified.
 - `bin/offbeat-count-join-en` was moved into `lib/` in `rhythmdo-com` commit `960c04d`; `bin/` no longer needs its own rename pass unless new helper commands are added.
 - Top-level `templates/` has been confirmed as preserved Obsidian authoring material, not active build/runtime infrastructure.
-- Recommended next action: commit this tracker update, then continue Pass 2 by renaming `lib/` and `templates/`.
+- Pass 2, Rhythmdo local library and authoring templates, has been applied and verified.
+- Recommended next action: commit this tracker update, commit the root `rhythmdo-com` Pass 2 rename, and separately decide whether to commit the nested `.obsidian` config changes.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.
