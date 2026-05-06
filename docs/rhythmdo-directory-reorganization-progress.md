@@ -82,7 +82,7 @@ The important policy is that CSS, JavaScript, filters, and config snippets shoul
 | `lib/` | Rhythmdo local Python/tools/templates | no | planned rename |
 | `templates/` | Authoring/Obsidian templates | no | planned rename |
 | `lib-translation/` | Translation working chunks/state | no | planned rename |
-| `bin/` | Local helper command wrappers | no | optional planned rename |
+| `bin/` | Former local helper command wrappers | no | empty after helper move; no dedicated rename planned unless new commands are added |
 | `common-ly/` | LilyPond shared source files | no, but rendered as resources | later high-risk rename |
 | `.quarto/` | Quarto generated state | no | keep ignored |
 | `.site/`, `.site-*` | Rendered output | generated public output | keep ignored |
@@ -128,7 +128,7 @@ Verification notes:
 
 Expected updates:
 
-- `bin/offbeat-count-join-en`
+- `lib/offbeat-count-join-en`
 - `.obsidian/daily-notes.json`
 - `.obsidian/zk-prefixer.json`
 - any remaining references found by `rg`
@@ -136,7 +136,8 @@ Expected updates:
 Notes:
 
 - `lib/templates/toc.markdown` is retained for now, but the canonical active Rhythmpress package template is `rhythmpress/src/rhythmpress/templates/toc.markdown`.
-- `bin/offbeat-count-join-en` rebuilds `offbeat-count/master-en.md` from `lib-translation/en/` chunks and currently depends on `lib/offbeat-count-translation.py`.
+- `bin/offbeat-count-join-en` was moved to `lib/offbeat-count-join-en` in `rhythmdo-com` commit `960c04d` at `20260507-041427`.
+- `lib/offbeat-count-join-en` rebuilds `offbeat-count/master-en.md` from `lib-translation/en/` chunks and currently depends on `lib/offbeat-count-translation.py`.
 
 ### Pass 3: Translation Workspace
 
@@ -148,13 +149,7 @@ Expected updates:
 - skill/workflow documentation if present
 - any hardcoded paths in progress notes
 
-### Pass 4: Optional Helper Command Directory
-
-- `bin/` -> `.project-bin/`
-
-This is optional. It should only be done if activation and PATH expectations are updated at the same time.
-
-### Pass 5: LilyPond Shared Sources
+### Pass 4: LilyPond Shared Sources
 
 - `common-ly/` -> `.project-common-ly/`
 
@@ -201,5 +196,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 
 - Worktree was clean before creating this tracker.
 - Pass 1, Quarto local infrastructure, has been applied and verified.
-- Recommended next action: commit the Rhythmpress tracker update, then commit the Rhythmdo Pass 1 rename.
+- `bin/offbeat-count-join-en` was moved into `lib/` in `rhythmdo-com` commit `960c04d`; `bin/` no longer needs its own rename pass unless new helper commands are added.
+- Recommended next action: commit this tracker update, then continue Pass 2 by renaming `lib/` and `templates/`.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.
