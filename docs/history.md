@@ -37,3 +37,21 @@ Classification:
 - `rhythmdo-com/lib/templates/toc.markdown`: retained local file, not deleted in this cleanup.
 - `rhythmpress/src/rhythmpress/templates/toc.markdown`: canonical active Rhythmpress template.
 
+## 20260507-015723 TOC Caption Ownership Clarification
+
+The `toc.markdown` template name made it easy to assume the template owned the whole generated TOC block, including captions such as `目次`.
+
+Verified behavior:
+
+- `rhythmpress/src/rhythmpress/templates/toc.markdown` contains only `$toc$`.
+- That template controls the Pandoc-generated TOC body used by `create_toc_v1`.
+- It does not inject the generated sidebar caption.
+- It does not inject Quarto's right-margin page TOC title.
+
+Caption ownership:
+
+- Rhythmpress writes the generated sidebar Markdown caption, for example `**目次**`, in `rhythmpress render-sidebar`.
+- That label is resolved by `resolve_sidebar_toc_label`.
+- The Rhythmpress override key is `rhythmpress.toc-label`.
+- Quarto writes the right-margin page TOC title, for example `<h2 id="toc-title">目次</h2>`.
+- The Quarto override key is `format.html.toc-title`.
