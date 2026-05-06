@@ -83,7 +83,7 @@ The important policy is that CSS, JavaScript, filters, and config snippets shoul
 | `.project-templates/` | Preserved Obsidian authoring templates, formerly `templates/` | no | renamed and verified |
 | `.project-translation/` | Translation working chunks/state, formerly `lib-translation/` | no | renamed and verified |
 | `bin/` | Former local helper command wrappers | no | empty after helper move; no dedicated rename planned unless new commands are added |
-| `common-ly/` | LilyPond shared source files | no, but rendered as resources | later high-risk rename |
+| `.project-lilypond/` | LilyPond shared source files, formerly `common-ly/` | no, but rendered as resources | renamed and verified |
 | `.quarto/` | Quarto generated state | no | keep ignored |
 | `.site/`, `.site-*` | Rendered output | generated public output | keep ignored |
 | `.venv/` | Python virtual environment | no | keep ignored |
@@ -182,17 +182,28 @@ Verification notes:
 
 ### Pass 4: LilyPond Shared Sources
 
-- `common-ly/` -> `.project-common-ly/`
+- `common-ly/` -> `.project-lilypond/`
 
-This is high risk because `common-ly/` is heavily referenced from:
+This was high risk because `common-ly/` was heavily referenced from:
 
 - `_quarto.yml` resources
 - `metadata.lilypond-preamble`
 - LilyPond `\include` statements
 - `offbeat-count/master-*.md`
-- `lib-translation/` chunks
+- `.project-translation/` chunks
 
-Do this only as a dedicated pass with focused verification.
+Status: completed and verified at `20260507-051009`.
+
+Verification notes:
+
+- `common-ly/` was renamed to `.project-lilypond/`.
+- `_quarto.yml` resources now list `.project-lilypond/*.ly` and `.project-lilypond/shared/*.ly`.
+- `metadata.lilypond-preamble` now points to `.project-lilypond/lilypond-preamble.ly`.
+- LilyPond `\include` paths inside shared `.ly` files now point to `.project-lilypond/`.
+- `offbeat-count/master-en.md`, `offbeat-count/master-ja.md`, and affected `.project-translation/` chunks now reference `.project-lilypond/shared/*.ly`.
+- The stale-reference scan found no remaining `common-ly` or `.project-common-ly` references in `rhythmdo-com` outside excluded generated/site/Obsidian areas.
+- `bash -n .project-lib/offbeat-count-join-en` passed.
+- `rhythmpress build` completed successfully after the rename.
 
 ## Verification Commands
 
@@ -200,12 +211,13 @@ After each pass:
 
 ```sh
 git -C /Users/ats/rhythmdo-com status --short
-rg -n "filters/|\\.assets/|lib/|templates/|lib-translation/|bin/|common-ly/" /Users/ats/rhythmdo-com \
+rg -n "filters/|\\.assets/|lib/|templates/|lib-translation/|bin/|common-ly/|\\.project-common-ly/" /Users/ats/rhythmdo-com \
   --glob '!*.html' \
   --glob '!.site*/**' \
   --glob '!.quarto/**' \
   --glob '!.venv/**' \
-  --glob '!.git/**'
+  --glob '!.git/**' \
+  --glob '!**/.obsidian/**'
 ```
 
 For Quarto path changes:
@@ -231,5 +243,6 @@ Use unsandboxed/local shell execution if full Quarto render verification is requ
 - Top-level `templates/` has been confirmed as preserved Obsidian authoring material, not active build/runtime infrastructure.
 - Pass 2, Rhythmdo local library and authoring templates, has been applied and verified.
 - Pass 3, translation workspace, has been applied and verified.
-- Recommended next action: commit this tracker update, commit the root `rhythmdo-com` Pass 3 rename, and then continue with the high-risk `common-ly/` pass only after a focused reference review.
+- Pass 4, LilyPond shared sources, has been applied and verified with `.project-lilypond/`.
+- Recommended next action: commit the root `rhythmdo-com` Pass 4 rename, then commit this Rhythmpress tracker/spec update.
 - The directory rename work is also being used to identify future Rhythmpress plugin/package boundaries.

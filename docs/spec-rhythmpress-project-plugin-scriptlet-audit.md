@@ -32,7 +32,7 @@ A Rhythmpress project plugin is a declarative bundle of source-level project beh
 
 A plugin may provide:
 
-- source files, such as `filters/*.lua`, `assets/*.mjs`, `assets/*.css`, or `common-ly/*`;
+- source files, such as `filters/*.lua`, `assets/*.mjs`, `assets/*.css`, or `.project-lilypond/*`;
 - `_quarto.yml` patches;
 - `_metadata-<lang>.yml` patches;
 - `.gitignore` and `.quartoignore` patterns;
@@ -72,13 +72,13 @@ external-tools:
 
 source-files:
   - filters/lilypond.lua
-  - common-ly/lilypond-preamble.ly
+  - .project-lilypond/lilypond-preamble.ly
 
 quarto-patch:
   format.html.filters:
     - filters/lilypond.lua
   resources:
-    - common-ly/*.ly
+    - .project-lilypond/*.ly
 
 metadata-patch: {}
 
@@ -176,7 +176,7 @@ Initial audit should inspect:
 ~/rhythmdo-com/_metadata-*.yml
 ~/rhythmdo-com/filters/
 ~/rhythmdo-com/assets/
-~/rhythmdo-com/common-ly/
+~/rhythmdo-com/.project-lilypond/
 ~/rhythmdo-com/templates/
 ~/rhythmdo-com/**/*.qmd
 ~/rhythmdo-com/**/master-*.md
@@ -208,4 +208,3 @@ The next pass should produce:
 - plugin candidate list with default status;
 - migration recommendations;
 - unresolved questions for scriptlets whose dependencies cannot be proven from static inspection.
-

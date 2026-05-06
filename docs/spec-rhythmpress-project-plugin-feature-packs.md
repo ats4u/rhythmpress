@@ -20,7 +20,7 @@ Feature packs should be implemented as plugin packages. The package artifact and
 - feature packs explicitly requested by CLI/config;
 - feature packs implied by core parameters, such as multilingual language-switcher support when more than one language is configured.
 
-It must not copy `rhythmdo-com`'s accumulated `filters/`, `assets/`, `.assets/`, `common-ly/`, or `templates/` directories wholesale.
+It must not copy `rhythmdo-com`'s accumulated `filters/`, `assets/`, `.assets/`, `.project-lilypond/` formerly `common-ly/`, or `templates/` directories wholesale.
 
 ## Feature Pack Definition
 
@@ -65,7 +65,7 @@ quarto-patch:
   format.html.filters:
     - filters/lilypond.lua
   resources:
-    - common-ly/*.ly
+    - .project-lilypond/*.ly
 gitignore:
   - /lilypond-out/
 external-tools:
@@ -149,7 +149,7 @@ Values should be explicit so users can discover available customization by readi
 | `filter-meta-dates` | `--with-meta-dates` | off | `filters/meta-dates.lua` | `format.html.filters` append | none | Pandoc Lua | Uses explicit `cdate` and `mdate`; separate from Git-date preprocessing. |
 | `filter-remove-softbreaks` | `--with-remove-softbreaks` | off | `filters/remove-softbreaks.lua` | `format.html.filters` append | none | Pandoc Lua | Risky for manually wrapped English prose. |
 | `filter-include-files` | `--with-include-files` | off | `filters/include-files.lua` | `format.html.filters` append | none | Pandoc 2.12+ Lua modules | No active dependency found in current authored source. |
-| `filter-lilypond` | `--with-lilypond` | off | `filters/lilypond.lua`, minimal `common-ly/` preamble | filter append, `metadata.lilypond-preamble`, `resources` | `lilypond-out/` | `lilypond`, `RHYTHMPRESS_ROOT` or `QUARTO_PROJECT_DIR` | Heavy but reusable; Rhythmdo shared notation library is not generic. |
+| `filter-lilypond` | `--with-lilypond` | off | `filters/lilypond.lua`, minimal `.project-lilypond/` preamble | filter append, `metadata.lilypond-preamble`, `resources` | `lilypond-out/` | `lilypond`, `RHYTHMPRESS_ROOT` or `QUARTO_PROJECT_DIR` | Heavy but reusable; Rhythmdo shared notation library is not generic. |
 | `filter-obsidian-image-dimensions` | future flag | off | cleaned filter only | filter append | none | Pandoc Lua | Current file is disabled and debug-printing; defer. |
 | `asset-twitter-video` | `--with-twitter-video` | off | renamed JS module and optional CSS fragment | header include for local module and external widgets script | none | Twitter widgets script; browser DOM | Must not retain `ats4u` naming in generic pack. |
 | `asset-cookie-settings` | `--with-cookie-settings` plus provider config | off | CMP settings JS | footer/link/header provider block | none | Cookiebot or IAB TCF API | Requires provider ID; no default ID. |

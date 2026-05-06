@@ -20,7 +20,7 @@ Read-only audit inputs:
 - `~/rhythmdo-com/filters/`
 - `~/rhythmdo-com/assets/`
 - `~/rhythmdo-com/.assets/`
-- `~/rhythmdo-com/common-ly/`
+- `~/rhythmdo-com/.project-lilypond/`, formerly `~/rhythmdo-com/common-ly/`
 - `~/rhythmdo-com/templates/`
 - selected authored QMD and `master-*` content references
 - `~/rhythmdo-com/_rhythmpress.hook-after.*.py`
@@ -52,9 +52,9 @@ Important scope correction: `.assets/websites/*.scss` is part of the current scr
 | `lang-switcher.generated.mjs` reference | `_quarto.yml` header include; `website.navbar` slot | `rhythmpress build` or `render-lang-switcher-js`; `_rhythmpress.conf`; multilingual routes | Generated runtime JS; browser DOM; `localStorage` and cookie preference | Language switching and root-route preference persistence | Yes | `language-switcher` | auto when multi-lang | yes, as core multilingual pack; generated JS remains excluded |
 | `filters/meta-dates.lua` | `_quarto.yml` filter list; pages with `cdate`/`mdate` | Pandoc Lua filter runtime | Adds HTML header metadata for created/modified dates | Social/search metadata from explicit front matter dates | Yes | `filter-meta-dates` | opt-in | yes |
 | `filters/include-files.lua` | `_quarto.yml` filter list | Pandoc 2.12+; `pandoc.path`; `pandoc.system`; include code blocks | Transcludes Markdown files; rewrites relative images and include paths | Source-level Markdown include composition | Yes, but unused here | `filter-include-files` | off | later only |
-| `filters/lilypond.lua` | `_quarto.yml` filter list; `.lilypond` and `.lilypond-file` blocks | `lilypond`; `RHYTHMPRESS_ROOT` or `QUARTO_PROJECT_DIR`; `realpath`; `common-ly`; Pandoc SHA1 | Writes `lilypond-out/ly-*.ly` and SVGs; injects image blocks; appends watched resources | Renders music notation from source | Yes, but heavy | `filter-lilypond` | opt-in | yes |
-| `common-ly/lilypond-preamble.ly` | `_quarto.yml` `metadata.lilypond-preamble`; LilyPond snippets | `common-ly/chromatic-solfege.ly`; LilyPond include path rooted at project | Preamble content prepended into rendered LilyPond temp files | Shared LilyPond setup | Mixed | `filter-lilypond` | opt-in | yes, minimal generic preamble only |
-| `common-ly/shared/*.ly` | `.lilypond-file` blocks | `lilypond-book-preamble.ly` in many files; project-root include path; site-specific musical vocabulary | Rendered notation cache via `lilypond-out/` | Rhythmdo notation examples | Site-specific | content pack, not generic | no | no default migration |
+| `filters/lilypond.lua` | `_quarto.yml` filter list; `.lilypond` and `.lilypond-file` blocks | `lilypond`; `RHYTHMPRESS_ROOT` or `QUARTO_PROJECT_DIR`; `realpath`; `.project-lilypond`; Pandoc SHA1 | Writes `lilypond-out/ly-*.ly` and SVGs; injects image blocks; appends watched resources | Renders music notation from source | Yes, but heavy | `filter-lilypond` | opt-in | yes |
+| `.project-lilypond/lilypond-preamble.ly` | `_quarto.yml` `metadata.lilypond-preamble`; LilyPond snippets | `.project-lilypond/chromatic-solfege.ly`; LilyPond include path rooted at project | Preamble content prepended into rendered LilyPond temp files | Shared LilyPond setup | Mixed | `filter-lilypond` | opt-in | yes, minimal generic preamble only |
+| `.project-lilypond/shared/*.ly` | `.lilypond-file` blocks | `lilypond-book-preamble.ly` in many files; project-root include path; site-specific musical vocabulary | Rendered notation cache via `lilypond-out/` | Rhythmdo notation examples | Site-specific | content pack, not generic | no | no default migration |
 | `filters/remove-softbreaks.lua` | `_quarto.yml` filter list | Pandoc Lua filter runtime | Replaces soft breaks with empty strings | Japanese/manual line wrapping cleanup | Mixed | `filter-remove-softbreaks` | off | yes, opt-in with warning |
 | `filters/obsidian-image-dimensions.lua` | Disabled `_quarto.yml` entry | Pandoc Lua filter runtime; Obsidian-style caption syntax | Mutates image width/height; prints debug output | Obsidian image dimensions | Generic idea, current file not clean | `filter-obsidian-image-dimensions` | off | no for first implementation |
 | `assets/ats4u-twitter-video.mjs` | `_quarto.yml` header include; `.ats4u-twitter-video` content markers | Browser DOM; `window.twttr.widgets.load`; Twitter widgets script | Converts placeholder divs to `blockquote.twitter-tweet` | Stable authoring shorthand for Twitter/X embeds | Generic after rename | `asset-twitter-video` | opt-in | yes, renamed/generalized |
@@ -143,7 +143,7 @@ Do not migrate by default:
 
 ## Open Risks
 
-- Many `common-ly/shared/*.ly` files include `lilypond-book-preamble.ly`, which was not present in the searched source tree. This may rely on LilyPond include behavior or local environment. The generic LilyPond pack must not assume Rhythmdo's full shared library is portable.
+- Many `.project-lilypond/shared/*.ly` files include `lilypond-book-preamble.ly`, which was not present in the searched source tree. This may rely on LilyPond include behavior or local environment. The generic LilyPond pack must not assume Rhythmdo's full shared library is portable.
 - `remove-softbreaks` is globally active in `rhythmdo-com`, but it can join wrapped English prose. It must remain explicit opt-in.
 - Cookiebot and AdSense are legally and operationally sensitive. They require project-specific IDs and should never appear in a default skeleton.
 - The hook mechanism is powerful but can hide post-generation mutations. First implementation should keep hooks opt-in and visibly declared.

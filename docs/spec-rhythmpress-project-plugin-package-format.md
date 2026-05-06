@@ -609,17 +609,17 @@ external-tools:
 files:
   - source: files/filters/lilypond.lua
     target: filters/lilypond.lua
-  - source: files/common-ly/lilypond-preamble.ly
-    target: common-ly/lilypond-preamble.ly
+  - source: files/.project-lilypond/lilypond-preamble.ly
+    target: .project-lilypond/lilypond-preamble.ly
 quarto-patch:
   metadata:
-    lilypond-preamble: common-ly/lilypond-preamble.ly
+    lilypond-preamble: .project-lilypond/lilypond-preamble.ly
   format:
     html:
       filters:
         - filters/lilypond.lua
   resources:
-    - common-ly/*.ly
+    - .project-lilypond/*.ly
 gitignore:
   - /lilypond-out/
 generated-exclusions:
