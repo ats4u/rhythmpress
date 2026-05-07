@@ -1,7 +1,7 @@
 # Project Lifecycle Template Engine Specification
 
 Created: 20260506-123604
-Updated: 20260507-062236
+Updated: 20260507-172326
 
 Status: draft implementation specification.
 
@@ -14,6 +14,7 @@ Related specifications:
 - [Scriptlet Dependency Map](spec-rhythmpress-project-scriptlet-dependency-map.md)
 - [Plugin Feature Packs](spec-rhythmpress-project-plugin-feature-packs.md)
 - [Plugin Package Format](spec-rhythmpress-project-plugin-package-format.md)
+- [Rhythmpress Plugin System Spec](spec-rhythmpress-plugin-system.md)
 
 Primary command for the first implementation:
 
@@ -31,10 +32,11 @@ Planned project lifecycle commands:
 rhythmpress project create <project-dir> [options]
 rhythmpress project add-language <lang> [options]
 rhythmpress project remove-language <lang> [options]
-rhythmpress project activate-plugin <package-or-feature> [options]
-rhythmpress project deactivate-plugin <package-or-feature> [options]
-rhythmpress project sync-plugins [options]
 rhythmpress project check [options]
+rhythmpress plugin install <path-or-package-id> [options]
+rhythmpress plugin uninstall <plugin-id> [options]
+rhythmpress plugin list [options]
+rhythmpress plugin inspect <plugin-id-or-path> [options]
 ```
 
 Existing page scaffold command remains separate:
@@ -80,10 +82,11 @@ Future commands are specified here, but not implemented in the first patch:
 
 - `project add-language`
 - `project remove-language`
-- `project activate-plugin`
-- `project deactivate-plugin`
-- `project sync-plugins`
 - `project check`
+- `plugin install`
+- `plugin uninstall`
+- `plugin list`
+- `plugin inspect`
 
 ## Non-Goals
 
@@ -217,7 +220,8 @@ Project lifecycle commands must treat these files as separate sources of truth:
 |---|---|---|
 | Desired state | `_quarto.yml` `rhythmpress.project` | User-editable project configuration and feature intent. |
 | Ownership state | `.rhythmpress-template.json` | Internal list of template-managed files and content hashes. |
-| Materialized state | actual files on disk | What currently exists in the project. |
+| Project file state | actual files on disk | What currently exists in the project, including optional deployed plugin files. |
+| Plugin state | `.rhythmpress-plugins/packages.yml` and `.rhythmpress-plugins/packages/` | Active package order and installed package contents. |
 | Article targets | `_rhythmpress.conf` | Article directory list consumed by current build commands. |
 
 Precedence:
@@ -225,7 +229,7 @@ Precedence:
 - User intent comes from `_quarto.yml` `rhythmpress.project`.
 - Safe overwrite decisions come from `.rhythmpress-template.json`.
 - Build targets come from `_rhythmpress.conf`.
-- `project check` compares desired state, ownership state, and materialized state; it should not silently rewrite files.
+- `project check` compares desired state, ownership state, project file state, and plugin state; it should not silently rewrite files.
 
 Important constraint:
 
@@ -380,7 +384,7 @@ rhythmpress:
 
 Feature-pack names and migration boundaries are defined in the plugin feature-pack specification. `project create` must install only core files plus selected feature packs. It must not copy `rhythmdo-com` `.quarto-filters/`, `assets/`, `.quarto-theme/`, `.project-lilypond/`, `.project-lib/`, `.project-translation/`, `.project-templates/`, or helper command directories wholesale.
 
-Feature packs should be materialized from plugin packages. `project create` may materialize built-in core/default packages for a new skeleton. Later plugin lifecycle commands own activation, deactivation, synchronization, and drift checks. `rhythmpress build` must not enable new packages by itself; if build-time plugin sync is introduced, it may only materialize packages already enabled in project desired state and must use the same conflict rules as `project sync-plugins`.
+Feature packs should be provided by plugin packages. The default plugin behavior is reference-in-place wiring from `.rhythmpress-plugins/packages/<plugin-id>/`; optional deployed files use explicit `deploy.files` rules. `project create` may seed built-in core/default packages for a new skeleton only when that behavior is explicitly designed. Later `rhythmpress plugin *` commands own install, uninstall, ordering, generated wiring, and drift checks. `rhythmpress build` must not enable new packages by itself; if build-time plugin sync is introduced, it may only regenerate wiring for packages already listed in `.rhythmpress-plugins/packages.yml`.
 
 If the language switcher is enabled, `_quarto.yml` must also include the generated runtime JS reference. `project create` writes only the source reference; `rhythmpress build` later writes `lang-switcher.generated.mjs`.
 
@@ -792,7 +796,7 @@ Future `project check`:
 - Reports missing managed files.
 - Reports modified managed files.
 - Reports generated artifacts that are present but untracked by the manifest.
-- Compares `_quarto.yml` `rhythmpress.project` desired state with materialized files and manifest state.
+- Compares `_quarto.yml` `rhythmpress.project` state, `.rhythmpress-plugins/packages.yml`, generated plugin wiring, optional deployed files, and manifest state.
 - Reports language config drift.
 
 ## Build-Time Generated Artifact Note
@@ -897,14 +901,16 @@ First patch cut line:
 - Do not implement `project add-language`.
 - Do not implement `project remove-language`.
 - Do not implement `project check`.
-- Do not implement `project activate-plugin`.
-- Do not implement `project deactivate-plugin`.
-- Do not implement `project sync-plugins`.
+- Do not implement `rhythmpress plugin install`.
+- Do not implement `rhythmpress plugin uninstall`.
+- Do not implement `rhythmpress plugin list`.
+- Do not implement `rhythmpress plugin inspect`.
 - Do not run lifecycle commands from inside `project create`.
 - Do not implement Git-date fallback.
 - Do not implement optional feature packs beyond source stubs already specified for default core behavior.
 - Keep optional feature-pack design aligned with `docs/spec-rhythmpress-project-plugin-feature-packs.md` before implementing those packs.
 - Keep plugin package implementation aligned with `docs/spec-rhythmpress-project-plugin-package-format.md`.
+- Keep plugin lifecycle implementation aligned with `docs/spec-rhythmpress-plugin-system.md`.
 - Treat the default TOC helper as core starter behavior, not as an optional pack.
 
 ## First Patch Contract
@@ -929,10 +935,11 @@ Implement in the first patch:
 Defer from the first patch:
 
 - Plugin package manager commands and registry behavior.
-- `rhythmpress project activate-plugin`.
-- `rhythmpress project deactivate-plugin`.
-- `rhythmpress project sync-plugins`.
-- Build-time package activation or package sync.
+- `rhythmpress plugin install`.
+- `rhythmpress plugin uninstall`.
+- `rhythmpress plugin list`.
+- `rhythmpress plugin inspect`.
+- Build-time package install or package sync.
 - Tar archive package input.
 - CSS feature-pack migration.
 - Broad migration of current Rhythmdo CSS, JavaScript, filters, or site-specific configuration.
@@ -945,8 +952,8 @@ Updated: 20260506-182041
 
 - The first implementation patch is core `rhythmpress project create` only.
 - The default TOC helper is core starter behavior because it is expected in a new project by default.
-- Package activation, deactivation, sync, update, registry, and tar archive input are future work.
-- `rhythmpress build` must not enable packages. It may only verify or sync already-enabled packages after that behavior is explicitly implemented.
+- Package install, uninstall, generated wiring sync, update, registry, and tar archive input are future work.
+- `rhythmpress build` must not enable packages. It may only verify or regenerate wiring for already-enabled packages after that behavior is explicitly implemented.
 - Do not copy `rhythmdo-com` directories wholesale. Treat `rhythmdo-com` as an audit source, not as a package source tree.
 - Do not template generated artifacts such as `_quarto-<lang>.yml`, generated sidebars, generated language switchers, render outputs, cache directories, or social images.
 - `_rhythmpress.conf` remains an article-target list only. Do not add language, feature, or project metadata to it.

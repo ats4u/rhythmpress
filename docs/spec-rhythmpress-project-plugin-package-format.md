@@ -1,24 +1,30 @@
 # Rhythmpress Project Plugin Package Format
 
 Created: 20260506-181609
-Updated: 20260507-062236
+Updated: 20260507-172326
 
 Status: draft specification.
+
+Canonical plugin-system behavior is now specified in
+[Rhythmpress Plugin System Spec](spec-rhythmpress-plugin-system.md). This file
+remains the package-format companion and must not contradict the canonical
+plugin storage, ordering, reference-in-place wiring, or deploy semantics defined
+there.
 
 ## Purpose
 
 Define the package artifact and lifecycle for Rhythmpress project plugins.
 
-The package format is the implementation form for project feature packs. A package keeps CSS, JavaScript, filters, support files, config patches, generated exclusions, and verification rules together until a project explicitly materializes it.
+The package format is the implementation form for project feature packs. A package keeps CSS, JavaScript, filters, support files, Quarto wiring contributions, optional deploy rules, generated exclusions, and verification rules together. By default, package files are referenced in place from `.rhythmpress-plugins/packages/<plugin-id>/` instead of copied into the project tree.
 
 ## Goals
 
 - Keep each feature as one portable, inspectable unit.
 - Make packages easy to edit during development.
 - Allow packed distribution without losing the editable structure.
-- Materialize package contents deterministically into a real project tree.
-- Record ownership so future checks, repairs, updates, and deactivation are possible.
-- Avoid scattering CSS, JavaScript, and configuration before activation.
+- Reference package contents deterministically from generated Quarto wiring.
+- Record optional deployed-file ownership so future checks, repairs, updates, and uninstall are possible.
+- Avoid scattering CSS, JavaScript, and configuration before install.
 
 ## Non-Goals
 
@@ -38,11 +44,13 @@ Two equivalent forms are supported.
 Development form:
 
 ```text
-toc-helper.rppkg/
+toc-helper/
   plugin.yml
-  files/
-    assets/rhythmpress-toc.mjs
-    assets/rhythmpress-toc.css
+  assets/
+    rhythmpress-toc.mjs
+    rhythmpress-toc.css
+  filters/
+  includes/
   templates/
     starter-toc.qmd
 ```
@@ -50,8 +58,7 @@ toc-helper.rppkg/
 Packed distribution form:
 
 ```text
-toc-helper.rppkg.tar
-toc-helper.rppkg.tar.gz
+toc-helper.tar.gz
 ```
 
 The archive must contain exactly one package root directory or a root-level `plugin.yml`. The unpacked tree must be byte-for-byte inspectable as the same development form.
@@ -60,7 +67,7 @@ Rationale:
 
 - directory form is easy to rewrite, diff, and edit;
 - tar form is one portable artifact;
-- both preserve multipart package contents without scattering them into the project before activation.
+- both preserve multipart package contents without scattering them into the project before install.
 
 ## Package Root
 
@@ -68,12 +75,14 @@ Required package root entries:
 
 ```text
 plugin.yml
-files/
 ```
 
 Optional package root entries:
 
 ```text
+assets/
+filters/
+includes/
 templates/
 docs/
 tests/
@@ -84,9 +93,8 @@ README.md
 Rules:
 
 - `plugin.yml` is the package source of truth.
-- `files/` contains source files to materialize into a project.
-- `templates/` contains text templates rendered during materialization.
-- `docs/` is human documentation and is not materialized unless explicitly listed.
+- Package content paths are package-local unless a `deploy` rule explicitly projects them into the project tree.
+- `docs/` is human documentation and is not deployed unless explicitly listed.
 - Paths inside the package must use `/` separators.
 - Paths must be relative and must not contain `..`.
 
@@ -113,27 +121,16 @@ features:
   provides:
     - toc-helper
 
-files:
-  - source: files/assets/rhythmpress-toc.mjs
-    target: assets/rhythmpress-toc.mjs
-    target-class: public-asset
-    mode: file
-    template: false
-  - source: files/assets/rhythmpress-toc.css
-    target: assets/rhythmpress-toc.css
-    target-class: public-asset
-    mode: file
-    template: false
+quarto:
+  global:
+    format.html.css:
+      - assets/rhythmpress-toc.css
+    format.html.include-in-header:
+      - includes/rhythmpress-toc-header.html
+  metadata: {}
 
-quarto-patch:
-  format:
-    html:
-      include-in-header:
-        - text: |
-            <link rel="stylesheet" href="/assets/rhythmpress-toc.css" />
-            <script type="module" src="/assets/rhythmpress-toc.mjs"></script>
-
-metadata-patch: {}
+deploy:
+  files: []
 
 starter-content:
   requires:
@@ -147,11 +144,10 @@ external-tools: []
 external-scripts: []
 
 verification:
-  - type: file-exists
+  - type: package-file-exists
     path: assets/rhythmpress-toc.mjs
-  - type: config-contains
-    path: _quarto.yml
-    value: /assets/rhythmpress-toc.mjs
+  - type: generated-config-contains
+    path: .rhythmpress-plugins/packages/toc-helper/assets/rhythmpress-toc.css
 ```
 
 Required fields:
@@ -161,15 +157,13 @@ Required fields:
 - `version`
 - `description`
 - `compatibility`
-- `files`
+- `quarto` or `deploy`
 
-Required fields for each `files` entry:
+Required fields for each `deploy.files` entry:
 
-- `source`
-- `target`
-- `target-class`
+- `from`
+- `to`
 - `mode`
-- `template`
 
 Recommended fields:
 
@@ -179,23 +173,25 @@ Recommended fields:
 - `generated-exclusions`
 - `verification`
 
-## Target Directory Policy
+## Deploy Target Directory Policy
 
-Package materialization must preserve project directory ownership boundaries.
+Reference-in-place wiring is the default. Deploy rules are the explicit escape
+hatch for files that must exist in a project path or public output path.
 
-Default target classes:
+Initial deploy target allowlist:
 
-| `target-class` | Target path pattern | Ownership | Public-facing? |
-| --- | --- | --- | --- |
-| `public-asset` | `assets/**` | Public web/runtime asset | yes |
-| `content-asset` | `attachments*/**` | Content-facing asset | yes or source-facing |
-| `quarto-local` | `.quarto-*/**` | Quarto-specific local infrastructure | no |
-| `rhythmpress-local` | `.rhythmpress-*/**` | Rhythmpress-managed local infrastructure | no |
-| `project-local` | `.project-*/**` | Project-specific local infrastructure | no |
+| Target path pattern | Ownership | Public-facing? |
+| --- | --- | --- |
+| `assets/**` | Public web/runtime asset | yes |
+| `attachments*/**` | Content-facing asset | yes or source-facing |
+| `.quarto-filters/**` | Quarto/Pandoc filter infrastructure | no |
+| `_extensions/**` | Quarto extension infrastructure | mixed |
+| `include/**` | Include snippets or source fragments | no |
+| `templates/**` | Project-local authoring templates | no |
 
-Package authors must not use project-branded hidden prefixes such as `.<project-name>-*` for materialized project-local files. Use `.project-*` so Rhythmpress can discover, audit, and reason about local-private directories predictably.
+Package authors must not deploy into `.rhythmpress-plugins/`, `.git/`, `.site/`, `.site-*/`, generated profile outputs, or any root-level file unless a later spec extension explicitly allows it.
 
-Quarto-specific package files should use the `quarto-local` class. Pandoc Lua filters should target `.quarto-filters/**`, and Quarto SCSS/theme source should target `.quarto-theme/**`. Browser-loaded runtime CSS, JavaScript, images, and other public web assets remain `public-asset` targets under `assets/**`.
+Package authors must not use project-branded hidden prefixes such as `.<project-name>-*` for deployed project-local files. If a future deploy class needs project-private support files, use static names so Rhythmpress can discover, audit, and reason about them predictably.
 
 Generated outputs are never valid package targets:
 
@@ -208,7 +204,7 @@ _sidebar-*.generated.*
 lang-switcher.generated.mjs
 ```
 
-If a package needs CSS, JavaScript, filters, templates, helper scripts, or config snippets, those files must be listed explicitly with a target class. Related behavior should be grouped into one package or into declared dependent packages rather than copied as scattered anonymous files.
+If a package needs CSS, JavaScript, filters, templates, helper scripts, or config snippets, those files must be declared explicitly in `plugin.yml` as Quarto wiring, verification input, or optional deploy input. Related behavior should be grouped into one package or into declared dependent packages rather than copied as scattered anonymous files.
 
 ## Identity And Versioning
 
@@ -232,7 +228,7 @@ Feature IDs and package IDs may be the same, but they are not required to be ide
 Package resolution order:
 
 1. explicit path passed to a command;
-2. project-local packages under `.rhythmpress/packages/`;
+2. project-local packages under `.rhythmpress-plugins/packages/`;
 3. user package directory under `$RHYTHMPRESS_HOME/packages/`;
 4. built-in Rhythmpress package directory shipped with the Python package;
 5. paths listed in `RHYTHMPRESS_PLUGIN_PATH`, left to right.
@@ -241,140 +237,135 @@ First implementation may support only explicit paths and built-in packages, but 
 
 ## Project State Files
 
-User-facing desired state remains in `_quarto.yml`:
+Project-local package state lives under `.rhythmpress-plugins/`:
 
-```yml
-rhythmpress:
-  project:
-    features:
-      toc-helper: true
-      lilypond: false
-    plugins:
-      toc-helper:
-        package: toc-helper
-        version: 0.1.0
-        materialize: true
+```text
+.rhythmpress-plugins/
+  packages.yml
+  packages/
+    toc-helper/
+  generated/
 ```
 
-Internal materialization state remains in `.rhythmpress-template.json`.
+`packages.yml` is the active ordered package set. Generated plugin wiring is derived from `packages.yml` and package manifests. `_quarto.yml` may contain the Rhythmpress project skeleton, but package order must not be inferred from arbitrary `_quarto.yml` map order.
 
-The manifest records:
+Optional deploy ownership state records:
 
 - active package ID and version;
 - package source digest;
 - owning feature ID;
-- materialized file targets;
-- materialized file hashes;
-- config patches applied;
+- deployed file targets;
+- deployed file hashes;
+- generated config contributions;
 - generated exclusions registered;
 - user-managed or package-managed status.
 
 Optional future lockfile:
 
 ```text
-.rhythmpress/plugins.lock.yml
+.rhythmpress-plugins/packages.lock.yml
 ```
 
 The lockfile is reserved for exact package resolution if remote registries or multiple package roots are added later. It is not required in the first implementation.
 
-## Materialization
+## Wiring And Optional Deployment
 
-Materialization expands a package into a project tree.
+Reference-in-place wiring is the default. Rhythmpress reads `packages.yml`,
+loads active package manifests in order, and generates Quarto config entries
+that point back into `.rhythmpress-plugins/packages/<plugin-id>/`.
 
-Materialization writes:
+Wiring generation writes:
 
-- listed `files` targets;
-- rendered listed templates;
-- structured patches into `_quarto.yml`;
-- structured patches into `_metadata-<lang>.yml`;
-- ignore patterns;
-- manifest state.
+- generated plugin config fragments or generated profile config;
+- optional ignore patterns;
+- optional deploy ownership state.
 
-Materialization must not write:
+Wiring generation must not write:
 
 - generated artifacts;
 - rendered output;
 - files outside the allowed target directory classes unless the package spec is extended with an explicit new class;
 - files not listed in `plugin.yml`;
-- package docs unless listed as materialized files.
+- package docs unless listed as deployed files.
 
-Materialization order:
+Install order:
 
 1. resolve package and dependencies;
 2. validate package schema and compatibility;
-3. build a complete write plan;
-4. validate target paths and conflicts;
-5. apply file writes and config patches;
-6. write manifest state after all writes succeed;
-7. run lightweight verification.
+3. install package under `.rhythmpress-plugins/packages/<plugin-id>/`;
+4. update `.rhythmpress-plugins/packages.yml`;
+5. generate Quarto wiring from active package order;
+6. apply optional `deploy.files` writes;
+7. write deploy ownership state after all writes succeed;
+8. run lightweight verification.
 
-If any step fails before the manifest write, the operation must fail without partially claiming ownership. Atomic file replacement should be used for individual file writes where possible.
+If any step fails before ownership state is written, the operation must fail without partially claiming ownership. Atomic file replacement should be used for individual file writes where possible.
 
-## Materialization Triggers
+## Plugin Lifecycle Triggers
 
 Allowed triggers:
 
 ```sh
 rhythmpress project create
-rhythmpress project activate-plugin <package-or-feature>
-rhythmpress project deactivate-plugin <package-or-feature>
-rhythmpress project sync-plugins
+rhythmpress plugin install <path-or-package-id>
+rhythmpress plugin uninstall <plugin-id>
+rhythmpress plugin list
+rhythmpress plugin inspect <plugin-id-or-path>
 rhythmpress project check
 rhythmpress build
 ```
 
 Trigger behavior:
 
-- `project create` materializes core and default packages selected for the new skeleton.
-- `project activate-plugin` records desired state and materializes the package.
-- `project deactivate-plugin` removes config patches and removes or unmanages owned files according to the deactivation policy.
-- `project sync-plugins` materializes missing or stale active packages.
+- `project create` creates the core skeleton and may seed default package state when explicitly designed to do so.
+- `plugin install` installs a package, adds it to `packages.yml`, regenerates plugin wiring, and applies optional deploy files.
+- `plugin uninstall` removes a package from `packages.yml`, regenerates plugin wiring, and removes owned deployed files according to policy.
 - `project check` verifies state and reports drift without writing.
-- `rhythmpress build` may run a pre-build plugin sync phase only for packages already enabled in project desired state.
+- `rhythmpress build` may verify generated plugin wiring, but must not enable new packages by itself.
 
 Build-trigger rule:
 
-`rhythmpress build` must not enable new packages by itself. It may materialize or repair packages already enabled in `_quarto.yml`, but only under the same conflict rules as `project sync-plugins`. If a conflict is detected, build fails before preprocessing.
+`rhythmpress build` must not enable new packages by itself. If it regenerates plugin wiring, it may only use packages already listed in `.rhythmpress-plugins/packages.yml`. If a conflict is detected, build fails before preprocessing.
 
-## Activation
+## Install
 
-Activation means:
+Install means:
 
 - package is resolved;
-- dependencies are activated first;
-- `_quarto.yml rhythmpress.project.features` is updated;
-- `_quarto.yml rhythmpress.project.plugins` records package desired state;
-- package contents are materialized;
-- `.rhythmpress-template.json` records ownership.
+- dependencies are installed or already active first;
+- package contents are placed under `.rhythmpress-plugins/packages/<plugin-id>/`;
+- `.rhythmpress-plugins/packages.yml` records active order;
+- generated Quarto wiring references package files in place;
+- optional deployed files are copied or linked and ownership is recorded.
 
 Example:
 
 ```sh
-rhythmpress project activate-plugin ./packages/toc-helper.rppkg
-rhythmpress project activate-plugin toc-helper
+rhythmpress plugin install ./packages/toc-helper.tar.gz
+rhythmpress plugin install toc-helper
 ```
 
-Activation must refuse:
+Install must refuse:
 
 - unknown package ID;
 - incompatible package;
 - dependency cycles;
 - package conflicts;
 - target path escaping project root;
-- unmanaged file collisions;
-- user-modified managed file collisions.
+- unmanaged deploy collisions;
+- user-modified managed deploy collisions.
 
-## Deactivation
+## Uninstall
 
-Deactivation means:
+Uninstall means:
 
-- desired feature state is disabled or removed;
-- config patches owned by the package are removed when safely identifiable;
+- package ID is removed from `packages.yml`;
+- generated Quarto wiring is regenerated from remaining active packages;
 - generated exclusions are removed when no other active package owns them;
-- materialized files are removed, preserved, or unmanaged according to policy;
-- manifest state is updated.
+- deployed files are removed, preserved, or unmanaged according to policy;
+- package directory is removed unless policy preserves archives.
 
-Deactivation policy per file:
+Uninstall policy per deployed file:
 
 | File State | Default Action |
 |---|---|
@@ -385,11 +376,11 @@ Deactivation policy per file:
 
 The command must print every preserved modified file.
 
-Config unpatching must be ownership-aware. If a raw config block was edited by the user, the command should preserve it and report drift instead of deleting it.
+Generated config unpatching is normally regeneration from `packages.yml`, not a raw edit/delete operation against user-managed `_quarto.yml` or `_metadata-<lang>.yml`.
 
 ## Conflict Handling
 
-Materialization conflict rules:
+Deploy conflict rules:
 
 - unmanaged existing target file: conflict;
 - managed target with matching hash: ok;
@@ -398,26 +389,26 @@ Materialization conflict rules:
 - target directory where file is expected: conflict;
 - target file where directory is expected: conflict.
 
-`--force` may repair missing or unchanged managed files. It must not overwrite user-modified files unless a later explicit merge/update command exists.
+`--force` may repair missing or unchanged managed deployed files. It must not overwrite user-modified files unless a later explicit merge/update command exists.
 
 ## Updates
 
-Package update is separate from activation.
+Package update is separate from install.
 
 Future command shape:
 
 ```sh
-rhythmpress project update-plugin <package-or-feature>
+rhythmpress plugin update <plugin-id>
 ```
 
 Update policy:
 
 - compare old package version and new package version;
-- compute file and config patch changes;
-- apply only unchanged managed files automatically;
+- compute generated wiring and optional deployed-file changes;
+- apply only unchanged managed deployed files automatically;
 - preserve user-modified managed files and report conflicts;
 - never delete user-modified files silently;
-- record old and new package digests in manifest.
+- record old and new package digests in ownership state.
 
 The first implementation may reject updates and instruct users to deactivate/reactivate only when safe.
 
@@ -433,7 +424,7 @@ depends-on:
 
 Rules:
 
-- dependencies activate before dependents;
+- dependencies install before dependents;
 - cycles are invalid;
 - version constraints may be added later;
 - package conflicts are checked after full dependency resolution.
@@ -445,27 +436,26 @@ conflicts-with:
   - another-toc-helper
 ```
 
-## Config Patch Model
+## Quarto Wiring Model
 
-Config patches are declarative.
+Quarto wiring contributions are declarative.
 
-Patch kinds:
+Contribution targets:
 
-- `quarto-patch`: applies to `_quarto.yml`;
-- `metadata-patch`: applies to every `_metadata-<lang>.yml` unless scoped;
-- `metadata-patch-by-lang`: applies to selected language metadata;
+- `quarto.global`: contributes to global project config;
+- `quarto.metadata.<lang>`: contributes to selected language metadata;
 - `gitignore`: appends ignore patterns;
 - `quartoignore`: appends Quarto ignore patterns.
 
-Patch merge rules:
+Wiring merge rules:
 
 - maps deep-merge;
-- lists append unique values;
-- scalar conflicts fail unless the package owns the existing value;
-- raw HTML blocks must carry package ownership metadata in the manifest;
-- unpatching removes only values owned by the package.
+- lists append in `.rhythmpress-plugins/packages.yml` order;
+- duplicate handling is per-key and disabled unless declared safe;
+- scalar conflicts fail unless the key is explicitly listed as last-wins;
+- raw HTML blocks must be generated from package-owned include files or package-owned text values.
 
-First implementation may restrict patch shapes to well-known Quarto paths to keep behavior deterministic.
+First implementation should restrict contribution shapes to well-known Quarto paths to keep behavior deterministic. Plugins must not edit `_quarto.yml` or `_metadata-<lang>.yml` directly.
 
 ## Template Rendering
 
@@ -484,8 +474,8 @@ Template rules:
 
 - no arbitrary code execution;
 - missing variables fail validation;
-- rendered bytes are hashed in the ownership manifest;
-- template output targets must be listed in `files`.
+- rendered bytes are package-local generated inputs unless explicitly deployed;
+- deployed template output targets must be listed in `deploy.files`.
 
 The first implementation may use simple placeholder replacement instead of a full template engine.
 
@@ -511,13 +501,14 @@ Supported first checks:
 
 | Check | Meaning |
 |---|---|
-| `file-exists` | Target file exists. |
+| `package-file-exists` | Package-local file exists. |
+| `deployed-file-exists` | Optional deployed file exists. |
 | `file-absent` | Generated or disabled target is absent. |
-| `config-contains` | Config file contains expected value. |
+| `generated-config-contains` | Generated plugin config contains expected value. |
 | `config-key-type` | Config key has expected type. |
 | `ignore-contains` | Ignore file contains expected pattern. |
 | `feature-enabled` | Desired feature state is enabled. |
-| `package-materialized` | Manifest records package and owned files. |
+| `package-installed` | Package is listed in `packages.yml` and present under `packages/`. |
 
 Verification must not run Quarto, Playwright, LilyPond, network calls, or deployment tools unless explicitly requested by a separate lifecycle proof command.
 
@@ -525,14 +516,14 @@ Verification must not run Quarto, Playwright, LilyPond, network calls, or deploy
 
 `rhythmpress build` can use packages in two ways:
 
-1. Check mode: verify active packages are materialized before preprocessing.
-2. Sync mode: materialize missing managed package files before preprocessing.
+1. Check mode: verify active package directories and generated wiring before preprocessing.
+2. Sync mode: regenerate plugin wiring from `packages.yml` before preprocessing.
 
 Default should be conservative:
 
 - check active package state;
 - fail clearly on drift;
-- allow an explicit project setting or flag to sync during build.
+- allow an explicit project setting or flag to regenerate wiring during build.
 
 Possible future flag:
 
@@ -540,16 +531,18 @@ Possible future flag:
 rhythmpress build --sync-plugins
 ```
 
-If build syncs plugins, it must use the same write plan, conflict checks, and manifest rules as `project sync-plugins`.
+If build syncs plugins, it must use the same generated-wiring plan, deploy conflict checks, and ownership rules as `rhythmpress plugin install` / `rhythmpress plugin uninstall`.
 
 ## Example Package: TOC Helper
 
 ```text
-toc-helper.rppkg/
+toc-helper/
   plugin.yml
-  files/
-    assets/rhythmpress-toc.mjs
-    assets/rhythmpress-toc.css
+  assets/
+    rhythmpress-toc.mjs
+    rhythmpress-toc.css
+  includes/
+    rhythmpress-toc-header.html
 ```
 
 ```yml
@@ -564,33 +557,20 @@ default: true
 features:
   provides:
     - toc-helper
-files:
-  - source: files/assets/rhythmpress-toc.mjs
-    target: assets/rhythmpress-toc.mjs
-    target-class: public-asset
-    mode: file
-    template: false
-  - source: files/assets/rhythmpress-toc.css
-    target: assets/rhythmpress-toc.css
-    target-class: public-asset
-    mode: file
-    template: false
-quarto-patch:
-  format:
-    html:
-      include-in-header:
-        - text: |
-            <link rel="stylesheet" href="/assets/rhythmpress-toc.css" />
-            <script type="module" src="/assets/rhythmpress-toc.mjs"></script>
+quarto:
+  global:
+    format.html.css:
+      - assets/rhythmpress-toc.css
+    format.html.include-in-header:
+      - includes/rhythmpress-toc-header.html
 starter-content:
   requires:
     - "#toc"
 verification:
-  - type: file-exists
+  - type: package-file-exists
     path: assets/rhythmpress-toc.mjs
-  - type: config-contains
-    path: _quarto.yml
-    value: /assets/rhythmpress-toc.mjs
+  - type: generated-config-contains
+    path: .rhythmpress-plugins/packages/toc-helper/assets/rhythmpress-toc.css
 ```
 
 ## Example Package: LilyPond
@@ -609,29 +589,20 @@ features:
     - lilypond
 external-tools:
   - lilypond
-files:
-  - source: files/.quarto-filters/lilypond.lua
-    target: .quarto-filters/lilypond.lua
-    target-class: quarto-local
-  - source: files/.project-lilypond/lilypond-preamble.ly
-    target: .project-lilypond/lilypond-preamble.ly
-    target-class: project-local
-quarto-patch:
-  metadata:
-    lilypond-preamble: .project-lilypond/lilypond-preamble.ly
-  format:
-    html:
-      filters:
-        - .quarto-filters/lilypond.lua
-  resources:
-    - .project-lilypond/*.ly
+quarto:
+  global:
+    metadata.lilypond-preamble: lilypond/lilypond-preamble.ly
+    format.html.filters:
+      - filters/lilypond.lua
+    resources:
+      - lilypond/*.ly
 gitignore:
   - /lilypond-out/
 generated-exclusions:
   - lilypond-out/
 verification:
-  - type: file-exists
-    path: .quarto-filters/lilypond.lua
+  - type: package-file-exists
+    path: filters/lilypond.lua
   - type: ignore-contains
     path: .gitignore
     value: /lilypond-out/
@@ -644,12 +615,13 @@ First implementation should support:
 - directory package form;
 - built-in package lookup;
 - `plugin.yml` schema validation;
-- file materialization;
-- structured `_quarto.yml` patching for known paths;
+- `.rhythmpress-plugins/packages.yml` active package ordering;
+- reference-in-place Quarto wiring for known paths;
+- optional `deploy.files` copy mode;
 - `.gitignore` appends;
-- manifest ownership records;
+- deployed-file ownership records;
 - check-only verification;
-- activation during `project create` for core/default packages.
+- optional default package seeding during `project create` only if explicitly designed.
 
 First implementation may defer:
 
@@ -657,7 +629,7 @@ First implementation may defer:
 - remote package registries;
 - signatures;
 - update command;
-- deactivation command;
+- uninstall command;
 - build-time sync;
 - package lockfile;
 - complex config unpatching.

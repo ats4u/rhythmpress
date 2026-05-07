@@ -9,6 +9,7 @@ Build a `rhythmpress project create` template engine that creates an empty, full
 Dedicated implementation specification:
 
 - [Project Lifecycle Template Engine Specification](spec-rhythmpress-project-lifecycle-template-engine.md)
+- [Rhythmpress Plugin System Spec](spec-rhythmpress-plugin-system.md)
 - [Scriptlet Dependency Map](spec-rhythmpress-project-scriptlet-dependency-map.md)
 - [Plugin Feature Packs](spec-rhythmpress-project-plugin-feature-packs.md)
 - [Plugin Package Format](spec-rhythmpress-project-plugin-package-format.md)
@@ -74,6 +75,10 @@ rhythmpress project create my-site --langs en,ja --default-lang en
 rhythmpress project add-language fr
 rhythmpress project remove-language fr --dry-run
 rhythmpress project check
+rhythmpress plugin install <path-or-package-id>
+rhythmpress plugin uninstall <plugin-id>
+rhythmpress plugin list
+rhythmpress plugin inspect <plugin-id-or-path>
 ```
 
 The existing page scaffold command remains separate:
@@ -422,6 +427,28 @@ Output:
 
 ## Progress Log
 
+### 20260507-173821 Future Git URL Plugin Input
+
+- Documented Git repository URLs as a future plugin distribution input, not part of the next implementation session.
+- Kept `.rhythmpress-plugins/packages/` and `packages.yml` as the post-install source of truth and active order source.
+- Recorded that future Git installs should resolve and record the commit, even when the requested ref is a branch.
+- Kept the next implementation focus on local package directories, package order, and generated Quarto wiring.
+
+### 20260507-172326 Plugin System Reconciliation
+
+- Added `spec-rhythmpress-plugin-system.md` as the canonical plugin-system design.
+- Reconciled older plugin/package docs away from default file projection and toward reference-in-place wiring from `.rhythmpress-plugins/packages/`.
+- Recorded `.rhythmpress-plugins/packages.yml` as the active package order and precedence source.
+- Kept `deploy.files` as the explicit exception for files that must land in project paths.
+- Updated planned lifecycle command language toward `rhythmpress plugin install`, `uninstall`, `list`, and `inspect`.
+
+### 20260507-152447 CSS And SCSS Ownership Boundary
+
+- Analyzed the post-split Rhythmdo CSS structure and the remaining `.quarto-theme/websites/theme*.scss` files.
+- Recorded that `theme.scss` is bloated because it mixes theme variables, public web-font imports, Rhythmdo branding, Quarto layout fixes, typography, browser workarounds, and old experiments.
+- Recorded that ordinary runtime CSS should move to focused `assets/*.css` files, while SCSS should remain for Quarto/Bootstrap theme compilation and Sass variables.
+- Added the font policy: the generic skeleton should use system font stacks; site-specific remote fonts must be explicit; self-hosted fonts belong under `assets/fonts/` with focused `@font-face` CSS.
+
 ### 20260506-235708 Rhythmpedia Legacy Archive
 
 - Archived three historical Rhythmpedia-era docs from `rhythmdo-com/lib/doc/` under `docs/archive/rhythmpedia-legacy/`.
@@ -485,7 +512,7 @@ Output:
 
 ### 20260506-132722 Remaining Contract Details
 
-- Added source-of-truth precedence across `_quarto.yml`, `.rhythmpress-template.json`, materialized files, and `_rhythmpress.conf`.
+- Added source-of-truth precedence across `_quarto.yml`, `.rhythmpress-template.json`, project file state, and `_rhythmpress.conf`.
 - Recorded that `_rhythmpress.conf` must remain an article-target list only under current command readers.
 - Added a minimum `_metadata-<lang>.yml` shape.
 - Added `project create` exit-code and dry-run output contracts.
@@ -495,7 +522,7 @@ Output:
 
 - Added a required user-editable `_quarto.yml` `rhythmpress.project` skeleton to the dedicated specification.
 - Clarified that `.rhythmpress-template.json` is internal ownership state, not the primary customization surface.
-- Defined future `project check` as comparing `_quarto.yml` desired state with materialized files and manifest state.
+- Defined future `project check` as comparing `_quarto.yml` desired state with project file state and manifest state.
 
 ### 20260506-131114 Spec Audit Corrections
 

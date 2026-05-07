@@ -1,7 +1,7 @@
 # Rhythmpress Project Plugin Feature Packs
 
 Created: 20260506-142202
-Updated: 20260507-062236
+Updated: 20260507-172326
 
 Status: draft design specification.
 
@@ -11,7 +11,7 @@ Define how `rhythmpress project create` should represent optional scriptlets, fi
 
 This document consumes the evidence in [Scriptlet Dependency Map](spec-rhythmpress-project-scriptlet-dependency-map.md).
 
-Feature packs should be implemented as plugin packages. The package artifact and lifecycle are specified in [Plugin Package Format](spec-rhythmpress-project-plugin-package-format.md).
+Feature packs should be implemented as plugin packages. The canonical plugin-system storage, ordering, and wiring contract is specified in [Rhythmpress Plugin System Spec](spec-rhythmpress-plugin-system.md). The package artifact details are specified in [Plugin Package Format](spec-rhythmpress-project-plugin-package-format.md).
 
 ## Core Rule
 
@@ -29,9 +29,10 @@ A feature pack is a deterministic bundle of source-layer project behavior.
 
 Feature packs may provide:
 
-- source files;
-- `_quarto.yml` patches;
-- `_metadata-<lang>.yml` patches;
+- package-local files referenced by generated Quarto wiring;
+- global Quarto contributions equivalent to `_quarto.yml` entries;
+- language metadata contributions equivalent to `_metadata-<lang>.yml` entries;
+- optional deployed files with explicit `from` / `to` rules;
 - `.gitignore` patterns;
 - `.quartoignore` patterns;
 - manifest entries;
@@ -47,7 +48,7 @@ Feature packs may not:
 - silently mutate user files outside the generated plan;
 - embed site-specific IDs or branding without explicit user configuration.
 
-Feature packs are authored and distributed as plugin packages. A feature pack may start life as a built-in package shipped with Rhythmpress, but it must still obey the package manifest, materialization, ownership, and verification rules.
+Feature packs are authored and distributed as plugin packages. A feature pack may start life as a built-in package shipped with Rhythmpress, but it must still obey the package manifest, reference-in-place wiring, optional deploy ownership, and verification rules.
 
 ## Feature-Pack Manifest Shape
 
@@ -59,14 +60,14 @@ default: false
 description: Render LilyPond notation during Quarto render.
 depends-on:
   - core
-source-files:
-  - path: .quarto-filters/lilypond.lua
-    template: packs/filter-lilypond/.quarto-filters/lilypond.lua
-quarto-patch:
-  format.html.filters:
-    - .quarto-filters/lilypond.lua
-  resources:
-    - .project-lilypond/*.ly
+quarto:
+  global:
+    format.html.filters:
+      - filters/lilypond.lua
+    resources:
+      - lilypond/*.ly
+deploy:
+  files: []
 gitignore:
   - /lilypond-out/
 external-tools:
@@ -74,37 +75,39 @@ external-tools:
 generated-exclusions:
   - lilypond-out/
 verification:
-  - file-exists: .quarto-filters/lilypond.lua
-  - config-list-contains: format.html.filters .quarto-filters/lilypond.lua
+  - package-file-exists: filters/lilypond.lua
+  - generated-config-contains: format.html.filters .rhythmpress-plugins/packages/filter-lilypond/filters/lilypond.lua
 ```
 
 Manifest rules:
 
-- `id` is stable and appears in `.rhythmpress-template.json`.
+- `id` is stable and appears in `plugin.yml` and `.rhythmpress-plugins/packages.yml` when active.
 - `depends-on` is explicit.
-- `source-files` are authored template inputs, not generated files.
-- `quarto-patch` and metadata patches are deterministic.
+- `quarto` contributions are authored package inputs, not generated files.
+- Quarto and metadata contributions are deterministic and generated from package order.
+- `deploy.files` is optional and must be used only when a file must land in a project path.
 - External tools and external network scripts are declared.
 - Generated outputs are excluded from ownership.
-- Package-level rules for archive form, package locations, activation, deactivation, update, and security live in the package-format specification.
+- Package-level rules for archive form, package locations, install, uninstall, update, and security live in the package-format specification and the canonical plugin-system spec.
 
-## Patch Semantics
+## Contribution Semantics
 
-Feature packs patch structured config, not raw strings, where possible.
+Feature packs contribute structured config, not raw strings, where possible.
 
 Patch behavior:
 
-- maps deep-merge with later explicit values winning;
-- lists append only when the value is absent;
+- maps deep-merge;
+- lists append in `.rhythmpress-plugins/packages.yml` order;
+- scalar conflicts fail unless the key is explicitly listed as last-wins;
 - generated render/profile files are never patched;
 - raw HTML header blocks are grouped by feature owner;
 - failed validation blocks the whole create operation before writing files.
 
-The first implementation may centralize patches in Python, but the data model must stay inspectable so later project lifecycle commands can compare desired state against actual files.
+The first implementation may centralize generated wiring in Python, but the data model must stay inspectable so later project lifecycle commands can compare active package state against generated config and optional deployed files.
 
 ## User-Facing Desired State
 
-`_quarto.yml` is the user-facing desired-state surface.
+`_quarto.yml` remains the user-facing project skeleton surface. Active package order is managed by `.rhythmpress-plugins/packages.yml`, not by arbitrary map order inside `_quarto.yml`.
 
 Minimum shape:
 
@@ -141,7 +144,7 @@ Values should be explicit so users can discover available customization by readi
 
 ## Feature Pack Table
 
-| Feature Pack | Trigger | Default | Source Files | Config Patches | Generated Exclusions | External Dependencies | Notes |
+| Feature Pack | Trigger | Default | Package Files | Quarto Wiring | Generated Exclusions | External Dependencies | Notes |
 |---|---|---|---|---|---|---|---|
 | `core` | always | on | `_quarto.yml`, `_metadata-<lang>.yml`, `_rhythmpress.conf`, starter masters, sidebar inputs, root pages | base Quarto website config; `rhythmpress.project` skeleton | `_quarto-*`, `_sidebar-*.generated.*`, `.site*`, `.quarto` | Quarto, yq, Git for full lifecycle, rsync for assemble | Minimal healthy project skeleton. |
 | `404` | `--with-404` / default core-site | on | root `404.qmd`, language `404.qmd` | render includes root QMD | none | Quarto | Recommended default but not lifecycle-minimum. |
@@ -199,6 +202,23 @@ Instead:
 - site branding lives in `theme-custom` or user-owned files;
 - project lifecycle commands must not overwrite user-owned CSS.
 
+SCSS should be used only where the Quarto/Bootstrap theme compiler is the reason for the file to exist:
+
+- Sass variables and Bootstrap/Quarto variable overrides;
+- true theme defaults;
+- mixins, functions, or other Sass features if introduced later;
+- dark/light theme entry files consumed by Quarto's `theme:` setting.
+
+Plain selector CSS should generally live under `assets/` instead:
+
+- logo replacement and other site branding;
+- navbar/sidebar DOM patches;
+- content or feature CSS;
+- browser workarounds;
+- font delivery via `@font-face` and language font-family rules when they do not need Bootstrap Sass variables.
+
+The default project skeleton should use system font stacks. Rhythmdo's current public web-font imports are site-specific and must not become generic defaults. If a project self-hosts fonts, package font files under `assets/fonts/` and load them from a focused asset CSS file instead of hiding them inside a broad theme SCSS file.
+
 Required first split candidates:
 
 - `filter-lilypond`: LilyPond image sizing and dark-mode SVG handling.
@@ -206,27 +226,28 @@ Required first split candidates:
 - `asset-groovespace`: perspective and division table CSS.
 - `theme-custom`: theme variables, fonts, logo behavior, and Quarto layout overrides.
 
-## Write And Ownership Rules
+## Wiring, Deploy, And Ownership Rules
 
-Feature pack writes follow the same safety rules as core project creation:
+Feature pack wiring follows the canonical plugin-system rules:
 
-- write only planned source files;
-- list every managed source file in `.rhythmpress-template.json`;
-- store the owning feature pack for every managed path;
-- refuse unmanaged collisions;
-- refuse changed managed files unless a future update command implements merge behavior;
+- reference package files in place by default;
+- generate Quarto wiring from active package order;
+- deploy files only when `deploy.files` explicitly asks for it;
+- record ownership for deployed files and generated wiring;
+- refuse unmanaged deploy collisions;
+- refuse changed managed deployed files unless a future update command implements merge behavior;
 - never delete generated artifacts;
-- never add generated artifacts to managed files.
+- never add generated artifacts to managed files or package source.
 
-Feature packs are not copied directly from source directories. They are materialized from a package write plan. The package remains the pre-materialization source of truth; `_quarto.yml` records desired enabled state; `.rhythmpress-template.json` records the materialized state and file hashes.
+Feature packs are not copied directly from source directories into the project tree. The package directory under `.rhythmpress-plugins/packages/<plugin-id>/` remains the source of truth; `.rhythmpress-plugins/packages.yml` records active order; generated wiring records how Quarto consumes package-local files. Optional deployed files record hashes and ownership separately.
 
 Example manifest entry:
 
 ```json
 {
-  "path": ".quarto-filters/lilypond.lua",
-  "kind": "source",
-  "feature": "filter-lilypond",
+  "path": "assets/player.js",
+  "kind": "deployed",
+  "feature": "asset-twitter-video",
   "sha256": "<hex>"
 }
 ```

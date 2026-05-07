@@ -1,7 +1,7 @@
 # Rhythmpress Project Scriptlet Dependency Map
 
 Created: 20260506-142202
-Updated: 20260507-062236
+Updated: 20260507-172326
 
 Status: evidence specification.
 
@@ -35,7 +35,8 @@ Important scope correction: `.quarto-theme/websites/*.scss`, formerly `.assets/w
 - `_quarto.yml` globally loads `.quarto-filters/meta-dates.lua`, `.quarto-filters/include-files.lua`, `.quarto-filters/lilypond.lua`, and `.quarto-filters/remove-softbreaks.lua`.
 - `_quarto.yml` contains a disabled `.quarto-filters/obsidian-image-dimensions.lua` entry.
 - `_quarto.yml` globally injects Twitter/X, language switcher, Groovespace, TOC, Cookiebot, AdSense, and Cookiebot settings scripts.
-- `_metadata-en.yml` and `_metadata-ja.yml` load `.quarto-theme/websites/theme.scss`, `.quarto-theme/websites/theme-light.scss`, `.quarto-theme/websites/theme-dark.scss`, and `assets/styles.css`.
+- `_metadata-en.yml` and `_metadata-ja.yml` load `.quarto-theme/websites/theme.scss`, `.quarto-theme/websites/theme-light.scss`, and `.quarto-theme/websites/theme-dark.scss`.
+- `_quarto.yml` loads the split runtime CSS files under `assets/`, including the `rhythmdo-theme-*` theme assets and content feature CSS.
 - Active `offbeat-count` masters contain 112 `.lilypond-file` blocks and 10 inline `.lilypond` blocks.
 - Active index/offbeat content contains 102 `ats4u-twitter-video` markers.
 - Active offbeat masters contain 32 Groovespace perspective/table markers.
@@ -70,10 +71,12 @@ Important scope correction: `.quarto-theme/websites/*.scss`, formerly `.assets/w
 | `assets/groovespace.css` | `_quarto.yml` header include; `.divisions`, `.persptable`, `.perspwrap` content | Matching classes from content and `.project-lib/groovespace.py` | Visual table styling | Groovespace visual system | Domain-specific | `asset-groovespace` | off | no default migration |
 | `.project-lib/groovespace.py` | Python snippets in masters import it | Python execution in Quarto source cells; matching CSS classes | Emits HTML tables with class names | Groovespace table generation | Domain-specific | `asset-groovespace` | off | no default migration |
 | `assets/dojo.css` | `dojo/master-ja.md` imports it | Page-level CSS import; `.rdo-header`; ruby classes | Page-specific layout and typography | Dojo page formatting | Site/content-specific | custom content asset | off | no |
-| `assets/styles.css` | `_metadata-*.yml` `format.html.css` | Quarto HTML classes; LilyPond image class; Twitter caption class; content table classes | Global site styling | Mixed catch-all site CSS | Mixed | split across packs | no as-is | split before migration |
-| `.quarto-theme/websites/theme.scss` | `_metadata-*.yml` theme list | Quarto SCSS pipeline; remote Google Fonts; Rhythmdo logo attachments; Quarto DOM classes | Theme variables and rules; logo replacement; typography; Quarto workarounds | Branded theme and Quarto fixes | Mixed/site-specific | `theme-custom` plus possible core fixes | off | split before migration |
-| `.quarto-theme/websites/theme-light.scss` | `_metadata-*.yml` theme list | Quarto SCSS pipeline | Empty/default light theme | Light theme placeholder | Generic placeholder | `theme-custom` | off | later |
-| `.quarto-theme/websites/theme-dark.scss` | `_metadata-*.yml` theme list | Quarto SCSS pipeline; Quarto dark-mode classes | Dark color overrides | Dark theme styling | Generic idea, site choices | `theme-custom` | off | later |
+| `assets/rhythmdo-theme-*.css` | `_quarto.yml` `format.html.css` | Quarto HTML classes; Rhythmdo logo attachments; public web fonts; browser CSS runtime | Theme runtime CSS: fonts, branding, typography, Quarto layout/navigation, dark mode | Branded theme and Quarto fixes | Mixed/site-specific | `theme-custom` plus possible core fixes | off | reference-in-place package later |
+| `assets/rhythmdo-*.css` content feature files | `_quarto.yml` `format.html.css` | Matching content classes and feature scripts | Lightbox, video embeds, offbeat table, Twitter video, LilyPond output styling | Feature/content styling | Mixed | split across feature packs | selected | reference-in-place package later |
+| `assets/rhythmdo-unused.css` | not loaded | Dead or archived selectors | None at runtime | Audit archive | no | none | off | no |
+| `.quarto-theme/websites/theme.scss` | `_metadata-*.yml` theme list | Quarto SCSS pipeline; Bootstrap/Quarto Sass variables | Theme SCSS defaults only | Quarto theme sizing | Generic idea, site choices | `theme-custom` plus possible core fixes | off | keep minimal |
+| `.quarto-theme/websites/theme-light.scss` | `_metadata-*.yml` theme list | Quarto SCSS pipeline | Empty/default light theme entry | Light theme placeholder | Generic placeholder | `theme-custom` | off | later |
+| `.quarto-theme/websites/theme-dark.scss` | `_metadata-*.yml` theme list | Quarto SCSS pipeline | Empty/default dark theme entry | Dark theme placeholder | Generic placeholder | `theme-custom` | off | later |
 | `.project-templates/*.md` | Authoring templates only | Obsidian/Templater syntax | Creates authoring notes, not Rhythmpress runtime files | Personal authoring workflow | Site/personal | none | no | no |
 | `.project-templates/ai-attribution-footer.html` | Duplicates `_quarto.yml` include-after-body content | Rhythmdo branding and canonical URL | Footer attribution block | Site policy text | Site-specific | none | no | no |
 | `_rhythmpress.hook-after._sidebar-*.generated.yml.py` | `render-sidebar` hook protocol | Python; PyYAML; generated sidebar YAML filename | Mutates generated sidebar `collapse-level` | Post-merge sidebar override | Generic hook mechanism, site-specific hook body | `sidebar-hook` | off | later |
@@ -81,16 +84,38 @@ Important scope correction: `.quarto-theme/websites/*.scss`, formerly `.assets/w
 | GitHub ribbon HTML | `_quarto.yml` include-after-body | External image URL; fixed position CSS | Adds visible GitHub fork ribbon | Repository promotion | Site-specific | none | no | no |
 | Attribution footer HTML | `_quarto.yml` include-after-body; template copy | Rhythmdo URL and policy text | Adds page footer note | Site-specific attribution policy | Site-specific | none | no | no |
 
-## CSS Split Required Before Migration
+## CSS Split Status Before Migration
 
-Current CSS is not separable by file:
+Current CSS is now separated enough to reason about package boundaries:
 
-- `assets/styles.css` contains content table styles, Twitter caption styles, LilyPond image behavior, iframe sizing, and miscellaneous site CSS.
-- `.quarto-theme/websites/theme.scss` contains Quarto fixes, logo replacement, external fonts, content typography, navbar/sidebar overrides, and Rhythmdo branding.
+- `assets/styles.css` was removed.
+- `assets/rhythmdo-theme-*.css` owns site theme runtime CSS.
+- feature CSS files such as `assets/rhythmdo-video-embed.css`, `assets/rhythmdo-twitter-video.css`, and `assets/rhythmdo-lilypond.css` own content behavior.
+- `.quarto-theme/websites/theme.scss` now contains only Quarto/Sass theme inputs.
 - `assets/groovespace.css` is already a coherent domain-specific pack.
 - `assets/dojo.css` is already a coherent content-specific pack.
 
-Therefore `project create` must not copy `assets/styles.css` or `.quarto-theme/websites/theme.scss` as generic defaults. Feature packs must own smaller CSS fragments.
+Therefore `project create` must not copy Rhythmdo CSS as generic defaults. Feature packs should reference package-local CSS in place through generated Quarto wiring, and only deploy CSS when a stable project path is required.
+
+`theme.scss` bloat analysis:
+
+- `.quarto-theme/websites/theme.scss` is bloated because it mixes Quarto/Bootstrap theme defaults, remote font imports, Rhythmdo logo replacement, navbar/sidebar logo behavior, generic layout helpers, typography, browser-specific ruby fixes, breadcrumb/page-navigation/search/hamburger workarounds, and commented experiments.
+- `.quarto-theme/websites/theme-light.scss` is effectively an empty placeholder.
+- `.quarto-theme/websites/theme-dark.scss` is comparatively small and mostly owns dark-mode heading styling plus dark Bootstrap/sidebar color overrides.
+- Plain selector rules do not need to live in SCSS unless they intentionally depend on Quarto's SCSS compilation or Bootstrap Sass variables.
+
+SCSS versus asset CSS policy:
+
+- Keep SCSS for Quarto/Bootstrap theme compilation: Sass variables, Bootstrap/Quarto variable overrides, mixins/functions if used, and true theme defaults that must be compiled into the generated Bootstrap CSS.
+- Put ordinary runtime CSS under `assets/`: branding rules, logo replacement, navbar/sidebar DOM patches, content and feature classes, browser workarounds, and layout helpers.
+- Keep Quarto SCSS section markers such as `/*-- scss:defaults --*/` and `/*-- scss:rules --*/` in entry SCSS files. Imported partials should avoid those markers unless Quarto import behavior is verified.
+
+Font ownership policy:
+
+- The default Rhythmpress project skeleton should use system font stacks and should not inherit Rhythmdo's fonts.
+- Remote public web-font imports are acceptable for a site-specific project such as `rhythmdo-com`, but they are external runtime dependencies and should be explicit.
+- For self-hosted fonts, font files belong under a public asset path such as `assets/fonts/`, with `@font-face` declarations in a focused asset CSS file such as `assets/rhythmdo-fonts.css`.
+- Font delivery and language-specific font-family rules can live in asset CSS when they are ordinary runtime CSS. They do not need SCSS unless they are part of Bootstrap variable compilation.
 
 Minimum CSS ownership split:
 
@@ -102,7 +127,7 @@ Minimum CSS ownership split:
 | `.rhythmpedia-iframe` | custom content asset |
 | logo replacement and Rhythmdo attachments | site-specific theme |
 | Quarto sidebar/nav/font-size fixes | possible future generic theme utility |
-| Google Fonts imports | theme pack with explicit external dependency |
+| Google Fonts imports or self-hosted font declarations | site-specific font asset or theme pack with explicit external dependency |
 | `.divisions`, `.perspwrap`, `.persptable` | `asset-groovespace` |
 | `.rdo-header`, inline ruby tweaks in dojo page | custom content asset |
 

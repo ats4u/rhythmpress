@@ -16,13 +16,14 @@ Primary implementation target:
 rhythmpress project create <project-dir>
 ```
 
-The first implementation patch should create only the core skeleton. Plugin lifecycle commands and optional feature-pack materialization are future work unless explicitly approved later.
+The first implementation patch should create only the core skeleton. Plugin lifecycle commands and optional feature-pack install/deploy behavior are future work unless explicitly approved later.
 
 ## Canonical Specs
 
 The durable specifications live in these files:
 
 - [Project Lifecycle Template Engine](spec-rhythmpress-project-lifecycle-template-engine.md)
+- [Rhythmpress Plugin System Spec](spec-rhythmpress-plugin-system.md)
 - [Plugin Feature Packs](spec-rhythmpress-project-plugin-feature-packs.md)
 - [Plugin Package Format](spec-rhythmpress-project-plugin-package-format.md)
 - [Plugin And Scriptlet Audit](spec-rhythmpress-project-plugin-scriptlet-audit.md)
@@ -38,10 +39,11 @@ Use the nested command family:
 
 ```sh
 rhythmpress project create
-rhythmpress project activate-plugin
-rhythmpress project deactivate-plugin
-rhythmpress project sync-plugins
 rhythmpress project check
+rhythmpress plugin install
+rhythmpress plugin uninstall
+rhythmpress plugin list
+rhythmpress plugin inspect
 ```
 
 Do not add legacy aliases such as `create-project` or `create-page`. There is no legacy compatibility requirement.
@@ -110,11 +112,11 @@ rhythmpress:
       sidebar-hook: false
 ```
 
-`.rhythmpress-template.json` is internal materialization state. It records owned files, hashes, package ownership, and whether a future command can safely repair or update files.
+`.rhythmpress-template.json` is internal project-generation ownership state. It records owned source files, hashes, package ownership where relevant, and whether a future command can safely repair or update files.
 
 ## Directory Policy
 
-Project skeletons and package materialization must make ownership visible from paths.
+Project skeletons and optional deployed plugin files must make ownership visible from paths.
 
 Directory classes:
 
@@ -147,21 +149,23 @@ CSS, JavaScript, filters, helper scripts, templates, and config snippets should 
 Future packages are deterministic, inspectable bundles:
 
 - `plugin.yml` is the package source of truth.
-- `files/` contains materialized source files.
-- `templates/` contains package-internal text templates rendered during materialization.
+- `.rhythmpress-plugins/packages/` stores installed package contents.
+- `.rhythmpress-plugins/packages.yml` stores active package order and CSS/filter precedence.
+- packages are referenced in place by generated Quarto wiring by default.
+- `deploy.files` is the explicit escape hatch for files that must land in project paths.
 - package archives may be tar-based, but the unpacked form must remain easy to edit and diff.
-- activation writes only listed files and structured config patches.
-- packages declare target classes, dependencies, external tools, external scripts, generated exclusions, and verification checks.
+- packages declare Quarto wiring, optional deploy files, dependencies, external tools, external scripts, generated exclusions, and verification checks.
 
-Package target classes should follow the directory policy:
+Deploy target classes should follow the directory policy:
 
-- `public-asset` -> `assets/**`
-- `quarto-local` -> `.quarto-*/**`
-- `rhythmpress-local` -> `.rhythmpress-*/**`
-- `project-local` -> `.project-*/**`
-- `content-asset` -> `attachments*/**`
+- `assets/**`
+- `.quarto-filters/**`
+- `_extensions/**`
+- `attachments*/**`
+- `include/**`
+- `templates/**`
 
-`rhythmpress build` must not enable packages. If build-time plugin sync is introduced later, it may only materialize packages already enabled in desired state and must use the same conflict rules as `project sync-plugins`.
+`rhythmpress build` must not enable packages. If build-time plugin sync is introduced later, it may only regenerate wiring for packages already listed in `.rhythmpress-plugins/packages.yml`.
 
 ## Feature-Pack Decisions
 
@@ -257,7 +261,7 @@ The output of that reconnaissance should be an implementation edit plan listing:
 - verification commands
 - unresolved risks
 
-The first code patch should implement only core `rhythmpress project create`. Do not implement plugin activation, deactivation, sync, update, registry lookup, tar archive input, or CSS feature-pack migration in the first patch.
+The first code patch should implement only core `rhythmpress project create`. Do not implement plugin install, uninstall, generated wiring sync, update, registry lookup, tar archive input, or CSS feature-pack migration in the first patch.
 
 ## Easy To Forget Constraints
 
