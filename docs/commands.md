@@ -115,6 +115,61 @@ Exit behavior:
 
 ---
 
+## `rhythmpress plugin`
+
+Read-only plugin package inspection.
+
+The first implementation slice treats the project-local package store as the source of truth:
+
+* `.rhythmpress-plugins/packages.yml` stores active package order.
+* `.rhythmpress-plugins/packages/<plugin-id>/plugin.yml` stores each plugin manifest.
+
+No install, uninstall, Quarto wiring, copying, or symlink deployment is performed by this command yet.
+
+### `rhythmpress plugin list`
+
+Show active packages from `packages.yml` in precedence order, then show installed package directories that are not active.
+
+Usage:
+
+```bash
+rhythmpress plugin list
+```
+
+If `.rhythmpress-plugins/packages.yml` does not exist, this is treated as an empty plugin state, not an error.
+
+Statuses:
+
+* `ok` package directory and `plugin.yml` are readable and consistent.
+* `missing-package` active package is listed but its package directory is missing.
+* `invalid-package` package path exists but is not a directory.
+* `invalid-manifest` `plugin.yml` is missing or malformed.
+* `manifest-id-mismatch` manifest `id` does not match the package directory name.
+
+### `rhythmpress plugin inspect`
+
+Inspect one package by package id, package directory path, or direct `plugin.yml` path.
+
+Usage:
+
+```bash
+rhythmpress plugin inspect <plugin-id-or-path>
+```
+
+The command prints manifest identity, package path, active state, and a small contribution summary:
+
+* number of top-level `quarto.global` keys
+* number of `quarto.metadata` language entries
+* number of `deploy.files` entries
+
+Exit behavior:
+
+* `0` success
+* `1` missing or invalid package/manifest
+* `2` usage error
+
+---
+
 ## `rhythmpress preproc`
 
 Front-matter-driven dispatcher that chooses a preprocessing handler and runs it.
