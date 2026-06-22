@@ -9,6 +9,7 @@ from rhythmpress.plugin_system import (
     count_quarto_global_keys,
     count_quarto_metadata_languages,
     discover_state,
+    render_plugin_wiring,
     inspect_package,
 )
 
@@ -16,6 +17,7 @@ from rhythmpress.plugin_system import (
 USAGE = """Usage:
   rhythmpress plugin list
   rhythmpress plugin inspect <plugin-id-or-path>
+  rhythmpress plugin render
 """
 
 
@@ -97,6 +99,27 @@ def command_inspect(argv: list[str]) -> int:
     return 0
 
 
+def command_render(argv: list[str]) -> int:
+    if argv == ["--help"] or argv == ["-h"]:
+        print("Usage: rhythmpress plugin render")
+        return 0
+    if argv:
+        print("Usage: rhythmpress plugin render", file=sys.stderr)
+        return 2
+
+    try:
+        result = render_plugin_wiring()
+    except PluginSystemError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
+    print(f"Active packages: {len(result.active_package_ids)}")
+    for generated in result.files:
+        state = "generated" if generated.changed else "unchanged"
+        print(f"{state}: {format_path(generated.path)}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     if argv is None:
         argv = sys.argv[1:]
@@ -112,6 +135,8 @@ def main(argv: list[str] | None = None) -> int:
         return command_list(rest)
     if command == "inspect":
         return command_inspect(rest)
+    if command == "render":
+        return command_render(rest)
 
     print_usage()
     return 2

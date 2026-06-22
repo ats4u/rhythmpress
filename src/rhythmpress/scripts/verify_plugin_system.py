@@ -8,7 +8,7 @@ import tempfile
 
 import yaml
 
-from rhythmpress.plugin_system import discover_state, inspect_package
+from rhythmpress.plugin_system import discover_state, inspect_package, render_plugin_wiring
 from rhythmpress.scripts import rhythmpress_plugin
 
 
@@ -36,6 +36,18 @@ def capture_main(argv: list[str]) -> tuple[int, str, str]:
 
 
 def make_manifest(package_dir: Path, package_id: str, name: str) -> None:
+    for rel in (
+        "assets/example.css",
+        "assets/example-resource.txt",
+        "filters/example.lua",
+        "includes/example-header.html",
+        "includes/example-after-body.html",
+        "assets/example-en.css",
+    ):
+        path = package_dir / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("", encoding="utf-8")
+
     write_yaml(
         package_dir / "plugin.yml",
         {
@@ -44,17 +56,15 @@ def make_manifest(package_dir: Path, package_id: str, name: str) -> None:
             "version": "0.1.0",
             "quarto": {
                 "global": {
-                    "format": {
-                        "html": {
-                            "css": ["assets/example.css"],
-                        },
-                    },
+                    "resources": ["assets/example-resource.txt"],
+                    "format.html.css": ["assets/example.css"],
+                    "format.html.filters": ["filters/example.lua"],
+                    "format.html.include-in-header": ["includes/example-header.html"],
+                    "format.html.include-after-body": ["includes/example-after-body.html"],
                 },
                 "metadata": {
                     "en": {
-                        "website": {
-                            "title": "Example",
-                        },
+                        "format.html.css": ["assets/example-en.css"],
                     },
                 },
             },
@@ -126,7 +136,7 @@ def test_inspect(root: Path) -> None:
     assert code == 0
     assert "id: alpha" in stdout
     assert "active: yes" in stdout
-    assert "quarto.global keys: 1" in stdout
+    assert "quarto.global keys: 5" in stdout
     assert "quarto.metadata languages: 1" in stdout
     assert "deploy.files: 1" in stdout
     assert stderr == ""
@@ -138,12 +148,109 @@ def test_inspect(root: Path) -> None:
     assert "missing-package" in stderr
 
 
+def test_render() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        plugin_root = root / ".rhythmpress-plugins"
+        write_yaml(plugin_root / "packages.yml", {"packages": ["alpha", "beta"]})
+        make_manifest(plugin_root / "packages" / "alpha", "alpha", "Alpha Plugin")
+        make_manifest(plugin_root / "packages" / "beta", "beta", "Beta Plugin")
+
+        result = render_plugin_wiring(root)
+        assert [item.path.name for item in result.files] == [
+            "_quarto.plugins.yml",
+            "_metadata-en.plugins.yml",
+        ]
+        assert all(item.changed for item in result.files)
+
+        quarto = yaml.safe_load(
+            (plugin_root / "generated" / "_quarto.plugins.yml").read_text(encoding="utf-8")
+        )
+        assert quarto == {
+            "resources": [
+                ".rhythmpress-plugins/packages/alpha/assets/example-resource.txt",
+                ".rhythmpress-plugins/packages/beta/assets/example-resource.txt",
+            ],
+            "format": {
+                "html": {
+                    "css": [
+                        ".rhythmpress-plugins/packages/alpha/assets/example.css",
+                        ".rhythmpress-plugins/packages/beta/assets/example.css",
+                    ],
+                    "filters": [
+                        ".rhythmpress-plugins/packages/alpha/filters/example.lua",
+                        ".rhythmpress-plugins/packages/beta/filters/example.lua",
+                    ],
+                    "include-in-header": [
+                        ".rhythmpress-plugins/packages/alpha/includes/example-header.html",
+                        ".rhythmpress-plugins/packages/beta/includes/example-header.html",
+                    ],
+                    "include-after-body": [
+                        ".rhythmpress-plugins/packages/alpha/includes/example-after-body.html",
+                        ".rhythmpress-plugins/packages/beta/includes/example-after-body.html",
+                    ],
+                },
+            },
+        }
+
+        metadata = yaml.safe_load(
+            (plugin_root / "generated" / "_metadata-en.plugins.yml").read_text(encoding="utf-8")
+        )
+        assert metadata == {
+            "format": {
+                "html": {
+                    "css": [
+                        ".rhythmpress-plugins/packages/alpha/assets/example-en.css",
+                        ".rhythmpress-plugins/packages/beta/assets/example-en.css",
+                    ],
+                },
+            },
+        }
+
+        second = render_plugin_wiring(root)
+        assert not any(item.changed for item in second.files)
+
+        with chdir(root):
+            code, stdout, stderr = capture_main(["render"])
+        assert code == 0
+        assert "Active packages: 2" in stdout
+        assert "unchanged: .rhythmpress-plugins/generated/_quarto.plugins.yml" in stdout
+        assert stderr == ""
+
+
+def test_render_rejects_invalid_quarto_key() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        plugin_root = root / ".rhythmpress-plugins"
+        write_yaml(plugin_root / "packages.yml", {"packages": ["bad"]})
+        write_yaml(
+            plugin_root / "packages" / "bad" / "plugin.yml",
+            {
+                "id": "bad",
+                "version": "0.1.0",
+                "quarto": {
+                    "global": {
+                        "website.title": ["not-supported"],
+                    },
+                },
+            },
+        )
+
+        with chdir(root):
+            code, stdout, stderr = capture_main(["render"])
+        assert code == 1
+        assert stdout == ""
+        assert "unsupported quarto.global key: website.title" in stderr
+
+
 def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         test_empty_project(root)
         test_discovery_and_list(root)
         test_inspect(root)
+    test_render()
+    test_render_rejects_invalid_quarto_key()
 
     print("OK: plugin system")
     return 0
