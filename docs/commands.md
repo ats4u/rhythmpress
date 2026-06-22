@@ -168,6 +168,40 @@ Exit behavior:
 * `1` missing or invalid package/manifest
 * `2` usage error
 
+### `rhythmpress plugin render`
+
+Generate read-only Quarto wiring from active plugin manifests.
+
+Usage:
+
+```bash
+rhythmpress plugin render
+```
+
+The command reads `.rhythmpress-plugins/packages.yml`, processes active packages in order, and writes:
+
+* `.rhythmpress-plugins/generated/_quarto.plugins.yml`
+* `.rhythmpress-plugins/generated/_metadata-<lang>.plugins.yml`
+
+Supported `plugin.yml` contribution keys are intentionally narrow:
+
+* `resources`
+* `format.html.css`
+* `format.html.filters`
+* `format.html.include-in-header`
+* `format.html.include-after-body`
+
+Values must be lists of package-relative path strings. Generated references point back into the package store, for example:
+
+```yaml
+format:
+  html:
+    css:
+      - .rhythmpress-plugins/packages/example/assets/example.css
+```
+
+This command does not install, uninstall, copy deploy files, create symlinks, edit `_quarto.yml`, or delete stale generated files.
+
 ---
 
 ## `rhythmpress preproc`

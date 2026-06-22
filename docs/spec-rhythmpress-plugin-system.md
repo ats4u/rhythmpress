@@ -1,7 +1,7 @@
 # Rhythmpress Plugin System Spec
 
 Status: draft
-Updated: 20260507-173821
+Updated: 20260507-181001
 
 This document defines the proposed project-local plugin system for Rhythmpress.
 The design goal is to keep plugin installation simple, ordered, inspectable, and
@@ -265,7 +265,23 @@ rhythmpress plugin install <path-or-package-id>
 rhythmpress plugin uninstall <plugin-id>
 rhythmpress plugin list
 rhythmpress plugin inspect <plugin-id-or-path>
+rhythmpress plugin render
 ```
+
+Current implemented command surface:
+
+```sh
+rhythmpress plugin list
+rhythmpress plugin inspect <plugin-id-or-path>
+rhythmpress plugin render
+```
+
+`plugin render` generates reference-in-place Quarto wiring under
+`.rhythmpress-plugins/generated/`. It supports only list-valued entries for
+`resources`, `format.html.css`, `format.html.filters`,
+`format.html.include-in-header`, and `format.html.include-after-body`.
+Unsupported keys, scalar values, absolute paths, URL values, and `..` traversal
+are rejected.
 
 Install behavior:
 
